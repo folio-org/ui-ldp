@@ -19,9 +19,10 @@ npm start
 ```
 
 
-## Run the tests
+## Test
 
-Run the included UI tests with the following command:
+Currently, there are no tests. When there are:
+
 ```
 npm run test
 ```
