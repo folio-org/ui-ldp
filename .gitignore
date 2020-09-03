@@ -6,3 +6,4 @@ artifacts
 npm-debug.log
 yarn.lock
 package-lock.json
+output

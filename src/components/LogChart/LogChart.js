@@ -9,15 +9,15 @@ function listToDatasets(resp) {
   let groups = {}, buckets = []
   for(let i=0; i<resp.length; i++) {
     const item = resp[i]
-    if(item['tableName'] === '') item['tableName'] = '[no table]'
-    if(!(item['tableName'] in groups)) {
+    const tableName = item['tableName'] === ''? '[no table]' : item['tableName']
+    if(!(tableName in groups)) {
       const idx = buckets.push({
-        "label" : item['tableName'],
+        "label" : tableName,
         "data": []
       })
-      groups[item['tableName']] = idx - 1
+      groups[tableName] = idx - 1
     }
-    const idx = groups[item['tableName']]
+    const idx = groups[tableName]
     buckets[idx].data.push({
       x: new Date(item["logTime"]),
       y: item["elapsedTime"]
@@ -34,7 +34,6 @@ class LogChart extends React.Component {
   }
 
   componentDidMount() {
-    console.debug('LogChart Mount', this.props.series)
     this.myChart = new Chart(this.chartRef.current.getContext('2d'), {
       type: "scatter",
       data: {
@@ -71,8 +70,6 @@ class LogChart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.debug('LogChart Update', this.props.series)
-    debugger
     this.myChart.options.scales.xAxes[0].ticks.min = moment(this.props.startDate).toDate()
     this.myChart.options.scales.xAxes[0].ticks.max = moment(this.props.endDate).toDate()
     this.myChart.data = { datasets: listToDatasets(this.props.series) }
@@ -82,7 +79,6 @@ class LogChart extends React.Component {
     // }
   }
   render() {
-    console.debug('LogChart render')
     return (
       <canvas
         id="myChart"
