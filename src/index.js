@@ -29,6 +29,14 @@ class Ldp extends React.Component {
   constructor(props) {
     super(props);
 
+    // TODO: Stripes CLI does not allow substituting in env variables
+    //       and currently mod-ldp is not behind Okapi.
+    //       Since there is no non-local LDP_BACKEND_URL yet,
+    //       this variable may as well be hardcoded.
+    
+    process.env.LDP_BACKEND_URL = window.location.origin.indexOf('localhost') > 0 ?
+      'http://localhost:8001' : props.stripes.okapi.url;
+
     this.connectedExamplePage = props.stripes.connect(ExamplePage);
   }
 
@@ -48,7 +56,7 @@ class Ldp extends React.Component {
         <div style={{ width: 200, padding: 15, borderRight: '1px solid rgba(0,0,0,.2)' }}>
           <NavList>
             <Link to={`${path}`}><NavListItem>Query Builder</NavListItem></Link>
-            <Link to={`${path}/examples`}><NavListItem>Tables</NavListItem></Link>
+            {/* <Link to={`${path}/examples`}><NavListItem>Tables</NavListItem></Link> */}
             <Link to={`${path}/logs`}><NavListItem>Logs</NavListItem></Link>
           </NavList>
         </div>
@@ -58,11 +66,11 @@ class Ldp extends React.Component {
             exact
             component={QueryBuilderPage}
           />
-          <Route
+          {/* <Route
             path={`${path}/examples`}
             exact
             component={this.connectedExamplePage}
-          />
+          /> */}
           <Route
             path={`${path}/logs`}
             exact

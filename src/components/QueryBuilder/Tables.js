@@ -1,20 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { times } from './utils';
-import Fields from './Fields';
+import Columns from './Columns';
 import { Button, Selection, Icon } from '@folio/stripes/components';
 
-const TableSelection = () => {
-  const tableOptions = [
-    { value: 'user_users', label: 'user_users' },
-    { value: 'user_groups', label: 'user_groups' },
-    { value: 'acquisitions_memberships', label: 'acquisitions_memberships' },
-    { value: 'acquisitions_units', label: 'acquisitions_units' },
-    { value: 'circulation_cancellation_reasons', label: 'circulation_cancellation_reasons' },
-    { value: 'circulation_fixed_due_date_schedules', label: 'circulation_fixed_due_date_schedules' },
-    { value: 'circulation_loan_history', label: 'circulation_loan_history' },
-    { value: 'circulation_loan_policies', label: 'circulation_loan_policies' },
-    { value: 'circulation_loans', label: 'circulation_loans' },
-  ];
+const TableSelection = ({ tables, setSelectedTableName, setIsLoadingFields }) => {
+  const tableOptions = tables.map(t => ({ value: t.tableName, label: t.tableName }));
   return (
     <div>
       <Selection
@@ -22,13 +12,43 @@ const TableSelection = () => {
         label="Table"
         id="tableSelect"
         placeholder=""
+        onChange={value => {
+          setSelectedTableName(value);
+          setIsLoadingFields(true);
+        }}
         dataOptions={tableOptions}
       />
     </div>
   );
 };
 
-const SubmitRow = ({ displaySubmit, setSubmitted }) => (
+const SubmitRow = ({ displaySubmit, setResults, selectedTableName }) => {
+
+  const submitQuery = async () => {
+    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/query?table=${selectedTableName}`
+    try {
+      const resp = await fetch(url)
+      resp
+        .json()
+        .then(resp => {
+          // setIsLoadingFields(false)
+          resp.forEach(v => { delete v.data })
+          setResults(resp);
+        })
+        .catch(err => {
+          // TODO: handle error
+          // setLoading(false)
+          // console.error(err)
+          // setErrors(`Failed connect to database`)
+        })
+    } catch (error) {
+      // TODO: handle error
+      // setLoading(false)
+      // setErrors(`Failed connecting to server ${url}`)
+    }
+  }
+
+  return (
   <div style={{
     display: 'flex',
     justifyContent: 'space-between',
@@ -36,13 +56,44 @@ const SubmitRow = ({ displaySubmit, setSubmitted }) => (
     paddingTop: 14,
   }}>
     <Button>Show Columns...</Button>
-    { displaySubmit? <Button buttonStyle='primary' onClick={() => setSubmitted(true)}>Submit</Button> : <div/> }
+    { displaySubmit? <Button buttonStyle='primary' onClick={submitQuery}>Submit</Button> : <div/> }
   </div>
-)
+)}
 
-const Table = (n, numTables, setSubmitted) => {
+const Table = (n, numTables, setResults, tables) => {
+  const [selectedTableName, setSelectedTableName] = useState('');
+  const [isLoadingFields, setIsLoadingFields] = useState(false);
+  const [columns, setColumns] = useState([]);
   const displaySubmit = n+1 == numTables // display Submit button if this is the last table
   const displayEditJoin = n != 0
+
+  const getColumns = async (selectedTableName) => {
+    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/columns?table=${selectedTableName}`
+    try {
+      const resp = await fetch(url)
+      resp
+        .json()
+        .then(resp => {
+          setIsLoadingFields(false)
+          setColumns(resp.map(c => ({ value: c.columnName, label: c.columnName })))
+        })
+        .catch(err => {
+          // TODO: handle error
+          // setLoading(false)
+          // console.error(err)
+          // setErrors(`Failed connect to database`)
+        })
+    } catch (error) {
+      // TODO: handle error
+      // setLoading(false)
+      // setErrors(`Failed connecting to server ${url}`)
+    }
+  }
+
+  useEffect(() => {
+    if(selectedTableName) { getColumns(selectedTableName); }
+  }, [selectedTableName]);
+
   return (
     <div style={{ width: 400, padding: 15, paddingBottom: 4, borderRight: '1px solid rgba(0,0,0,.2)', borderBottom: '1px solid rgba(0,0,0,.2)' }}>
       <div style={{
@@ -60,17 +111,25 @@ const Table = (n, numTables, setSubmitted) => {
             <Icon icon='times' />
           </Button> */}
       </div>
-      <TableSelection />
-      <Fields />
-      <SubmitRow displaySubmit={displaySubmit} setSubmitted={setSubmitted} />
+      <TableSelection
+        tables={tables}
+        setSelectedTableName={setSelectedTableName}
+        setIsLoadingFields={setIsLoadingFields}
+      />
+      <Columns columns={columns} />
+      <SubmitRow
+        selectedTableName={selectedTableName}
+        displaySubmit={displaySubmit}
+        setResults={setResults}
+      />
     </div>
   )
 }
 
-const Tables = ({ numTables, setSubmitted }) => {
+const Tables = ({ numTables, setResults, tables }) => {
   return (
     <div style={{ display: 'flex' }}>
-      { times(numTables, n => Table(n, numTables, setSubmitted)) }
+      { times(numTables, n => Table(n, numTables, setResults, tables)) }
     </div>
   )
 }

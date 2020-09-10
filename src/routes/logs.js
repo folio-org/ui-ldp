@@ -28,7 +28,7 @@ const LogsPage = props => {
   })
 
   async function fetchData() {
-    const url = "http://localhost:8001/ldp/db/log"
+    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/log`
     try {
       const resp = await fetch(url)
       resp
