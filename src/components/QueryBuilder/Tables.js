@@ -26,8 +26,15 @@ const SubmitRow = ({ displaySubmit, setResults, selectedTableName }) => {
 
   const submitQuery = async () => {
     const url = `${process.env.LDP_BACKEND_URL}/ldp/db/query?table=${selectedTableName}`
+    const data = { 'username': 'example' };
     try {
-      const resp = await fetch(url)
+      const resp = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       resp
         .json()
         .then(resp => {
@@ -63,7 +70,8 @@ const SubmitRow = ({ displaySubmit, setResults, selectedTableName }) => {
 const Table = (n, numTables, setResults, tables) => {
   const [selectedTableName, setSelectedTableName] = useState('');
   const [isLoadingFields, setIsLoadingFields] = useState(false);
-  const [columns, setColumns] = useState([]);
+  const [availableColumns, setAvailableColumns] = useState([]);
+  const [columnsQuery, setColumnsQuery] = useState({})
   const displaySubmit = n+1 == numTables // display Submit button if this is the last table
   const displayEditJoin = n != 0
 
@@ -75,7 +83,7 @@ const Table = (n, numTables, setResults, tables) => {
         .json()
         .then(resp => {
           setIsLoadingFields(false)
-          setColumns(resp.map(c => ({ value: c.columnName, label: c.columnName })))
+          setAvailableColumns(resp.map(c => ({ value: c.columnName, label: c.columnName })))
         })
         .catch(err => {
           // TODO: handle error
@@ -95,7 +103,7 @@ const Table = (n, numTables, setResults, tables) => {
   }, [selectedTableName]);
 
   return (
-    <div style={{ width: 400, padding: 15, paddingBottom: 4, borderRight: '1px solid rgba(0,0,0,.2)', borderBottom: '1px solid rgba(0,0,0,.2)' }}>
+    <div key={`table${n}`} style={{ width: 400, padding: 15, paddingBottom: 4, borderRight: '1px solid rgba(0,0,0,.2)', borderBottom: '1px solid rgba(0,0,0,.2)' }}>
       <div style={{
         display: 'flex',
         // justifyContent: 'flex-end',
@@ -116,7 +124,7 @@ const Table = (n, numTables, setResults, tables) => {
         setSelectedTableName={setSelectedTableName}
         setIsLoadingFields={setIsLoadingFields}
       />
-      <Columns columns={columns} />
+      <Columns availableColumns={availableColumns} setColumnsQuery={setColumnsQuery} />
       <SubmitRow
         selectedTableName={selectedTableName}
         displaySubmit={displaySubmit}

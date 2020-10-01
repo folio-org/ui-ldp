@@ -1,31 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FieldArray } from 'react-final-form-arrays';
+import { FormSpy, useFormState } from 'react-final-form';
+import get from 'lodash.get';
 import { Button, Selection, TextField, MultiSelection } from '@folio/stripes/components';
-import { times } from './utils';
+import ColumnFilter from './ColumnFilter';
 
-const SelectionAndTextField = ({ columns }) => {
-  return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ flex: 1, marginRight: 5 }}>
-        <Selection
-          name="SelectionField"
-          placeholder=""
-          dataOptions={columns}
-        />
-      </div>
-      <div style={{ flex: 1, marginLeft: 5 }}>
-        <TextField placeholder='Value' />
-      </div>
-    </div>
-  )
-}
+const Columns = ({ table, tableIndex }) => {
+  const { values } = useFormState();
+  const selectedTableName = get(values, `${table}.tableName`)
+  const [availableColumns, setAvailableColumns] = useState([]);
+  
+  const getColumns = async (selectedTableName) => {
+    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/columns?table=${selectedTableName}`
+    try {
+      const resp = await fetch(url)
+      resp
+        .json()
+        .then(resp => {
+          // setIsLoadingFields(false)
+          setAvailableColumns(resp.map(c => ({ value: c.columnName, label: c.columnName })))
+        })
+        .catch(err => {
+          // TODO: handle error
+          // setLoading(false)
+          // console.error(err)
+          // setErrors(`Failed connect to database`)
+        })
+    } catch (error) {
+      // TODO: handle error
+      // setLoading(false)
+      // setErrors(`Failed connecting to server ${url}`)
+    }
+  }
+  useEffect(() => {
+    if(selectedTableName) { getColumns(selectedTableName) }
+  }, [selectedTableName]);
 
-const Columns = ({ columns }) => {
-  const [numInputs, setNumInputs] = useState(1)
   return (
     <div>
       <div style={{ fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '0.25rem' }}>Column</div>
-      { times(numInputs, () => SelectionAndTextField({ columns })) }
-      <Button onClick={() => { setNumInputs(numInputs+1) }}>Add Filter</Button>
+      <FieldArray name={`${table}.columns`} tableIndex={tableIndex}>
+        {({ fields }) =>
+          fields.map((name, index) => (
+            <ColumnFilter
+              name={name}
+              index={index}
+              key={name}
+              availableColumns={availableColumns}
+              onRemove={() => fields.remove(index)}
+            />
+          ))
+        }
+      </FieldArray>
     </div>
   )
 }

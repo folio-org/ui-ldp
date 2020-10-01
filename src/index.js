@@ -12,11 +12,6 @@ import LogsPage from './routes/logs';
 import Settings from './settings';
 import { NavList, NavListItem } from '@folio/stripes-components'
 
-/*
-  STRIPES-NEW-APP
-  This is the main entry point into your new app.
-*/
-
 class Ldp extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -37,6 +32,7 @@ class Ldp extends React.Component {
     process.env.LDP_BACKEND_URL = window.location.origin.indexOf('localhost') > 0 ?
       'http://localhost:8001' : props.stripes.okapi.url;
 
+    this.connectedQueryBuilderPage = props.stripes.connect(QueryBuilderPage);
     this.connectedExamplePage = props.stripes.connect(ExamplePage);
   }
 
@@ -64,7 +60,7 @@ class Ldp extends React.Component {
           <Route
             path={path}
             exact
-            component={QueryBuilderPage}
+            component={this.connectedQueryBuilderPage}
           />
           {/* <Route
             path={`${path}/examples`}

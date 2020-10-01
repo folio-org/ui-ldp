@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Tables from '../components/QueryBuilder/Tables';
-import { Button, MultiColumnList } from '@folio/stripes/components';
+import { Button, MultiColumnList, TextField } from '@folio/stripes/components';
 import { times } from '../components/QueryBuilder/utils';
+import PropTypes from 'prop-types';
+import { Form } from 'react-final-form';
+import arrayMutators from 'final-form-arrays'
+import { FieldArray } from 'react-final-form-arrays';
+import Table from '../components/QueryBuilder/Table';
 
 const mockData2 = [
   {id:'b6d44', desc: 'Faculty Member', group:'faculty'},
@@ -22,13 +27,27 @@ const ResultsRow = ({ numTables, results }) => {
     </div>
   )
 }
+const initialState = {
+  tables: [
+    {
+      tableName: null,
+      columns: [{}]
+    }
+  ]
+}
 
-const QueryBuilderPage = () => {
+const QueryBuilderPage = props => {
+  const { mutator, resources: { someLocalResource } } = props
   const [hasError, setErrors] = useState(false)
   const [isLoading, setLoading] = useState(true)
   const [numTables, setNumTables] = useState(1)
   const [results, setResults] = useState([])
   const [tables, setTables] = useState([])
+
+  useEffect(() => {
+    mutator.someLocalResource.update({ stuff: 7 });
+  }, [])
+  // console.debug(someLocalResource)
 
   async function fetchTables() {
     const url = `${process.env.LDP_BACKEND_URL}/ldp/db/tables`
@@ -38,7 +57,9 @@ const QueryBuilderPage = () => {
         .json()
         .then(resp => {
           setLoading(false)
-          setTables(resp.sort((a,b) => a.tableName.localeCompare(b.tableName) ))
+          const sortedTables = resp.sort((a,b) => a.tableName.localeCompare(b.tableName) )
+          const tableOptions = sortedTables.map(t => ({ value: t.tableName, label: t.tableName }));
+          setTables(tableOptions)
         })
         .catch(err => {
           setLoading(false)
@@ -55,17 +76,73 @@ const QueryBuilderPage = () => {
     fetchTables()
   }, []);
 
+  const onSubmit = async values => {
+    await sleep(300)
+    window.alert(JSON.stringify(values, 0, 2))
+    // event.preventDefault();
+  }
+
   return (
-    <div style={{ position: 'relative', display: 'flex', height: '100%', width: '100%' }}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Tables tables={tables} numTables={numTables} setResults={setResults} />
-        <ResultsRow numTables={numTables} results={results} />
-      </div>
-      <div style={{ padding: 10, borderTop: '1px solid rgba(0,0,0,.2)' }}>
-        {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
-      </div>
-    </div>
+    <Form
+      onSubmit={onSubmit}
+      mutators={{
+        ...arrayMutators
+      }}
+      initialValues={initialState}
+      render={({
+        handleSubmit,
+        form: {
+          mutators: { push, pop }
+        }, // injected from final-form-arrays above
+        pristine,
+        form,
+        submitting,
+        values
+      }) => {
+        return (
+          <form id="form-querybuilder" onSubmit={onSubmit}>{props.children}
+            <div style={{ position: 'relative', display: 'flex', height: '100%', width: '100%' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <FieldArray name="tables">
+                  {({ fields }) =>
+                  fields.map((table, tableIndex) => (
+                    <Table
+                      table={table}
+                      tableIndex={tableIndex}
+                      key={table}
+                      tables={tables}
+                      onRemove={() => fields.remove(tableIndex)}
+                      push={push}
+                      pop={pop}
+                    />
+                  ))}
+                </FieldArray>
+{/* 
+                <Tables tables={tables} numTables={numTables} setResults={setResults} />
+                <ResultsRow numTables={numTables} results={results} />
+  */}
+              </div>
+              <div style={{ padding: 10, borderTop: '1px solid rgba(0,0,0,.2)' }}>
+                <pre>{JSON.stringify(values, 0, 2)}</pre>
+                {/* <div>{someLocalResource}</div> */}
+                {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
+              </div>
+            </div>
+          </form>
+        )
+      }}
+    />
   );
+}
+
+QueryBuilderPage.propTypes = {
+  resources: PropTypes.shape({
+    someLocalResource: PropTypes.object
+  }).isRequired
+}
+QueryBuilderPage.manifest = {
+  dataKey: 'ldp',
+  someLocalResource: {}
 }
 
 export default QueryBuilderPage
