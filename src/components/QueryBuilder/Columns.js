@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FieldArray } from 'react-final-form-arrays';
-import { FormSpy, useFormState } from 'react-final-form';
+import { Field, FormSpy, useFormState } from 'react-final-form';
 import get from 'lodash.get';
 import { Button, Selection, TextField, MultiSelection } from '@folio/stripes/components';
 import ColumnFilter from './ColumnFilter';
 
-const Columns = ({ table, tableIndex }) => {
+// TODO: ability to remove column filter
+// <button type="button" onClick={() => pop(`${table}.columns`)}>Remove Column</button>
+
+const Columns = ({ table, tableIndex, push, pop }) => {
   const { values } = useFormState();
   const selectedTableName = get(values, `${table}.tableName`)
   const [availableColumns, setAvailableColumns] = useState([]);
@@ -52,6 +55,15 @@ const Columns = ({ table, tableIndex }) => {
           ))
         }
       </FieldArray>
+      <Button onClick={() => push(`${table}.columns`)}>Add Filter</Button>
+
+      <Field
+          name={`${table}.showColumns`}
+          label="Show Columns"
+          component={MultiSelection}
+          placeholder="All"
+          dataOptions={availableColumns}
+        />
     </div>
   )
 }

@@ -1,36 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Field } from "react-final-form";
-import { FieldArray } from "react-final-form-arrays";
-import { Button, Selection } from '@folio/stripes/components';
+import { Button, MultiColumnList, MultiSelection, Selection } from '@folio/stripes/components';
 
-import ColumnFilter from "./ColumnFilter";
 import css from './css/Table.css'
 import Columns from "./Columns";
+import get from "lodash.get";
 
 // TODO: ability to add and remove table joins
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
 
-// TODO: ability to remove column filter
-// <button type="button" onClick={() => pop(`${table}.columns`)}>Remove Column</button>
+const Results = ({ results, tableIndex }) => {
+  const data = results || [];
+  return (
+    <div style={{ flex: 1 }}>
+      {results? <MultiColumnList contentData={data} virtualize autosize /> : <div/>}
+    </div>
+  )
+}
 
-const Table = ({ table, tableIndex, tables, onRemove, push, pop }) => {
+const Table = ({ table, tableIndex, tables, queryResponse, onRemove, push, pop }) => {
   return (
     <div className={css.Table}>
-      
-      <Field
-        name={`${table}.tableName`}
-        label="Table"
-        component={Selection}
-        placeholder=""
-        dataOptions={tables}
-      />
-      
-      <Columns table={table} tableIndex={tableIndex} />
-      
-      <div className={css.SubmitRow}>
-        <Button disabled >Show Columns...</Button>
-        <Button buttonStyle='primary'>Submit</Button>
+
+      <div className="query-input">
+        <Field
+          name={`${table}.tableName`}
+          label="Table"
+          component={Selection}
+          placeholder=""
+          dataOptions={tables}
+        />
+        <Columns table={table} tableIndex={tableIndex} push={push} pop={pop} />
+        <div className={css.SubmitRow}>
+          {/* <Button disabled >Show Columns...</Button> */}
+          <Button type='submit' buttonStyle='primary'>Submit</Button>
+        </div>
       </div>
+
+      <Results results={queryResponse} tableIndex={tableIndex} />
     </div>
   );
 };
