@@ -10,12 +10,7 @@ import QueryBuilderPage from './routes/query-builder-page';
 import ExamplePage from './routes/example-page';
 import LogsPage from './routes/logs';
 import Settings from './settings';
-import { NavList, NavListItem } from '@folio/stripes-components'
-
-/*
-  STRIPES-NEW-APP
-  This is the main entry point into your new app.
-*/
+import { NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components'
 
 class Ldp extends React.Component {
   static propTypes = {
@@ -37,6 +32,7 @@ class Ldp extends React.Component {
     process.env.LDP_BACKEND_URL = window.location.origin.indexOf('localhost') > 0 ?
       'http://localhost:8001' : props.stripes.okapi.url;
 
+    this.connectedQueryBuilderPage = props.stripes.connect(QueryBuilderPage);
     this.connectedExamplePage = props.stripes.connect(ExamplePage);
   }
 
@@ -53,18 +49,21 @@ class Ldp extends React.Component {
     }
     return (
       <div style={{ position: 'absolute', display: 'flex', height: '100%', width: '100%',  }}>
-        <div style={{ width: 200, padding: 15, borderRight: '1px solid rgba(0,0,0,.2)' }}>
-          <NavList>
-            <Link to={`${path}`}><NavListItem>Query Builder</NavListItem></Link>
-            {/* <Link to={`${path}/examples`}><NavListItem>Tables</NavListItem></Link> */}
-            <Link to={`${path}/logs`}><NavListItem>Logs</NavListItem></Link>
-          </NavList>
-        </div>
+        <Paneset>
+          <Pane defaultWidth="15%">
+            <NavList>
+              <NavListSection activeLink={`${path}`}>
+                <NavListItem to={`${path}`}>Query Builder</NavListItem>
+                <NavListItem to={`${path}/examples`}>Tables</NavListItem>
+                <NavListItem to={`${path}/logs`}>Logs</NavListItem>
+              </NavListSection>
+            </NavList>
+          </Pane>
         <Switch>
           <Route
             path={path}
             exact
-            component={QueryBuilderPage}
+            component={this.connectedQueryBuilderPage}
           />
           {/* <Route
             path={`${path}/examples`}
@@ -77,6 +76,7 @@ class Ldp extends React.Component {
             component={LogsPage}
           />
         </Switch>
+        </Paneset>
       </div>
     );
   }
