@@ -62,7 +62,7 @@
     "route": "/ldp",
     "hasSettings": true,
     "okapiInterfaces": {
-      "ldp": "0.0.1"
+      "ldp": "0.0"
     },
     "permissionSets": [
       {
