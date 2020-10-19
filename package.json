@@ -60,7 +60,9 @@
     "displayName": "ui-ldp.meta.title",
     "route": "/ldp",
     "hasSettings": true,
-    "okapiInterfaces": {},
+    "okapiInterfaces": {
+      "ldp": "0.0.1"
+    },
     "permissionSets": [
       {
         "permissionName": "module.ldp.enabled",
