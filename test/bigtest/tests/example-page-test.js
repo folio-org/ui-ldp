@@ -9,29 +9,29 @@ describe('ExamplePage', () => {
 
   setupApplication();
 
-  beforeEach(function () {
-    this.visit('ldp/examples');
-  });
+  // beforeEach(function () {
+  //   this.visit('ldp/examples');
+  // });
 
-  it('has a link home', () => {
-    expect(examplePage.homeLink).to.include('ldp');
-  });
+  // it('has a link home', () => {
+  //   expect(examplePage.homeLink).to.include('ldp');
+  // });
 
-  it('has a link to stripes-components', () => {
-    expect(examplePage.componentsLink).to.include('/folio-org/stripes-components/');
-  });
+  // it('has a link to stripes-components', () => {
+  //   expect(examplePage.componentsLink).to.include('/folio-org/stripes-components/');
+  // });
 
-  it('has an example button', () => {
-    expect(examplePage.button.isPresent).to.be.true;
-  });
+  // it('has an example button', () => {
+  //   expect(examplePage.button.isPresent).to.be.true;
+  // });
 
-  describe('clicking the example button', () => {
-    beforeEach(async () => {
-      await examplePage.button.click();
-    });
+  // describe('clicking the example button', () => {
+  //   beforeEach(async () => {
+  //     await examplePage.button.click();
+  //   });
 
-    it('shows a greetings modal', () => {
-      expect(examplePage.modal.greetingMessage).to.equal('Congratulations!');
-    });
-  });
+  //   it('shows a greetings modal', () => {
+  //     expect(examplePage.modal.greetingMessage).to.equal('Congratulations!');
+  //   });
+  // });
 });

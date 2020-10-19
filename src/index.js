@@ -3,9 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Switch from 'react-router-dom/Switch';
-import Route from 'react-router-dom/Route';
-import Link from 'react-router-dom/Link';
+import { Switch, Route, Link } from 'react-router-dom';
 import QueryBuilderPage from './routes/query-builder-page';
 import ExamplePage from './routes/example-page';
 import LogsPage from './routes/logs';

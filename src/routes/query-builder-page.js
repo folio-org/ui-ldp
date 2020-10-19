@@ -9,7 +9,8 @@ const initialState = {
   tables: [
     {
       tableName: null,
-      columns: [{}]
+      columnFilters: [{}],
+      showColumns: []
     }
   ]
 }
@@ -105,11 +106,10 @@ const QueryBuilderPage = props => {
               <FieldArray name="tables">
                 {({ fields }) =>
                 fields.map((table, tableIndex) => (
-                  <Pane id={`table${tableIndex}`} defaultWidth="50%" >
+                  <Pane id={`table${tableIndex}`} defaultWidth="50%" key={table} >
                     <Table
                       table={table}
                       tableIndex={tableIndex}
-                      key={table}
                       tables={tables}
                       queryResponse={queryResponse}
                       onRemove={() => fields.remove(tableIndex)}

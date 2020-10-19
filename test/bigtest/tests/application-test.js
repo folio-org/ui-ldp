@@ -13,15 +13,8 @@ describe('Application', () => {
     this.visit('ldp');
   });
 
-  it('shows a greeting message', () => {
-    expect(app.greetingMessage).to.equal('Congratulations!');
-  });
+  // it('shows a greeting message', () => {
+  //   expect(app.greetingMessage).to.equal('Congratulations!');
+  // });
 
-  it('has a link to examples', () => {
-    expect(app.exampleLink).to.include('ldp/examples');
-  });
-
-  it('has a link to the developer guides', () => {
-    expect(app.guideLink).to.include('/dev-guide.md');
-  });
 });
