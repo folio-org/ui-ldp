@@ -128,8 +128,8 @@ const QueryBuilderPage = props => {
                   </Pane>
                 ))}
               </FieldArray>
-              <Pane id='empty-space' defaultWidth="fill" style={{ height: 'auto' }}>
-                <pre>{JSON.stringify(values, 0, 2)}</pre>
+              <Pane id='empty-space' defaultWidth="fill" style={{ height: '0' }}>
+                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                 {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
               </Pane>
 

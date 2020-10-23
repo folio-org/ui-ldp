@@ -4,7 +4,6 @@ import { Field, FormSpy, useFormState } from 'react-final-form';
 import get from 'lodash.get';
 import { Button, Selection, TextField, MultiSelection, OptionSegment } from '@folio/stripes/components';
 import ColumnFilter from './ColumnFilter';
-import ColumnChooser from './ColumnChooser';
 
 // TODO: ability to remove column filter
 // <button type="button" onClick={() => pop(`${table}.columns`)}>Remove Column</button>
@@ -83,15 +82,6 @@ const Columns = ({ table, tableIndex, push, pop }) => {
         formatter={({option, searchTerm}) => <OptionSegment searchTerm={searchTerm} >{option}</OptionSegment>}
         filter={filterItems}
       />
-      <Field name={`${table}.showColumns2`}>
-        {props => (
-          <ColumnChooser
-            possibleColumns={availableColumns.list}
-            value={props.input.value}
-            onChange={props.input.onChange}
-          />
-        )}
-      </Field>
     </div>
   )
 }

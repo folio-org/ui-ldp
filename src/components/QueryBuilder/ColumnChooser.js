@@ -2,8 +2,17 @@ import React, { useState, useEffect } from 'react';
 import {Checkbox, Dropdown, DropdownButton, DropdownMenu } from "@folio/stripes/components";
 import cloneDeep from 'lodash.clonedeep'
 
-// TODO: ability to remove filters
-// <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
+// This is an alternative to the Multiselection used to select which columns to choose
+// Usage:
+/* <Field name={`${table}.showColumns2`}>
+  {props => (
+    <ColumnChooser
+      possibleColumns={availableColumns.list}
+      value={props.input.value}
+      onChange={props.input.onChange}
+    />
+  )}
+</Field> */
 
 const ColumnChooser = ({ possibleColumns, value, onChange }) => {
   const [menuOpen, setMenuOpen] = useState(false);
