@@ -54,6 +54,8 @@ const Columns = ({ table, tableIndex, push, pop }) => {
     if(selectedTableName) { getColumns(selectedTableName) }
   }, [selectedTableName]);
 
+  const disabled = availableColumns.list == 0;
+
   return (
     <div>
       <div style={{ fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '0.25rem' }}>Column</div>
@@ -66,11 +68,12 @@ const Columns = ({ table, tableIndex, push, pop }) => {
               key={name}
               availableColumns={availableColumns.options}
               onRemove={() => fields.remove(index)}
+              disabled={disabled}
             />
           ))
         }
       </FieldArray>
-      <Button onClick={() => push(`${table}.columns`)}>Add Filter</Button>
+      <Button disabled={disabled} onClick={() => push(`${table}.columns`)}>Add Filter</Button>
 
       <Field
         name={`${table}.showColumns`}
@@ -81,6 +84,7 @@ const Columns = ({ table, tableIndex, push, pop }) => {
         itemToString={(opt => opt)}
         formatter={({option, searchTerm}) => <OptionSegment searchTerm={searchTerm} >{option}</OptionSegment>}
         filter={filterItems}
+        disabled={disabled}
       />
     </div>
   )

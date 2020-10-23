@@ -5,7 +5,8 @@ import { Selection, TextField } from "@folio/stripes/components";
 // TODO: ability to remove filters
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
 
-const ColumnFilter = ({ name, index, availableColumns, onRemove }) => (
+const ColumnFilter = ({ name, index, availableColumns, disabled, onRemove }) => {
+  return (
   <div key={name} style={{ display: 'flex' }}>
     <div style={{ flex: 1, marginRight: 5 }}>
         <Field
@@ -13,6 +14,7 @@ const ColumnFilter = ({ name, index, availableColumns, onRemove }) => (
           component={Selection}
           placeholder=""
           dataOptions={availableColumns}
+          disabled={disabled}
         />
     </div>
     <div style={{ flex: 1, marginLeft: 5 }}>
@@ -21,9 +23,10 @@ const ColumnFilter = ({ name, index, availableColumns, onRemove }) => (
         component={TextField}
         placeholder="Value"
         validateFields={[]}
+        disabled={disabled}
       />
     </div>
   </div>
-);
+)};
 
 export default ColumnFilter;
