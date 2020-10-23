@@ -25,14 +25,17 @@ const TableSelection = ({ tables, setSelectedTableName, setIsLoadingFields }) =>
 const SubmitRow = ({ displaySubmit, setResults, selectedTableName }) => {
 
   const submitQuery = async () => {
-    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/query?table=${selectedTableName}`
+    const { okapi } = process.env;
+    const url = `${okapi.url}/ldp/db/query?table=${selectedTableName}`
     const data = { 'username': 'example' };
     try {
       const resp = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-Okapi-Tenant': okapi.tenant,
+          'X-Okapi-Token': okapi.token
         }
       })
       resp
@@ -76,9 +79,15 @@ const Table = (n, numTables, setResults, tables) => {
   const displayEditJoin = n != 0
 
   const getColumns = async (selectedTableName) => {
-    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/columns?table=${selectedTableName}`
+    const { okapi } = process.env;
+    const url = `${okapi.url}/ldp/db/columns?table=${selectedTableName}`
     try {
-      const resp = await fetch(url)
+      const resp = await fetch(url, {
+        headers: {
+          'X-Okapi-Tenant': okapi.tenant,
+          'X-Okapi-Token': okapi.token
+        }
+      });
       resp
         .json()
         .then(resp => {

@@ -22,13 +22,8 @@ class Ldp extends React.Component {
   constructor(props) {
     super(props);
 
-    // TODO: Stripes CLI does not allow substituting in env variables
-    //       and currently mod-ldp is not behind Okapi.
-    //       Since there is no non-local LDP_BACKEND_URL yet,
-    //       this variable may as well be hardcoded.
-    
-    process.env.LDP_BACKEND_URL = window.location.origin.indexOf('localhost') > 0 ?
-      'http://localhost:8001' : props.stripes.okapi.url;
+    // TODO: Curry okapi params into apiCall() function that can be imported
+    process.env.okapi = props.stripes.okapi;
 
     this.connectedQueryBuilderPage = props.stripes.connect(QueryBuilderPage);
     this.connectedExamplePage = props.stripes.connect(ExamplePage);

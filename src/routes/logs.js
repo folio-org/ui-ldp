@@ -28,9 +28,15 @@ const LogsPage = props => {
   })
 
   async function fetchData() {
-    const url = `${process.env.LDP_BACKEND_URL}/ldp/db/log`
+    const { okapi } = process.env;
+    const url = `${okapi.url}/ldp/db/log`
     try {
-      const resp = await fetch(url)
+      const resp = await fetch(url, {
+        headers: {
+          'X-Okapi-Tenant': okapi.tenant,
+          'X-Okapi-Token': okapi.token
+        }
+      });
       resp
         .json()
         .then(resp => {
