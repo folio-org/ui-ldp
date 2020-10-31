@@ -3,6 +3,7 @@ import { Pane, Paneset } from '@folio/stripes/components';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays';
+import { v4 as uuidv4 } from 'uuid';
 import Table from '../components/QueryBuilder/Table';
 
 const initialState = {
@@ -19,7 +20,7 @@ const QueryBuilderPage = props => {
   const [hasError, setErrors] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState([]);
-  const [queryResponse, setQueryResponse] = useState(null);
+  const [queryResponse, setQueryResponse] = useState({ key: null, resp: []});
 
   async function fetchTables() {
     const { okapi } = process.env;
@@ -72,7 +73,7 @@ const QueryBuilderPage = props => {
         .then(resp => {
           // setIsLoadingFields(false)
           resp.forEach(v => { delete v.data });
-          setQueryResponse(resp);
+          setQueryResponse({ key: uuidv4(), resp });
         })
         .catch(err => {
           // TODO: handle error

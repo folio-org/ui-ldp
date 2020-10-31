@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FieldArray } from 'react-final-form-arrays';
-import { Field, FormSpy, useFormState } from 'react-final-form';
-import get from 'lodash.get';
-import { Button, Selection, TextField, MultiSelection, OptionSegment } from '@folio/stripes/components';
+import { Field } from 'react-final-form';
+import { Button, MultiSelection, OptionSegment } from '@folio/stripes/components';
 import ColumnFilter from './ColumnFilter';
 
 // TODO: ability to remove column filter
@@ -14,48 +13,7 @@ const filterItems = ((filterText, list) => {
   return { renderedItems };
 });
 
-const Columns = ({ table, tableIndex, push, pop }) => {
-  const { values } = useFormState();
-  const selectedTableName = get(values, `${table}.tableName`)
-  const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
-  
-  const getColumns = async (selectedTableName) => {
-    const { okapi } = process.env;
-    const url = `${okapi.url}/ldp/db/columns?table=${selectedTableName}`
-    try {
-      const resp = await fetch(url, {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token
-        }
-      });
-      resp
-        .json()
-        .then(resp => {
-          // setIsLoadingFields(false)
-          setAvailableColumns({
-            list: resp.map(c => c.columnName),
-            options: resp.map(c => ({ value: c.columnName, label: c.columnName }))
-          })
-        })
-        .catch(err => {
-          // TODO: handle error
-          // setLoading(false)
-          // console.error(err)
-          // setErrors(`Failed connect to database`)
-        })
-    } catch (error) {
-      // TODO: handle error
-      // setLoading(false)
-      // setErrors(`Failed connecting to server ${url}`)
-    }
-  }
-  useEffect(() => {
-    if(selectedTableName) { getColumns(selectedTableName) }
-  }, [selectedTableName]);
-
-  const disabled = availableColumns.list == 0;
-
+const Columns = ({ availableColumns, disabled, table, tableIndex, push, pop }) => {
   return (
     <div>
       <div style={{ fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '0.25rem' }}>Column</div>
