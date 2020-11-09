@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Pane, Paneset } from '@folio/stripes/components';
+import { Pane, Paneset, Loading } from '@folio/stripes/components';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays';
 import { v4 as uuidv4 } from 'uuid';
 import Table from '../components/QueryBuilder/Table';
+import BigError from '../components/QueryBuilder/BigError';
 
 const initialState = {
   tables: [
@@ -17,7 +18,7 @@ const initialState = {
 }
 
 const QueryBuilderPage = props => {
-  const [hasError, setErrors] = useState(false);
+  const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState([]);
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: []});
@@ -43,11 +44,12 @@ const QueryBuilderPage = props => {
         .catch(err => {
           setLoading(false)
           console.error(err)
-          setErrors(`Failed connect to database`)
+          setError(`Failed connect to database`)
         })
-    } catch (error) {
+    } catch (err) {
       setLoading(false)
-      setErrors(`Failed connecting to server ${url}`)
+      console.error(err)
+      setError(`Failed connecting to server ${url}`)
     }
   }
 
@@ -117,15 +119,17 @@ const QueryBuilderPage = props => {
                 {({ fields }) =>
                 fields.map((table, tableIndex) => (
                   <Pane id={`table${tableIndex}`} defaultWidth="50%" key={table} >
+                    {isLoading ? <div style={{ textAlign: 'center', margin: 20 }}><Loading size="xlarge"/></div> : (error ? <BigError message={error} /> : 
                     <Table
                       table={table}
                       tableIndex={tableIndex}
                       tables={tables}
                       queryResponse={queryResponse}
+                      tablesAreLoading={isLoading}
                       onRemove={() => fields.remove(tableIndex)}
                       push={push}
                       pop={pop}
-                    />
+                    />)}
                   </Pane>
                 ))}
               </FieldArray>

@@ -49,23 +49,24 @@ class Ldp extends React.Component {
               </NavListSection>
             </NavList>
           </Pane>
-        <Switch>
-          <Route
-            path={path}
-            exact
-            component={this.connectedQueryBuilderPage}
-          />
-          {/* <Route
-            path={`${path}/examples`}
-            exact
-            component={this.connectedExamplePage}
-          /> */}
-          <Route
-            path={`${path}/logs`}
-            exact
-            component={LogsPage}
-          />
-        </Switch>
+        
+          <Switch>
+            <Route
+              path={path}
+              exact
+              component={this.connectedQueryBuilderPage}
+            />
+            {/* <Route
+              path={`${path}/examples`}
+              exact
+              component={this.connectedExamplePage}
+            /> */}
+            <Route
+              path={`${path}/logs`}
+              exact
+              component={LogsPage}
+            />
+          </Switch>
         </Paneset>
       </div>
     );

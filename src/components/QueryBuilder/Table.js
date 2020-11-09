@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Field, useFormState } from "react-final-form";
 import get from 'lodash.get';
-import { Button, MultiColumnList, Selection } from '@folio/stripes/components';
+import { Button, MultiColumnList, Selection, Loading } from '@folio/stripes/components';
 
 import css from './css/Table.css'
 import Columns from "./Columns";
@@ -18,8 +18,18 @@ const Results = ({ results, dirty }) => {
   )
 }
 
-const Table = ({ table, tableIndex, tables, queryResponse, onRemove, push, pop }) => {
+const Table = ({
+  table,
+  tableIndex,
+  tables,
+  tablesAreLoading,
+  queryResponse,
+  onRemove,
+  push,
+  pop
+}) => {
   const { values, dirtySinceLastSubmit } = useFormState();
+  const [isLoadingColumns, setIsLoadingColumns] = useState(false);
   const selectedTableName = get(values, `${table}.tableName`)
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
   
@@ -27,6 +37,7 @@ const Table = ({ table, tableIndex, tables, queryResponse, onRemove, push, pop }
     const { okapi } = process.env;
     const url = `${okapi.url}/ldp/db/columns?table=${selectedTableName}`
     try {
+      setIsLoadingColumns(true)
       const resp = await fetch(url, {
         headers: {
           'X-Okapi-Tenant': okapi.tenant,
@@ -36,7 +47,7 @@ const Table = ({ table, tableIndex, tables, queryResponse, onRemove, push, pop }
       resp
         .json()
         .then(resp => {
-          // setIsLoadingFields(false)
+          setIsLoadingColumns(false)
           setAvailableColumns({
             list: resp.map(c => c.columnName),
             options: resp.map(c => ({ value: c.columnName, label: c.columnName }))
@@ -44,13 +55,13 @@ const Table = ({ table, tableIndex, tables, queryResponse, onRemove, push, pop }
         })
         .catch(err => {
           // TODO: handle error
-          // setLoading(false)
+          setIsLoadingColumns(false)
           // console.error(err)
           // setErrors(`Failed connect to database`)
         })
     } catch (error) {
       // TODO: handle error
-      // setLoading(false)
+      setIsLoadingColumns(false)
       // setErrors(`Failed connecting to server ${url}`)
     }
   }
@@ -66,10 +77,15 @@ const Table = ({ table, tableIndex, tables, queryResponse, onRemove, push, pop }
       <div className="query-input">
         <Field
           name={`${table}.tableName`}
-          label="Table"
+          label={(
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ marginRight: 7 }}>Table</span>
+            </div>
+          )}
           component={Selection}
-          placeholder=""
+          placeholder={<span style={{ color: 'transparent' }}>-</span> /* Workaround for Safari sizing bug */}
           dataOptions={tables}
+          disabled={tablesAreLoading}
         />
         <Columns
           availableColumns={availableColumns}
