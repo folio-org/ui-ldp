@@ -115,6 +115,7 @@ const QueryBuilderPage = props => {
               width: '100%',
               height: '100%'
             }}>
+              
               <FieldArray name="tables">
                 {({ fields }) =>
                 fields.map((table, tableIndex) => (

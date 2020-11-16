@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Field, useFormState } from "react-final-form";
+import { Field, FormSpy, useFormState } from "react-final-form";
+import { OnChange } from "react-final-form-listeners";
 import get from 'lodash.get';
 import { Button, MultiColumnList, Selection, Loading } from '@folio/stripes/components';
 
@@ -8,6 +9,27 @@ import Columns from "./Columns";
 
 // TODO: ability to add and remove table joins
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
+
+const WhenFieldChanges = ({ field, set, to }) => (
+  <Field name={set} subscription={{}}>
+    {(
+      // No subscription. We only use Field to get to the change function
+      { input: { onChange } }
+    ) => (
+      <FormSpy subscription={{}}>
+        {({ form }) => (
+          <OnChange name={field}>
+            {(value, previous) => {
+              if (value !== previous) {
+                onChange(to);
+              }
+            }}
+          </OnChange>
+        )}
+      </FormSpy>
+    )}
+  </Field>
+);
 
 const Results = ({ results, dirty }) => {
   const data = results.resp || [];
@@ -73,7 +95,6 @@ const Table = ({
 
   return (
     <div className={css.Table}>
-
       <div className="query-input">
         <Field
           name={`${table}.tableName`}
@@ -87,7 +108,18 @@ const Table = ({
           dataOptions={tables}
           disabled={tablesAreLoading}
         />
+        <WhenFieldChanges
+          field={`${table}.tableName`}
+          set={`${table}.columnFilters`}
+          to={[{}]}
+        />
+        <WhenFieldChanges
+          field={`${table}.tableName`}
+          set={`${table}.showColumns`}
+          to={[]}
+        />
         <Columns
+          selectedTableName={selectedTableName}
           availableColumns={availableColumns}
           disabled={disabled}
           table={table}
