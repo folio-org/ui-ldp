@@ -69,12 +69,12 @@
     "permissionSets": [
       {
         "permissionName": "module.ldp.enabled",
-        "displayName": "UI: ldp module is enabled",
+        "displayName": "LDP: all permissions",
         "visible": true
       },
       {
         "permissionName": "settings.ldp.enabled",
-        "displayName": "Settings (ldp): display list of settings pages",
+        "displayName": "Settings (LDP): Can view, create, edit, and remove",
         "subPermissions": [
           "settings.enabled"
         ],
