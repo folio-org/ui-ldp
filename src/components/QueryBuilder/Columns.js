@@ -31,7 +31,7 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push, pop }) =
           ))
         }
       </FieldArray>
-      <Button disabled={disabled} onClick={() => push(`${table}.columns`)}>Add Filter</Button>
+      <Button disabled={disabled} onClick={() => push(`${table}.columnFilters`)}>Add Filter</Button>
 
       <Field
         name={`${table}.showColumns`}
