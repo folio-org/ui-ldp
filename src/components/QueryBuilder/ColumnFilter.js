@@ -11,8 +11,9 @@ const ColumnFilter = ({ name, index, availableColumns, disabled, onRemove }) => 
     <div style={{ flex: 1, marginRight: 5 }}>
       <Field
         name={`${name}.key`}
+        label='Column'
         component={Selection}
-        placeholder={<span style={{ color: 'transparent' }}>-</span> /* Workaround for Safari sizing bug */}
+        placeholder='&nbsp;'
         dataOptions={availableColumns}
         disabled={disabled}
       />

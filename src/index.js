@@ -18,18 +18,12 @@ class Ldp extends React.Component {
     })
   };
 
-  constructor(props) {
-    super(props);
-
-    // TODO: Curry okapi params into apiCall() function that can be imported
-    process.env.okapi = props.stripes.okapi;
-
-    this.connectedQueryBuilderPage = props.stripes.connect(QueryBuilderPage);
-  }
-
   render() {
     const {
       showSettings,
+      stripes: {
+        okapi
+      },
       match: {
         path
       }
@@ -54,17 +48,12 @@ class Ldp extends React.Component {
             <Route
               path={path}
               exact
-              component={this.connectedQueryBuilderPage}
+              render={(props) => <QueryBuilderPage {...props} okapi={okapi} />}
             />
-            {/* <Route
-              path={`${path}/examples`}
-              exact
-              component={this.connectedExamplePage}
-            /> */}
             <Route
               path={`${path}/logs`}
               exact
-              component={LogsPage}
+              render={(props) => <LogsPage {...props} okapi={okapi} />}
             />
           </Switch>
         </Paneset>

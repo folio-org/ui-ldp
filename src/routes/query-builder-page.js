@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Pane, Paneset, Loading } from '@folio/stripes/components';
+import { Pane } from '@folio/stripes/components';
+import { Paneset } from '@folio/stripes/components';
+import { Loading } from '@folio/stripes/components';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays';
 import { v4 as uuidv4 } from 'uuid';
+import fetch from 'cross-fetch'
 import Table from '../components/QueryBuilder/Table';
 import BigError from '../components/QueryBuilder/BigError';
 
@@ -17,14 +20,13 @@ const initialState = {
   ]
 }
 
-const QueryBuilderPage = props => {
+const QueryBuilderPage = ({ okapi }) => {
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState([]);
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: []});
 
   async function fetchTables() {
-    const { okapi } = process.env;
     const url = `${okapi.url}/ldp/db/tables`;
     try {
       const resp = await fetch(url, {
@@ -58,7 +60,6 @@ const QueryBuilderPage = props => {
   }, []);
 
   const onSubmit = async (values) => {
-    const { okapi } = process.env;
     const url = `${okapi.url}/ldp/db/query`
     try {
       const resp = await fetch(url, {
@@ -109,13 +110,12 @@ const QueryBuilderPage = props => {
       }) => {
         return (
           <Paneset>
-            <form id="form-querybuilder" onSubmit={handleSubmit} style={{
+            <form id="form-querybuilder" onSubmit={handleSubmit} data-test-query-builder style={{
               display: 'flex',
               flexDirection: 'row',
               width: '100%',
               height: '100%'
             }}>
-              
               <FieldArray name="tables">
                 {({ fields }) =>
                 fields.map((table, tableIndex) => (
@@ -127,6 +127,7 @@ const QueryBuilderPage = props => {
                       tables={tables}
                       queryResponse={queryResponse}
                       tablesAreLoading={isLoading}
+                      okapi={okapi}
                       onRemove={() => fields.remove(tableIndex)}
                       push={push}
                       pop={pop}

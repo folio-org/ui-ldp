@@ -15,14 +15,13 @@ This repo is bootstrapped by the Stripes CLI, so an Okapi backend is required to
 ## Run
 
 ```
-npm start
+yarn start
 ```
 
 
 ## Test
 
-Currently, there are no tests. When there are:
 
 ```
-npm run test
+yarn test
 ```

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment'
+import fetch from 'cross-fetch'
 import { Datepicker, MultiColumnList, Row, Col, ButtonGroup, Button } from '@folio/stripes-components'
 import LogChart from '../components/LogChart'
 
@@ -14,7 +15,7 @@ function isEmpty(obj) {
 
 const blankLogs = [{logTime: '', tableName: '', elapsedTime: '', message: ''}]
 
-const LogsPage = props => {
+const LogsPage = ({ okapi }) => {
   const [hasError, setErrors] = useState(false)
   const [isLoading, setLoading] = useState(true)
   const [startDate, setStartDate] = useState(null)
@@ -28,7 +29,6 @@ const LogsPage = props => {
   })
 
   async function fetchData() {
-    const { okapi } = process.env;
     const url = `${okapi.url}/ldp/db/log`
     try {
       const resp = await fetch(url, {

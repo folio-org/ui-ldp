@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Field, FormSpy, useFormState } from "react-final-form";
 import { OnChange } from "react-final-form-listeners";
 import get from 'lodash.get';
+import fetch from 'cross-fetch'
 import { Button, MultiColumnList, Selection, Loading } from '@folio/stripes/components';
 
 import css from './css/Table.css'
@@ -45,6 +46,7 @@ const Table = ({
   tableIndex,
   tables,
   tablesAreLoading,
+  okapi,
   queryResponse,
   onRemove,
   push,
@@ -56,7 +58,6 @@ const Table = ({
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
   
   const getColumns = async (selectedTableName) => {
-    const { okapi } = process.env;
     const url = `${okapi.url}/ldp/db/columns?table=${selectedTableName}`
     try {
       setIsLoadingColumns(true)
@@ -94,7 +95,7 @@ const Table = ({
   const disabled = availableColumns.list == 0;
 
   return (
-    <div className={css.Table}>
+    <div className={css.Table} data-test-table>
       <div className="query-input">
         <Field
           name={`${table}.tableName`}
@@ -104,7 +105,7 @@ const Table = ({
             </div>
           )}
           component={Selection}
-          placeholder={<span style={{ color: 'transparent' }}>-</span> /* Workaround for Safari sizing bug */}
+          placeholder='&nbsp;'
           dataOptions={tables}
           disabled={tablesAreLoading}
         />
