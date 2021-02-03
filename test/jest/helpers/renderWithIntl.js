@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import { Harness } from '../../helpers';
 
-export const renderWithIntl = (children, translations = [], stripes) => render(
+const renderWithIntl = (children, translations = [], stripes) => render(
   <Harness
     translations={translations}
     stripes={stripes}
@@ -11,3 +11,5 @@ export const renderWithIntl = (children, translations = [], stripes) => render(
     {children}
   </Harness>
 );
+
+export default renderWithIntl;

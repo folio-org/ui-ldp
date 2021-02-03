@@ -1,2 +1,2 @@
 // export * from './stripesResourcesMocks';
-export * from './Harness';
+export { default as Harness } from './Harness';  // eslint-disable-line import/prefer-default-export

@@ -1,7 +1,7 @@
 // Taken from https://github.com/bvaughn/react-virtualized-auto-sizer/blob/master/src/__tests__/AutoSizer.js
 // AutoSizer uses offsetWidth and offsetHeight.
 // Jest runs in JSDom which doesn't support measurements APIs.
-export function mockOffsetSize(width, height) {
+function mockOffsetSize(width, height) {
   Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
     configurable: true,
     value: height,
@@ -11,3 +11,5 @@ export function mockOffsetSize(width, height) {
     value: width,
   });
 }
+
+export default mockOffsetSize;

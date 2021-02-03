@@ -10,9 +10,9 @@ import { noop } from 'lodash';
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 // import createReactQueryClient from '@folio/stripes-core/src/createReactQueryClient';
 
-import { translationsProperties } from './translationsProperties'
-import { prefixKeys } from './prefixKeys';
-import { mockOffsetSize } from './mockOffsetSize';
+import translationsProperties from './translationsProperties';
+import prefixKeys from './prefixKeys';
+import mockOffsetSize from './mockOffsetSize';
 
 const stripesDefaultProps = {
   okapi: { url: '' },
@@ -27,7 +27,7 @@ const stripesDefaultProps = {
 };
 // const reactQueryClient = new QueryClient(createReactQueryClient());
 
-export function Harness({
+function Harness({
   // translations: translationsConfig,
   shouldMockOffsetSize = true,
   width = 500,
@@ -36,7 +36,7 @@ export function Harness({
   children,
 }) {
   const allTranslations = {}; // prefixKeys(translations);
-  const stripes = Object.assign({}, stripesDefaultProps, stripesCustomProps);
+  const stripes = { ...stripesDefaultProps, ...stripesCustomProps };
 
   translationsProperties.forEach(tx => {
     Object.assign(allTranslations, prefixKeys(tx.translations, tx.prefix));
@@ -73,3 +73,5 @@ Harness.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
 };
+
+export default Harness;

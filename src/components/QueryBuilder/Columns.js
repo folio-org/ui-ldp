@@ -18,17 +18,16 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push, pop }) =
     <div>
       <div style={{ fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '0.25rem' }}>Column</div>
       <FieldArray name={`${table}.columnFilters`} tableIndex={tableIndex}>
-        {({ fields }) =>
-          fields.map((name, index) => (
-            <ColumnFilter
-              name={name}
-              index={index}
-              key={name}
-              availableColumns={availableColumns.options}
-              onRemove={() => fields.remove(index)}
-              disabled={disabled}
-            />
-          ))
+        {({ fields }) => fields.map((name, index) => (
+          <ColumnFilter
+            name={name}
+            index={index}
+            key={name}
+            availableColumns={availableColumns.options}
+            onRemove={() => fields.remove(index)}
+            disabled={disabled}
+          />
+        ))
         }
       </FieldArray>
       <Button disabled={disabled} onClick={() => push(`${table}.columnFilters`)}>Add Filter</Button>
@@ -40,12 +39,12 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push, pop }) =
         placeholder="All"
         dataOptions={availableColumns.list}
         itemToString={(opt => opt)}
-        formatter={({option, searchTerm}) => <OptionSegment searchTerm={searchTerm} >{option}</OptionSegment>}
+        formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
         filter={filterItems}
         disabled={disabled}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Columns
+export default Columns;

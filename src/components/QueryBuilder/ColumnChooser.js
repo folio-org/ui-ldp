@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {Checkbox, Dropdown, DropdownButton, DropdownMenu } from "@folio/stripes/components";
-import cloneDeep from 'lodash.clonedeep'
+import React, { useState } from 'react';
+import { Checkbox, Dropdown, DropdownButton, DropdownMenu } from '@folio/stripes/components';
+import cloneDeep from 'lodash.clonedeep';
 
 // This is an alternative to the Multiselection used to select which columns to choose
 // Usage:
@@ -23,7 +23,7 @@ const ColumnChooser = ({ possibleColumns, value, onChange }) => {
 
   const updateColumns = (e) => {
     const column = e.target.value;
-    let newColumns
+    let newColumns;
     if (e.target.checked) {
       newColumns = [...columns, column];
       setColumns(newColumns);
@@ -32,47 +32,47 @@ const ColumnChooser = ({ possibleColumns, value, onChange }) => {
       if (columnIndex !== -1) {
         newColumns = cloneDeep(columns);
         newColumns.splice(columnIndex, 1);
-        setColumns(newColumns)
+        setColumns(newColumns);
       }
     }
-    console.debug('columns', newColumns)
-    value = newColumns;
-    onChange(newColumns)
-  }
-  
+    // console.debug('columns', newColumns);
+    onChange(newColumns);
+  };
+
   return (
-  <Dropdown
-    id="chooseColumnDropdown"
-    open={menuOpen}
-    onToggle={() => setMenuOpen(!menuOpen)}
-  >
-    <DropdownButton
-      data-role="toggle"
+    <Dropdown
+      id="chooseColumnDropdown"
       open={menuOpen}
-    >
-      {'Show columns...'}
-    </DropdownButton>
-    <DropdownMenu
-      data-role="menu"
-      // aria-label="column menu"
       onToggle={() => setMenuOpen(!menuOpen)}
     >
-      <ul>
-        { possibleColumns.map((col) => {
-          return (
-            <li key={col}>
-              <Checkbox
-                value={col}
-                label={col}
-                onChange={updateColumns}
-                checked={columns.includes(col)}
-              />
-            </li>
-          );
-        })}
-      </ul>
-    </DropdownMenu>
-  </Dropdown>
-)};
+      <DropdownButton
+        data-role="toggle"
+        open={menuOpen}
+      >
+      Show columns...
+      </DropdownButton>
+      <DropdownMenu
+        data-role="menu"
+      // aria-label="column menu"
+        onToggle={() => setMenuOpen(!menuOpen)}
+      >
+        <ul>
+          { possibleColumns.map((col) => {
+            return (
+              <li key={col}>
+                <Checkbox
+                  value={col}
+                  label={col}
+                  onChange={updateColumns}
+                  checked={columns.includes(col)}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </DropdownMenu>
+    </Dropdown>
+  );
+};
 
 export default ColumnChooser;

@@ -1,5 +1,5 @@
 // mimics the StripesTranslationPlugin in @folio/stripes-core
-export function prefixKeys(obj, prefix = 'ui-ldp') {
+function prefixKeys(obj, prefix = 'ui-ldp') {
   const res = {};
 
   for (const key of Object.keys(obj)) {
@@ -8,3 +8,5 @@ export function prefixKeys(obj, prefix = 'ui-ldp') {
 
   return res;
 }
+
+export default prefixKeys;

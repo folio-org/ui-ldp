@@ -2,7 +2,7 @@ import stripesComponentsTranslations from '@folio/stripes-components/translation
 
 import translations from '../../translations/ui-ldp/en';
 
-export const translationsProperties = [
+const translationsProperties = [
   {
     prefix: 'ui-ldp',
     translations,
@@ -20,3 +20,5 @@ export const translationsProperties = [
     },
   },
 ];
+
+export default translationsProperties;
