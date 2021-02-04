@@ -2,7 +2,7 @@
 function prefixKeys(obj, prefix = 'ui-ldp') {
   const res = {};
 
-  for (const key of Object.keys(obj)) {
+  for (const key of Object.keys(obj)) { // eslint-disable-line no-unused-vars
     res[`${prefix}.${key}`] = obj[key];
   }
 

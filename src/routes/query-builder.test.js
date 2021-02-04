@@ -12,11 +12,9 @@ import QueryBuilderPage from './query-builder-page';
 jest.mock('cross-fetch');
 
 describe('App', () => {
-  let renderResult;
-
   beforeEach(() => {
     fetch.mockResolvedValue(ldpTablesResponse);
-    renderResult = renderWithIntl(
+    renderWithIntl(
       <QueryBuilderPage okapi={{
         url: 'dummy.com',
         tenant: 'dummyTenant',
@@ -27,7 +25,6 @@ describe('App', () => {
   });
 
   test('renders Table component', async () => {
-    const { container } = renderResult;
     const tableLabel = await screen.findByText('Table');
     expect(tableLabel).toBeInTheDocument();
 

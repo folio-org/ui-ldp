@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { IconButton, Selection, TextField } from '@folio/stripes/components';
 
 // TODO: ability to remove filters
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
 
-const ColumnFilter = ({ name, index, availableColumns, disabled, onRemove }) => {
+const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
   return (
     <div key={name} style={{ display: 'flex' }}>
       <div style={{ flex: 1, marginRight: 5 }}>
@@ -34,6 +35,13 @@ const ColumnFilter = ({ name, index, availableColumns, disabled, onRemove }) => 
       />
     </div>
   );
+};
+
+ColumnFilter.propTypes = {
+  name: PropTypes.string,
+  availableColumns: PropTypes.arrayOf(PropTypes.object),
+  disabled: PropTypes.bool,
+  onRemove: PropTypes.func,
 };
 
 export default ColumnFilter;

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import fetch from 'cross-fetch';
-import { Datepicker, MultiColumnList, Row, Col, ButtonGroup, Button } from '@folio/stripes-components';
+import { Datepicker, MultiColumnList, Row, Col } from '@folio/stripes-components';
 import LogChart from '../components/LogChart';
 
 function isEmpty(obj) {
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
+  for (const key in obj) { // eslint-disable-line no-unused-vars
+    if (Object.prototype.hasOwnProperty.call(obj, key)) return false;
   }
   return true;
 }
@@ -15,9 +15,8 @@ function isEmpty(obj) {
 const blankLogs = [{ logTime: '', tableName: '', elapsedTime: '', message: '' }];
 
 const LogsPage = ({ okapi }) => {
-  const [hasError, setErrors] = useState(false);
-  const [isLoading, setLoading] = useState(true);
-  const [startDate, setStartDate] = useState(null);
+  // const [error, setErrors] = useState(false);
+  // const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState({
     rawData: [],
     filteredData: blankLogs,
@@ -27,55 +26,6 @@ const LogsPage = ({ okapi }) => {
     }
   });
 
-  async function fetchData() {
-    const url = `${okapi.url}/ldp/db/log`;
-    try {
-      const resp = await fetch(url, {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token
-        }
-      });
-      resp
-        .json()
-        .then(resp => {
-          setLoading(false);
-          setState({
-            ...state,
-            rawData: resp,
-            filteredData: applyDateFilters(resp)
-          });
-        })
-        .catch(err => {
-          setLoading(false);
-          console.error(err);
-          setErrors('Failed connect to database');
-        });
-    } catch (error) {
-      setLoading(false);
-      setErrors(`Failed connecting to server ${url}`);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const buttonGroup = (
-    <ButtonGroup fullWidth>
-      <Button buttonStyle="primary">Logs</Button>
-      <Button>Console</Button>
-      <Button>Hooks</Button>
-    </ButtonGroup>
-  );
-
-  const applyDateFilters = data => {
-    data = applyEndDateFilter(applyStartDateFilter(data));
-    if (isEmpty(data)) {
-      return blankLogs;
-    }
-    return data;
-  };
   const applyStartDateFilter = data => {
     if (state.filters.startDate) {
       const startDate = new Date(state.filters.startDate);
@@ -89,6 +39,13 @@ const LogsPage = ({ okapi }) => {
       return data.filter(log => endDate > new Date(log.logTime));
     }
     return data;
+  };
+  const applyDateFilters = data => {
+    const filteredData = applyEndDateFilter(applyStartDateFilter(data));
+    if (isEmpty(filteredData)) {
+      return blankLogs;
+    }
+    return filteredData;
   };
 
   const handleStartDateChange = e => {
@@ -119,7 +76,40 @@ const LogsPage = ({ okapi }) => {
     };
     setState(newState);
   };
-  console.log('state.filteredData', state.filteredData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = `${okapi.url}/ldp/db/log`;
+      try {
+        const resp = await fetch(url, {
+          headers: {
+            'X-Okapi-Tenant': okapi.tenant,
+            'X-Okapi-Token': okapi.token
+          }
+        });
+        resp
+          .json()
+          .then(jsonResp => {
+            // setLoading(false);
+            setState(s => ({
+              ...s,
+              rawData: jsonResp,
+              filteredData: applyDateFilters(jsonResp)
+            }));
+          })
+          .catch(() => {
+            // setLoading(false);
+            // console.error(err);
+            // setErrors('Failed connect to database');
+          });
+      } catch (error) {
+        // setLoading(false);
+        // setErrors(`Failed connecting to server ${url}`);
+      }
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [okapi]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', padding: 5, flex: 1 }}>
@@ -161,7 +151,11 @@ const LogsPage = ({ okapi }) => {
 };
 
 LogsPage.propTypes = {
-  match: PropTypes.object.isRequired,
+  okapi: PropTypes.shape({
+    url: PropTypes.string,
+    tenant: PropTypes.string,
+    token: PropTypes.string,
+  }),
 };
 
 export default LogsPage;

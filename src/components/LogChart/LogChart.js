@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 // import { FormattedMessage } from 'react-intl';
 import Chart from 'chart.js';

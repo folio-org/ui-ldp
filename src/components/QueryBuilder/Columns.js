@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
 import { Button, MultiSelection, OptionSegment } from '@folio/stripes/components';
@@ -13,7 +14,7 @@ const filterItems = ((filterText, list) => {
   return { renderedItems };
 });
 
-const Columns = ({ availableColumns, disabled, table, tableIndex, push, pop }) => {
+const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
   return (
     <div>
       <div style={{ fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '0.25rem' }}>Column</div>
@@ -45,6 +46,14 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push, pop }) =
       />
     </div>
   );
+};
+
+Columns.propTypes = {
+  availableColumns: PropTypes.arrayOf(PropTypes.object),
+  disabled: PropTypes.bool,
+  table: PropTypes.string,
+  tableIndex: PropTypes.number,
+  push: PropTypes.func,
 };
 
 export default Columns;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Pane, Paneset, Loading } from '@folio/stripes/components';
 
 import { Form } from 'react-final-form';
@@ -25,38 +26,37 @@ const QueryBuilderPage = ({ okapi }) => {
   const [tables, setTables] = useState([]);
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
-  async function fetchTables() {
-    const url = `${okapi.url}/ldp/db/tables`;
-    try {
-      const resp = await fetch(url, {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token
-        }
-      });
-      resp
-        .json()
-        .then(resp => {
-          setLoading(false);
-          const sortedTables = resp.sort((a, b) => a.tableName.localeCompare(b.tableName));
-          const tableOptions = sortedTables.map(t => ({ value: t.tableName, label: t.tableName }));
-          setTables(tableOptions);
-        })
-        .catch(err => {
-          setLoading(false);
-          console.error(err);
-          setError('Failed connect to database');
-        });
-    } catch (err) {
-      setLoading(false);
-      console.error(err);
-      setError(`Failed connecting to server ${url}`);
-    }
-  }
-
   useEffect(() => {
+    const fetchTables = async () => {
+      const url = `${okapi.url}/ldp/db/tables`;
+      try {
+        const resp = await fetch(url, {
+          headers: {
+            'X-Okapi-Tenant': okapi.tenant,
+            'X-Okapi-Token': okapi.token
+          }
+        });
+        resp
+          .json()
+          .then(jsonResp => {
+            setLoading(false);
+            const sortedTables = jsonResp.sort((a, b) => a.tableName.localeCompare(b.tableName));
+            const tableOptions = sortedTables.map(t => ({ value: t.tableName, label: t.tableName }));
+            setTables(tableOptions);
+          })
+          .catch(err => {
+            setLoading(false);
+            // console.error(err);
+            setError('Failed connect to database' + err);
+          });
+      } catch (err) {
+        setLoading(false);
+        // console.error(err);
+        setError(`Failed connecting to server ${url}`);
+      }
+    };
     fetchTables();
-  }, []);
+  }, [okapi]);
 
   const onSubmit = async (values) => {
     const url = `${okapi.url}/ldp/db/query`;
@@ -72,18 +72,18 @@ const QueryBuilderPage = ({ okapi }) => {
       });
       resp
         .json()
-        .then(resp => {
+        .then(jsonResp => {
           // setIsLoadingFields(false)
-          resp.forEach(v => { delete v.data; });
-          setQueryResponse({ key: uuidv4(), resp });
+          jsonResp.forEach(v => { delete v.data; });
+          setQueryResponse({ key: uuidv4(), resp: jsonResp });
         })
-        .catch(err => {
+        .catch(() => {
           // TODO: handle error
           // setLoading(false)
           // console.error(err)
           // setErrors(`Failed connect to database`)
         });
-    } catch (error) {
+    } catch (error2) {
       // TODO: handle error
       // setLoading(false)
       // setErrors(`Failed connecting to server ${url}`)
@@ -101,11 +101,7 @@ const QueryBuilderPage = ({ okapi }) => {
         handleSubmit,
         form: {
           mutators: { push, pop }
-        }, // injected from final-form-arrays above
-        pristine,
-        form,
-        submitting,
-        values
+        }
       }) => {
         return (
           <Paneset>
@@ -149,6 +145,14 @@ const QueryBuilderPage = ({ okapi }) => {
       }}
     />
   );
+};
+
+QueryBuilderPage.propTypes = {
+  okapi: PropTypes.shape({
+    url: PropTypes.string,
+    tenant: PropTypes.string,
+    token: PropTypes.string,
+  })
 };
 
 export default QueryBuilderPage;

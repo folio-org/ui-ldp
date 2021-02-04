@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
 import QueryBuilderPage from './routes/query-builder-page';
 import LogsPage from './routes/logs';
@@ -14,6 +14,11 @@ class Ldp extends React.Component {
     match: PropTypes.object.isRequired,
     showSettings: PropTypes.bool,
     stripes: PropTypes.shape({
+      okapi: PropTypes.shape({
+        url: PropTypes.string,
+        tenant: PropTypes.string,
+        token: PropTypes.string,
+      }),
       connect: PropTypes.func
     })
   };
