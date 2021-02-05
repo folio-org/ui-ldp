@@ -39,17 +39,16 @@ WhenFieldChanges.propTypes = {
   to: PropTypes.arrayOf(PropTypes.object),
 };
 
-const Results = ({ results, dirty }) => {
+const Results = ({ results }) => {
   const data = results.resp || [];
   return (
     <div style={{ flex: 1 }}>
-      {(results.key && !dirty) ? <MultiColumnList key={results.key} contentData={data} virtualize autosize /> : <div />}
+      {(results.key) ? <MultiColumnList key={results.key} contentData={data} virtualize autosize /> : <div />}
     </div>
   );
 };
 Results.propTypes = {
   results: PropTypes.object,
-  dirty: PropTypes.bool,
 };
 
 const Table = ({
@@ -63,7 +62,7 @@ const Table = ({
   push,
   pop
 }) => {
-  const { values, dirtySinceLastSubmit } = useFormState();
+  const { values } = useFormState();
   // const [isLoadingColumns, setIsLoadingColumns] = useState(false);
   const selectedTableName = get(values, `${table}.tableName`);
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
@@ -145,7 +144,7 @@ const Table = ({
         </div>
       </div>
 
-      <Results results={queryResponse} dirty={dirtySinceLastSubmit} />
+      <Results results={queryResponse} />
     </div>
   );
 };
