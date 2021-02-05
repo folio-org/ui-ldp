@@ -36,7 +36,7 @@ const WhenFieldChanges = ({ field, set, to }) => (
 WhenFieldChanges.propTypes = {
   field: PropTypes.string,
   set: PropTypes.string,
-  to: PropTypes.string,
+  to: PropTypes.arrayOf(PropTypes.object),
 };
 
 const Results = ({ results, dirty }) => {
@@ -48,7 +48,7 @@ const Results = ({ results, dirty }) => {
   );
 };
 Results.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.object),
+  results: PropTypes.object,
   dirty: PropTypes.bool,
 };
 
@@ -103,7 +103,7 @@ const Table = ({
     if (selectedTableName) { getColumns(selectedTableName); }
   }, [okapi, selectedTableName]);
 
-  const disabled = availableColumns.list === 0;
+  const disabled = availableColumns.list.length === 0;
 
   return (
     <div className={css.Table} data-test-table>

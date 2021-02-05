@@ -49,7 +49,7 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
 };
 
 Columns.propTypes = {
-  availableColumns: PropTypes.arrayOf(PropTypes.object),
+  availableColumns: PropTypes.object,
   disabled: PropTypes.bool,
   table: PropTypes.string,
   tableIndex: PropTypes.number,
