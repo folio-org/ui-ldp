@@ -4,7 +4,8 @@ import { Field, FormSpy, useFormState } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import get from 'lodash.get';
 import fetch from 'cross-fetch';
-import { Button, MultiColumnList, Selection } from '@folio/stripes/components';
+import { Button, IconButton, MultiColumnList, Selection } from '@folio/stripes/components';
+import { default as exportToCsv } from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
 
 import css from './css/Table.css';
 import Columns from './Columns';
@@ -141,6 +142,7 @@ const Table = ({
         <div className={css.SubmitRow}>
           {/* <Button disabled >Show Columns...</Button> */}
           <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
+          <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportToCsv(queryResponse.resp, {}) } disabled={!get(queryResponse, 'resp.length')}></IconButton>
         </div>
       </div>
 
