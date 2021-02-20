@@ -65,12 +65,13 @@ const Table = ({
 }) => {
   const { values } = useFormState();
   // const [isLoadingColumns, setIsLoadingColumns] = useState(false);
+  const selectedSchema = get(values, `${table}.schema`);
   const selectedTableName = get(values, `${table}.tableName`);
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
 
   useEffect(() => {
-    const getColumns = async (tableName) => {
-      const url = `${okapi.url}/ldp/db/columns?table=${tableName}`;
+    const getColumns = async (schema, tableName) => {
+      const url = `${okapi.url}/ldp/db/columns?schema=${schema}&table=${tableName}`;
       try {
         // setIsLoadingColumns(true);
         const resp = await fetch(url, {
@@ -100,26 +101,48 @@ const Table = ({
         // setErrors(`Failed connecting to server ${url}`)
       }
     };
-    if (selectedTableName) { getColumns(selectedTableName); }
-  }, [okapi, selectedTableName]);
+    if (selectedTableName) { getColumns(selectedSchema, selectedTableName); }
+  }, [selectedSchema, selectedTableName]);
 
   const disabled = availableColumns.list.length === 0;
 
   return (
     <div className={css.Table} data-test-table>
       <div className="query-input">
-        <Field
-          name={`${table}.tableName`}
-          label={(
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <span style={{ marginRight: 7 }}>Table</span>
-            </div>
-          )}
-          component={Selection}
-          placeholder="&nbsp;"
-          dataOptions={tables}
-          disabled={tablesAreLoading}
-        />
+        <div style={{ display: 'flex' }}>
+          <div style={{ flex: 1, marginRight: 5 }}>
+            <Field
+              name={`${table}.schema`}
+              label={(
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <span style={{ marginRight: 7 }}>Schema</span>
+                </div>
+              )}
+              component={Selection}
+              placeholder="&nbsp;"
+              dataOptions={[
+                { value: 'public', label: 'public' },
+                { value: 'local', label: 'local' },
+                { value: 'folio_reporting', label: 'folio_reporting' },
+              ]}
+              disabled={tablesAreLoading}
+            />
+          </div>
+          <div style={{ flex: 3, marginLeft: 5 }}>
+            <Field
+              name={`${table}.tableName`}
+              label={(
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <span style={{ marginRight: 7 }}>Table</span>
+                </div>
+              )}
+              component={Selection}
+              placeholder="&nbsp;"
+              dataOptions={tables[selectedSchema]}
+              disabled={tablesAreLoading}
+            />
+          </div>
+        </div>
         <WhenFieldChanges
           field={`${table}.tableName`}
           set={`${table}.columnFilters`}

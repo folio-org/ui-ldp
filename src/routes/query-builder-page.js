@@ -13,6 +13,7 @@ import BigError from '../components/QueryBuilder/BigError';
 const initialState = {
   tables: [
     {
+      schema: 'public',
       tableName: null,
       columnFilters: [{}],
       showColumns: []
@@ -23,7 +24,11 @@ const initialState = {
 const QueryBuilderPage = ({ okapi }) => {
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [tables, setTables] = useState([]);
+  const [tables, setTables] = useState({
+    'public': [],
+    'local': [],
+    'folio_reporting': []
+  });
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
@@ -40,9 +45,34 @@ const QueryBuilderPage = ({ okapi }) => {
           .json()
           .then(jsonResp => {
             setLoading(false);
-            const sortedTables = jsonResp.sort((a, b) => a.tableName.localeCompare(b.tableName));
-            const tableOptions = sortedTables.map(t => ({ value: t.tableName, label: t.tableName }));
-            setTables(tableOptions);
+            // jsonResp: [{ tableSchema, tableName }, {}, {}, ...]
+            // The server returns a sorted list by tableSchema
+            let _public = [], local = [], folio_reporting = []
+            for(let i=0; i<jsonResp.length; i++) {
+              switch (jsonResp[i].tableSchema) {
+                case 'public':
+                  _public.push(jsonResp[i].tableName)
+                  break
+                case 'local':
+                  local.push(jsonResp[i].tableName)
+                  break
+                case 'folio_reporting':
+                  folio_reporting.push(jsonResp[i].tableName)
+                  break
+              }
+            }
+            // Sort the tableNames in each bucket alphabetically
+            _public = _public.sort((a, b) => a.localeCompare(b));
+            local = local.sort((a, b) => a.localeCompare(b));
+            folio_reporting = folio_reporting.sort((a, b) => a.localeCompare(b));
+
+            // Transform each tableName string to an Option object used in the Selection component
+            _public = _public.map(t => ({ value: t, label: t }));
+            local = local.map(t => ({ value: t, label: t }));
+            folio_reporting = folio_reporting.map(t => ({ value: t, label: t }));
+
+            const schemaMap = { 'public': _public, local, folio_reporting }
+            setTables(schemaMap);
           })
           .catch(err => {
             setLoading(false);
@@ -56,7 +86,7 @@ const QueryBuilderPage = ({ okapi }) => {
       }
     };
     fetchTables();
-  }, [okapi]);
+  }, []);
 
   const onSubmit = async (values) => {
     const url = `${okapi.url}/ldp/db/query`;
