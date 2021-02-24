@@ -71,7 +71,10 @@ const QueryBuilderPage = ({ okapi }) => {
             local = local.map(t => ({ value: t, label: t }));
             folio_reporting = folio_reporting.map(t => ({ value: t, label: t }));
 
-            const schemaMap = { 'public': _public, local, folio_reporting }
+            const schemaMap = {}
+            if(folio_reporting.length > 0) schemaMap['folio_reporting'] = folio_reporting
+            if(local.length > 0) schemaMap['local'] = local
+            if(_public.length > 0) schemaMap['public'] = _public
             setTables(schemaMap);
           })
           .catch(err => {

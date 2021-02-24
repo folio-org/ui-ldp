@@ -120,11 +120,7 @@ const Table = ({
               )}
               component={Selection}
               placeholder="&nbsp;"
-              dataOptions={[
-                { value: 'public', label: 'public' },
-                { value: 'local', label: 'local' },
-                { value: 'folio_reporting', label: 'folio_reporting' },
-              ]}
+              dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
               disabled={tablesAreLoading}
             />
           </div>
@@ -177,7 +173,7 @@ const Table = ({
 Table.propTypes = {
   table: PropTypes.string,
   tableIndex: PropTypes.number,
-  tables: PropTypes.arrayOf(PropTypes.object),
+  tables: PropTypes.object,
   tablesAreLoading: PropTypes.bool,
   okapi: PropTypes.shape({
     url: PropTypes.string,
