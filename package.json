@@ -80,6 +80,13 @@
     "okapiInterfaces": {
       "ldp-query": "1.0"
     },
+    "icons": [
+      {
+        "name": "app",
+        "alt": "Dashboard for the Library Data Platform",
+        "title": "LDP"
+      }
+    ],
     "permissionSets": [
       {
         "permissionName": "module.ldp.enabled",
