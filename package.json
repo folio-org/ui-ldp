@@ -71,10 +71,12 @@
     "react-router-dom": "^5.2.0"
   },
   "stripes": {
-    "type": "app",
+    "actsAs": [
+      "app",
+      "settings"
+    ],
     "displayName": "ui-ldp.meta.title",
     "route": "/ldp",
-    "hasSettings": true,
     "okapiInterfaces": {
       "ldp-query": "1.0"
     },

@@ -25,7 +25,7 @@ class Ldp extends React.Component {
 
   render() {
     const {
-      showSettings,
+      actAs,
       stripes: {
         okapi
       },
@@ -34,7 +34,7 @@ class Ldp extends React.Component {
       }
     } = this.props;
 
-    if (showSettings) {
+    if (actAs === 'settings') {
       return <Settings {...this.props} />;
     }
     return (
