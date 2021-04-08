@@ -47,40 +47,44 @@ const QueryBuilderPage = ({ okapi }) => {
             setLoading(false);
             // jsonResp: [{ tableSchema, tableName }, {}, {}, ...]
             // The server returns a sorted list by tableSchema
-            let _public = [], local = [], folio_reporting = []
-            for(let i=0; i<jsonResp.length; i++) {
+            let _public = [];
+            let local = [];
+            let folioReporting = [];
+            for (let i = 0; i < jsonResp.length; i++) {
               switch (jsonResp[i].tableSchema) {
                 case 'public':
-                  _public.push(jsonResp[i].tableName)
-                  break
+                  _public.push(jsonResp[i].tableName);
+                  break;
                 case 'local':
-                  local.push(jsonResp[i].tableName)
-                  break
+                  local.push(jsonResp[i].tableName);
+                  break;
                 case 'folio_reporting':
-                  folio_reporting.push(jsonResp[i].tableName)
-                  break
+                  folioReporting.push(jsonResp[i].tableName);
+                  break;
+                default:
+                  throw Error(`cannot happen: tableSchema='${jsonResp[i].tableSchema}'`);
               }
             }
             // Sort the tableNames in each bucket alphabetically
             _public = _public.sort((a, b) => a.localeCompare(b));
             local = local.sort((a, b) => a.localeCompare(b));
-            folio_reporting = folio_reporting.sort((a, b) => a.localeCompare(b));
+            folioReporting = folioReporting.sort((a, b) => a.localeCompare(b));
 
             // Transform each tableName string to an Option object used in the Selection component
             _public = _public.map(t => ({ value: t, label: t }));
             local = local.map(t => ({ value: t, label: t }));
-            folio_reporting = folio_reporting.map(t => ({ value: t, label: t }));
+            folioReporting = folioReporting.map(t => ({ value: t, label: t }));
 
-            const schemaMap = {}
-            if(folio_reporting.length > 0) schemaMap['folio_reporting'] = folio_reporting
-            if(local.length > 0) schemaMap['local'] = local
-            if(_public.length > 0) schemaMap['public'] = _public
+            const schemaMap = {};
+            if (folioReporting.length > 0) schemaMap.folio_reporting = folioReporting;
+            if (local.length > 0) schemaMap.local = local;
+            if (_public.length > 0) schemaMap.public = _public;
             setTables(schemaMap);
           })
           .catch(err => {
             setLoading(false);
             // console.error(err);
-            setError('Failed connect to database' + err);
+            setError('Failed connect to database: ' + err);
           });
       } catch (err) {
         setLoading(false);
