@@ -101,7 +101,7 @@ const Table = ({
       }
     };
     if (selectedTableName) { getColumns(selectedSchema, selectedTableName); }
-  }, [selectedSchema, selectedTableName]);
+  }, [okapi.tenant, okapi.token, okapi.url, selectedSchema, selectedTableName]);
 
   const disabled = availableColumns.list.length === 0;
 

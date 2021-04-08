@@ -93,7 +93,7 @@ const QueryBuilderPage = ({ okapi }) => {
       }
     };
     fetchTables();
-  }, []);
+  }, [okapi.tenant, okapi.token, okapi.url]);
 
   const onSubmit = async (values) => {
     const url = `${okapi.url}/ldp/db/query`;
