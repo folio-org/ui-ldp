@@ -12,7 +12,7 @@ import Settings from './settings';
 class Ldp extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
-    showSettings: PropTypes.bool,
+    actAs: PropTypes.string.isRequired,
     stripes: PropTypes.shape({
       okapi: PropTypes.shape({
         url: PropTypes.string,
