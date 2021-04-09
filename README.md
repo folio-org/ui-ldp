@@ -4,7 +4,7 @@ Copyright (C) 2020 The Open Library Foundation
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for more information.
 
-![alt text](https://github.com/library-data-platform/ui-ldp/blob/master/screenshot3.png?raw=true)
+![Screenshot of the module in action](screenshot3.png)
 
 Currently has one page, a Query Builder for the Library Data Platform (LDP). 
 
