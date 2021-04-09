@@ -16,12 +16,6 @@ Currently has one page, a Query Builder for the Library Data Platform (LDP).
 ## Run
 
 ```
-yarn start
+yarn start --okapi https://folio-snapshot-okapi.dev.folio.org
 ```
 
-
-## Test
-
-```
-yarn test
-```
