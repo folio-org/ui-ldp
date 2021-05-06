@@ -72,8 +72,7 @@
   },
   "stripes": {
     "actsAs": [
-      "app",
-      "settings"
+      "app"
     ],
     "displayName": "ui-ldp.meta.title",
     "route": "/ldp",
