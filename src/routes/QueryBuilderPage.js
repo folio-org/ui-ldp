@@ -16,7 +16,9 @@ const initialState = {
       schema: 'public',
       tableName: null,
       columnFilters: [{}],
-      showColumns: []
+      showColumns: [],
+      orderBy: [],
+      limit: 1000,
     }
   ]
 };
