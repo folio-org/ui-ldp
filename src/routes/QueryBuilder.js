@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useStripes } from '@folio/stripes/core';
 import { Pane, Paneset, Loading } from '@folio/stripes/components';
 
 import { Form } from 'react-final-form';
@@ -24,6 +25,7 @@ const initialState = {
 };
 
 const QueryBuilderPage = ({ okapi }) => {
+  const stripes = useStripes();
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState({
@@ -33,9 +35,13 @@ const QueryBuilderPage = ({ okapi }) => {
   });
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
+  const modLdpUrl = stripes?.config?.modLdpUrl;
+  console.log('modLdpUrl =', modLdpUrl);
+
   useEffect(() => {
     const fetchTables = async () => {
-      const url = `${okapi.url}/ldp/db/tables`;
+      const okapiUrl = modLdpUrl || okapi.url;
+      const url = `${okapiUrl}/ldp/db/tables`;
       try {
         const resp = await fetch(url, {
           headers: {
@@ -95,7 +101,7 @@ const QueryBuilderPage = ({ okapi }) => {
       }
     };
     fetchTables();
-  }, [okapi.tenant, okapi.token, okapi.url]);
+  }, [okapi.tenant, okapi.token, okapi.url, modLdpUrl]);
 
   const onSubmit = async (values) => {
     const url = `${okapi.url}/ldp/db/query`;

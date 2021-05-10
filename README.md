@@ -19,3 +19,15 @@ Currently has one page, a Query Builder for the Library Data Platform (LDP).
 yarn start --okapi https://folio-snapshot-okapi.dev.folio.org
 ```
 
+## Side-loading mod-ldp
+
+If developing mod-ldp locally, it's desirable to make ui-ldp refer to the local instance rather than the one of the backend that is used for other FOLIO modules, such as mod-configuration and mod-users-bl. The conceptually simplest way to do this is to run the whole FOLIO stack locally, but this is complex in practice, and requires a vast amount of memory.
+
+An alternative is to "side-load" the locally running copy of mod-ldp. This can be done by setting the Stripes configuration element `modLdpUrl` to the URL of the running instance -- for example, `http://localhost:8001` if running simply with `java -jar target/mod-ldp-0.0.1-SNAPSHOT.jar`.
+
+_However_ ... it's never that easy, it? ... Done naively, this will fail because the browser's common origin policy will refuse to perform GETs and POST against servers such as mod-ldp that do not supply the `Access-Control-Allow-Origin: *` header in OPTIONS responses. In order to work around this, it's necessary to use a proxy that inserts this header, such as [CORS Anywhere](https://github.com/Rob--W/cors-anywhere), and to modify the `modLdpUrl` setting accordingly.
+
+The `modLdpUrl` setting can be placed in a Stripes config file such as the supplied [`stripes.config.js`](stripes.config.js). To use it, ensure that its Okapi URL setting is correct, and run as
+```
+yarn start stripes.config.js
+```
