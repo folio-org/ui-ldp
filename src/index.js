@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
 import QueryBuilder from './routes/QueryBuilder';
-import LogsPage from './routes/Logs';
+import Logs from './routes/Logs';
 import Settings from './settings';
 
 class Ldp extends React.Component {
@@ -58,7 +58,7 @@ class Ldp extends React.Component {
             <Route
               path={`${path}/logs`}
               exact
-              render={(props) => <LogsPage {...props} okapi={okapi} />}
+              render={(props) => <Logs {...props} okapi={okapi} />}
             />
           </Switch>
         </Paneset>
