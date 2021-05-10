@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
-import { Button, MultiSelection, OptionSegment } from '@folio/stripes/components';
+import { Button, Label, MultiSelection, OptionSegment, TextField } from '@folio/stripes/components';
 import ColumnFilter from './ColumnFilter';
 
 // TODO: ability to remove column filter
@@ -17,8 +17,8 @@ const filterItems = ((filterText, list) => {
 const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
   return (
     <div>
-      <div style={{ fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.5, marginBottom: '0.25rem' }}>Column</div>
-      <FieldArray name={`${table}.columnFilters`} tableIndex={tableIndex}>
+      <Label htmlFor="choose-columns">Column</Label>
+      <FieldArray id="choose-columns" name={`${table}.columnFilters`} tableIndex={tableIndex}>
         {({ fields }) => fields.map((name, index) => (
           <ColumnFilter
             name={name}
@@ -37,7 +37,7 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
         name={`${table}.showColumns`}
         label="Show Columns"
         component={MultiSelection}
-        placeholder="All"
+        placeholder="(All)"
         dataOptions={availableColumns.list}
         itemToString={(opt => opt)}
         formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
