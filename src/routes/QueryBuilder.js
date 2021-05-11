@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useStripes } from '@folio/stripes/core';
-import { Pane, Paneset, Loading } from '@folio/stripes/components';
-
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { v4 as uuidv4 } from 'uuid';
-import fetch from 'cross-fetch';
+import { useStripes } from '@folio/stripes/core';
+import { Pane, Paneset, Loading } from '@folio/stripes/components';
+import stripesFetch from '../util/stripesFetch';
 import Table from '../components/QueryBuilder/Table';
 import BigError from '../components/QueryBuilder/BigError';
+
 
 const initialState = {
   tables: [
@@ -23,21 +23,6 @@ const initialState = {
     }
   ]
 };
-
-
-async function stripesFetch(stripes, path, options) {
-  const { okapi } = stripes;
-  const okapiUrl = stripes?.config?.modLdpUrl || okapi.url;
-
-  return fetch(`${okapiUrl}${path}`, {
-    ...options,
-    headers: {
-      'X-Okapi-Tenant': okapi.tenant,
-      'X-Okapi-Token': okapi.token,
-      'Content-Type': 'application/json'
-    }
-  });
-}
 
 
 const QueryBuilderPage = ({ okapi }) => {
