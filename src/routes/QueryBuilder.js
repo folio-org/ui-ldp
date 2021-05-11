@@ -37,7 +37,7 @@ const QueryBuilderPage = ({ okapi }) => {
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
-    const fetchTables = async () => {
+    const getTables = async () => {
       try {
         const resp = await stripesFetch(stripes, '/ldp/db/tables');
         resp
@@ -91,7 +91,7 @@ const QueryBuilderPage = ({ okapi }) => {
         setError('Failed connecting to server');
       }
     };
-    fetchTables();
+    getTables();
   }, [stripes, okapi]);
 
   const onSubmit = async (values) => {
