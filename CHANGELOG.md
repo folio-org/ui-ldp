@@ -5,9 +5,9 @@
 * Updated to use Babel 7.
 * Updated `stripes` to v3.0.0.
 * Updated `eslint` to v6.2.1.
-* Make the code lint-clean. Fixes #25.
-* Update package file to use modern Stripes-module description. Fixes #27.
-* Create and implement an icon for this app. Fixes #26.
+* Made the code lint-clean. Fixes #25.
+* Updated package file to use modern Stripes-module description. Fixes #27.
+* Created and implemented an icon for this app. Fixes #26.
 * Updated `stripes` to v6; removed unused incompatible deps (redux, react-redux). Fixes #29.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
