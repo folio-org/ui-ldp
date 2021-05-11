@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { Field, FormSpy, useFormState } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import get from 'lodash.get';
-import fetch from 'cross-fetch';
+import { useStripes } from '@folio/stripes/core';
 import { Button, IconButton, MultiColumnList, Selection } from '@folio/stripes/components';
 import exportToCsv from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
+import stripesFetch from '../../util/stripesFetch';
 import css from './css/Table.css';
 import Columns from './Columns';
 
@@ -56,12 +57,12 @@ const Table = ({
   tableIndex,
   tables,
   tablesAreLoading,
-  okapi,
   queryResponse,
   // onRemove,
   push,
   pop
 }) => {
+  const stripes = useStripes();
   const { values } = useFormState();
   // const [isLoadingColumns, setIsLoadingColumns] = useState(false);
   const selectedSchema = get(values, `${table}.schema`);
@@ -70,15 +71,10 @@ const Table = ({
 
   useEffect(() => {
     const getColumns = async (schema, tableName) => {
-      const url = `${okapi.url}/ldp/db/columns?schema=${schema}&table=${tableName}`;
+      const path = `/ldp/db/columns?schema=${schema}&table=${tableName}`;
       try {
         // setIsLoadingColumns(true);
-        const resp = await fetch(url, {
-          headers: {
-            'X-Okapi-Tenant': okapi.tenant,
-            'X-Okapi-Token': okapi.token
-          }
-        });
+        const resp = await stripesFetch(stripes, path);
         resp
           .json()
           .then(jsonResp => {
@@ -101,7 +97,7 @@ const Table = ({
       }
     };
     if (selectedTableName) { getColumns(selectedSchema, selectedTableName); }
-  }, [okapi.tenant, okapi.token, okapi.url, selectedSchema, selectedTableName]);
+  }, [stripes, selectedSchema, selectedTableName]);
 
   const disabled = availableColumns.list.length === 0;
 
