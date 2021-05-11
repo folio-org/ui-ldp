@@ -24,6 +24,22 @@ const initialState = {
   ]
 };
 
+
+async function stripesFetch(stripes, path, options) {
+  const { okapi } = stripes;
+  const okapiUrl = stripes?.config?.modLdpUrl || okapi.url;
+
+  return fetch(`${okapiUrl}${path}`, {
+    ...options,
+    headers: {
+      'X-Okapi-Tenant': okapi.tenant,
+      'X-Okapi-Token': okapi.token,
+      'Content-Type': 'application/json'
+    }
+  });
+}
+
+
 const QueryBuilderPage = ({ okapi }) => {
   const stripes = useStripes();
   const [error, setError] = useState(false);
@@ -35,20 +51,10 @@ const QueryBuilderPage = ({ okapi }) => {
   });
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
-  const modLdpUrl = stripes?.config?.modLdpUrl;
-  console.log('modLdpUrl =', modLdpUrl);
-
   useEffect(() => {
     const fetchTables = async () => {
-      const okapiUrl = modLdpUrl || okapi.url;
-      const url = `${okapiUrl}/ldp/db/tables`;
       try {
-        const resp = await fetch(url, {
-          headers: {
-            'X-Okapi-Tenant': okapi.tenant,
-            'X-Okapi-Token': okapi.token
-          }
-        });
+        const resp = await stripesFetch(stripes, '/ldp/db/tables');
         resp
           .json()
           .then(jsonResp => {
@@ -97,23 +103,17 @@ const QueryBuilderPage = ({ okapi }) => {
       } catch (err) {
         setLoading(false);
         // console.error(err);
-        setError(`Failed connecting to server ${url}`);
+        setError('Failed connecting to server');
       }
     };
     fetchTables();
-  }, [okapi.tenant, okapi.token, okapi.url, modLdpUrl]);
+  }, [stripes, okapi]);
 
   const onSubmit = async (values) => {
-    const url = `${okapi.url}/ldp/db/query`;
     try {
-      const resp = await fetch(url, {
+      const resp = await stripesFetch(stripes, '/ldp/db/query', {
         method: 'POST',
         body: JSON.stringify(values),
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json'
-        }
       });
       resp
         .json()
