@@ -44,6 +44,14 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
         filter={filterItems}
         disabled={disabled}
       />
+
+      <Field
+        name={`${table}.limit`}
+        label="Limit number of results"
+        component={TextField}
+        type="number"
+        disabled={disabled}
+      />
     </div>
   );
 };
