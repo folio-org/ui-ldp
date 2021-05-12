@@ -1,32 +1,26 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
-import GeneralSettings from './general-settings';
-import SomeFeatureSettings from './some-feature-settings';
-
-/*
-  STRIPES-NEW-APP
-  Your app's settings pages are defined here.
-  The pages "general" and "some feature" are examples. Name them however you like.
-*/
+import RecordLimits from './RecordLimits';
+import TableAvailability from './TableAvailability';
 
 export default class LdpSettings extends React.Component {
   pages = [
     {
-      route: 'general',
-      label: <FormattedMessage id="ui-ldp.settings.general" />,
-      component: GeneralSettings,
+      route: 'limits',
+      label: <FormattedMessage id="ui-ldp.settings.record-limits" />,
+      component: RecordLimits,
     },
     {
-      route: 'somefeature',
-      label: <FormattedMessage id="ui-ldp.settings.some-feature" />,
-      component: SomeFeatureSettings,
+      route: 'tables',
+      label: <FormattedMessage id="ui-ldp.settings.table-availability" />,
+      component: TableAvailability,
     },
   ];
 
   render() {
     return (
-      <Settings {...this.props} pages={this.pages} paneTitle="ldp" />
+      <Settings {...this.props} pages={this.pages} paneTitle={<FormattedMessage id="ui-ldp.meta.title" />} />
     );
   }
 }
