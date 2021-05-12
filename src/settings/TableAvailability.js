@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { Pane } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 
-export default class GeneralSettings extends React.Component {
-  static propTypes = {
-    label: PropTypes.object.isRequired,
-  };
-
-  render() {
-    return (
-      <Pane defaultWidth="fill" fluidContentWidth paneTitle={this.props.label}>
-        <div data-test-application-settings-general-message>
-          <FormattedMessage id="ui-ldp.settings.general.message" />
-        </div>
-      </Pane>
-    );
-  }
+function TableAvailability({ label }) {
+  return (
+    <Pane defaultWidth="fill" fluidContentWidth paneTitle={label}>
+      <div data-test-settings-table-availability>
+        <FormattedMessage id="ui-ldp.settings.table-availability.nyi" />
+      </div>
+    </Pane>
+  );
 }
+
+TableAvailability.propTypes = {
+  label: PropTypes.object.isRequired,
+};
+
+export default TableAvailability;
