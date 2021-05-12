@@ -40,6 +40,7 @@ const QueryBuilderPage = ({ okapi }) => {
     const getTables = async () => {
       try {
         const resp = await stripesFetch(stripes, '/ldp/db/tables');
+        if (!resp.ok) throw new Error(`HTTP error ${resp.status}: ${resp.statusText}`);
         resp
           .json()
           .then(jsonResp => {
@@ -88,7 +89,7 @@ const QueryBuilderPage = ({ okapi }) => {
       } catch (err) {
         setLoading(false);
         // console.error(err);
-        setError('Failed connecting to server');
+        setError('Failed connecting to server' + err);
       }
     };
     getTables();

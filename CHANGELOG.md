@@ -9,7 +9,9 @@
 * Updated package file to use modern Stripes-module description. Fixes #27.
 * Created and implemented an icon for this app. Fixes #26.
 * Updated `stripes` to v6; removed unused incompatible deps (redux, react-redux). Fixes #29.
+* Support side-loading mod-ldp as an aid to local development. Fixes #34.
 * Add optional user-specified limit. Fixes #14.
+* Handle server-side internal errors more gracefully: non-2xx HTTP statuses are now reported as a `<BigError>`. Fixes #35.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 
