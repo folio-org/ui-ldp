@@ -59,7 +59,7 @@
     "react-final-form": "^6.5.1",
     "react-final-form-arrays": "^3.1.2",
     "react-final-form-listeners": "^1.0.2",
-    "redux-form": "^7.4.3",
+    "redux-form": "^8.3.0",
     "uuid": "^8.3.1"
   },
   "peerDependencies": {
