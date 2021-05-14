@@ -5,9 +5,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
+import { LdpContext } from './LdpContext';
 import QueryBuilder from './routes/QueryBuilder';
 import Logs from './routes/Logs';
 import Settings from './settings';
+
+const LdpConfig = {
+  defaultShow: null,
+  maxShow: null,
+  maxExport: null,
+};
 
 class Ldp extends React.Component {
   static propTypes = {
@@ -34,35 +41,35 @@ class Ldp extends React.Component {
       }
     } = this.props;
 
-    if (actAs === 'settings') {
-      return <Settings {...this.props} />;
-    }
     return (
-      <div style={{ position: 'absolute', display: 'flex', height: '100%', width: '100%' }}>
-        <Paneset>
-          <Pane defaultWidth="15%">
-            <NavList>
-              <NavListSection activeLink={window.location.pathname}>
-                <NavListItem to={`${path}`}>Query Builder</NavListItem>
-                {/* <NavListItem to={`${path}/logs`}>Logs</NavListItem> */}
-              </NavListSection>
-            </NavList>
-          </Pane>
+      <LdpContext.Provider value={LdpConfig}>
+        {actAs === 'settings' ?
+          <Settings {...this.props} /> :
+          <Paneset>
+            <Pane defaultWidth="15%">
+              <NavList>
+                <NavListSection activeLink={window.location.pathname}>
+                  <NavListItem to={`${path}`}>Query Builder</NavListItem>
+                  {/* <NavListItem to={`${path}/logs`}>Logs</NavListItem> */}
+                </NavListSection>
+              </NavList>
+            </Pane>
 
-          <Switch>
-            <Route
-              path={path}
-              exact
-              render={(props) => <QueryBuilder {...props} okapi={okapi} />}
-            />
-            <Route
-              path={`${path}/logs`}
-              exact
-              render={(props) => <Logs {...props} okapi={okapi} />}
-            />
-          </Switch>
-        </Paneset>
-      </div>
+            <Switch>
+              <Route
+                path={path}
+                exact
+                render={(props) => <QueryBuilder {...props} okapi={okapi} />}
+              />
+              <Route
+                path={`${path}/logs`}
+                exact
+                render={(props) => <Logs {...props} okapi={okapi} />}
+              />
+            </Switch>
+          </Paneset>
+        }
+      </LdpContext.Provider>
     );
   }
 }

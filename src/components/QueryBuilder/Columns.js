@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
-import { Button, Label, MultiSelection, OptionSegment, TextField } from '@folio/stripes/components';
+import { Button, Label, MultiSelection, OptionSegment, Select } from '@folio/stripes/components';
+import { useLdp } from '../../LdpContext';
+import generateOptions from '../../util/generateOptions';
 import ColumnFilter from './ColumnFilter';
 
 // TODO: ability to remove column filter
@@ -15,6 +17,12 @@ const filterItems = ((filterText, list) => {
 });
 
 const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
+  const ldp = useLdp();
+  console.log('ldp =', ldp);
+  console.log(`maxShow=${ldp.maxShow}, log10=${Math.log10(ldp.maxShow || 1)}`);
+  const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
+  console.log(' -- limitOptions =', limitOptions);
+
   return (
     <div>
       <Label htmlFor="choose-columns">Column</Label>
@@ -48,7 +56,8 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
       <Field
         name={`${table}.limit`}
         label="Limit number of results"
-        component={TextField}
+        component={Select}
+        dataOptions={limitOptions}
         type="number"
         disabled={disabled}
       />

@@ -6,6 +6,7 @@ import { FieldArray } from 'react-final-form-arrays';
 import { v4 as uuidv4 } from 'uuid';
 import { useStripes } from '@folio/stripes/core';
 import { Pane, Paneset, Loading } from '@folio/stripes/components';
+import { useLdp } from '../LdpContext';
 import stripesFetch from '../util/stripesFetch';
 import Table from '../components/QueryBuilder/Table';
 import BigError from '../components/QueryBuilder/BigError';
@@ -27,6 +28,7 @@ const initialState = {
 
 const QueryBuilderPage = ({ okapi }) => {
   const stripes = useStripes();
+  const ldp = useLdp();
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState({
@@ -35,6 +37,7 @@ const QueryBuilderPage = ({ okapi }) => {
     'folio_reporting': []
   });
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const [counter, setCounter] = useState(0); // Used only to force a re-render
 
   useEffect(() => {
     const getTables = async () => {
@@ -92,8 +95,33 @@ const QueryBuilderPage = ({ okapi }) => {
         setError('Failed connecting to server' + err);
       }
     };
+
     getTables();
   }, [stripes, okapi]);
+
+  useEffect(() => {
+    const setDefaults = async () => {
+      if (!ldp.defaultShow) {
+        try {
+          const path = '/configurations/entries?query=(module==LDP and configName==recordLimits)';
+          const resp = await stripesFetch(stripes, path, { noSideLoad: true });
+          resp.json().then(json => {
+            if (!json.configs || json.configs.lengths) throw new Error(`bad config ${JSON.stringify(json)}`);
+            const data = JSON.parse(json.configs[0].value);
+            ldp.defaultShow = data.defaultShow;
+            ldp.maxShow = data.maxShow;
+            ldp.maxExport = data.maxExport;
+            setCounter(counter + 1); // Force re-render
+          });
+        } catch (err) {
+          setLoading(false);
+          setError('Could not load defaults:' + err);
+        }
+      }
+    };
+
+    setDefaults();
+  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, counter]);
 
   const onSubmit = async (values) => {
     try {
@@ -121,13 +149,14 @@ const QueryBuilderPage = ({ okapi }) => {
     }
   };
 
+  console.log('defaultShow =', ldp.defaultShow);
   return (
     <Form
       onSubmit={onSubmit}
       mutators={{
         ...arrayMutators
       }}
-      initialValues={initialState}
+      initialValues={{ ...initialState, limit: ldp.defaultShow }}
       render={({
         handleSubmit,
         form: {
@@ -180,10 +209,10 @@ const QueryBuilderPage = ({ okapi }) => {
 
 QueryBuilderPage.propTypes = {
   okapi: PropTypes.shape({
-    url: PropTypes.string,
-    tenant: PropTypes.string,
-    token: PropTypes.string,
-  })
+    url: PropTypes.string.isRequired,
+    tenant: PropTypes.string.isRequired,
+    token: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default QueryBuilderPage;
