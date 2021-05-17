@@ -8,6 +8,7 @@ import { useStripes } from '@folio/stripes/core';
 import { Pane, Paneset, Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import stripesFetch from '../util/stripesFetch';
+import defaultConfig from '../util/defaultConfig';
 import Table from '../components/QueryBuilder/Table';
 import BigError from '../components/QueryBuilder/BigError';
 
@@ -106,8 +107,9 @@ const QueryBuilderPage = ({ okapi }) => {
           const path = '/configurations/entries?query=(module==LDP and configName==recordLimits)';
           const resp = await stripesFetch(stripes, path, { noSideLoad: true });
           resp.json().then(json => {
-            if (!json.configs || json.configs.lengths) throw new Error(`bad config ${JSON.stringify(json)}`);
-            const data = JSON.parse(json.configs[0].value);
+            const data = (json.configs && json.configs.length !== 0) ?
+              JSON.parse(json.configs[0].value) :
+              defaultConfig;
             ldp.defaultShow = data.defaultShow;
             ldp.maxShow = data.maxShow;
             ldp.maxExport = data.maxExport;

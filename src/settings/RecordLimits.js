@@ -6,6 +6,7 @@ import { ConfigManager } from '@folio/stripes/smart-components';
 import { Col, Row, Select } from '@folio/stripes/components';
 import { LdpContext } from '../LdpContext';
 import generateOptions from '../util/generateOptions';
+import defaultConfig from '../util/defaultConfig';
 
 
 class RecordLimits extends React.Component {
@@ -23,7 +24,6 @@ class RecordLimits extends React.Component {
 
   getInitialValues = (settings) => {
     const value = settings.length === 0 ? '' : settings[0].value;
-    const defaultConfig = { defaultShow: 100, maxShow: 1000, maxExport: 10000 };
     let config;
 
     try {
