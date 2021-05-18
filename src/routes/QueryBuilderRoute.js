@@ -34,7 +34,6 @@ const QueryBuilderRoute = ({ okapi }) => {
     'folio_reporting': []
   });
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
-  const [counter, setCounter] = useState(0); // Used only to force a re-render
 
   useEffect(() => {
     const getTables = async () => {
@@ -109,7 +108,6 @@ const QueryBuilderRoute = ({ okapi }) => {
             ldp.defaultShow = data.defaultShow;
             ldp.maxShow = data.maxShow;
             ldp.maxExport = data.maxExport;
-            setCounter(counter + 1); // Force re-render
           });
         } catch (err) {
           setLoading(false);
@@ -119,7 +117,7 @@ const QueryBuilderRoute = ({ okapi }) => {
     };
 
     setDefaults();
-  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, counter]);
+  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport]);
 
   const onSubmit = async (values) => {
     try {
