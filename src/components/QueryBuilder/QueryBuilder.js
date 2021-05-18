@@ -8,14 +8,14 @@ import Table from './Table';
 import BigError from './BigError';
 
 
-function QueryBuilder({ okapi, ldp, isLoading, modifiedInitialState, tables, onSubmit, queryResponse, error }) {
+function QueryBuilder({ okapi, ldp, isLoading, initialState, tables, onSubmit, queryResponse, error }) {
   return (
     <FinalForm
       onSubmit={onSubmit}
       mutators={{
         ...arrayMutators
       }}
-      initialValues={modifiedInitialState}
+      initialValues={initialState}
       render={({
         handleSubmit,
         form: {
@@ -71,7 +71,7 @@ QueryBuilder.propTypes = {
   okapi: P.object.isRequired,
   ldp: P.shape({}).isRequired,
   isLoading: P.bool.isRequired,
-  modifiedInitialState: P.object.isRequired,
+  initialState: P.object.isRequired,
   tables: P.objectOf(
     P.arrayOf(
       P.shape({

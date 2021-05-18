@@ -147,17 +147,14 @@ const QueryBuilderRoute = ({ okapi }) => {
     }
   };
 
-  console.log('defaultShow =', ldp.defaultShow);
   if (!ldp.defaultShow) return <Loading size="xlarge" />;
 
-  const modifiedInitialState = { ...initialState, limit: ldp.defaultShow };
-  console.log('modifiedInitialState =', modifiedInitialState);
-
+  initialState.tables[0].limit = ldp.defaultShow;
   return <QueryBuilder
     okapi={okapi}
     ldp={ldp}
     isLoading={isLoading}
-    modifiedInitialState={modifiedInitialState}
+    initialState={initialState}
     tables={tables}
     onSubmit={onSubmit}
     queryResponse={queryResponse}
