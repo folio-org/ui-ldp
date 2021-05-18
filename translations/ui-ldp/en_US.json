@@ -3,6 +3,10 @@
   "new-app.greeting": "Congratulations!",
   "new-app.message": "Your Stripes app is running.",
   "settings.record-limits": "Record limits",
+  "settings.record-limits.default-show": "Default number to show",
+  "settings.record-limits.max-show": "Maximum number to show",
+  "settings.record-limits.max-export": "Maximum number to export",
   "settings.table-availability": "Table availability",
+  "settings.table-availability.nyi": "(Not yet implemented)",
   "SENTINEL": ""
 }

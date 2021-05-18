@@ -2,7 +2,13 @@ import fetch from 'cross-fetch';
 
 async function stripesFetch(stripes, path, options) {
   const { okapi } = stripes;
-  const okapiUrl = stripes?.config?.modLdpUrl || okapi.url;
+  let okapiUrl;
+  if (options?.noSideLoad) {
+    delete options.noSideLoad;
+    okapiUrl = okapi.url;
+  } else {
+    okapiUrl = stripes?.config?.modLdpUrl || okapi.url;
+  }
 
   return fetch(`${okapiUrl}${path}`, {
     ...options,
