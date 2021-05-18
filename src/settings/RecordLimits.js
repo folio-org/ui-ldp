@@ -33,15 +33,14 @@ function RecordLimits(props) {
   };
 
   const beforeSave = (data) => {
-    const { defaultShow, maxShow, maxExport } = data;
-    return JSON.stringify({ defaultShow, maxShow, maxExport });
-  };
-
-  const afterSave = (setting) => {
-    const data = JSON.parse(setting.value);
     ldp.defaultShow = data.defaultShow;
     ldp.maxShow = data.maxShow;
     ldp.maxExport = data.maxExport;
+    return JSON.stringify(ldp);
+  };
+
+  const afterSave = (setting) => {
+    beforeSave(JSON.parse(setting.value));
   };
 
   return (
