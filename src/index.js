@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
 import { LdpContext } from './LdpContext';
-import QueryBuilder from './routes/QueryBuilder';
+import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import Logs from './routes/Logs';
 import Settings from './settings';
 
@@ -59,7 +59,7 @@ class Ldp extends React.Component {
               <Route
                 path={path}
                 exact
-                render={(props) => <QueryBuilder {...props} okapi={okapi} />}
+                render={(props) => <QueryBuilderRoute {...props} okapi={okapi} />}
               />
               <Route
                 path={`${path}/logs`}

@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { FieldArray } from 'react-final-form-arrays';
 import { v4 as uuidv4 } from 'uuid';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, Paneset, Loading } from '@folio/stripes/components';
+import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import stripesFetch from '../util/stripesFetch';
 import defaultConfig from '../util/defaultConfig';
-import Table from '../components/QueryBuilder/Table';
-import BigError from '../components/QueryBuilder/BigError';
+import QueryBuilder from '../components/QueryBuilder';
 
 
 const initialState = {
@@ -27,7 +23,7 @@ const initialState = {
 };
 
 
-const QueryBuilderPage = ({ okapi }) => {
+const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
   const [error, setError] = useState(false);
@@ -152,64 +148,24 @@ const QueryBuilderPage = ({ okapi }) => {
   };
 
   console.log('defaultShow =', ldp.defaultShow);
-  return (
-    <Form
-      onSubmit={onSubmit}
-      mutators={{
-        ...arrayMutators
-      }}
-      initialValues={{ ...initialState, limit: ldp.defaultShow }}
-      render={({
-        handleSubmit,
-        form: {
-          mutators: { push, pop }
-        }
-      }) => {
-        return (
-          <Paneset>
-            <form
-              id="form-querybuilder"
-              onSubmit={handleSubmit}
-              data-test-query-builder
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                width: '100%',
-                height: '100%'
-              }}
-            >
-              <FieldArray name="tables">
-                {({ fields }) => fields.map((table, tableIndex) => (
-                  <Pane id={`table${tableIndex}`} defaultWidth="50%" key={table}>
-                    {isLoading ? <div style={{ textAlign: 'center', margin: 20 }}><Loading size="xlarge" /></div> : (error ? <BigError message={error} /> :
-                    <Table
-                      table={table}
-                      tableIndex={tableIndex}
-                      tables={tables}
-                      queryResponse={queryResponse}
-                      tablesAreLoading={isLoading}
-                      okapi={okapi}
-                      onRemove={() => fields.remove(tableIndex)}
-                      push={push}
-                      pop={pop}
-                    />)}
-                  </Pane>
-                ))}
-              </FieldArray>
-              <Pane id="empty-space" defaultWidth="fill" style={{ height: '0' }}>
-                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
-                {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
-              </Pane>
+  if (!ldp.defaultShow) return <Loading size="xlarge" />;
 
-            </form>
-          </Paneset>
-        );
-      }}
-    />
-  );
+  const modifiedInitialState = { ...initialState, limit: ldp.defaultShow };
+  console.log('modifiedInitialState =', modifiedInitialState);
+
+  return <QueryBuilder
+    okapi={okapi}
+    ldp={ldp}
+    isLoading={isLoading}
+    modifiedInitialState={modifiedInitialState}
+    tables={tables}
+    onSubmit={onSubmit}
+    queryResponse={queryResponse}
+    error={error}
+  />;
 };
 
-QueryBuilderPage.propTypes = {
+QueryBuilderRoute.propTypes = {
   okapi: PropTypes.shape({
     url: PropTypes.string.isRequired,
     tenant: PropTypes.string.isRequired,
@@ -217,4 +173,4 @@ QueryBuilderPage.propTypes = {
   }).isRequired,
 };
 
-export default QueryBuilderPage;
+export default QueryBuilderRoute;
