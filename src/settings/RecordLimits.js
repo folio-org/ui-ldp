@@ -1,27 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { Col, Row, Select } from '@folio/stripes/components';
-import { LdpContext } from '../LdpContext';
+import { useLdp } from '../LdpContext';
 import generateOptions from '../util/generateOptions';
 import defaultConfig from '../util/defaultConfig';
 
-class RecordLimits extends React.Component {
-  static propTypes = {
-    stripes: PropTypes.shape({
-      connect: PropTypes.func.isRequired,
-    }).isRequired,
-    label: PropTypes.node.isRequired,
-  };
 
-  constructor(props) {
-    super(props);
-    this.configManager = props.stripes.connect(ConfigManager);
-  }
+function RecordLimits(props) {
+  const ldp = useLdp();
+  const [ConnectedConfigManager, setConfigManager] = useState();
 
-  getInitialValues = (settings) => {
+  useEffect(() => {
+    setConfigManager(props.stripes.connect(ConfigManager));
+  }, [props.stripes]);
+
+  if (!ConnectedConfigManager) return null;
+
+  const getInitialValues = (settings) => {
     const value = settings.length === 0 ? '' : settings[0].value;
     let config;
 
@@ -32,85 +30,88 @@ class RecordLimits extends React.Component {
     }
 
     return config;
-  }
+  };
 
-  beforeSave = (data) => {
+  const beforeSave = (data) => {
     const { defaultShow, maxShow, maxExport } = data;
     return JSON.stringify({ defaultShow, maxShow, maxExport });
-  }
+  };
 
-  afterSave = (setting, ldp) => {
+  const afterSave = (setting) => {
     const data = JSON.parse(setting.value);
     ldp.defaultShow = data.defaultShow;
     ldp.maxShow = data.maxShow;
     ldp.maxExport = data.maxExport;
-  }
+  };
 
-  render() {
-    return (
-      <LdpContext.Consumer>
-        {ldp => (
-          <this.configManager
-            label={this.props.label}
-            moduleName="LDP"
-            configName="recordLimits"
-            getInitialValues={this.getInitialValues}
-            onBeforeSave={this.beforeSave}
-            onAfterSave={setting => this.afterSave(setting, ldp)}
-          >
-            <Row>
-              <Col xs={12} id="select-default-show">
-                <FormattedMessage id="ui-ldp.settings.record-limits.default-show">
-                  {label => (
-                    <Field
-                      id="defaultShow"
-                      name="defaultShow"
-                      label={label}
-                      component={Select}
-                      dataOptions={generateOptions(0, 3)}
-                      placeholder="---"
-                    />
-                  )}
-                </FormattedMessage>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12} id="select-max-show">
-                <FormattedMessage id="ui-ldp.settings.record-limits.max-show">
-                  {label => (
-                    <Field
-                      id="maxShow"
-                      name="maxShow"
-                      label={label}
-                      component={Select}
-                      dataOptions={generateOptions(0, 4)}
-                      placeholder="---"
-                    />
-                  )}
-                </FormattedMessage>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12} id="select-max-export">
-                <FormattedMessage id="ui-ldp.settings.record-limits.max-export">
-                  {label => (
-                    <Field
-                      id="maxExport"
-                      name="maxExport"
-                      label={label}
-                      component={Select}
-                      dataOptions={generateOptions(3, 3)}
-                      placeholder="---"
-                    />
-                  )}
-                </FormattedMessage>
-              </Col>
-            </Row>
-          </this.configManager>
-        )}
-      </LdpContext.Consumer>
-    );
-  }
+  return (
+    <ConnectedConfigManager
+      label={props.label}
+      moduleName="LDP"
+      configName="recordLimits"
+      getInitialValues={getInitialValues}
+      onBeforeSave={beforeSave}
+      onAfterSave={afterSave}
+    >
+      <Row>
+        <Col xs={12} id="select-default-show">
+          <FormattedMessage id="ui-ldp.settings.record-limits.default-show">
+            {label => (
+              <Field
+                id="defaultShow"
+                name="defaultShow"
+                label={label}
+                component={Select}
+                dataOptions={generateOptions(0, 3)}
+                placeholder="---"
+              />
+            )}
+          </FormattedMessage>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} id="select-max-show">
+          <FormattedMessage id="ui-ldp.settings.record-limits.max-show">
+            {label => (
+              <Field
+                id="maxShow"
+                name="maxShow"
+                label={label}
+                component={Select}
+                dataOptions={generateOptions(0, 4)}
+                placeholder="---"
+              />
+            )}
+          </FormattedMessage>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} id="select-max-export">
+          <FormattedMessage id="ui-ldp.settings.record-limits.max-export">
+            {label => (
+              <Field
+                id="maxExport"
+                name="maxExport"
+                label={label}
+                component={Select}
+                dataOptions={generateOptions(3, 3)}
+                placeholder="---"
+              />
+            )}
+          </FormattedMessage>
+        </Col>
+      </Row>
+    </ConnectedConfigManager>
+  );
 }
 
-export default injectIntl(RecordLimits);
+
+RecordLimits.propTypes = {
+  stripes: PropTypes.shape({
+    connect: PropTypes.func.isRequired,
+  }).isRequired,
+  label: PropTypes.node.isRequired,
+};
+
+
+export default RecordLimits;
