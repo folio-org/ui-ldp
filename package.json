@@ -9,10 +9,10 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "stripes serve",
+    "start": "stripes serve stripes.config.js",
     "build": "stripes build --output ./output",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint --format unix .",
     "lintwatch": "esw . -w --color"
   },
   "devDependencies": {
