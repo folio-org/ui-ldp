@@ -19,9 +19,7 @@ const filterItems = ((filterText, list) => {
 const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
   const ldp = useLdp();
   console.log('ldp =', ldp);
-  console.log(`maxShow=${ldp.maxShow}, log10=${Math.log10(ldp.maxShow || 1)}`);
   const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
-  console.log(' -- limitOptions =', limitOptions);
 
   return (
     <div>
