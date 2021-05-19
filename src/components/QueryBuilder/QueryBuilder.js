@@ -56,7 +56,7 @@ function QueryBuilder({ okapi, ldp, isLoading, initialState, tables, onSubmit, q
               <Pane id="debug" defaultWidth="fill">
                 {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                 {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
-                LDP: <tt>{JSON.stringify(ldp, null, 2)}</tt>
+                LDP: <code>{JSON.stringify(ldp, null, 2)}</code>
               </Pane>
             </form>
           </Paneset>
