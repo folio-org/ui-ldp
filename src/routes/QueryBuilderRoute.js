@@ -26,6 +26,7 @@ const initialState = {
 const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
+  const [counter, setCounter] = useState(0);
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState({
@@ -49,9 +50,11 @@ const QueryBuilderRoute = ({ okapi }) => {
             const data = (json.configs && json.configs.length !== 0) ?
               JSON.parse(json.configs[0].value) :
               defaultConfig;
-            ldp.defaultShow = data.defaultShow;
             ldp.maxShow = data.maxShow;
             ldp.maxExport = data.maxExport;
+            ldp.defaultShow = data.defaultShow;
+            // React doesn't realise that the context has changed, so change state
+            setCounter(counter + 1);
           });
         } catch (err) {
           setLoading(false);
@@ -61,7 +64,7 @@ const QueryBuilderRoute = ({ okapi }) => {
     };
 
     setDefaults();
-  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport]);
+  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, counter]);
 
   const onSubmit = async (values) => {
     try {
