@@ -26,7 +26,7 @@ const initialState = {
 const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
-  const [counter, setCounter] = useState(0);
+  const [configLoaded, setConfigLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [tables, setTables] = useState({
@@ -54,7 +54,7 @@ const QueryBuilderRoute = ({ okapi }) => {
             ldp.maxExport = data.maxExport;
             ldp.defaultShow = data.defaultShow;
             // React doesn't realise that the context has changed, so change state
-            setCounter(counter + 1);
+            setConfigLoaded(true);
           });
         } catch (err) {
           setLoading(false);
@@ -64,7 +64,7 @@ const QueryBuilderRoute = ({ okapi }) => {
     };
 
     setDefaults();
-  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, counter]);
+  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, configLoaded]);
 
   const onSubmit = async (values) => {
     try {
@@ -92,7 +92,7 @@ const QueryBuilderRoute = ({ okapi }) => {
     }
   };
 
-  if (!ldp.defaultShow) return <Loading size="xlarge" />;
+  if (!tables || !configLoaded) return <Loading size="xlarge" />;
 
   initialState.tables[0].limit = ldp.defaultShow;
   return <QueryBuilder
