@@ -1,32 +1,30 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
-// import loadConfig from '../util/loadConfig';
+import { Loading, NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
+import loadConfig from './util/loadConfig';
 import { LdpContext } from './LdpContext';
+import BigError from './components/QueryBuilder/BigError';
 import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import Logs from './routes/Logs';
 import Settings from './settings';
 
-const LdpConfig = {
-  defaultShow: null,
-  maxShow: null,
-  maxExport: null,
-};
+const LdpConfig = {};
 
 const Ldp = (props) => {
-  const {
-    actAs,
-    stripes: {
-      okapi
-    },
-    match: {
-      path
-    }
-  } = props;
+  const { actAs, stripes, match } = props;
+
+  const [configLoaded, setConfigLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    loadConfig(stripes, LdpConfig, setConfigLoaded, setError);
+  }, [stripes, stripes.okapi]);
+
+  if (error) return <BigError message={error} />;
+  if (!configLoaded) return <Loading size="xlarge" />;
 
   return (
     <LdpContext.Provider value={LdpConfig}>
@@ -36,22 +34,22 @@ const Ldp = (props) => {
           <Pane defaultWidth="15%">
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
-                <NavListItem to={`${path}`}>Query Builder</NavListItem>
-                {/* <NavListItem to={`${path}/logs`}>Logs</NavListItem> */}
+                <NavListItem to={`${match.path}`}>Query Builder</NavListItem>
+                {/* <NavListItem to={`${match.path}/logs`}>Logs</NavListItem> */}
               </NavListSection>
             </NavList>
           </Pane>
 
           <Switch>
             <Route
-              path={path}
+              path={match.path}
               exact
-              render={(props2) => <QueryBuilderRoute {...props2} okapi={okapi} />}
+              render={(props2) => <QueryBuilderRoute {...props2} okapi={stripes.okapi} />}
             />
             <Route
-              path={`${path}/logs`}
+              path={`${match.path}/logs`}
               exact
-              render={(props2) => <Logs {...props2} okapi={okapi} />}
+              render={(props2) => <Logs {...props2} okapi={stripes.okapi} />}
             />
           </Switch>
         </Paneset>
