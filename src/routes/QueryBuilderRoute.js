@@ -42,7 +42,9 @@ const QueryBuilderRoute = ({ okapi }) => {
 
   useEffect(() => {
     loadConfig(stripes, ldp, setConfigLoaded, setError);
-  }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, configLoaded]);
+  }, [stripes, stripes.okapi, ldp]);
+
+  if (!tables || !configLoaded) return <Loading size="xlarge" />;
 
   const onSubmit = async (values) => {
     try {
@@ -69,8 +71,6 @@ const QueryBuilderRoute = ({ okapi }) => {
       // setErrors(`Failed connecting to server ${url}`)
     }
   };
-
-  if (!tables || !configLoaded) return <Loading size="xlarge" />;
 
   initialState.tables[0].limit = ldp.defaultShow;
   return <QueryBuilder
