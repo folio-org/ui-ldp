@@ -23,6 +23,27 @@ const initialState = {
 };
 
 
+const loadConfig = async (stripes, ldp, setConfigLoaded, setError) => {
+  if (!ldp.defaultShow) {
+    try {
+      const path = '/configurations/entries?query=(module==LDP and configName==recordLimits)';
+      const resp = await stripesFetch(stripes, path, { noSideLoad: true });
+      resp.json().then(json => {
+        const data = (json.configs && json.configs.length !== 0) ?
+          JSON.parse(json.configs[0].value) :
+          defaultConfig;
+        ldp.maxShow = data.maxShow;
+        ldp.maxExport = data.maxExport;
+        ldp.defaultShow = data.defaultShow;
+        // React doesn't realise that the context has changed, so change state
+        setConfigLoaded(true);
+      });
+    } catch (err) {
+      setError('Could not load defaults:' + err);
+    }
+  }
+};
+
 const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
@@ -41,29 +62,7 @@ const QueryBuilderRoute = ({ okapi }) => {
   }, [stripes, stripes.okapi, setTables]);
 
   useEffect(() => {
-    const setDefaults = async () => {
-      if (!ldp.defaultShow) {
-        try {
-          const path = '/configurations/entries?query=(module==LDP and configName==recordLimits)';
-          const resp = await stripesFetch(stripes, path, { noSideLoad: true });
-          resp.json().then(json => {
-            const data = (json.configs && json.configs.length !== 0) ?
-              JSON.parse(json.configs[0].value) :
-              defaultConfig;
-            ldp.maxShow = data.maxShow;
-            ldp.maxExport = data.maxExport;
-            ldp.defaultShow = data.defaultShow;
-            // React doesn't realise that the context has changed, so change state
-            setConfigLoaded(true);
-          });
-        } catch (err) {
-          setLoading(false);
-          setError('Could not load defaults:' + err);
-        }
-      }
-    };
-
-    setDefaults();
+    loadConfig(stripes, ldp, setConfigLoaded, setError);
   }, [stripes, ldp, ldp.defaultShow, ldp.maxShow, ldp.maxExport, configLoaded]);
 
   const onSubmit = async (values) => {
