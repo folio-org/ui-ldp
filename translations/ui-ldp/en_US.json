@@ -7,6 +7,7 @@
   "settings.record-limits.max-show": "Maximum number to show",
   "settings.record-limits.max-export": "Maximum number to export",
   "settings.table-availability": "Table availability",
-  "settings.table-availability.nyi": "(Not yet implemented)",
+  "settings.table-availability.schema": "Schema <code>{name}</code>",
+  "settings.table-availability.check-to-disable": "Check the tables to disable for querying",
   "SENTINEL": ""
 }

@@ -6,12 +6,23 @@ import get from 'lodash.get';
 import { useStripes } from '@folio/stripes/core';
 import { Button, IconButton, MultiColumnList, Selection } from '@folio/stripes/components';
 import exportToCsv from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
+import { useLdp } from '../../LdpContext';
 import stripesFetch from '../../util/stripesFetch';
 import css from './css/Table.css';
 import Columns from './Columns';
 
 // TODO: ability to add and remove table joins
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
+
+function filterAvailableTables(tables, selectedSchema, ldp) {
+  const disabledMap = {};
+  ldp.disabledTables.forEach(name => {
+    const [s, t] = name.split('-');
+    if (s === selectedSchema) disabledMap[t] = true;
+  });
+
+  return tables[selectedSchema].filter(entry => !disabledMap[entry.value]);
+}
 
 const WhenFieldChanges = ({ field, set, to }) => (
   <Field name={set} subscription={{}}>
@@ -68,6 +79,7 @@ const Table = ({
   const selectedSchema = get(values, `${table}.schema`);
   const selectedTableName = get(values, `${table}.tableName`);
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
+  const ldp = useLdp();
 
   useEffect(() => {
     const getColumns = async (schema, tableName) => {
@@ -129,7 +141,7 @@ const Table = ({
               )}
               component={Selection}
               placeholder="&nbsp;"
-              dataOptions={tables[selectedSchema]}
+              dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
               disabled={tablesAreLoading}
             />
           </div>
