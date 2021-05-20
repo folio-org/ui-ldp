@@ -5,7 +5,6 @@ import { useStripes } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import getTables from '../util/getTables';
-import loadConfig from '../util/loadConfig';
 import stripesFetch from '../util/stripesFetch';
 import QueryBuilder from '../components/QueryBuilder';
 
@@ -13,7 +12,6 @@ const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
   const [tables, setTables] = useState();
-  const [configLoaded, setConfigLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
@@ -22,11 +20,7 @@ const QueryBuilderRoute = ({ okapi }) => {
     getTables(stripes, setLoading, setTables, setError);
   }, [stripes, stripes.okapi, setTables]);
 
-  useEffect(() => {
-    loadConfig(stripes, ldp, setConfigLoaded, setError);
-  }, [stripes, stripes.okapi, ldp]);
-
-  if (!tables || !configLoaded) return <Loading size="xlarge" />;
+  if (!tables) return <Loading size="xlarge" />;
 
   const onSubmit = async (values) => {
     try {
