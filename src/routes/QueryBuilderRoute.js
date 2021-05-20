@@ -15,11 +15,7 @@ const QueryBuilderRoute = ({ okapi }) => {
   const [configLoaded, setConfigLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [tables, setTables] = useState({
-    'public': [],
-    'local': [],
-    'folio_reporting': []
-  });
+  const [tables, setTables] = useState();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
