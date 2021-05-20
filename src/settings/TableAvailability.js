@@ -48,7 +48,7 @@ function TableAvailability(props) {
   const beforeSave = (data) => {
     const disabledTables = [];
     Object.keys(data).sort().forEach(key => {
-      disabledTables.push(key);
+      if (data[key]) disabledTables.push(key);
     });
 
     ldp.disabledTables = disabledTables;
