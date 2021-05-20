@@ -9,20 +9,6 @@ import loadConfig from '../util/loadConfig';
 import stripesFetch from '../util/stripesFetch';
 import QueryBuilder from '../components/QueryBuilder';
 
-const initialState = {
-  tables: [
-    {
-      schema: 'public',
-      tableName: null,
-      columnFilters: [{}],
-      showColumns: [],
-      orderBy: [],
-      limit: 1000,
-    }
-  ]
-};
-
-
 const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
@@ -72,7 +58,19 @@ const QueryBuilderRoute = ({ okapi }) => {
     }
   };
 
-  initialState.tables[0].limit = ldp.defaultShow;
+  const initialState = {
+    tables: [
+      {
+        schema: 'public',
+        tableName: null,
+        columnFilters: [{}],
+        showColumns: [],
+        orderBy: [],
+        limit: ldp.defaultShow,
+      }
+    ]
+  };
+
   return <QueryBuilder
     okapi={okapi}
     ldp={ldp}
