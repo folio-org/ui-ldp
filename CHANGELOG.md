@@ -13,7 +13,7 @@
 * Add optional user-specified limit. Fixes #14.
 * Handle server-side internal errors more gracefully: non-2xx HTTP statuses are now reported as a `<BigError>`. Fixes #35.
 * Add setting to limit number of results displayed and retrieved. Fixes #13.
-* Add support for configuration of available schemas. Fixes #16.
+* Add support for configuration of available tables. Fixes #16.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 
