@@ -31,20 +31,14 @@ const QueryBuilderRoute = ({ okapi }) => {
       resp
         .json()
         .then(jsonResp => {
-          // setIsLoadingFields(false)
           jsonResp.forEach(v => { delete v.data; });
           setQueryResponse({ key: uuidv4(), resp: jsonResp });
         })
         .catch(() => {
           // TODO: handle error
-          // setLoading(false)
-          // console.error(err)
-          // setErrors(`Failed connect to database`)
         });
     } catch (error2) {
       // TODO: handle error
-      // setLoading(false)
-      // setErrors(`Failed connecting to server ${url}`)
     }
   };
 
