@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useStripes } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
-import getTables from '../util/getTables';
+import loadTables from '../util/loadTables';
 import stripesFetch from '../util/stripesFetch';
 import QueryBuilder from '../components/QueryBuilder';
 
@@ -13,11 +13,10 @@ const QueryBuilderRoute = ({ okapi }) => {
   const ldp = useLdp();
   const [tables, setTables] = useState();
   const [error, setError] = useState(false);
-  const [isLoading, setLoading] = useState(true);
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
-    getTables(stripes, setLoading, setTables, setError);
+    loadTables(stripes, setTables, setError);
   }, [stripes, stripes.okapi, setTables]);
 
   if (!tables) return <Loading size="xlarge" />;
@@ -45,7 +44,6 @@ const QueryBuilderRoute = ({ okapi }) => {
   return <QueryBuilder
     okapi={okapi}
     ldp={ldp}
-    isLoading={isLoading}
     initialState={{
       tables: [{
         schema: 'public',

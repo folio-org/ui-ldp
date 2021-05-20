@@ -7,7 +7,7 @@ import { ConfigManager } from '@folio/stripes/smart-components';
 import { Loading, Checkbox } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import BigError from '../components/QueryBuilder/BigError';
-import getTables from '../util/getTables';
+import loadTables from '../util/loadTables';
 import defaultConfig from '../util/defaultConfig';
 
 function TableAvailability(props) {
@@ -22,7 +22,7 @@ function TableAvailability(props) {
   }, [props.stripes]);
 
   useEffect(() => {
-    getTables(stripes, () => null, setTables, setError);
+    loadTables(stripes, setTables, setError);
   }, [stripes, stripes.okapi, setTables]);
 
   if (error) return <BigError message={error} />;

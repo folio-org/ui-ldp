@@ -1,13 +1,12 @@
 import stripesFetch from './stripesFetch';
 
-const getTables = async (stripes, setLoading, setTables, setError) => {
+const loadTables = async (stripes, setTables, setError) => {
   try {
     const resp = await stripesFetch(stripes, '/ldp/db/tables');
     if (!resp.ok) throw new Error(`HTTP error ${resp.status}: ${resp.statusText}`);
     resp
       .json()
       .then(jsonResp => {
-        setLoading(false);
         // jsonResp: [{ tableSchema, tableName }, {}, {}, ...]
         // The server returns a sorted list by tableSchema
         let _public = [];
@@ -45,15 +44,13 @@ const getTables = async (stripes, setLoading, setTables, setError) => {
         setTables(schemaMap);
       })
       .catch(err => {
-        setLoading(false);
         // console.error(err);
         setError('Failed connect to database: ' + err);
       });
   } catch (err) {
-    setLoading(false);
     // console.error(err);
     setError('Failed connecting to server: ' + err);
   }
 };
 
-export default getTables;
+export default loadTables;
