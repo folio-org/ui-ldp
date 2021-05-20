@@ -5,8 +5,8 @@ import { useStripes } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import getTables from '../util/getTables';
+import loadConfig from '../util/loadConfig';
 import stripesFetch from '../util/stripesFetch';
-import defaultConfig from '../util/defaultConfig';
 import QueryBuilder from '../components/QueryBuilder';
 
 const initialState = {
@@ -22,27 +22,6 @@ const initialState = {
   ]
 };
 
-
-const loadConfig = async (stripes, ldp, setConfigLoaded, setError) => {
-  if (!ldp.defaultShow) {
-    try {
-      const path = '/configurations/entries?query=(module==LDP and configName==recordLimits)';
-      const resp = await stripesFetch(stripes, path, { noSideLoad: true });
-      resp.json().then(json => {
-        const data = (json.configs && json.configs.length !== 0) ?
-          JSON.parse(json.configs[0].value) :
-          defaultConfig;
-        ldp.maxShow = data.maxShow;
-        ldp.maxExport = data.maxExport;
-        ldp.defaultShow = data.defaultShow;
-        // React doesn't realise that the context has changed, so change state
-        setConfigLoaded(true);
-      });
-    } catch (err) {
-      setError('Could not load defaults:' + err);
-    }
-  }
-};
 
 const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
