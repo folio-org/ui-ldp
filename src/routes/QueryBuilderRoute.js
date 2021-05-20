@@ -12,10 +12,10 @@ import QueryBuilder from '../components/QueryBuilder';
 const QueryBuilderRoute = ({ okapi }) => {
   const stripes = useStripes();
   const ldp = useLdp();
+  const [tables, setTables] = useState();
   const [configLoaded, setConfigLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [tables, setTables] = useState();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
@@ -54,24 +54,20 @@ const QueryBuilderRoute = ({ okapi }) => {
     }
   };
 
-  const initialState = {
-    tables: [
-      {
+  return <QueryBuilder
+    okapi={okapi}
+    ldp={ldp}
+    isLoading={isLoading}
+    initialState={{
+      tables: [{
         schema: 'public',
         tableName: null,
         columnFilters: [{}],
         showColumns: [],
         orderBy: [],
         limit: ldp.defaultShow,
-      }
-    ]
-  };
-
-  return <QueryBuilder
-    okapi={okapi}
-    ldp={ldp}
-    isLoading={isLoading}
-    initialState={initialState}
+      }]
+    }}
     tables={tables}
     onSubmit={onSubmit}
     queryResponse={queryResponse}
