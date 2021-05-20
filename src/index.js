@@ -9,7 +9,7 @@ import loadConfig from './util/loadConfig';
 import { LdpContext } from './LdpContext';
 import BigError from './components/QueryBuilder/BigError';
 import QueryBuilderRoute from './routes/QueryBuilderRoute';
-import Logs from './routes/Logs';
+import LogsRoute from './routes/LogsRoute';
 import Settings from './settings';
 
 const LdpConfig = {};
@@ -49,7 +49,7 @@ const Ldp = (props) => {
             <Route
               path={`${match.path}/logs`}
               exact
-              render={(props2) => <Logs {...props2} okapi={stripes.okapi} />}
+              render={(props2) => <LogsRoute {...props2} okapi={stripes.okapi} />}
             />
           </Switch>
         </Paneset>
