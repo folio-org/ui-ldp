@@ -4,7 +4,7 @@ import { Field, FormSpy, useFormState } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import get from 'lodash.get';
 import { useStripes } from '@folio/stripes/core';
-import { Button, IconButton, MultiColumnList, Selection } from '@folio/stripes/components';
+import { Button, IconButton, MultiColumnList, Selection, NoValue } from '@folio/stripes/components';
 import exportToCsv from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
 import { useLdp } from '../../LdpContext';
 import stripesFetch from '../../util/stripesFetch';
@@ -53,9 +53,16 @@ WhenFieldChanges.propTypes = {
 
 const Results = ({ results }) => {
   const data = results.resp || [];
+  const formatter = {};
+  if (data.length) {
+    Object.entries(data[0]).forEach(([key, _value]) => {
+      formatter[key] = (rec) => (rec[key] === null ? <NoValue /> : rec[key]);
+    });
+  }
+
   return (
     <div style={{ flex: 1 }}>
-      {(results.key) ? <MultiColumnList key={results.key} contentData={data} virtualize autosize /> : <div />}
+      {(results.key) ? <MultiColumnList key={results.key} contentData={data} formatter={formatter} virtualize autosize /> : <div />}
     </div>
   );
 };
