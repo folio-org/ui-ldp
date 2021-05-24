@@ -189,11 +189,6 @@ Table.propTypes = {
   tableIndex: PropTypes.number,
   tables: PropTypes.object,
   tablesAreLoading: PropTypes.bool,
-  okapi: PropTypes.shape({
-    url: PropTypes.string,
-    tenant: PropTypes.string,
-    token: PropTypes.string,
-  }),
   queryResponse: PropTypes.object,
   push: PropTypes.func,
   pop: PropTypes.func,

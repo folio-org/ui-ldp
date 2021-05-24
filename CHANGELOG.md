@@ -15,6 +15,7 @@
 * Add setting to limit number of results displayed and retrieved. Fixes #13.
 * Add support for configuration of available tables. Fixes #16.
 * Get rid of MCL-formatter console warnings by providing a dynamic `formater`. Fixes #39.
+* Do not needlessly pass the okapi object through the components. Fixes #42.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 

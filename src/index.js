@@ -35,7 +35,7 @@ const Ldp = (props) => {
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
                 <NavListItem to={`${match.path}`}>Query Builder</NavListItem>
-                {/* <NavListItem to={`${match.path}/logs`}>Logs</NavListItem> */}
+                <NavListItem to={`${match.path}/logs`}>Logs</NavListItem>
               </NavListSection>
             </NavList>
           </Pane>
@@ -44,12 +44,12 @@ const Ldp = (props) => {
             <Route
               path={match.path}
               exact
-              render={(props2) => <QueryBuilderRoute {...props2} okapi={stripes.okapi} />}
+              component={QueryBuilderRoute}
             />
             <Route
               path={`${match.path}/logs`}
               exact
-              render={(props2) => <LogsRoute {...props2} okapi={stripes.okapi} />}
+              component={LogsRoute}
             />
           </Switch>
         </Paneset>

@@ -8,7 +8,7 @@ import Table from './Table';
 import BigError from './BigError';
 
 
-function QueryBuilder({ okapi, ldp, initialState, tables, onSubmit, queryResponse, error }) {
+function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse, error }) {
   return (
     <FinalForm
       onSubmit={onSubmit}
@@ -45,7 +45,6 @@ function QueryBuilder({ okapi, ldp, initialState, tables, onSubmit, queryRespons
                       tables={tables}
                       queryResponse={queryResponse}
                       tablesAreLoading={false}
-                      okapi={okapi}
                       onRemove={() => fields.remove(tableIndex)}
                       push={push}
                       pop={pop}
@@ -68,7 +67,6 @@ function QueryBuilder({ okapi, ldp, initialState, tables, onSubmit, queryRespons
 
 
 QueryBuilder.propTypes = {
-  okapi: P.object.isRequired,
   ldp: P.shape({}).isRequired,
   initialState: P.object.isRequired,
   tables: P.objectOf(

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
-import fetch from 'cross-fetch';
+import { useStripes } from '@folio/stripes/core';
 import { Datepicker, MultiColumnList, Row, Col } from '@folio/stripes-components';
+import stripesFetch from '../util/stripesFetch';
 import LogChart from '../components/LogChart';
 
 function isEmpty(obj) {
@@ -14,7 +14,8 @@ function isEmpty(obj) {
 
 const blankLogs = [{ logTime: '', tableName: '', elapsedTime: '', message: '' }];
 
-const LogsPage = ({ okapi }) => {
+const LogsPage = () => {
+  const stripes = useStripes();
   // const [error, setErrors] = useState(false);
   // const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState({
@@ -79,14 +80,8 @@ const LogsPage = ({ okapi }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `${okapi.url}/ldp/db/log`;
       try {
-        const resp = await fetch(url, {
-          headers: {
-            'X-Okapi-Tenant': okapi.tenant,
-            'X-Okapi-Token': okapi.token
-          }
-        });
+        const resp = await stripesFetch(stripes, '/ldp/db/log');
         resp
           .json()
           .then(jsonResp => {
@@ -109,7 +104,7 @@ const LogsPage = ({ okapi }) => {
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [okapi]);
+  }, [stripes.okapi]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', padding: 5, flex: 1 }}>
@@ -150,12 +145,6 @@ const LogsPage = ({ okapi }) => {
   );
 };
 
-LogsPage.propTypes = {
-  okapi: PropTypes.shape({
-    url: PropTypes.string,
-    tenant: PropTypes.string,
-    token: PropTypes.string,
-  }),
-};
+LogsPage.propTypes = {};
 
 export default LogsPage;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { useStripes } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
@@ -20,7 +19,7 @@ const initialState = {
   ]
 };
 
-const QueryBuilderRoute = ({ okapi }) => {
+const QueryBuilderRoute = () => {
   const stripes = useStripes();
   const ldp = useLdp();
   const [tables, setTables] = useState();
@@ -56,7 +55,6 @@ const QueryBuilderRoute = ({ okapi }) => {
   initialState.tables[0].limit = ldp.defaultShow;
 
   return <QueryBuilder
-    okapi={okapi}
     ldp={ldp}
     initialState={initialState}
     tables={tables}
@@ -66,12 +64,6 @@ const QueryBuilderRoute = ({ okapi }) => {
   />;
 };
 
-QueryBuilderRoute.propTypes = {
-  okapi: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    tenant: PropTypes.string.isRequired,
-    token: PropTypes.string.isRequired,
-  }).isRequired,
-};
+QueryBuilderRoute.propTypes = {};
 
 export default QueryBuilderRoute;
