@@ -8,47 +8,31 @@ const loadTables = async (stripes, setTables, setError) => {
       .json()
       .then(jsonResp => {
         // jsonResp: [{ tableSchema, tableName }, {}, {}, ...]
-        // The server returns a sorted list by tableSchema
-        let _public = [];
-        let local = [];
-        let folioReporting = [];
+        const acc = {};
         for (let i = 0; i < jsonResp.length; i++) {
-          switch (jsonResp[i].tableSchema) {
-            case 'public':
-              _public.push(jsonResp[i].tableName);
-              break;
-            case 'local':
-              local.push(jsonResp[i].tableName);
-              break;
-            case 'folio_reporting':
-              folioReporting.push(jsonResp[i].tableName);
-              break;
-            default:
-              throw Error(`cannot happen: tableSchema='${jsonResp[i].tableSchema}'`);
+          const schemaName = jsonResp[i].tableSchema;
+          if (!['public', 'local', 'folio_reporting'].includes(schemaName)) {
+            throw Error(`cannot happen: tableSchema='${schemaName}'`);
           }
-        }
-        // Sort the tableNames in each bucket alphabetically
-        _public = _public.sort((a, b) => a.localeCompare(b));
-        local = local.sort((a, b) => a.localeCompare(b));
-        folioReporting = folioReporting.sort((a, b) => a.localeCompare(b));
 
-        // Transform each tableName string to an Option object used in the Selection component
-        _public = _public.map(t => ({ value: t, label: t }));
-        local = local.map(t => ({ value: t, label: t }));
-        folioReporting = folioReporting.map(t => ({ value: t, label: t }));
+          if (!acc[schemaName]) acc[schemaName] = [];
+          acc[schemaName].push(jsonResp[i].tableName);
+        }
 
         const schemaMap = {};
-        if (folioReporting.length > 0) schemaMap.folio_reporting = folioReporting;
-        if (local.length > 0) schemaMap.local = local;
-        if (_public.length > 0) schemaMap.public = _public;
+        Object.keys(acc).forEach(key => {
+          if (acc[key].length > 0) {
+            schemaMap[key] = acc[key].sort().map(t => ({ value: t, label: t }));
+          }
+        });
+
         setTables(schemaMap);
       })
       .catch(err => {
-        // console.error(err);
         setError('Failed connect to database: ' + err);
       });
   } catch (err) {
-    // console.error(err);
+    // I don't think this can work -- at least, it doesn't seem to catch errors
     setError('Failed connecting to server: ' + err);
   }
 };
