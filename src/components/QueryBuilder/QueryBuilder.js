@@ -4,7 +4,7 @@ import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { Pane, Paneset } from '@folio/stripes/components';
-import Table from './Table';
+import Table from './QuerySingleTable';
 import BigError from './BigError';
 
 

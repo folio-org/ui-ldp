@@ -8,7 +8,7 @@ import { Button, IconButton, MultiColumnList, Selection, NoValue } from '@folio/
 import exportToCsv from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
 import { useLdp } from '../../LdpContext';
 import stripesFetch from '../../util/stripesFetch';
-import css from './css/Table.css';
+import css from './css/QuerySingleTable.css';
 import Columns from './Columns';
 
 // TODO: ability to add and remove table joins
