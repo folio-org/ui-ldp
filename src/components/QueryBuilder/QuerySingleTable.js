@@ -4,12 +4,13 @@ import { Field, FormSpy, useFormState } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import get from 'lodash.get';
 import { useStripes } from '@folio/stripes/core';
-import { Button, IconButton, MultiColumnList, Selection, NoValue } from '@folio/stripes/components';
+import { Button, IconButton, Selection } from '@folio/stripes/components';
 import exportToCsv from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
 import { useLdp } from '../../LdpContext';
 import stripesFetch from '../../util/stripesFetch';
 import css from './css/QuerySingleTable.css';
 import Columns from './Columns';
+import ResultsList from './ResultsList';
 
 // TODO: ability to add and remove table joins
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
@@ -49,25 +50,6 @@ WhenFieldChanges.propTypes = {
   field: PropTypes.string,
   set: PropTypes.string,
   to: PropTypes.arrayOf(PropTypes.object),
-};
-
-const Results = ({ results }) => {
-  const data = results.resp || [];
-  const formatter = {};
-  if (data.length) {
-    Object.entries(data[0]).forEach(([key, _value]) => {
-      formatter[key] = (rec) => (rec[key] === null ? <NoValue /> : rec[key]);
-    });
-  }
-
-  return (
-    <div style={{ flex: 1 }}>
-      {(results.key) ? <MultiColumnList key={results.key} contentData={data} formatter={formatter} virtualize autosize /> : <div />}
-    </div>
-  );
-};
-Results.propTypes = {
-  results: PropTypes.object,
 };
 
 const Table = ({
@@ -179,7 +161,7 @@ const Table = ({
         </div>
       </div>
 
-      <Results results={queryResponse} />
+      <ResultsList results={queryResponse} />
     </div>
   );
 };
