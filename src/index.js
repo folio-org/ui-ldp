@@ -35,7 +35,7 @@ const Ldp = (props) => {
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
                 <NavListItem to={`${match.path}`}>Query Builder</NavListItem>
-                <NavListItem to={`${match.path}/logs`}>Logs</NavListItem>
+                {/* <NavListItem to={`${match.path}/logs`}>Logs</NavListItem> */}
               </NavListSection>
             </NavList>
           </Pane>
