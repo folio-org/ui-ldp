@@ -10,6 +10,7 @@ import { LdpContext } from './LdpContext';
 import BigError from './components/QueryBuilder/BigError';
 import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import LogsRoute from './routes/LogsRoute';
+import Playground from './routes/Playground';
 import Settings from './settings';
 
 const LdpConfig = {};
@@ -36,6 +37,7 @@ const Ldp = (props) => {
               <NavListSection activeLink={window.location.pathname}>
                 <NavListItem to={`${match.path}`}>Query Builder</NavListItem>
                 {/* <NavListItem to={`${match.path}/logs`}>Logs</NavListItem> */}
+                <NavListItem to={`${match.path}/playground`}>Playground</NavListItem>
               </NavListSection>
             </NavList>
           </Pane>
@@ -50,6 +52,11 @@ const Ldp = (props) => {
               path={`${match.path}/logs`}
               exact
               component={LogsRoute}
+            />
+            <Route
+              path={`${match.path}/playground`}
+              exact
+              component={Playground}
             />
           </Switch>
         </Paneset>
