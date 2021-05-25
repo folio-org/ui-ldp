@@ -52,7 +52,7 @@ WhenFieldChanges.propTypes = {
   to: PropTypes.arrayOf(PropTypes.object),
 };
 
-const Table = ({
+const QuerySingleTable = ({
   table,
   tableIndex,
   tables,
@@ -103,7 +103,7 @@ const Table = ({
   const disabled = availableColumns.list.length === 0;
 
   return (
-    <div className={css.Table} data-test-table>
+    <div className={css.QuerySingleTable} data-test-table>
       <div className="query-input">
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1, marginRight: 5 }}>
@@ -166,7 +166,7 @@ const Table = ({
   );
 };
 
-Table.propTypes = {
+QuerySingleTable.propTypes = {
   table: PropTypes.string,
   tableIndex: PropTypes.number,
   tables: PropTypes.object,
@@ -176,4 +176,4 @@ Table.propTypes = {
   pop: PropTypes.func,
 };
 
-export default Table;
+export default QuerySingleTable;
