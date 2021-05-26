@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { MultiColumnList, NoValue } from '@folio/stripes/components';
 
 const ResultsList = ({ results }) => {
+  if (!results.key) return null;
+
   const data = results.resp || [];
   const formatter = {};
   if (data.length) {
@@ -11,11 +13,7 @@ const ResultsList = ({ results }) => {
     });
   }
 
-  return (
-    <div style={{ flex: 1 }}>
-      {(results.key) ? <MultiColumnList key={results.key} contentData={data} formatter={formatter} virtualize autosize /> : <div />}
-    </div>
-  );
+  return <MultiColumnList key={results.key} contentData={data} formatter={formatter} virtualize autosize />;
 };
 
 ResultsList.propTypes = {
