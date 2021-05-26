@@ -39,9 +39,8 @@ export default function Coburn() {
             </Pane>
           </Paneset>
         </div>
-        <div>
-          <PaneHeader paneTitle="Results" />
-          <div style={{ height: 400 }}>
+        <div style={{ height: '100%' }}>
+          <div style={{ height: '100%' }}>
             <MultiColumnList contentData={contentData} virtualize autosize />
           </div>
         </div>
