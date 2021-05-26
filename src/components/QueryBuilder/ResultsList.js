@@ -13,6 +13,8 @@ const ResultsList = ({ results }) => {
 
   return (
     <div style={{ flex: 1 }}>
+      1st value:
+      <pre>{JSON.stringify(data[0], null, 2)}</pre>
       {(results.key) ? <MultiColumnList key={results.key} contentData={data} formatter={formatter} virtualize autosize /> : <div />}
     </div>
   );
