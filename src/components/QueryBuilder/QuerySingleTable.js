@@ -10,7 +10,6 @@ import { useLdp } from '../../LdpContext';
 import stripesFetch from '../../util/stripesFetch';
 import css from './css/QuerySingleTable.css';
 import Columns from './Columns';
-import ResultsList from './ResultsList';
 
 // TODO: ability to add and remove table joins
 // <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
@@ -160,8 +159,6 @@ const QuerySingleTable = ({
           <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportToCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
         </div>
       </div>
-
-      <ResultsList results={queryResponse} />
     </div>
   );
 };
