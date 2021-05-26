@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paneset, Pane, PaneHeader, Button, MultiColumnList } from '@folio/stripes/components';
+import { Paneset, Pane, Button, MultiColumnList } from '@folio/stripes/components';
 
 export default function Coburn() {
   const [nrows, setNrows] = useState(10);
@@ -34,7 +34,7 @@ export default function Coburn() {
             <Pane defaultWidth="fill" paneTitle="Debug info">
               nrows = {typeof nrows} {nrows}
               <pre>
-                {JSON.stringify(contentData[contentData.length-1], null, 2)}
+                {JSON.stringify(contentData[contentData.length - 1], null, 2)}
               </pre>
             </Pane>
           </Paneset>
