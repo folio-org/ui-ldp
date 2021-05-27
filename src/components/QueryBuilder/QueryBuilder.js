@@ -4,7 +4,7 @@ import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { Pane, Paneset } from '@folio/stripes/components';
-import Table from './QuerySingleTable';
+import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 
 
@@ -41,7 +41,7 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                     <FieldArray name="tables">
                       {({ fields }) => fields.map((table, tableIndex) => (
                         <Pane id={`table${tableIndex}`} defaultWidth="50%" key={table}>
-                          <Table
+                          <QuerySingleTable
                             table={table}
                             tableIndex={tableIndex}
                             tables={tables}
