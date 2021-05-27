@@ -118,7 +118,6 @@ const QuerySingleTable = ({
           pop={pop}
         />
         <div className={css.SubmitRow}>
-          {/* <Button disabled >Show Columns...</Button> */}
           <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
           <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
         </div>
