@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { Loading, NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
+import { Loading, NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes/components';
 import loadConfig from './util/loadConfig';
 import { LdpContext } from './LdpContext';
 import BigError from './components/BigError';

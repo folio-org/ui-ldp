@@ -18,6 +18,7 @@
 * Do not needlessly pass the okapi object through the components. Fixes #42.
 * Use full width of page for results list. Fixes #28.
 * Fix error handling on main page. Fixes #46.
+* Prefer `@folio/stripes` exports to private paths when importing components. Fixes #44.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 

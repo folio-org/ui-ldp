@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useStripes } from '@folio/stripes/core';
-import { Datepicker, MultiColumnList, Row, Col } from '@folio/stripes-components';
+import { Datepicker, MultiColumnList, Row, Col } from '@folio/stripes/components';
 import stripesFetch from '../util/stripesFetch';
 import LogChart from '../components/LogChart';
 

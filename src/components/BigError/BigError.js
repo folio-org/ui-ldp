@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Headline, Icon } from '@folio/stripes-components';
+import { Button, Headline, Icon } from '@folio/stripes/components';
 
 import css from './BigError.css';
 
