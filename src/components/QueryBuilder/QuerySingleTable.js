@@ -7,7 +7,8 @@ import { useStripes } from '@folio/stripes/core';
 import { Button, IconButton, Selection } from '@folio/stripes/components';
 import { exportCsv } from '@folio/stripes/util';
 import { useLdp } from '../../LdpContext';
-import stripesFetch from '../../util/stripesFetch';
+import loadColumns from '../../util/loadColumns';
+import BigError from '../BigError';
 import css from './css/QuerySingleTable.css';
 import Columns from './Columns';
 
@@ -64,32 +65,15 @@ const QuerySingleTable = ({
   const { values } = useFormState();
   const selectedSchema = get(values, `${namePrefix}.schema`);
   const selectedTableName = get(values, `${namePrefix}.tableName`);
-  const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
+  const [availableColumns, setColumns] = useState({ list: [], options: [] });
+  const [error, setError] = useState(false);
   const ldp = useLdp();
 
   useEffect(() => {
-    const getColumns = async (schema, tableName) => {
-      const path = `/ldp/db/columns?schema=${schema}&table=${tableName}`;
-      try {
-        const resp = await stripesFetch(stripes, path);
-        resp
-          .json()
-          .then(jsonResp => {
-            setAvailableColumns({
-              list: jsonResp.map(c => c.columnName),
-              options: jsonResp.map(c => ({ value: c.columnName, label: c.columnName }))
-            });
-          })
-          .catch(() => {
-            // TODO: handle error
-            // console.error(err)
-          });
-      } catch (error) {
-        // TODO: handle error
-      }
-    };
-    if (selectedTableName) { getColumns(selectedSchema, selectedTableName); }
+    if (selectedTableName) loadColumns(stripes, selectedSchema, selectedTableName, setColumns, setError);
   }, [stripes, selectedSchema, selectedTableName]);
+
+  if (error) return <BigError message={error} />;
 
   const disabled = availableColumns.list.length === 0;
 
