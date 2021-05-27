@@ -5,11 +5,10 @@ import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { Pane, Paneset } from '@folio/stripes/components';
 import Table from './QuerySingleTable';
-import BigError from './BigError';
 import ResultsList from './ResultsList';
 
 
-function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse, error }) {
+function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
   return (
     <Paneset>
       <FinalForm
@@ -42,7 +41,6 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse, erro
                     <FieldArray name="tables">
                       {({ fields }) => fields.map((table, tableIndex) => (
                         <Pane id={`table${tableIndex}`} defaultWidth="50%" key={table}>
-                          {error ? <BigError message={error} /> :
                           <Table
                             table={table}
                             tableIndex={tableIndex}
@@ -52,7 +50,7 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse, erro
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}
-                          />}
+                          />
                         </Pane>
                       ))}
                     </FieldArray>
@@ -96,10 +94,6 @@ QueryBuilder.propTypes = {
       P.object.isRequired,
     ).isRequired,
   }).isRequired,
-  error: P.oneOfType([
-    P.bool,
-    P.string
-  ]).isRequired,
 };
 
 

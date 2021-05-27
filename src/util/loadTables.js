@@ -32,7 +32,6 @@ const loadTables = async (stripes, setTables, setError) => {
         setError('Failed connect to database: ' + err);
       });
   } catch (err) {
-    // I don't think this can work -- at least, it doesn't seem to catch errors
     setError('Failed connecting to server: ' + err);
   }
 };

@@ -17,6 +17,7 @@
 * Get rid of MCL-formatter console warnings by providing a dynamic `formater`. Fixes #39.
 * Do not needlessly pass the okapi object through the components. Fixes #42.
 * Use full width of page for results list. Fixes #28.
+* Fix error handling on main page. Fixes #46.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 
