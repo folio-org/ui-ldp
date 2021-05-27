@@ -46,7 +46,6 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                             tableIndex={tableIndex}
                             tables={tables}
                             queryResponse={queryResponse}
-                            tablesAreLoading={false}
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}

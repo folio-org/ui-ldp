@@ -55,7 +55,6 @@ const QuerySingleTable = ({
   table,
   tableIndex,
   tables,
-  tablesAreLoading,
   queryResponse,
   // onRemove,
   push,
@@ -116,7 +115,6 @@ const QuerySingleTable = ({
               component={Selection}
               placeholder="&nbsp;"
               dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
-              disabled={tablesAreLoading}
             />
           </div>
           <div style={{ flex: 3, marginLeft: 5 }}>
@@ -130,7 +128,6 @@ const QuerySingleTable = ({
               component={Selection}
               placeholder="&nbsp;"
               dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
-              disabled={tablesAreLoading}
             />
           </div>
         </div>
@@ -167,7 +164,6 @@ QuerySingleTable.propTypes = {
   table: PropTypes.string,
   tableIndex: PropTypes.number,
   tables: PropTypes.object,
-  tablesAreLoading: PropTypes.bool,
   queryResponse: PropTypes.object,
   push: PropTypes.func,
   pop: PropTypes.func,
