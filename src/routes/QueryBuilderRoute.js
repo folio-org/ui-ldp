@@ -5,6 +5,7 @@ import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import loadTables from '../util/loadTables';
 import stripesFetch from '../util/stripesFetch';
+import BigError from '../components/QueryBuilder/BigError';
 import QueryBuilder from '../components/QueryBuilder';
 
 const initialState = {
@@ -30,6 +31,7 @@ const QueryBuilderRoute = () => {
     loadTables(stripes, setTables, setError);
   }, [stripes, stripes.okapi, setTables]);
 
+  if (error) return <BigError message={error} />;
   if (!tables) return <Loading size="xlarge" />;
 
   const onSubmit = async (values) => {
@@ -60,7 +62,6 @@ const QueryBuilderRoute = () => {
     tables={tables}
     onSubmit={onSubmit}
     queryResponse={queryResponse}
-    error={error}
   />;
 };
 
