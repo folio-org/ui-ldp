@@ -62,7 +62,6 @@ const QuerySingleTable = ({
 }) => {
   const stripes = useStripes();
   const { values } = useFormState();
-  // const [isLoadingColumns, setIsLoadingColumns] = useState(false);
   const selectedSchema = get(values, `${table}.schema`);
   const selectedTableName = get(values, `${table}.tableName`);
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
@@ -72,12 +71,10 @@ const QuerySingleTable = ({
     const getColumns = async (schema, tableName) => {
       const path = `/ldp/db/columns?schema=${schema}&table=${tableName}`;
       try {
-        // setIsLoadingColumns(true);
         const resp = await stripesFetch(stripes, path);
         resp
           .json()
           .then(jsonResp => {
-            // setIsLoadingColumns(false);
             setAvailableColumns({
               list: jsonResp.map(c => c.columnName),
               options: jsonResp.map(c => ({ value: c.columnName, label: c.columnName }))
@@ -85,14 +82,10 @@ const QuerySingleTable = ({
           })
           .catch(() => {
             // TODO: handle error
-            // setIsLoadingColumns(false);
             // console.error(err)
-            // setErrors(`Failed connect to database`)
           });
       } catch (error) {
         // TODO: handle error
-        // setIsLoadingColumns(false);
-        // setErrors(`Failed connecting to server ${url}`)
       }
     };
     if (selectedTableName) { getColumns(selectedSchema, selectedTableName); }
