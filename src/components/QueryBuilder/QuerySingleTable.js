@@ -84,26 +84,16 @@ const QuerySingleTable = ({
           <div style={{ flex: 1, marginRight: 5 }}>
             <Field
               name={`${namePrefix}.schema`}
-              label={(
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ marginRight: 7 }}>Schema</span>
-                </div>
-              )}
+              label="Schema"
               component={Selection}
-              placeholder="&nbsp;"
               dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
             />
           </div>
           <div style={{ flex: 3, marginLeft: 5 }}>
             <Field
               name={`${namePrefix}.tableName`}
-              label={(
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ marginRight: 7 }}>Table</span>
-                </div>
-              )}
+              label="Table"
               component={Selection}
-              placeholder="&nbsp;"
               dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
             />
           </div>
