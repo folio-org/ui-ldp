@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Loading, NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes-components';
 import loadConfig from './util/loadConfig';
 import { LdpContext } from './LdpContext';
-import BigError from './components/QueryBuilder/BigError';
+import BigError from './components/BigError';
 import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import LogsRoute from './routes/LogsRoute';
 import Playground from './routes/Playground';

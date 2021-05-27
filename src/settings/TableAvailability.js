@@ -6,7 +6,7 @@ import { useStripes } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { Loading, Checkbox } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
-import BigError from '../components/QueryBuilder/BigError';
+import BigError from '../components/BigError';
 import loadTables from '../util/loadTables';
 import defaultConfig from '../util/defaultConfig';
 

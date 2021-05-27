@@ -5,7 +5,7 @@ import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import loadTables from '../util/loadTables';
 import stripesFetch from '../util/stripesFetch';
-import BigError from '../components/QueryBuilder/BigError';
+import BigError from '../components/BigError';
 import QueryBuilder from '../components/QueryBuilder';
 
 const initialState = {
