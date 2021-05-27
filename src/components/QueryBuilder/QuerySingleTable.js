@@ -5,7 +5,7 @@ import { OnChange } from 'react-final-form-listeners';
 import get from 'lodash.get';
 import { useStripes } from '@folio/stripes/core';
 import { Button, IconButton, Selection } from '@folio/stripes/components';
-import exportToCsv from '@folio/stripes-components/lib/ExportCsv/exportToCsv';
+import { exportCsv } from '@folio/stripes/util';
 import { useLdp } from '../../LdpContext';
 import stripesFetch from '../../util/stripesFetch';
 import css from './css/QuerySingleTable.css';
@@ -156,7 +156,7 @@ const QuerySingleTable = ({
         <div className={css.SubmitRow}>
           {/* <Button disabled >Show Columns...</Button> */}
           <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
-          <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportToCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
+          <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
         </div>
       </div>
     </div>
