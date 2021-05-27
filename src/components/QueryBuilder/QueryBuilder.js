@@ -39,10 +39,10 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                 <div style={{ height: 'auto' }}>
                   <Paneset nested static>
                     <FieldArray name="tables">
-                      {({ fields }) => fields.map((table, tableIndex) => (
-                        <Pane id={`table${tableIndex}`} defaultWidth="50%" key={table}>
+                      {({ fields }) => fields.map((namePrefix, tableIndex) => (
+                        <Pane id={`table${tableIndex}`} defaultWidth="50%" key={namePrefix}>
                           <QuerySingleTable
-                            table={table}
+                            namePrefix={namePrefix}
                             tableIndex={tableIndex}
                             tables={tables}
                             queryResponse={queryResponse}

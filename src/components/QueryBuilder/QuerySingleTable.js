@@ -52,7 +52,7 @@ WhenFieldChanges.propTypes = {
 };
 
 const QuerySingleTable = ({
-  table,
+  namePrefix,
   tableIndex,
   tables,
   queryResponse,
@@ -62,8 +62,8 @@ const QuerySingleTable = ({
 }) => {
   const stripes = useStripes();
   const { values } = useFormState();
-  const selectedSchema = get(values, `${table}.schema`);
-  const selectedTableName = get(values, `${table}.tableName`);
+  const selectedSchema = get(values, `${namePrefix}.schema`);
+  const selectedTableName = get(values, `${namePrefix}.tableName`);
   const [availableColumns, setAvailableColumns] = useState({ list: [], options: [] });
   const ldp = useLdp();
 
@@ -99,7 +99,7 @@ const QuerySingleTable = ({
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1, marginRight: 5 }}>
             <Field
-              name={`${table}.schema`}
+              name={`${namePrefix}.schema`}
               label={(
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <span style={{ marginRight: 7 }}>Schema</span>
@@ -112,7 +112,7 @@ const QuerySingleTable = ({
           </div>
           <div style={{ flex: 3, marginLeft: 5 }}>
             <Field
-              name={`${table}.tableName`}
+              name={`${namePrefix}.tableName`}
               label={(
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <span style={{ marginRight: 7 }}>Table</span>
@@ -125,20 +125,20 @@ const QuerySingleTable = ({
           </div>
         </div>
         <WhenFieldChanges
-          field={`${table}.tableName`}
-          set={`${table}.columnFilters`}
+          field={`${namePrefix}.tableName`}
+          set={`${namePrefix}.columnFilters`}
           to={[{}]}
         />
         <WhenFieldChanges
-          field={`${table}.tableName`}
-          set={`${table}.showColumns`}
+          field={`${namePrefix}.tableName`}
+          set={`${namePrefix}.showColumns`}
           to={[]}
         />
         <Columns
           selectedTableName={selectedTableName}
           availableColumns={availableColumns}
           disabled={disabled}
-          table={table}
+          namePrefix={namePrefix}
           tableIndex={tableIndex}
           push={push}
           pop={pop}
@@ -154,7 +154,7 @@ const QuerySingleTable = ({
 };
 
 QuerySingleTable.propTypes = {
-  table: PropTypes.string,
+  namePrefix: PropTypes.string,
   tableIndex: PropTypes.number,
   tables: PropTypes.object,
   queryResponse: PropTypes.object,

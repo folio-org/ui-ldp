@@ -8,7 +8,7 @@ import generateOptions from '../../util/generateOptions';
 import ColumnFilter from './ColumnFilter';
 
 // TODO: ability to remove column filter
-// <button type="button" onClick={() => pop(`${table}.columns`)}>Remove Column</button>
+// <button type="button" onClick={() => pop(`${namePrefix}.columns`)}>Remove Column</button>
 
 const filterItems = ((filterText, list) => {
   const filterRegExp = new RegExp(`^${filterText}`, 'i');
@@ -16,14 +16,14 @@ const filterItems = ((filterText, list) => {
   return { renderedItems };
 });
 
-const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
+const Columns = ({ availableColumns, disabled, namePrefix, tableIndex, push }) => {
   const ldp = useLdp();
   const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
 
   return (
     <div>
       <Label htmlFor="choose-columns">Column</Label>
-      <FieldArray id="choose-columns" name={`${table}.columnFilters`} tableIndex={tableIndex}>
+      <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
         {({ fields }) => fields.map((name, index) => (
           <ColumnFilter
             name={name}
@@ -36,10 +36,10 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
         ))
         }
       </FieldArray>
-      <Button disabled={disabled} onClick={() => push(`${table}.columnFilters`)}>Add Filter</Button>
+      <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
 
       <Field
-        name={`${table}.showColumns`}
+        name={`${namePrefix}.showColumns`}
         label="Show Columns"
         component={MultiSelection}
         placeholder="(All)"
@@ -51,7 +51,7 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
       />
 
       <Field
-        name={`${table}.limit`}
+        name={`${namePrefix}.limit`}
         label="Limit number of results"
         component={Select}
         dataOptions={limitOptions}
@@ -65,7 +65,7 @@ const Columns = ({ availableColumns, disabled, table, tableIndex, push }) => {
 Columns.propTypes = {
   availableColumns: PropTypes.object,
   disabled: PropTypes.bool,
-  table: PropTypes.string,
+  namePrefix: PropTypes.string,
   tableIndex: PropTypes.number,
   push: PropTypes.func,
 };
