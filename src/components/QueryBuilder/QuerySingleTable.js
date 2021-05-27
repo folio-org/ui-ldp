@@ -109,7 +109,6 @@ const QuerySingleTable = ({
           to={[]}
         />
         <Columns
-          selectedTableName={selectedTableName}
           availableColumns={availableColumns}
           disabled={disabled}
           namePrefix={namePrefix}
