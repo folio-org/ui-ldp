@@ -125,12 +125,11 @@ const QuerySingleTable = ({
         <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
           {({ fields }) => fields.map((name, index) => (
             <ColumnFilter
-              name={name}
-              index={index}
               key={name}
+              name={name}
               availableColumns={availableColumns.options}
-              onRemove={() => fields.remove(index)}
               disabled={disabled}
+              onRemove={() => fields.remove(index)}
             />
           ))
           }
