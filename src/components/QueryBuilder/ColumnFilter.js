@@ -36,10 +36,10 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
 };
 
 ColumnFilter.propTypes = {
-  name: PropTypes.string,
-  availableColumns: PropTypes.arrayOf(PropTypes.object),
-  disabled: PropTypes.bool,
-  onRemove: PropTypes.func,
+  name: PropTypes.string.isRequired,
+  availableColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  disabled: PropTypes.bool.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default ColumnFilter;
