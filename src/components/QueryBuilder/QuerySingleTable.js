@@ -12,6 +12,7 @@ import loadColumns from '../../util/loadColumns';
 import generateOptions from '../../util/generateOptions';
 import BigError from '../BigError';
 import ColumnFilter from './ColumnFilter';
+import OrderingCriterion from './OrderingCriterion';
 import css from './QuerySingleTable.css';
 
 
@@ -147,6 +148,21 @@ const QuerySingleTable = ({
           filter={filterItems}
           disabled={disabled}
         />
+
+        <Label htmlFor="choose-order">Order by column</Label>
+        <FieldArray id="choose-order" name={`${namePrefix}.orderBy`} tableIndex={tableIndex}>
+          {({ fields }) => fields.map((name, index) => (
+            <OrderingCriterion
+              key={name}
+              name={name}
+              availableColumns={availableColumns.options}
+              disabled={disabled}
+              onRemove={() => fields.remove(index)}
+            />
+          ))
+          }
+        </FieldArray>
+        <Button disabled={disabled} onClick={() => push(`${namePrefix}.orderBy`)}>Add ordering criterion</Button>
 
         <Field
           name={`${namePrefix}.limit`}
