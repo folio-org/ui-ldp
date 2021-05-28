@@ -21,6 +21,7 @@
 * Prefer `@folio/stripes` exports to private paths when importing components. Fixes #44.
 * Refactor to use stripes-util's `exportCsv` instead of stripes-components' `exportToCsv`. Fixes #45.
 * Add sorting options: user can now add any number of [column, direction, null-handling] triples via the UI -- though the null-handling specifications are ignored by the back-end due to limitations in the SQL-building tool. Fixes #12.
+* Report number of hits, specifying when it is greater than those displayed. Fixes #37.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 

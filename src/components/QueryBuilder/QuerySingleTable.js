@@ -175,7 +175,23 @@ const QuerySingleTable = ({
 
         <div className={css.SubmitRow}>
           <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
-          <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
+          {queryResponse.key && (
+            <span>
+              Found
+              {' '}
+              {queryResponse.isComplete ? '' : 'more than '}
+              {queryResponse.count}
+              {' '}
+              records
+            </span>
+          )}
+          <IconButton
+            icon="save"
+            ariaLabel="Download as CSV"
+            disabled={!get(queryResponse, 'resp.length')}
+            onClick={() => exportCsv(queryResponse.resp, {})}
+            style={{ marginTop: '-1em' }}
+          />
         </div>
       </div>
     </div>
