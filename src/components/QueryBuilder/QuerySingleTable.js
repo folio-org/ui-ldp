@@ -15,26 +15,6 @@ import ColumnFilter from './ColumnFilter';
 import css from './QuerySingleTable.css';
 
 
-const filterItems = ((filterText, list) => {
-  const filterRegExp = new RegExp(`^${filterText}`, 'i');
-  const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-  return { renderedItems };
-});
-
-
-// TODO: ability to add and remove table joins
-// <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
-
-function filterAvailableTables(tables, selectedSchema, ldp) {
-  const disabledMap = {};
-  ldp.disabledTables.forEach(name => {
-    const [s, t] = name.split('-');
-    if (s === selectedSchema) disabledMap[t] = true;
-  });
-
-  return tables[selectedSchema].filter(entry => !disabledMap[entry.value]);
-}
-
 const WhenFieldChanges = ({ field, set, to }) => (
   <Field name={set} subscription={{}}>
     {(
@@ -61,6 +41,28 @@ WhenFieldChanges.propTypes = {
   set: PropTypes.string,
   to: PropTypes.arrayOf(PropTypes.object),
 };
+
+
+function filterAvailableTables(tables, selectedSchema, ldp) {
+  const disabledMap = {};
+  ldp.disabledTables.forEach(name => {
+    const [s, t] = name.split('-');
+    if (s === selectedSchema) disabledMap[t] = true;
+  });
+
+  return tables[selectedSchema].filter(entry => !disabledMap[entry.value]);
+}
+
+
+const filterItems = ((filterText, list) => {
+  const filterRegExp = new RegExp(`^${filterText}`, 'i');
+  const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+  return { renderedItems };
+});
+
+
+// TODO: ability to add and remove table joins
+// <span onClick={onRemove} style={{ cursor: "pointer" }}>❌</span>
 
 const QuerySingleTable = ({
   namePrefix,
@@ -173,5 +175,6 @@ QuerySingleTable.propTypes = {
   push: PropTypes.func,
   // pop: PropTypes.func,
 };
+
 
 export default QuerySingleTable;
