@@ -118,44 +118,44 @@ const QuerySingleTable = ({
           set={`${namePrefix}.showColumns`}
           to={[]}
         />
-        <div>
-          <Label htmlFor="choose-columns">Column</Label>
-          <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
-            {({ fields }) => fields.map((name, index) => (
-              <ColumnFilter
-                name={name}
-                index={index}
-                key={name}
-                availableColumns={availableColumns.options}
-                onRemove={() => fields.remove(index)}
-                disabled={disabled}
-              />
-            ))
-            }
-          </FieldArray>
-          <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
 
-          <Field
-            name={`${namePrefix}.showColumns`}
-            label="Show Columns"
-            component={MultiSelection}
-            placeholder="(All)"
-            dataOptions={availableColumns.list}
-            itemToString={(opt => opt)}
-            formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
-            filter={filterItems}
-            disabled={disabled}
-          />
+        <Label htmlFor="choose-columns">Filter by column</Label>
+        <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
+          {({ fields }) => fields.map((name, index) => (
+            <ColumnFilter
+              name={name}
+              index={index}
+              key={name}
+              availableColumns={availableColumns.options}
+              onRemove={() => fields.remove(index)}
+              disabled={disabled}
+            />
+          ))
+          }
+        </FieldArray>
+        <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
 
-          <Field
-            name={`${namePrefix}.limit`}
-            label="Limit number of results"
-            component={Select}
-            dataOptions={limitOptions}
-            type="number"
-            disabled={disabled}
-          />
-        </div>
+        <Field
+          name={`${namePrefix}.showColumns`}
+          label="Show Columns"
+          component={MultiSelection}
+          placeholder="(All)"
+          dataOptions={availableColumns.list}
+          itemToString={(opt => opt)}
+          formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
+          filter={filterItems}
+          disabled={disabled}
+        />
+
+        <Field
+          name={`${namePrefix}.limit`}
+          label="Limit number of results"
+          component={Select}
+          dataOptions={limitOptions}
+          type="number"
+          disabled={disabled}
+        />
+
         <div className={css.SubmitRow}>
           <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
           <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
