@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FieldArray } from 'react-final-form-arrays';
-import { Field, FormSpy, useFormState } from 'react-final-form';
-import { OnChange } from 'react-final-form-listeners';
 import get from 'lodash.get';
+import { Field, FormSpy, useFormState } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
+import { OnChange } from 'react-final-form-listeners';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Label, MultiSelection, OptionSegment, Select, IconButton, Selection } from '@folio/stripes/components';
 import { exportCsv } from '@folio/stripes/util';
@@ -11,8 +11,8 @@ import { useLdp } from '../../LdpContext';
 import loadColumns from '../../util/loadColumns';
 import generateOptions from '../../util/generateOptions';
 import BigError from '../BigError';
-import css from './QuerySingleTable.css';
 import ColumnFilter from './ColumnFilter';
+import css from './QuerySingleTable.css';
 
 
 const filterItems = ((filterText, list) => {
