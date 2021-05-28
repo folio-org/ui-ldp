@@ -11,7 +11,7 @@ import { useLdp } from '../../LdpContext';
 import loadColumns from '../../util/loadColumns';
 import generateOptions from '../../util/generateOptions';
 import BigError from '../BigError';
-import css from './css/QuerySingleTable.css';
+import css from './QuerySingleTable.css';
 import ColumnFilter from './ColumnFilter';
 
 
