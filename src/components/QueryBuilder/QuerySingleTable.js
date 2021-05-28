@@ -101,7 +101,7 @@ const QuerySingleTable = ({
               dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
             />
           </div>
-          <div style={{ flex: 3, marginLeft: 5 }}>
+          <div style={{ flex: 2, marginLeft: 5 }}>
             <Field
               name={`${namePrefix}.tableName`}
               label="Table"
