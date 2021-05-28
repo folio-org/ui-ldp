@@ -18,6 +18,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
           disabled={disabled}
         />
       </div>
+      =
       <div style={{ flex: 1, marginLeft: 5 }}>
         <Field
           name={`${name}.value`}
