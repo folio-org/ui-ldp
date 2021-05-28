@@ -15,75 +15,11 @@ import css from './css/QuerySingleTable.css';
 import ColumnFilter from './ColumnFilter';
 
 
-
-
-
-
 const filterItems = ((filterText, list) => {
   const filterRegExp = new RegExp(`^${filterText}`, 'i');
   const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
   return { renderedItems };
 });
-
-const Columns = ({ availableColumns, disabled, namePrefix, tableIndex, push }) => {
-  const ldp = useLdp();
-  const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
-
-  return (
-    <div>
-      <Label htmlFor="choose-columns">Column</Label>
-      <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
-        {({ fields }) => fields.map((name, index) => (
-          <ColumnFilter
-            name={name}
-            index={index}
-            key={name}
-            availableColumns={availableColumns.options}
-            onRemove={() => fields.remove(index)}
-            disabled={disabled}
-          />
-        ))
-        }
-      </FieldArray>
-      <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
-
-      <Field
-        name={`${namePrefix}.showColumns`}
-        label="Show Columns"
-        component={MultiSelection}
-        placeholder="(All)"
-        dataOptions={availableColumns.list}
-        itemToString={(opt => opt)}
-        formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
-        filter={filterItems}
-        disabled={disabled}
-      />
-
-      <Field
-        name={`${namePrefix}.limit`}
-        label="Limit number of results"
-        component={Select}
-        dataOptions={limitOptions}
-        type="number"
-        disabled={disabled}
-      />
-    </div>
-  );
-};
-
-Columns.propTypes = {
-  availableColumns: PropTypes.object,
-  disabled: PropTypes.bool,
-  namePrefix: PropTypes.string,
-  tableIndex: PropTypes.number,
-  push: PropTypes.func,
-};
-
-
-
-
-
-
 
 
 // TODO: ability to add and remove table joins
@@ -133,7 +69,6 @@ const QuerySingleTable = ({
   queryResponse,
   // onRemove,
   push,
-  pop
 }) => {
   const stripes = useStripes();
   const { values } = useFormState();
@@ -142,6 +77,7 @@ const QuerySingleTable = ({
   const [availableColumns, setColumns] = useState({ list: [], options: [] });
   const [error, setError] = useState(false);
   const ldp = useLdp();
+  const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
 
   useEffect(() => {
     if (selectedTableName) loadColumns(stripes, selectedSchema, selectedTableName, setColumns, setError);
@@ -182,14 +118,44 @@ const QuerySingleTable = ({
           set={`${namePrefix}.showColumns`}
           to={[]}
         />
-        <Columns
-          availableColumns={availableColumns}
-          disabled={disabled}
-          namePrefix={namePrefix}
-          tableIndex={tableIndex}
-          push={push}
-          pop={pop}
-        />
+        <div>
+          <Label htmlFor="choose-columns">Column</Label>
+          <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
+            {({ fields }) => fields.map((name, index) => (
+              <ColumnFilter
+                name={name}
+                index={index}
+                key={name}
+                availableColumns={availableColumns.options}
+                onRemove={() => fields.remove(index)}
+                disabled={disabled}
+              />
+            ))
+            }
+          </FieldArray>
+          <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
+
+          <Field
+            name={`${namePrefix}.showColumns`}
+            label="Show Columns"
+            component={MultiSelection}
+            placeholder="(All)"
+            dataOptions={availableColumns.list}
+            itemToString={(opt => opt)}
+            formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
+            filter={filterItems}
+            disabled={disabled}
+          />
+
+          <Field
+            name={`${namePrefix}.limit`}
+            label="Limit number of results"
+            component={Select}
+            dataOptions={limitOptions}
+            type="number"
+            disabled={disabled}
+          />
+        </div>
         <div className={css.SubmitRow}>
           <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
           <IconButton ariaLabel="Download as CSV" icon="save" onClick={() => exportCsv(queryResponse.resp, {})} disabled={!get(queryResponse, 'resp.length')} />
@@ -205,7 +171,7 @@ QuerySingleTable.propTypes = {
   tables: PropTypes.object,
   queryResponse: PropTypes.object,
   push: PropTypes.func,
-  pop: PropTypes.func,
+  // pop: PropTypes.func,
 };
 
 export default QuerySingleTable;
