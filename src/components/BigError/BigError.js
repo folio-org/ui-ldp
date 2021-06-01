@@ -17,7 +17,7 @@ const BigError = ({ message }) => {
         size="xx-large"
         margin="xx-small"
       >
-Something went wrong.
+XXX Something went wrong.
       </Headline>
       <Headline
         tag="h2"
@@ -27,7 +27,7 @@ Something went wrong.
       >
         {message}
       </Headline>
-      <Button buttonStyle="primary" onClick={refresh}>Refresh</Button>
+      <Button buttonStyle="primary" onClick={refresh}>XXX Refresh</Button>
     </div>
   );
 };

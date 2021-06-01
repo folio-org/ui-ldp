@@ -3,7 +3,7 @@ import stripesFetch from './stripesFetch';
 const loadColumns = async (stripes, schema, tableName, setColumns, setError) => {
   try {
     const resp = await stripesFetch(stripes, `/ldp/db/columns?schema=${schema}&table=${tableName}`);
-    if (!resp.ok) throw new Error(`HTTP error ${resp.status}: ${resp.statusText}`);
+    if (!resp.ok) throw new Error(`XXX HTTP error ${resp.status}: ${resp.statusText}`);
     resp
       .json()
       .then(jsonResp => {
@@ -16,7 +16,7 @@ const loadColumns = async (stripes, schema, tableName, setColumns, setError) => 
         // TODO: handle error
       });
   } catch (err) {
-    setError('Failed obtaining column names: ' + err);
+    setError('XXX Failed obtaining column names: ' + err);
   }
 };
 

@@ -19,8 +19,8 @@ const OrderingCriterion = ({ name, availableColumns, disabled, onRemove }) => {
           name={`${name}.direction`}
           component={Select}
           dataOptions={[
-            { value: 'asc', label: 'Ascending' },
-            { value: 'desc', label: 'Descending' },
+            { value: 'asc', label: 'XXX Ascending' },
+            { value: 'desc', label: 'XXX Descending' },
           ]}
           defaultValue="asc"
           disabled={disabled}
@@ -31,8 +31,8 @@ const OrderingCriterion = ({ name, availableColumns, disabled, onRemove }) => {
           name={`${name}.nulls`}
           component={Select}
           dataOptions={[
-            { value: 'start', label: 'At start' },
-            { value: 'end', label: 'At end' },
+            { value: 'start', label: 'XXX At start' },
+            { value: 'end', label: 'XXX At end' },
           ]}
           defaultValue="end"
           disabled={disabled}

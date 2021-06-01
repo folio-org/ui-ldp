@@ -3,7 +3,7 @@ import stripesFetch from './stripesFetch';
 const loadTables = async (stripes, setTables, setError) => {
   try {
     const resp = await stripesFetch(stripes, '/ldp/db/tables');
-    if (!resp.ok) throw new Error(`HTTP error ${resp.status}: ${resp.statusText}`);
+    if (!resp.ok) throw new Error(`XXX HTTP error ${resp.status}: ${resp.statusText}`);
     resp
       .json()
       .then(jsonResp => {
@@ -29,10 +29,10 @@ const loadTables = async (stripes, setTables, setError) => {
         setTables(schemaMap);
       })
       .catch(err => {
-        setError('Failed connect to database: ' + err);
+        setError('XXX Failed connect to database: ' + err);
       });
   } catch (err) {
-    setError('Failed connecting to server: ' + err);
+    setError('XXX Failed connecting to server: ' + err);
   }
 };
 

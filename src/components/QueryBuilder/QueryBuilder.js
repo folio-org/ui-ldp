@@ -59,7 +59,7 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                     {showDevInfo && false &&
                       <Pane id="debug" defaultWidth="fill">
                         {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
-                        {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
+                        {/* <Button onClick={() => { setNumTables(numTables+1) }}>XXX Add Join Table</Button> */}
                         LDP: <pre>{JSON.stringify(ldp, null, 2)}</pre>
                       </Pane>
                     }

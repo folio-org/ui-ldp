@@ -20,7 +20,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
         <Field
           name={`${name}.value`}
           component={TextField}
-          placeholder="Value"
+          placeholder="XXX Value"
           validateFields={[]}
           disabled={disabled}
         />

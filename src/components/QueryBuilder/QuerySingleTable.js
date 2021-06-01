@@ -97,7 +97,7 @@ const QuerySingleTable = ({
           <div style={{ flex: 1, marginRight: 5 }}>
             <Field
               name={`${namePrefix}.schema`}
-              label="Schema"
+              label="XXX Schema"
               component={Selection}
               dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
             />
@@ -105,7 +105,7 @@ const QuerySingleTable = ({
           <div style={{ flex: 2, marginLeft: 5 }}>
             <Field
               name={`${namePrefix}.tableName`}
-              label="Table"
+              label="XXX Table"
               component={Selection}
               dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
             />
@@ -122,7 +122,7 @@ const QuerySingleTable = ({
           to={[]}
         />
 
-        <Label htmlFor="choose-columns">Filter by column</Label>
+        <Label htmlFor="choose-columns">XXX Filter by column</Label>
         <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
           {({ fields }) => fields.map((name, index) => (
             <ColumnFilter
@@ -135,13 +135,13 @@ const QuerySingleTable = ({
           ))
           }
         </FieldArray>
-        <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
+        <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>XXX Add Filter</Button>
 
         <Field
           name={`${namePrefix}.showColumns`}
-          label="Show Columns"
+          label="XXX Show Columns"
           component={MultiSelection}
-          placeholder="(All)"
+          placeholder="(XXX All)"
           dataOptions={availableColumns.list}
           itemToString={(opt => opt)}
           formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
@@ -149,7 +149,7 @@ const QuerySingleTable = ({
           disabled={disabled}
         />
 
-        <Label htmlFor="choose-order">Order by column</Label>
+        <Label htmlFor="choose-order">XXX Order by column</Label>
         <FieldArray id="choose-order" name={`${namePrefix}.orderBy`} tableIndex={tableIndex}>
           {({ fields }) => fields.map((name, index) => (
             <OrderingCriterion
@@ -162,11 +162,11 @@ const QuerySingleTable = ({
           ))
           }
         </FieldArray>
-        <Button disabled={disabled} onClick={() => push(`${namePrefix}.orderBy`)}>Add ordering criterion</Button>
+        <Button disabled={disabled} onClick={() => push(`${namePrefix}.orderBy`)}>XXX Add ordering criterion</Button>
 
         <Field
           name={`${namePrefix}.limit`}
-          label="Limit number of results"
+          label="XXX Limit number of results"
           component={Select}
           dataOptions={limitOptions}
           type="number"
@@ -174,20 +174,20 @@ const QuerySingleTable = ({
         />
 
         <div className={css.SubmitRow}>
-          <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
+          <Button type="submit" buttonStyle="primary" disabled={disabled}>XXX Submit</Button>
           {queryResponse.key && (
             <span>
-              Found
+              XXX Found
               {' '}
-              {queryResponse.isComplete ? '' : 'more than '}
+              {queryResponse.isComplete ? '' : 'XXX more than '}
               {queryResponse.count}
               {' '}
-              records
+              XXX records
             </span>
           )}
           <IconButton
             icon="save"
-            ariaLabel="Download as CSV"
+            ariaLabel="XXX Download as CSV"
             disabled={!get(queryResponse, 'resp.length')}
             onClick={() => exportCsv(queryResponse.resp, {})}
             style={{ marginTop: '-1em' }}

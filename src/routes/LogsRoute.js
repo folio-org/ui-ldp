@@ -111,10 +111,10 @@ const LogsPage = () => {
       <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
         <Row style={{ margin: '1em 0' }}>
           <Col style={{ paddingLeft: 12, paddingRight: 10 }}>
-            <Datepicker label="Start" onChange={handleStartDateChange} value={state.filters.startDate} />
+            <Datepicker label="XXX Start" onChange={handleStartDateChange} value={state.filters.startDate} />
           </Col>
           <Col>
-            <Datepicker label="End" onChange={handleEndDateChange} value={state.filters.endDate} />
+            <Datepicker label="XXX End" onChange={handleEndDateChange} value={state.filters.endDate} />
           </Col>
         </Row>
         <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>

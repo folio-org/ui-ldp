@@ -21,7 +21,7 @@ const loadConfig = async (stripes, ldp, setConfigLoaded, setError) => {
       setConfigLoaded(true);
     });
   } catch (err) {
-    setError('Could not load defaults:' + err);
+    setError('XXX Could not load defaults:' + err);
   }
 };
 

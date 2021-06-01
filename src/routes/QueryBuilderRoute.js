@@ -45,7 +45,7 @@ const QueryBuilderRoute = () => {
         method: 'POST',
         body: JSON.stringify(modifiedValues),
       });
-      if (!resp.ok) throw new Error(`HTTP error ${resp.status}: ${resp.statusText}`);
+      if (!resp.ok) throw new Error(`XXX HTTP error ${resp.status}: ${resp.statusText}`);
       resp
         .json()
         .then(jsonResp => {
@@ -76,7 +76,7 @@ const QueryBuilderRoute = () => {
           setError(e.toString());
         });
     } catch (err) {
-      setError('Query failed: ' + err);
+      setError('XXX Query failed: ' + err);
     }
   };
 
