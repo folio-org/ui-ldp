@@ -55,7 +55,7 @@ const QueryBuilderRoute = () => {
           if (!isComplete) {
             let firstField;
 
-            // XXX I don't know if this is guaranteed to work, but it seems to
+            // ### I don't know if this is guaranteed to work, but it seems to
             Object.keys(jsonResp[0]).forEach(key => {
               if (!firstField) firstField = key;
             });
