@@ -3,6 +3,7 @@ module.exports = {
   config: {
     showHomeLink: true,
     modLdpUrl: 'http://localhost:8080/http://localhost:8001',
+    showDevInfo: true,
   },
   modules: {
     '@folio/ldp': {},

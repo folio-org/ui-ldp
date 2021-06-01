@@ -3,12 +3,15 @@ import P from 'prop-types';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
+import { useStripes } from '@folio/stripes/core';
 import { Pane, Paneset } from '@folio/stripes/components';
 import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 
-
 function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
+  const stripes = useStripes();
+  const showDevInfo = stripes.config?.showDevInfo;
+
   return (
     <Paneset>
       <FinalForm
@@ -53,11 +56,13 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                         </Pane>
                       ))}
                     </FieldArray>
-                    <Pane id="debug" defaultWidth="fill">
-                      {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
-                      {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
-                      LDP: <pre>{JSON.stringify(ldp, null, 2)}</pre>
-                    </Pane>
+                    {showDevInfo && false &&
+                      <Pane id="debug" defaultWidth="fill">
+                        {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
+                        {/* <Button onClick={() => { setNumTables(numTables+1) }}>Add Join Table</Button> */}
+                        LDP: <pre>{JSON.stringify(ldp, null, 2)}</pre>
+                      </Pane>
+                    }
                   </Paneset>
                 </div>
                 <div style={{ height: '100%' }}>
