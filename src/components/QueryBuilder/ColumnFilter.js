@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import { IconButton, Selection, TextField } from '@folio/stripes/components';
 
 const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
+  const intl = useIntl();
+
   return (
     <div key={name} style={{ display: 'flex' }}>
       <div style={{ flex: 1, marginRight: 5 }}>
@@ -20,7 +23,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
         <Field
           name={`${name}.value`}
           component={TextField}
-          placeholder="XXX Value"
+          placeholder={intl.formatMessage({ id: 'ui-ldp.placeholder.value' })}
           validateFields={[]}
           disabled={disabled}
         />
