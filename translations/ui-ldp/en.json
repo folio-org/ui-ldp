@@ -4,6 +4,7 @@
   "refresh": "Refresh",
   "error.http": "HTTP error: status {status}: {text}",
   "error.fetch-reject": "fetch() rejected (never happens): {error}",
+  "error.load-config": "Could not load configuration: {error}",
   "error.load-tables": "Could not load tables: {error}",
   "error.load-columns": "Could not load columns: {error}",
   "nav.query-builder": "Query builder",
