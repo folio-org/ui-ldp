@@ -1,8 +1,35 @@
 {
   "extends": "@folio/eslint-config-stripes",
   "parser": "babel-eslint",
-  "plugins": ["jest"],
+  "plugins": [
+    "jest",
+    "@calm/react-intl"
+  ],
   "env": {
     "jest/globals": true
+  },
+  "rules": {
+    "@calm/react-intl/missing-formatted-message": [
+      2,
+      {
+        "noTrailingWhitespace": true,
+        "ignoreLinks": true,
+        "enforceLabels": false,
+        "enforceImageAlts": false,
+        "enforceInputProps": false
+      }
+    ],
+    "@calm/react-intl/missing-attribute": [
+      2,
+      {
+        "noTrailingWhitespace": true,
+        "noSpreadOperator": true,
+        "requireDescription": false,
+        "formatDefineMessages": false,
+        "requireIdAsString": true,
+        "requireDefaultMessage": false
+      }
+    ],
+    "@calm/react-intl/missing-values": 2
   }
 }
