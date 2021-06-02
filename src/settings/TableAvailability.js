@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Field } from 'redux-form';
 import { useStripes } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
@@ -11,6 +11,7 @@ import loadTables from '../util/loadTables';
 import defaultConfig from '../util/defaultConfig';
 
 function TableAvailability(props) {
+  const intl = useIntl();
   const stripes = useStripes();
   const ldp = useLdp();
   const [error, setError] = useState(false);
@@ -22,8 +23,8 @@ function TableAvailability(props) {
   }, [props.stripes]);
 
   useEffect(() => {
-    loadTables(stripes, setTables, setError);
-  }, [stripes, stripes.okapi, setTables]);
+    loadTables(intl, stripes, setTables, setError);
+  }, [intl, stripes, stripes.okapi, setTables]);
 
   if (error) return <BigError message={error} />;
   if (!ConnectedConfigManager || !tables) return <Loading size="xlarge" />;

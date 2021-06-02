@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useIntl } from 'react-intl';
 import cloneDeep from 'lodash.clonedeep';
 import { v4 as uuidv4 } from 'uuid';
 import { useStripes } from '@folio/stripes/core';
@@ -22,6 +23,7 @@ const initialState = {
 };
 
 const QueryBuilderRoute = () => {
+  const intl = useIntl();
   const stripes = useStripes();
   const ldp = useLdp();
   const [tables, setTables] = useState();
@@ -29,8 +31,8 @@ const QueryBuilderRoute = () => {
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
-    loadTables(stripes, setTables, setError);
-  }, [stripes, stripes.okapi, setTables]);
+    loadTables(intl, stripes, setTables, setError);
+  }, [intl, stripes, stripes.okapi, setTables]);
 
   if (error) return <BigError message={error} />;
   if (!tables) return <Loading size="xlarge" />;

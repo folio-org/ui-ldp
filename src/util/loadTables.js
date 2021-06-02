@@ -1,9 +1,15 @@
 import stripesFetch from './stripesFetch';
 
-const loadTables = async (stripes, setTables, setError) => {
+const loadTables = async (intl, stripes, setTables, setError) => {
   try {
     const resp = await stripesFetch(stripes, '/ldp/db/tables');
-    if (!resp.ok) throw new Error(`XXX HTTP error ${resp.status}: ${resp.statusText}`);
+    if (!resp.ok) {
+      throw new Error(intl.formatMessage(
+        { id: 'ui-ldp.error.http' },
+        { status: resp.status, text: resp.statusText },
+      ));
+    }
+
     resp
       .json()
       .then(jsonResp => {
@@ -28,11 +34,17 @@ const loadTables = async (stripes, setTables, setError) => {
 
         setTables(schemaMap);
       })
-      .catch(err => {
-        setError('XXX Failed connect to database: ' + err);
+      .catch(error => {
+        setError(intl.formatMessage(
+          { id: 'ui-ldp.error.fetch-reject' },
+          { error: error.toString() },
+        ));
       });
-  } catch (err) {
-    setError('XXX Failed connecting to server: ' + err);
+  } catch (error) {
+    setError(intl.formatMessage(
+      { id: 'ui-ldp.error.load-tables' },
+      { error: error.toString() },
+    ));
   }
 };
 
