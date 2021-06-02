@@ -85,8 +85,8 @@ const QuerySingleTable = ({
   const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
 
   useEffect(() => {
-    if (selectedTableName) loadColumns(stripes, selectedSchema, selectedTableName, setColumns, setError);
-  }, [stripes, selectedSchema, selectedTableName]);
+    if (selectedTableName) loadColumns(intl, stripes, selectedSchema, selectedTableName, setColumns, setError);
+  }, [intl, stripes, selectedSchema, selectedTableName]);
 
   if (error) return <BigError message={error} />;
 
