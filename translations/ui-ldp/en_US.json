@@ -21,6 +21,7 @@
   "button.add-ordering-criterion": "Add ordering criterion",
   "button.submit": "Submit",
   "button.download-csv": "Download as CSV",
+  "button.add-join-table": "Add join table",
   "found-records": "Found {count} records",
   "found-more-than": "Found more than {count} records",
   "label.start-date": "Start date",
