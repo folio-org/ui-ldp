@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Switch, Route } from 'react-router-dom';
 import { Loading, NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes/components';
 import loadConfig from './util/loadConfig';
@@ -35,9 +36,15 @@ const Ldp = (props) => {
           <Pane defaultWidth="15%">
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
-                <NavListItem to={`${match.path}`}>XXX Query Builder</NavListItem>
-                {/* <NavListItem to={`${match.path}/logs`}>XXX Logs</NavListItem> */}
-                {/* <NavListItem to={`${match.path}/playground`}>XXX Playground</NavListItem> */}
+                <NavListItem to={`${match.path}`}>
+                  <FormattedMessage id="ui-ldp.nav.query-builder" />
+                </NavListItem>
+                <NavListItem to={`${match.path}/logs`}>
+                  <FormattedMessage id="ui-ldp.nav.logs" />
+                </NavListItem>
+                <NavListItem to={`${match.path}/playground`}>
+                  <FormattedMessage id="ui-ldp.nav.playground" />
+                </NavListItem>
               </NavListSection>
             </NavList>
           </Pane>

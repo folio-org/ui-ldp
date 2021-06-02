@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { useStripes } from '@folio/stripes/core';
 import { Datepicker, MultiColumnList, Row, Col } from '@folio/stripes/components';
@@ -111,10 +112,10 @@ const LogsPage = () => {
       <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
         <Row style={{ margin: '1em 0' }}>
           <Col style={{ paddingLeft: 12, paddingRight: 10 }}>
-            <Datepicker label="XXX Start" onChange={handleStartDateChange} value={state.filters.startDate} />
+            <Datepicker label={<FormattedMessage id="ui-ldp.label.start-date" />} onChange={handleStartDateChange} value={state.filters.startDate} />
           </Col>
           <Col>
-            <Datepicker label="XXX End" onChange={handleEndDateChange} value={state.filters.endDate} />
+            <Datepicker label=<FormattedMessage id="ui-ldp.label.end-date" /> onChange={handleEndDateChange} value={state.filters.endDate} />
           </Col>
         </Row>
         <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>

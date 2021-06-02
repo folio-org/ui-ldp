@@ -1,5 +1,6 @@
 import React from 'react';
 import P from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
@@ -56,11 +57,12 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                         </Pane>
                       ))}
                     </FieldArray>
-                    {showDevInfo && false &&
+                    {showDevInfo &&
                       <Pane id="debug" defaultWidth="fill">
                         {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                         {/* <Button onClick={() => { setNumTables(numTables+1) }}>XXX Add Join Table</Button> */}
-                        LDP: <pre>{JSON.stringify(ldp, null, 2)}</pre>
+                        <h2><FormattedMessage id="ui-ldp.heading.current-settings" /></h2>
+                        <pre>{JSON.stringify(ldp, null, 2)}</pre>
                       </Pane>
                     }
                   </Paneset>
