@@ -12,7 +12,13 @@ const loadResults = async (intl, stripes, values, setQueryResponse, setError) =>
       method: 'POST',
       body: JSON.stringify(modifiedValues),
     });
-    if (!resp.ok) throw new Error(`XXX HTTP error ${resp.status}: ${resp.statusText}`);
+    if (!resp.ok) {
+      throw new Error(intl.formatMessage(
+        { id: 'ui-ldp.error.http' },
+        { status: resp.status, text: resp.statusText },
+      ));
+    }
+
     resp
       .json()
       .then(jsonResp => {
@@ -39,11 +45,17 @@ const loadResults = async (intl, stripes, values, setQueryResponse, setError) =>
           resp: jsonResp,
         });
       })
-      .catch((e) => {
-        setError(e.toString());
+      .catch(error => {
+        setError(intl.formatMessage(
+          { id: 'ui-ldp.error.fetch-reject' },
+          { error: error.toString() },
+        ));
       });
-  } catch (err) {
-    setError('XXX Query failed: ' + err);
+  } catch (error) {
+    setError(intl.formatMessage(
+      { id: 'ui-ldp.error.load-results' },
+      { error: error.toString() },
+    ));
   }
 };
 
