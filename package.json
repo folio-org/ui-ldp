@@ -18,6 +18,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/polyfill": "^7.12.1",
+    "@calm/eslint-plugin-react-intl": "^1.4.1",
     "@folio/eslint-config-stripes": "^5.2.0",
     "@folio/stripes": "^6.0.0",
     "@folio/stripes-cli": "^2.2.0",
