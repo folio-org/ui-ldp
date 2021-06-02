@@ -1,9 +1,15 @@
 import stripesFetch from './stripesFetch';
 
-const loadColumns = async (stripes, schema, tableName, setColumns, setError) => {
+const loadColumns = async (intl, stripes, schema, tableName, setColumns, setError) => {
   try {
     const resp = await stripesFetch(stripes, `/ldp/db/columns?schema=${schema}&table=${tableName}`);
-    if (!resp.ok) throw new Error(`HTTP error ${resp.status}: ${resp.statusText}`);
+    if (!resp.ok) {
+      throw new Error(intl.formatMessage(
+        { id: 'ui-ldp.error.http' },
+        { status: resp.status, text: resp.statusText },
+      ));
+    }
+
     resp
       .json()
       .then(jsonResp => {
@@ -12,11 +18,17 @@ const loadColumns = async (stripes, schema, tableName, setColumns, setError) => 
           options: jsonResp.map(c => ({ value: c.columnName, label: c.columnName }))
         });
       })
-      .catch(() => {
-        // TODO: handle error
+      .catch(error => {
+        setError(intl.formatMessage(
+          { id: 'ui-ldp.error.fetch-reject' },
+          { error: error.toString() },
+        ));
       });
-  } catch (err) {
-    setError('Failed obtaining column names: ' + err);
+  } catch (error) {
+    setError(intl.formatMessage(
+      { id: 'ui-ldp.error.load-columns' },
+      { error: error.toString() },
+    ));
   }
 };
 

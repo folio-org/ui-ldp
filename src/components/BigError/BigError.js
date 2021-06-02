@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { Button, Headline, Icon } from '@folio/stripes/components';
 
 import css from './BigError.css';
@@ -17,7 +18,7 @@ const BigError = ({ message }) => {
         size="xx-large"
         margin="xx-small"
       >
-Something went wrong.
+        <FormattedMessage id="ui-ldp.something-went-wrong" />
       </Headline>
       <Headline
         tag="h2"
@@ -27,7 +28,9 @@ Something went wrong.
       >
         {message}
       </Headline>
-      <Button buttonStyle="primary" onClick={refresh}>Refresh</Button>
+      <Button buttonStyle="primary" onClick={refresh}>
+        <FormattedMessage id="ui-ldp.refresh" />
+      </Button>
     </div>
   );
 };

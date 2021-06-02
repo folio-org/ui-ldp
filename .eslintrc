@@ -14,8 +14,8 @@
       {
         "noTrailingWhitespace": true,
         "ignoreLinks": true,
-        "enforceLabels": false,
-        "enforceImageAlts": false,
+        "enforceLabels": true,
+        "enforceImageAlts": true,
         "enforceInputProps": false
       }
     ],
@@ -31,5 +31,11 @@
       }
     ],
     "@calm/react-intl/missing-values": 2
-  }
+  },
+  "overrides": [{
+    "files": [ "src/routes/Playground.js", "*.mock.js" ],
+    "rules": {
+      "@calm/react-intl/missing-formatted-message": "off"
+    }
+  }]
 }

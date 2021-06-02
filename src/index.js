@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Switch, Route } from 'react-router-dom';
 import { Loading, NavList, NavListItem, NavListSection, Paneset, Pane } from '@folio/stripes/components';
 import loadConfig from './util/loadConfig';
@@ -18,11 +19,12 @@ const LdpConfig = {};
 const Ldp = (props) => {
   const { actAs, stripes, match } = props;
 
+  const intl = useIntl();
   const [configLoaded, setConfigLoaded] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
-    loadConfig(stripes, LdpConfig, setConfigLoaded, setError);
-  }, [stripes, stripes.okapi]);
+    loadConfig(intl, stripes, LdpConfig, setConfigLoaded, setError);
+  }, [intl, stripes, stripes.okapi]);
 
   if (error) return <BigError message={error} />;
   if (!configLoaded) return <Loading size="xlarge" />;
@@ -35,9 +37,15 @@ const Ldp = (props) => {
           <Pane defaultWidth="15%">
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
-                <NavListItem to={`${match.path}`}>Query Builder</NavListItem>
-                {/* <NavListItem to={`${match.path}/logs`}>Logs</NavListItem> */}
-                {/* <NavListItem to={`${match.path}/playground`}>Playground</NavListItem> */}
+                <NavListItem to={`${match.path}`}>
+                  <FormattedMessage id="ui-ldp.nav.query-builder" />
+                </NavListItem>
+                <NavListItem to={`${match.path}/logs`}>
+                  <FormattedMessage id="ui-ldp.nav.logs" />
+                </NavListItem>
+                <NavListItem to={`${match.path}/playground`}>
+                  <FormattedMessage id="ui-ldp.nav.playground" />
+                </NavListItem>
               </NavListSection>
             </NavList>
           </Pane>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage, useIntl } from 'react-intl';
 import get from 'lodash.get';
 import { Field, FormSpy, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
@@ -73,6 +74,7 @@ const QuerySingleTable = ({
   // onRemove,
   push,
 }) => {
+  const intl = useIntl();
   const stripes = useStripes();
   const { values } = useFormState();
   const selectedSchema = get(values, `${namePrefix}.schema`);
@@ -83,8 +85,8 @@ const QuerySingleTable = ({
   const limitOptions = generateOptions(0, 1 + Math.log10(ldp.maxShow || 1));
 
   useEffect(() => {
-    if (selectedTableName) loadColumns(stripes, selectedSchema, selectedTableName, setColumns, setError);
-  }, [stripes, selectedSchema, selectedTableName]);
+    if (selectedTableName) loadColumns(intl, stripes, selectedSchema, selectedTableName, setColumns, setError);
+  }, [intl, stripes, selectedSchema, selectedTableName]);
 
   if (error) return <BigError message={error} />;
 
@@ -97,7 +99,7 @@ const QuerySingleTable = ({
           <div style={{ flex: 1, marginRight: 5 }}>
             <Field
               name={`${namePrefix}.schema`}
-              label="Schema"
+              label={<FormattedMessage id="ui-ldp.label.schema" />}
               component={Selection}
               dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
             />
@@ -105,7 +107,7 @@ const QuerySingleTable = ({
           <div style={{ flex: 2, marginLeft: 5 }}>
             <Field
               name={`${namePrefix}.tableName`}
-              label="Table"
+              label={<FormattedMessage id="ui-ldp.label.table" />}
               component={Selection}
               dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
             />
@@ -122,7 +124,9 @@ const QuerySingleTable = ({
           to={[]}
         />
 
-        <Label htmlFor="choose-columns">Filter by column</Label>
+        <Label htmlFor="choose-columns">
+          <FormattedMessage id="ui-ldp.label.filter-by-column" />
+        </Label>
         <FieldArray id="choose-columns" name={`${namePrefix}.columnFilters`} tableIndex={tableIndex}>
           {({ fields }) => fields.map((name, index) => (
             <ColumnFilter
@@ -135,13 +139,15 @@ const QuerySingleTable = ({
           ))
           }
         </FieldArray>
-        <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>Add Filter</Button>
+        <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>
+          <FormattedMessage id="ui-ldp.button.add-filter" />
+        </Button>
 
         <Field
           name={`${namePrefix}.showColumns`}
-          label="Show Columns"
+          label={<FormattedMessage id="ui-ldp.label.show-columns" />}
           component={MultiSelection}
-          placeholder="(All)"
+          placeholder={intl.formatMessage({ id: 'ui-ldp.placeholder.columns.all' })}
           dataOptions={availableColumns.list}
           itemToString={(opt => opt)}
           formatter={({ option, searchTerm }) => <OptionSegment searchTerm={searchTerm}>{option}</OptionSegment>}
@@ -149,7 +155,9 @@ const QuerySingleTable = ({
           disabled={disabled}
         />
 
-        <Label htmlFor="choose-order">Order by column</Label>
+        <Label htmlFor="choose-order">
+          <FormattedMessage id="ui-ldp.label.order-by-column" />
+        </Label>
         <FieldArray id="choose-order" name={`${namePrefix}.orderBy`} tableIndex={tableIndex}>
           {({ fields }) => fields.map((name, index) => (
             <OrderingCriterion
@@ -162,11 +170,13 @@ const QuerySingleTable = ({
           ))
           }
         </FieldArray>
-        <Button disabled={disabled} onClick={() => push(`${namePrefix}.orderBy`)}>Add ordering criterion</Button>
+        <Button disabled={disabled} onClick={() => push(`${namePrefix}.orderBy`)}>
+          <FormattedMessage id="ui-ldp.button.add-ordering-criterion" />
+        </Button>
 
         <Field
           name={`${namePrefix}.limit`}
-          label="Limit number of results"
+          label={<FormattedMessage id="ui-ldp.label.limit-results" />}
           component={Select}
           dataOptions={limitOptions}
           type="number"
@@ -174,20 +184,17 @@ const QuerySingleTable = ({
         />
 
         <div className={css.SubmitRow}>
-          <Button type="submit" buttonStyle="primary" disabled={disabled}>Submit</Button>
+          <Button type="submit" buttonStyle="primary" disabled={disabled}>
+            <FormattedMessage id="ui-ldp.button.submit" />
+          </Button>
           {queryResponse.key && (
-            <span>
-              Found
-              {' '}
-              {queryResponse.isComplete ? '' : 'more than '}
-              {queryResponse.count}
-              {' '}
-              records
-            </span>
+            queryResponse.isComplete ?
+              <FormattedMessage id="ui-ldp.found-records" values={{ count: queryResponse.count }} /> :
+              <FormattedMessage id="ui-ldp.found-more-than" values={{ count: queryResponse.count }} />
           )}
           <IconButton
             icon="save"
-            ariaLabel="Download as CSV"
+            ariaLabel={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
             disabled={!get(queryResponse, 'resp.length')}
             onClick={() => exportCsv(queryResponse.resp, {})}
             style={{ marginTop: '-1em' }}
