@@ -17,7 +17,7 @@
   "label.filter-by-column": "Filter by column",
   "label.show-columns": "Show columns",
   "label.order-by-column": "Order by column",
-  "label.limit-results": "limit number of results",
+  "label.limit-results": "Limit number of results",
   "direction.asc": "Ascending",
   "direction.desc": "Descending",
   "nulls.start": "At start",
