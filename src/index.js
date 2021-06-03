@@ -29,6 +29,8 @@ const Ldp = (props) => {
   if (error) return <BigError message={error} />;
   if (!configLoaded) return <Loading size="xlarge" />;
 
+  const showDevInfo = stripes.config?.showDevInfo;
+
   return (
     <LdpContext.Provider value={LdpConfig}>
       {actAs === 'settings' ?
@@ -40,12 +42,16 @@ const Ldp = (props) => {
                 <NavListItem to={`${match.path}`}>
                   <FormattedMessage id="ui-ldp.nav.query-builder" />
                 </NavListItem>
-                <NavListItem to={`${match.path}/logs`}>
-                  <FormattedMessage id="ui-ldp.nav.logs" />
-                </NavListItem>
-                <NavListItem to={`${match.path}/playground`}>
-                  <FormattedMessage id="ui-ldp.nav.playground" />
-                </NavListItem>
+                {showDevInfo &&
+                  <>
+                    <NavListItem to={`${match.path}/logs`}>
+                      <FormattedMessage id="ui-ldp.nav.logs" />
+                    </NavListItem>
+                    <NavListItem to={`${match.path}/playground`}>
+                      <FormattedMessage id="ui-ldp.nav.playground" />
+                    </NavListItem>
+                  </>
+                }
               </NavListSection>
             </NavList>
           </Pane>
@@ -81,6 +87,9 @@ Ldp.propTypes = {
       url: PropTypes.string,
       tenant: PropTypes.string,
       token: PropTypes.string,
+    }),
+    config: PropTypes.shape({
+      showDevInfo: PropTypes.bool,
     }),
     connect: PropTypes.func
   })
