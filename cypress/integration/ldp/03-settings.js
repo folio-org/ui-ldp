@@ -39,13 +39,13 @@ describe('ui-ldp: settings pages', () => {
       cy.get('#maxExport').should('have.value', '1000')
     })
     it('can set different, more sensible, values', () => {
-      cy.get('#defaultShow').select('10')
-      cy.get('#maxShow').select('100')
+      cy.get('#defaultShow').select('100')
+      cy.get('#maxShow').select('1000')
       cy.get('#maxExport').select('10000')
     })
     it('can verify the new values it set', () => {
-      cy.get('#defaultShow').contains('10')
-      cy.get('#maxShow').should('have.value', '100')
+      cy.get('#defaultShow').contains('100')
+      cy.get('#maxShow').should('have.value', '1000')
       cy.get('#maxExport').should('have.value', '10000')
     })
     it('can save the sensible values', () => {
