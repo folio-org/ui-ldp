@@ -14,20 +14,42 @@ describe('ui-ldp: query builder', () => {
       cy.contains('div[data-test-selection-option-segment="true"]', 'public').click()
       cy.get('[name="tables[0].tableName"]').click()
       // I don't understand by the "user_users" entry here is invisible, but it is
-      cy.contains('div[data-test-selection-option-segment="true"]', 'user_users').click({force: true})
+      // eslint-disable-next-line cypress/no-force
+      cy.contains('div[data-test-selection-option-segment="true"]', 'user_users').click({ force: true })
     })
     it('can now add a filter', () => {
       cy.get('[data-cy="tables[0].addFilter"]').should('not.have.attr', 'disabled')
     })
     it('can search for up to 10 users', () => {
-      cy.get('[data-cy="tables[0].limit"]').select('10');
+      cy.get('[data-cy="tables[0].limit"]').select('10')
       cy.get('[data-cy="tables[0].submit"]').click()
-      cy.contains('[data-cy="tables[0].message"]', /Found more than [0-9]+ records/);
+      cy.contains('[data-cy="tables[0].message"]', /Found more than [0-9]+ records/)
     })
     it('can increase the number of records to 1000', () => {
-      cy.get('[data-cy="tables[0].limit"]').select('1000');
+      cy.get('[data-cy="tables[0].limit"]').select('1000')
       cy.get('[data-cy="tables[0].submit"]').click()
-      cy.contains('[data-cy="tables[0].message"]', /Found [0-9]+ records/);
+      cy.contains('[data-cy="tables[0].message"]', /Found [0-9]+ records/)
+    })
+  })
+
+  describe('filtering', () => {
+    it('can filter by active', () => {
+      cy.get('[name="tables[0].columnFilters[0].key"]').click()
+      cy.get('#option-stripes-selection-6-1-active').click()
+      cy.get('[name="tables[0].columnFilters[0].value"]').type('true')
+      cy.get('[data-cy="tables[0].submit"]').click()
+      // Currently this finds 38 records, but accepting any two-digit count is more robust
+      cy.contains('[data-cy="tables[0].message"]', /Found [1-9][0-9] records/)
+    })
+
+    it('can filter by multiple criteria', () => {
+      cy.get('[data-cy="tables[0].addFilter"]').click()
+      cy.get('[name="tables[0].columnFilters[1].key"]').click()
+      cy.get('#option-stripes-selection-9-9-username > div').click()
+      cy.get('[name="tables[0].columnFilters[1].value"]').type('diku_admin')
+      cy.get('[data-cy="tables[0].submit"]').click()
+      cy.contains('[data-cy="tables[0].message"]', /Found 1 records/)
+      // XXX Remove the second criterion and re-run the search
     })
   })
 })
