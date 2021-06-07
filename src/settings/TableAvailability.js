@@ -88,6 +88,7 @@ function TableAvailability(props) {
                         type="checkbox"
                         label={entry.label}
                         name={`${key}-${entry.value}`}
+                        data-cy={`${key}-${entry.value}`}
                       />
                     </li>
                   ))

@@ -52,4 +52,55 @@ describe('ui-ldp: settings pages', () => {
       cy.get('button').contains('Save').click()
     })
   })
+
+  describe('set table availability', () => {
+    const fields = [
+      'folio_reporting-users_groups',
+      'folio_reporting-users_addresses',
+      'folio_reporting-requests_items',
+    ]
+
+    it('can set values', () => {
+      cy.contains('Table availability').click()
+      cy.url().should('contain', '/settings/ldp/tables')
+      fields.forEach(field => {
+        cy.get(`[data-cy="${field}"]`).should('have.value', '')
+        cy.get(`[data-cy="${field}"]`).click()
+        cy.get(`[data-cy="${field}"]`).should('have.value', 'true')
+      })
+      cy.get('button').contains('Save').click()
+    })
+
+    it('can navigate away and return, and see the saved values', () => {
+      cy.contains('Software versions').click()
+      cy.url().should('contain', '/settings/about')
+      cy.get('[href="/settings/ldp"]').click()
+      cy.contains('Table availability').click()
+      cy.url().should('contain', '/settings/ldp/tables')
+      fields.forEach(field => {
+        cy.get(`[data-cy="${field}"]`).should('have.value', 'true')
+      })
+    })
+
+    it('can reset values', () => {
+      fields.forEach(field => {
+        cy.get(`[data-cy="${field}"]`).should('have.value', 'true')
+        cy.get(`[data-cy="${field}"]`).click()
+        // Annoyingly, checkboxes have three possible values; '', 'true', 'false'
+        cy.get(`[data-cy="${field}"]`).should('have.value', 'false')
+      })
+      cy.get('button').contains('Save').click()
+    })
+
+    it('can navigate away and return, and see the reset values', () => {
+      cy.contains('Software versions').click()
+      cy.url().should('contain', '/settings/about')
+      cy.get('[href="/settings/ldp"]').click()
+      cy.contains('Table availability').click()
+      cy.url().should('contain', '/settings/ldp/tables')
+      fields.forEach(field => {
+        cy.get(`[data-cy="${field}"]`).should('have.value', '')
+      })
+    })
+  })
 })
