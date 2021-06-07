@@ -49,7 +49,7 @@ describe('ui-ldp: settings pages', () => {
       cy.get('#maxExport').should('have.value', '10000')
     })
     it('can save the sensible values', () => {
-      cy.get('button').contains('Save').click({ force: true })
+      cy.get('button').contains('Save').click()
     })
   })
 })
