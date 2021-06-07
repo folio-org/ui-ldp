@@ -99,6 +99,7 @@ const QuerySingleTable = ({
           <div style={{ flex: 1, marginRight: 5 }}>
             <Field
               name={`${namePrefix}.schema`}
+              data-cy={`${namePrefix}.schema`}
               label={<FormattedMessage id="ui-ldp.label.schema" />}
               component={Selection}
               dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
@@ -107,6 +108,7 @@ const QuerySingleTable = ({
           <div style={{ flex: 2, marginLeft: 5 }}>
             <Field
               name={`${namePrefix}.tableName`}
+              data-cy={`${namePrefix}.tableName`}
               label={<FormattedMessage id="ui-ldp.label.table" />}
               component={Selection}
               dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
@@ -132,6 +134,7 @@ const QuerySingleTable = ({
             <ColumnFilter
               key={name}
               name={name}
+              data-cy={name}
               availableColumns={availableColumns.options}
               disabled={disabled}
               onRemove={() => fields.remove(index)}
@@ -139,12 +142,17 @@ const QuerySingleTable = ({
           ))
           }
         </FieldArray>
-        <Button disabled={disabled} onClick={() => push(`${namePrefix}.columnFilters`)}>
+        <Button
+          disabled={disabled}
+          onClick={() => push(`${namePrefix}.columnFilters`)}
+          data-cy={`${namePrefix}.addFilter`}
+        >
           <FormattedMessage id="ui-ldp.button.add-filter" />
         </Button>
 
         <Field
           name={`${namePrefix}.showColumns`}
+          data-cy={`${namePrefix}.showColumns`}
           label={<FormattedMessage id="ui-ldp.label.show-columns" />}
           component={MultiSelection}
           placeholder={intl.formatMessage({ id: 'ui-ldp.placeholder.columns.all' })}
@@ -163,6 +171,7 @@ const QuerySingleTable = ({
             <OrderingCriterion
               key={name}
               name={name}
+              data-cy={name}
               availableColumns={availableColumns.options}
               disabled={disabled}
               onRemove={() => fields.remove(index)}
@@ -170,12 +179,17 @@ const QuerySingleTable = ({
           ))
           }
         </FieldArray>
-        <Button disabled={disabled} onClick={() => push(`${namePrefix}.orderBy`)}>
+        <Button
+          disabled={disabled}
+          onClick={() => push(`${namePrefix}.orderBy`)}
+          data-cy={`${namePrefix}.addOrderingCriterion`}
+        >
           <FormattedMessage id="ui-ldp.button.add-ordering-criterion" />
         </Button>
 
         <Field
           name={`${namePrefix}.limit`}
+          data-cy={`${namePrefix}.limit`}
           label={<FormattedMessage id="ui-ldp.label.limit-results" />}
           component={Select}
           dataOptions={limitOptions}
@@ -184,20 +198,28 @@ const QuerySingleTable = ({
         />
 
         <div className={css.SubmitRow}>
-          <Button type="submit" buttonStyle="primary" disabled={disabled}>
+          <Button
+            type="submit"
+            buttonStyle="primary"
+            disabled={disabled}
+            data-cy={`${namePrefix}.submit`}
+          >
             <FormattedMessage id="ui-ldp.button.submit" />
           </Button>
-          {queryResponse.key && (
-            queryResponse.isComplete ?
-              <FormattedMessage id="ui-ldp.found-records" values={{ count: queryResponse.count }} /> :
-              <FormattedMessage id="ui-ldp.found-more-than" values={{ count: queryResponse.count }} />
-          )}
+          <span data-cy={`${namePrefix}.message`}>
+            {queryResponse.key && (
+              queryResponse.isComplete ?
+                <FormattedMessage id="ui-ldp.found-records" values={{ count: queryResponse.count }} /> :
+                <FormattedMessage id="ui-ldp.found-more-than" values={{ count: queryResponse.count }} />
+            )}
+          </span>
           <IconButton
             icon="save"
             ariaLabel={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
             disabled={!get(queryResponse, 'resp.length')}
             onClick={() => exportCsv(queryResponse.resp, {})}
             style={{ marginTop: '-1em' }}
+            data-cy={`${namePrefix}.downloadCSV`}
           />
         </div>
       </div>
