@@ -1,0 +1,7 @@
+{
+  "exclude": [
+    "src/routes/LogsRoute.js",
+    "src/routes/Playground.js",
+    "src/components/LogChart"
+  ]
+}
