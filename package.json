@@ -11,7 +11,7 @@
   "scripts": {
     "start": "stripes serve stripes.config.js",
     "build": "stripes build --output ./output",
-    "test": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $?; exit $?",
+    "test": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
     "coverage-summary": "nyc report --reporter=text-summary",
     "coverage": "nyc report --reporter=text",
     "lint": "eslint --format unix .",
