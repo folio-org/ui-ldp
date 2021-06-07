@@ -18,6 +18,7 @@
     "lintwatch": "esw . -w --color"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.2",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/polyfill": "^7.12.1",
     "@calm/eslint-plugin-react-intl": "^1.4.1",
