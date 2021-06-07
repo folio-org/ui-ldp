@@ -39,15 +39,15 @@ const Ldp = (props) => {
           <Pane defaultWidth="15%">
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
-                <NavListItem to={`${match.path}`}>
+                <NavListItem data-cy="nav-queryBuilder" to={`${match.path}`}>
                   <FormattedMessage id="ui-ldp.nav.query-builder" />
                 </NavListItem>
                 {showDevInfo &&
                   <>
-                    <NavListItem to={`${match.path}/logs`}>
+                    <NavListItem data-cy="nav-logs" to={`${match.path}/logs`}>
                       <FormattedMessage id="ui-ldp.nav.logs" />
                     </NavListItem>
-                    <NavListItem to={`${match.path}/playground`}>
+                    <NavListItem data-cy="nav-playground" to={`${match.path}/playground`}>
                       <FormattedMessage id="ui-ldp.nav.playground" />
                     </NavListItem>
                   </>
