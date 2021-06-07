@@ -11,7 +11,9 @@
   "scripts": {
     "start": "stripes serve stripes.config.js",
     "build": "stripes build --output ./output",
-    "test": "stripes serve --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; kill $pid",
+    "test": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; kill $pid",
+    "coverage-summary": "nyc report --reporter=text-summary",
+    "coverage": "nyc report --reporter=text",
     "lint": "eslint --format unix .",
     "lintwatch": "esw . -w --color"
   },
@@ -19,6 +21,7 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/polyfill": "^7.12.1",
     "@calm/eslint-plugin-react-intl": "^1.4.1",
+    "@cypress/code-coverage": "^3.9.6",
     "@folio/eslint-config-stripes": "^5.2.0",
     "@folio/stripes": "^6.0.0",
     "@folio/stripes-cli": "^2.2.0",

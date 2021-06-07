@@ -8,3 +8,5 @@ yarn.lock
 package-lock.json
 output
 junit.xml
+.nyc_output
+coverage
