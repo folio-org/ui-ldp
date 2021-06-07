@@ -12,6 +12,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
       <div style={{ flex: 1, marginRight: 5 }}>
         <Field
           name={`${name}.key`}
+          data-cy={`${name}.key`}
           component={Selection}
           placeholder="&nbsp;"
           dataOptions={availableColumns}
@@ -22,6 +23,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
       <div style={{ flex: 1, marginLeft: 5 }}>
         <Field
           name={`${name}.value`}
+          data-cy={`${name}.value`}
           component={TextField}
           placeholder={intl.formatMessage({ id: 'ui-ldp.placeholder.value' })}
           validateFields={[]}
@@ -33,6 +35,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
         onClick={onRemove}
         style={{ marginLeft: 5, alignItems: 'flex-start' }}
         disabled={disabled}
+        data-cy={`${name}.remove`}
       />
     </div>
   );
