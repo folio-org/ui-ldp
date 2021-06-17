@@ -47,7 +47,7 @@ describe('ui-ldp: query builder', () => {
       cy.get('[data-cy="tables[0].addFilter"]').click()
       cy.get('[name="tables[0].columnFilters[1].key"]').click()
       // XXX I want to find a better selector for this
-      cy.get('#option-stripes-selection-9-9-username > div').click()
+      cy.get('#option-stripes-selection-10-10-username > div').click()
       cy.get('[name="tables[0].columnFilters[1].value"]').type('diku_admin')
       cy.get('[data-cy="tables[0].submit"]').click()
       cy.contains('[data-cy="tables[0].message"]', /Found 1 records/)

@@ -1,5 +1,10 @@
 # Change history for ui-ldp
 
+## 1.3.0 (IN PROGRESS)
+
+* Increase testing timeout to 10 seconds, to allow for slow CI environment.
+* Adjust a test which seemed affected by this.
+
 ## [1.3.0](https://github.com/folio-org/ui-ldp/tree/v1.3.0) (2020-06-17)
 
 * Updated to use Babel 7.
