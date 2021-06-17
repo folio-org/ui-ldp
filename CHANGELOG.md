@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## 1.3.0 (https://github.com/folio-org/ui-ldp/tree/v1.3.0) (2020-06-17)
+## [1.3.0](https://github.com/folio-org/ui-ldp/tree/v1.3.0) (2020-06-17)
 
 * Updated to use Babel 7.
 * Updated `stripes` to v3.0.0.
@@ -28,6 +28,7 @@
 * Clear ordering criteria when the table changes. Fixes #51.
 * Clarify null ordering options in "order by column". Fixes #52.
 
-## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
+## [1.0.0](https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 
 * New app created with stripes-cli
+
