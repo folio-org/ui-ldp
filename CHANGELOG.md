@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## 1.1.0 (IN PROGRESS)
+## 1.3.0 (https://github.com/folio-org/ui-ldp/tree/v1.3.0) (2020-06-17)
 
 * Updated to use Babel 7.
 * Updated `stripes` to v3.0.0.
