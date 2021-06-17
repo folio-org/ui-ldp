@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.3.2](https://github.com/folio-org/ui-ldp/tree/v1.3.2) (2020-06-17)
+
+* More robust selectors for filter-field choice in tests.
+
 ## [1.3.1](https://github.com/folio-org/ui-ldp/tree/v1.3.1) (2020-06-17)
 
 * Increase testing timeout to 10 seconds, to allow for slow CI environment.
