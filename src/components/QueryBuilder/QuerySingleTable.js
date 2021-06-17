@@ -125,6 +125,11 @@ const QuerySingleTable = ({
           set={`${namePrefix}.showColumns`}
           to={[]}
         />
+        <WhenFieldChanges
+          field={`${namePrefix}.tableName`}
+          set={`${namePrefix}.orderBy`}
+          to={[]}
+        />
 
         <Label htmlFor="choose-columns">
           <FormattedMessage id="ui-ldp.label.filter-by-column" />

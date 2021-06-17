@@ -25,6 +25,7 @@
 * Display debug info only when the `showDevInfo` config item is true. Fixes #47.
 * Internationalization. Fixes #31.
 * Add test-suite using Cypress.io. Fixes #32.
+* Clear ordering criteria when the table changes. Fixes #51.
 
 ## 1.0.0 (https://github.com/folio-org/ui-app-template/tree/v1.0.0) (2020-03-02)
 
