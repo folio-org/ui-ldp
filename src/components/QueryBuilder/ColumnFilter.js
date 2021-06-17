@@ -8,7 +8,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
   const intl = useIntl();
 
   return (
-    <div key={name} style={{ display: 'flex' }}>
+    <div id={name} key={name} style={{ display: 'flex' }}>
       <div style={{ flex: 1, marginRight: 5 }}>
         <Field
           name={`${name}.key`}
