@@ -1,12 +1,16 @@
 # ui-ldp
 
-Copyright (C) 2020 The Open Library Foundation
+Copyright (C) 2020-2021 The Open Library Foundation
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for more information.
 
+## Introduction
+
+LDP query builder UI for FOLIO/ReShare.
+
 ![Screenshot of the module in action](screenshot3.png)
 
-Currently has one page, a Query Builder for the Library Data Platform (LDP). 
+Currently has one page, a Query Builder for the [Library Data Platform](https://github.com/library-data-platform/ldp) (LDP).
 
 ## Pre-reqs for local development
 
@@ -31,3 +35,17 @@ The `modLdpUrl` setting can be placed in a Stripes config file such as the suppl
 ```
 yarn start stripes.config.js
 ```
+
+## Additional information
+
+### Other documentation
+
+[Library Data Platform](https://github.com/library-data-platform/ldp) (LDP)
+-- an open source platform for analytics in libraries.
+
+[mod-ldp](https://github.com/library-data-platform/mod-ldp)
+-- LDP query builder server-side module for FOLIO/ReShare.
+
+### Issue tracker
+
+The project use this GitHub [issue tracker](https://github.com/library-data-platform/ui-ldp/issues).
