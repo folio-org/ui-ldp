@@ -48,4 +48,4 @@ yarn start stripes.config.js
 
 ### Issue tracker
 
-The project use this GitHub [issue tracker](https://github.com/library-data-platform/ui-ldp/issues).
+The project uses this GitHub [issue tracker](https://github.com/library-data-platform/ui-ldp/issues).
