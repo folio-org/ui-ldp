@@ -24,7 +24,7 @@ describe('ui-ldp: application exists', () => {
       // But it's not feasible to log in to Stipes using a similar
       // behind-the-scenes approach, so we have to use the UI.
       // Looong timeout since we have to wait for the Stripes bundle to build
-      cy.visit('', { timeout: 120000 })
+      cy.visit('', { timeout: 240000 })
       cy.contains('Log in')
       cy.get('#input-username').type('diku_admin')
       cy.get('#input-password').type('admin')
