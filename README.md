@@ -46,6 +46,10 @@ yarn start stripes.config.js
 [mod-ldp](https://github.com/library-data-platform/mod-ldp)
 -- LDP query builder server-side module for FOLIO/ReShare.
 
+### Code of Conduct
+
+Refer to the Wiki [FOLIO Code of Conduct](https://wiki.folio.org/display/COMMUNITY/FOLIO+Code+of+Conduct).
+
 ### Issue tracker
 
 The project uses this GitHub [issue tracker](https://github.com/library-data-platform/ui-ldp/issues).
