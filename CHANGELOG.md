@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.4.0](https://github.com/folio-org/ui-ldp/tree/v1.4.0) (IN PROGRESS)
+
+* Add low-level "ldp.read" permission to high-level "LDP: all permissions". Fixes UILDP-2.
+
 ## [1.3.2](https://github.com/folio-org/ui-ldp/tree/v1.3.2) (2020-06-17)
 
 * More robust selectors for filter-field choice in tests.
