@@ -35,13 +35,13 @@ Cypress.Commands.add('login', (username, password) => {
 
   // But it's not feasible to log in to Stipes using a similar
   // behind-the-scenes approach, so we have to use the UI.
-  cy.visit('')
+  cy.visit('', { timeout: 120000 })
   cy.contains('Log in')
   cy.get('#input-username').type(username)
   cy.get('#input-password').type(password)
   cy.get('#clickable-login').click()
   // Login can be too slow for the default 4-second timeout
-  cy.contains('Welcome', { timeout: 10000 })
+  cy.contains('Welcome', { timeout: 120000 })
 
   // There seems to be a race condition here: sometimes there is
   // re-render that happens so quickly that following actions like

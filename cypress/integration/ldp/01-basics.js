@@ -30,7 +30,7 @@ describe('ui-ldp: application exists', () => {
       cy.get('#input-password').type('admin')
       cy.get('#clickable-login').click()
       // Login can be too slow for the default 4-second timeout
-      cy.contains('Welcome', { timeout: 10000 })
+      cy.contains('Welcome', { timeout: 120000 })
       // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(1000) // Otherwise sometimes the app button becomes detached from the DOM
     })

@@ -1,5 +1,10 @@
 # Change history for ui-ldp
 
+## [1.4.0](https://github.com/folio-org/ui-ldp/tree/v1.4.0) (IN PROGRESS)
+
+* Upgrade to run under either v6 or v7 of the Stripes framework. Fixes UIPER-75.
+* Extend timeouts for test suite.
+
 ## [1.3.2](https://github.com/folio-org/ui-ldp/tree/v1.3.2) (2020-06-17)
 
 * More robust selectors for filter-field choice in tests.

@@ -1,6 +1,6 @@
 {
   "name": "@folio/ldp",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Dashboard for the Library Data Platform",
   "main": "src/index.js",
   "repository": "",
@@ -11,7 +11,7 @@
   "scripts": {
     "start": "stripes serve stripes.config.js",
     "build": "stripes build --output ./output",
-    "test": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
+    "test": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-load-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
     "coverage-summary": "nyc report --reporter=text-summary",
     "coverage": "nyc report --reporter=text",
     "lint": "eslint --format unix .",
@@ -29,11 +29,11 @@
     "@calm/eslint-plugin-react-intl": "^1.4.1",
     "@cypress/code-coverage": "^3.9.6",
     "@folio/eslint-config-stripes": "^5.2.0",
-    "@folio/stripes": "^6.0.0",
+    "@folio/stripes": "^6.0.0|| ^7.0.0",
     "@folio/stripes-cli": "^2.2.0",
-    "@folio/stripes-components": "^9.0.0",
-    "@folio/stripes-core": "^7.0.0",
-    "@folio/stripes-smart-components": "^6.0.0",
+    "@folio/stripes-components": "^9.0.0 || ^10.0.0",
+    "@folio/stripes-core": "^7.0.0|| ^8.0.0",
+    "@folio/stripes-smart-components": "^6.0.0 || ^7.0.0",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
     "@testing-library/user-event": "^12.1.10",
@@ -76,9 +76,9 @@
     "uuid": "^8.3.1"
   },
   "peerDependencies": {
-    "@folio/stripes": "^6.0.0",
+    "@folio/stripes": "^6.0.0 || ^7.0.0",
     "core-js": "^3.6.1",
-    "react": "*",
+    "react": "^16.0.0 || ^17.0.2",
     "react-intl": "^5.8.0",
     "react-router-dom": "^5.2.0"
   },
