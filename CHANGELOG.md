@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [1.4.0](https://github.com/folio-org/ui-ldp/tree/v1.4.0) (IN PROGRESS)
+## [1.4.0](https://github.com/folio-org/ui-ldp/tree/v1.4.0) (2021-09-27)
 
 * Upgrade to run under either v6 or v7 of the Stripes framework. Fixes UILDP-1.
 * Extend timeouts for test suite.
