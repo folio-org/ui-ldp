@@ -103,6 +103,9 @@
       {
         "permissionName": "module.ldp.enabled",
         "displayName": "LDP: all permissions",
+        "subPermissions": [
+          "ldp.read"
+        ],
         "visible": true
       },
       {
