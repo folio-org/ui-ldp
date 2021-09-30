@@ -13,6 +13,7 @@ const OrderingCriterion = ({ name, availableColumns, disabled, onRemove }) => {
         <Field
           name={`${name}.key`}
           component={Selection}
+          placeholder={intl.formatMessage({ id: 'ui-ldp.placeholder.column' })}
           dataOptions={availableColumns}
           disabled={disabled}
         />
@@ -20,6 +21,7 @@ const OrderingCriterion = ({ name, availableColumns, disabled, onRemove }) => {
       <div style={{ flex: 2, marginLeft: 5, marginRight: 5 }}>
         <Field
           name={`${name}.direction`}
+          aria-label={intl.formatMessage({ id: 'ui-ldp.direction.direction' })}
           component={Select}
           dataOptions={[
             { value: 'asc', label: intl.formatMessage({ id: 'ui-ldp.direction.asc' }) },
@@ -33,6 +35,7 @@ const OrderingCriterion = ({ name, availableColumns, disabled, onRemove }) => {
         <Field
           name={`${name}.nulls`}
           component={Select}
+          aria-label={intl.formatMessage({ id: 'ui-ldp.direction.nulls' })}
           dataOptions={[
             { value: 'start', label: intl.formatMessage({ id: 'ui-ldp.nulls.start' }) },
             { value: 'end', label: intl.formatMessage({ id: 'ui-ldp.nulls.end' }) },

@@ -2,7 +2,8 @@
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (IN PROGRESS)
 
-Add [`PERSONAL_DATA_DISCLOSURE.md`](PERSONAL_DATA_DISCLOSURE.md) file.
+* Add [`PERSONAL_DATA_DISCLOSURE.md`](PERSONAL_DATA_DISCLOSURE.md) file.
+* Fixes for WCAG 2.1 accessibility. As described in detail in the Jira issue, it is not possible to achieve full compliance at this time due to extensive issues in Stripes itself, but I believe that when those are fixed this app will be clean. Fixes UILDP-5.
 
 ## [1.4.0](https://github.com/folio-org/ui-ldp/tree/v1.4.0) (2021-09-27)
 
