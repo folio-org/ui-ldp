@@ -2,7 +2,8 @@
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (IN PROGRESS)
 
-Add [`PERSONAL_DATA_DISCLOSURE.md`](PERSONAL_DATA_DISCLOSURE.md) file.
+* Add [`PERSONAL_DATA_DISCLOSURE.md`](PERSONAL_DATA_DISCLOSURE.md) file.
+* `yarn test` now runs from yakbak tapes, which can be regenerated using `yarn regenerate`. Fixes UILDP-11.
 
 ## [1.4.0](https://github.com/folio-org/ui-ldp/tree/v1.4.0) (2021-09-27)
 
