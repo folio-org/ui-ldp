@@ -14,7 +14,7 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
           name={`${name}.key`}
           data-cy={`${name}.key`}
           component={Selection}
-          placeholder="&nbsp;"
+          placeholder={intl.formatMessage({ id: 'ui-ldp.placeholder.column' })}
           dataOptions={availableColumns}
           disabled={disabled}
         />
