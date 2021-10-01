@@ -43,7 +43,7 @@ yarn start stripes.config.js
 [Library Data Platform](https://github.com/library-data-platform/ldp) (LDP)
 -- an open source platform for analytics in libraries.
 
-[mod-ldp](https://github.com/library-data-platform/mod-ldp)
+[mod-ldp](https://github.com/folio-org/mod-ldp)
 -- LDP query builder server-side module for FOLIO/ReShare.
 
 ### Code of Conduct
@@ -52,4 +52,7 @@ Refer to the Wiki [FOLIO Code of Conduct](https://wiki.folio.org/display/COMMUNI
 
 ### Issue tracker
 
-The project uses this GitHub [issue tracker](https://github.com/library-data-platform/ui-ldp/issues).
+This project intially used [its own GitHub issue tracker](https://github.com/folio-org/ui-ldp/issues).
+It is in the process of transitioning to [a JIRA tracker](https://issues.folio.org/projects/UILDP).
+For the present, issues may be found in both places.
+
