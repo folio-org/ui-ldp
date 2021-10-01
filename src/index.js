@@ -36,7 +36,7 @@ const Ldp = (props) => {
       {actAs === 'settings' ?
         <Settings {...props} /> :
         <Paneset>
-          <Pane defaultWidth="15%">
+          <Pane defaultWidth="15%" paneTitle={<FormattedMessage id="ui-ldp.nav" />}>
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
                 <NavListItem data-cy="nav-queryBuilder" to={`${match.path}`}>

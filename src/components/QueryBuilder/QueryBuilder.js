@@ -44,7 +44,12 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
                   <Paneset nested static>
                     <FieldArray name="tables">
                       {({ fields }) => fields.map((namePrefix, tableIndex) => (
-                        <Pane id={`table${tableIndex}`} defaultWidth="50%" key={namePrefix}>
+                        <Pane
+                          id={`table${tableIndex}`}
+                          defaultWidth="50%"
+                          key={namePrefix}
+                          paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
+                        >
                           <QuerySingleTable
                             namePrefix={namePrefix}
                             tableIndex={tableIndex}
