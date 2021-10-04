@@ -40,5 +40,9 @@
     "settings.table-availability": "Table availability",
     "settings.table-availability.schema": "Schema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Check the tables to disable for querying",
-    "SENTINEL": ""
+    "SENTINEL": "",
+    "direction": "Sort direction",
+    "nulls": "Sort nulls",
+    "placeholder.column": "(Column)",
+    "nav": "Navigation"
 }
