@@ -10,12 +10,16 @@ import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 import loadResults from '../../util/loadResults';
 
-function QueryBuilder({ ldp, initialState, tables, setError }) {
+function QueryBuilder({ ldp, initialState, stateHasChanged, tables, setError }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
-  const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
   const showDevInfo = stripes.config?.showDevInfo;
+  const onSubmit = values => {
+    // console.log('onSubmit: values =', values);
+    stateHasChanged(values);
+    loadResults(intl, stripes, values, setQueryResponse, setError);
+  };
 
   return (
     <Paneset>
@@ -94,6 +98,7 @@ function QueryBuilder({ ldp, initialState, tables, setError }) {
 QueryBuilder.propTypes = {
   ldp: P.shape({}).isRequired,
   initialState: P.object.isRequired,
+  stateHasChanged: P.func.isRequired,
   tables: P.objectOf(
     P.arrayOf(
       P.shape({
