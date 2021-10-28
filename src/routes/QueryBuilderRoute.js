@@ -4,7 +4,6 @@ import { useStripes } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import loadTables from '../util/loadTables';
-import loadResults from '../util/loadResults';
 import BigError from '../components/BigError';
 import QueryBuilder from '../components/QueryBuilder';
 
@@ -27,7 +26,6 @@ const QueryBuilderRoute = () => {
   const ldp = useLdp();
   const [tables, setTables] = useState();
   const [error, setError] = useState(false);
-  const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
 
   useEffect(() => {
     loadTables(intl, stripes, setTables, setError);
@@ -42,8 +40,7 @@ const QueryBuilderRoute = () => {
     ldp={ldp}
     initialState={initialState}
     tables={tables}
-    onSubmit={values => loadResults(intl, stripes, values, setQueryResponse, setError)}
-    queryResponse={queryResponse}
+    setError={setError}
   />;
 };
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import P from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
@@ -8,9 +8,13 @@ import { useStripes } from '@folio/stripes/core';
 import { Pane, Paneset } from '@folio/stripes/components';
 import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
+import loadResults from '../../util/loadResults';
 
-function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
+function QueryBuilder({ ldp, initialState, tables, setError }) {
+  const intl = useIntl();
   const stripes = useStripes();
+  const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
   const showDevInfo = stripes.config?.showDevInfo;
 
   return (
@@ -98,13 +102,7 @@ QueryBuilder.propTypes = {
       }).isRequired,
     ).isRequired
   ).isRequired,
-  onSubmit: P.func.isRequired,
-  queryResponse: P.shape({
-    key: P.string,
-    resp: P.arrayOf(
-      P.object.isRequired,
-    ).isRequired,
-  }).isRequired,
+  setError: P.func.isRequired,
 };
 
 
