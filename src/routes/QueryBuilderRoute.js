@@ -16,6 +16,7 @@ const initialState = {
       columnFilters: [{}],
       showColumns: [],
       orderBy: [],
+      // limit is set below, from dynamically loaded defaults
     }
   ]
 };
