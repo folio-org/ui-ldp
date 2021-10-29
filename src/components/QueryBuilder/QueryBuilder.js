@@ -1,6 +1,7 @@
-import React from 'react';
+import isEqual from 'lodash/isEqual';
+import React, { useState } from 'react';
 import P from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
@@ -8,10 +9,24 @@ import { useStripes } from '@folio/stripes/core';
 import { Pane, Paneset } from '@folio/stripes/components';
 import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
+import loadResults from '../../util/loadResults';
 
-function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
+
+let _savedValues; // Private to stateMayHaveChanged
+function stateMayHaveChanged(stateHasChanged, values) {
+  if (!isEqual(values, _savedValues)) {
+    stateHasChanged(values);
+    _savedValues = values;
+  }
+}
+
+
+function QueryBuilder({ ldp, initialState, stateHasChanged, tables, setError }) {
+  const intl = useIntl();
   const stripes = useStripes();
+  const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
   const showDevInfo = stripes.config?.showDevInfo;
+  const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
 
   return (
     <Paneset>
@@ -24,9 +39,11 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
         render={({
           handleSubmit,
           form: {
+            getState,
             mutators: { push, pop }
           }
         }) => {
+          stateMayHaveChanged(stateHasChanged, getState().values);
           return (
             <form
               id="form-querybuilder"
@@ -90,6 +107,7 @@ function QueryBuilder({ ldp, initialState, tables, onSubmit, queryResponse }) {
 QueryBuilder.propTypes = {
   ldp: P.shape({}).isRequired,
   initialState: P.object.isRequired,
+  stateHasChanged: P.func.isRequired,
   tables: P.objectOf(
     P.arrayOf(
       P.shape({
@@ -98,13 +116,7 @@ QueryBuilder.propTypes = {
       }).isRequired,
     ).isRequired
   ).isRequired,
-  onSubmit: P.func.isRequired,
-  queryResponse: P.shape({
-    key: P.string,
-    resp: P.arrayOf(
-      P.object.isRequired,
-    ).isRequired,
-  }).isRequired,
+  setError: P.func.isRequired,
 };
 
 
