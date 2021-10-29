@@ -53,6 +53,7 @@ const QueryBuilderRoute = () => {
     stateHasChanged={values => localforage.setItem(namespace, values)}
     tables={tables}
     setError={setError}
+    onClear={() => setInitialState(initialInitialState)}
   />;
 };
 

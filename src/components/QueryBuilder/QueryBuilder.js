@@ -21,7 +21,7 @@ function stateMayHaveChanged(stateHasChanged, values) {
 }
 
 
-function QueryBuilder({ ldp, initialState, stateHasChanged, tables, setError }) {
+function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, setError }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
@@ -75,6 +75,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, tables, setError }) 
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}
+                            onClear={onClear}
                           />
                         </Pane>
                       ))}
@@ -117,6 +118,7 @@ QueryBuilder.propTypes = {
     ).isRequired
   ).isRequired,
   setError: P.func.isRequired,
+  onClear: P.func.isRequired,
 };
 
 
