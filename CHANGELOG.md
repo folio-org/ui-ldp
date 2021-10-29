@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.6.0](https://github.com/folio-org/ui-ldp/tree/v1.6.0) (IN PROGRESS)
+
+* Maintain querty-form state when navigating away and returning. Fixes UILDP-10.
+
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (2021-10-01)
 
 * Repair tests, which had broken due to changes in Stripes. Fixes UILDP-3.
