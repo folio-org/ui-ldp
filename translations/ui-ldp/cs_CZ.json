@@ -44,5 +44,6 @@
     "direction": "Sort direction",
     "nulls": "Sort nulls",
     "placeholder.column": "(Column)",
-    "nav": "Navigation"
+    "nav": "Navigation",
+    "button.clear": "Clear"
 }

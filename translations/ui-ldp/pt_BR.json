@@ -44,5 +44,6 @@
     "direction": "Ordem de Classificação",
     "nulls": "Classificar nulos",
     "placeholder.column": "(Coluna)",
-    "nav": "Navegação"
+    "nav": "Navegação",
+    "button.clear": "Clear"
 }

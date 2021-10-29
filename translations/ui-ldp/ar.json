@@ -44,5 +44,6 @@
     "direction": "اتجاه الفرز",
     "nulls": "فرز القيم الخالية",
     "placeholder.column": "(العمود)",
-    "nav": "التصفح"
+    "nav": "التصفح",
+    "button.clear": "مسح"
 }
