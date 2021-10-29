@@ -31,6 +31,7 @@
   "button.add-filter": "Add filter",
   "button.add-ordering-criterion": "Add ordering criterion",
   "button.submit": "Submit",
+  "button.clear": "Clear",
   "button.download-csv": "Download as CSV",
   "button.add-join-table": "Add join table",
   "found-records": "Found {count} records",

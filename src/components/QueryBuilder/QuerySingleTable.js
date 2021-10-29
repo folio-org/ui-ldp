@@ -73,6 +73,7 @@ const QuerySingleTable = ({
   queryResponse,
   // onRemove,
   push,
+  onClear,
 }) => {
   const intl = useIntl();
   const stripes = useStripes();
@@ -203,14 +204,25 @@ const QuerySingleTable = ({
         />
 
         <div className={css.SubmitRow}>
-          <Button
-            type="submit"
-            buttonStyle="primary"
-            disabled={disabled}
-            data-cy={`${namePrefix}.submit`}
-          >
-            <FormattedMessage id="ui-ldp.button.submit" />
-          </Button>
+          <span>
+            <Button
+              type="submit"
+              buttonStyle="primary"
+              disabled={disabled}
+              data-cy={`${namePrefix}.submit`}
+            >
+              <FormattedMessage id="ui-ldp.button.submit" />
+            </Button>
+            <Button
+              type="button"
+              buttonStyle="default"
+              disabled={false}
+              data-cy={`${namePrefix}.clear`}
+              onClick={onClear}
+            >
+              <FormattedMessage id="ui-ldp.button.clear" />
+            </Button>
+          </span>
           <span data-cy={`${namePrefix}.message`}>
             {queryResponse.key && (
               queryResponse.isComplete ?
@@ -239,6 +251,7 @@ QuerySingleTable.propTypes = {
   queryResponse: PropTypes.object,
   push: PropTypes.func,
   // pop: PropTypes.func,
+  onClear: PropTypes.func.isRequired,
 };
 
 
