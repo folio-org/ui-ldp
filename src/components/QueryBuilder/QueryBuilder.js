@@ -1,3 +1,4 @@
+import isEqual from 'lodash/isEqual';
 import React, { useState } from 'react';
 import P from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
@@ -10,16 +11,22 @@ import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 import loadResults from '../../util/loadResults';
 
+
+let _savedValues; // Private to stateMayHaveChanged
+function stateMayHaveChanged(stateHasChanged, values) {
+  if (!isEqual(values, _savedValues)) {
+    stateHasChanged(values);
+    _savedValues = values;
+  }
+}
+
+
 function QueryBuilder({ ldp, initialState, stateHasChanged, tables, setError }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
   const showDevInfo = stripes.config?.showDevInfo;
-  const onSubmit = values => {
-    // console.log('onSubmit: values =', values);
-    stateHasChanged(values);
-    loadResults(intl, stripes, values, setQueryResponse, setError);
-  };
+  const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
 
   return (
     <Paneset>
@@ -32,9 +39,11 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, tables, setError }) 
         render={({
           handleSubmit,
           form: {
+            getState,
             mutators: { push, pop }
           }
         }) => {
+          stateMayHaveChanged(stateHasChanged, getState().values);
           return (
             <form
               id="form-querybuilder"
