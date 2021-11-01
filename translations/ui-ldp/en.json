@@ -49,6 +49,7 @@
   "settings.database-configuration.url": "Database URL",
   "settings.database-configuration.user": "Username",
   "settings.database-configuration.pass": "Password",
+  "settings.database-configuration.update.ok": "Updated database configuration",
 
   "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
   "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
