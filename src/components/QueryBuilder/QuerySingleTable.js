@@ -41,7 +41,10 @@ const WhenFieldChanges = ({ field, set, to }) => (
 WhenFieldChanges.propTypes = {
   field: PropTypes.string,
   set: PropTypes.string,
-  to: PropTypes.arrayOf(PropTypes.object),
+  to: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.string,
+  ]).isRequired,
 };
 
 
@@ -116,6 +119,11 @@ const QuerySingleTable = ({
             />
           </div>
         </div>
+        <WhenFieldChanges
+          field={`${namePrefix}.schema`}
+          set={`${namePrefix}.tableName`}
+          to=""
+        />
         <WhenFieldChanges
           field={`${namePrefix}.tableName`}
           set={`${namePrefix}.columnFilters`}
