@@ -5,6 +5,7 @@
 * Maintain query-form state when navigating away and returning. Fixes UILDP-10.
 * Add a Clear button that resets form state. Fixes UILDP-26.
 * Changing schema clears all fields, and they do not reappear when changing back. Fixes UILDP-25.
+* Settings page for database connection configuration. Fixes UILDP-14.
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (2021-10-01)
 

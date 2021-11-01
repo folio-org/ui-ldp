@@ -121,6 +121,30 @@
           "settings.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.settings.record-limits",
+        "displayName": "Settings (LDP): Can modify default record limits",
+        "subPermissions": [
+          "settings.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.settings.table-availability",
+        "displayName": "Settings (LDP): Can select which tables are available to search",
+        "subPermissions": [
+          "settings.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.settings.database-configuration",
+        "displayName": "Settings (LDP): Can modify LDP database connection details",
+        "subPermissions": [
+          "settings.enabled"
+        ],
+        "visible": true
       }
     ]
   }
