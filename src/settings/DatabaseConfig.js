@@ -8,6 +8,7 @@ import stripesFetch from '../util/stripesFetch';
 
 
 function DatabaseConfig(props) {
+  const key = 'dbinfo';
   const [loadedConfig, setLoadedConfig] = useState();
   const [url, setUrl] = useState();
   const [user, setUser] = useState();
@@ -19,7 +20,7 @@ function DatabaseConfig(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await stripesFetch(stripes, '/ldp/config/dbinfo');
+      const res = await stripesFetch(stripes, `/ldp/config/${key}`);
       if (res.ok) {
         const json = await res.json();
         const data = JSON.parse(json.value);
@@ -41,10 +42,10 @@ function DatabaseConfig(props) {
   const saveData = async () => {
     setSubmitting(true);
     const newConfig = { url, user, pass };
-    const res = await stripesFetch(stripes, '/ldp/config/dbinfo', {
+    const res = await stripesFetch(stripes, `/ldp/config/${key}`, {
       method: 'PUT',
       body: JSON.stringify({
-        key: 'dbinfo',
+        key,
         tenant: stripes.okapi.tenant,
         value: JSON.stringify(newConfig),
       }),
@@ -54,7 +55,7 @@ function DatabaseConfig(props) {
     if (res.ok) {
       setLoadedConfig(newConfig);
       callout.sendCallout({
-        message: <FormattedMessage id="ui-ldp.settings.dbinfo.update.ok" />
+        message: <FormattedMessage id={`ui-ldp.settings.${key}.update.ok`} />
       });
     } else {
       const content = await res.text();
@@ -72,7 +73,7 @@ function DatabaseConfig(props) {
       <Row>
         <Col xs={12}>
           <TextField
-            label={<FormattedMessage id="ui-ldp.settings.dbinfo.url" />}
+            label={<FormattedMessage id={`ui-ldp.settings.${key}.url`} />}
             value={url}
             onChange={e => setUrl(e.target.value)}
           />
@@ -81,14 +82,14 @@ function DatabaseConfig(props) {
       <Row>
         <Col xs={6}>
           <TextField
-            label={<FormattedMessage id="ui-ldp.settings.dbinfo.user" />}
+            label={<FormattedMessage id={`ui-ldp.settings.${key}.user`} />}
             value={user}
             onChange={e => setUser(e.target.value)}
           />
         </Col>
         <Col xs={6}>
           <TextField
-            label={<FormattedMessage id="ui-ldp.settings.dbinfo.pass" />}
+            label={<FormattedMessage id={`ui-ldp.settings.${key}.pass`} />}
             value={pass}
             onChange={e => setPass(e.target.value)}
           />
