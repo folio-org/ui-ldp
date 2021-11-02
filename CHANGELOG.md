@@ -7,6 +7,7 @@
 * Changing schema clears all fields, and they do not reappear when changing back. Fixes UILDP-25.
 * Settings page for database connection configuration. Fixes UILDP-14.
 * Protect settings pages with permissions. Fixes UILDP-30.
+* Factor out common code in `load*` functions. Fixes UILDP-21.
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (2021-10-01)
 
