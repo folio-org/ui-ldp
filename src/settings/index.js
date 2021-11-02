@@ -11,16 +11,19 @@ export default class LdpSettings extends React.Component {
       route: 'limits',
       label: <FormattedMessage id="ui-ldp.settings.record-limits" />,
       component: RecordLimits,
+      perm: 'ui-ldp.settings.record-limits',
     },
     {
       route: 'tables',
       label: <FormattedMessage id="ui-ldp.settings.table-availability" />,
       component: TableAvailability,
+      perm: 'ui-ldp.settings.table-availability',
     },
     {
       route: 'dbconfig',
       label: <FormattedMessage id="ui-ldp.settings.database-configuration" />,
       component: DatabaseConfig,
+      perm: 'ui-ldp.settings.database-configuration',
     },
   ];
 
