@@ -45,15 +45,15 @@
   "settings.table-availability": "Table availability",
   "settings.table-availability.schema": "Schema <code>{name}</code>",
   "settings.table-availability.check-to-disable": "Check the tables to disable for querying",
-  "settings.database-configuration": "Database configuration",
-  "settings.database-configuration.url": "Database URL",
-  "settings.database-configuration.user": "Username",
-  "settings.database-configuration.pass": "Password",
-  "settings.database-configuration.update.ok": "Updated database configuration",
+  "settings.dbinfo": "Database configuration",
+  "settings.dbinfo.url": "Database URL",
+  "settings.dbinfo.user": "Username",
+  "settings.dbinfo.pass": "Password",
+  "settings.dbinfo.update.ok": "Updated database configuration",
 
   "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
   "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
-  "permission.settings.database-configuration": "Settings (LDP): Can modify LDP database connection details",
+  "permission.settings.dbinfo": "Settings (LDP): Can modify LDP database connection details",
 
   "SENTINEL": ""
 }

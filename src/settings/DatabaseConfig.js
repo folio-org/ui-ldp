@@ -54,7 +54,7 @@ function DatabaseConfig(props) {
     if (res.ok) {
       setLoadedConfig(newConfig);
       callout.sendCallout({
-        message: <FormattedMessage id="ui-ldp.settings.database-configuration.update.ok" />
+        message: <FormattedMessage id="ui-ldp.settings.dbinfo.update.ok" />
       });
     } else {
       const content = await res.text();
@@ -72,7 +72,7 @@ function DatabaseConfig(props) {
       <Row>
         <Col xs={12}>
           <TextField
-            label={<FormattedMessage id="ui-ldp.settings.database-configuration.url" />}
+            label={<FormattedMessage id="ui-ldp.settings.dbinfo.url" />}
             value={url}
             onChange={e => setUrl(e.target.value)}
           />
@@ -81,14 +81,14 @@ function DatabaseConfig(props) {
       <Row>
         <Col xs={6}>
           <TextField
-            label={<FormattedMessage id="ui-ldp.settings.database-configuration.user" />}
+            label={<FormattedMessage id="ui-ldp.settings.dbinfo.user" />}
             value={user}
             onChange={e => setUser(e.target.value)}
           />
         </Col>
         <Col xs={6}>
           <TextField
-            label={<FormattedMessage id="ui-ldp.settings.database-configuration.pass" />}
+            label={<FormattedMessage id="ui-ldp.settings.dbinfo.pass" />}
             value={pass}
             onChange={e => setPass(e.target.value)}
           />

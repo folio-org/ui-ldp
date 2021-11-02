@@ -21,9 +21,9 @@ export default class LdpSettings extends React.Component {
     },
     {
       route: 'dbconfig',
-      label: <FormattedMessage id="ui-ldp.settings.database-configuration" />,
+      label: <FormattedMessage id="ui-ldp.settings.dbinfo" />,
       component: DatabaseConfig,
-      perm: 'ui-ldp.settings.database-configuration',
+      // perm: 'ui-ldp.settings.dbinfo', // uncomment after the renamed permission is available
     },
   ];
 
