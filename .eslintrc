@@ -26,7 +26,7 @@
         "noSpreadOperator": true,
         "requireDescription": false,
         "formatDefineMessages": false,
-        "requireIdAsString": true,
+        "requireIdAsString": false,
         "requireDefaultMessage": false
       }
     ],
