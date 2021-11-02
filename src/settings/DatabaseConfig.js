@@ -29,7 +29,7 @@ function compileRows(fields) {
 }
 
 
-function DatabaseConfig(props) {
+function LdpConfig(props) {
   const key = 'dbinfo';
   const fields = [
     { name: 'url', xs: 12 },
@@ -118,9 +118,23 @@ function DatabaseConfig(props) {
 }
 
 
-DatabaseConfig.propTypes = {
+LdpConfig.propTypes = {
   label: PropTypes.node.isRequired,
 };
 
+
+function DatabaseConfig(props) {
+  return (
+    <LdpConfig
+      {...props}
+      key="dbinfo"
+      fields={[
+        { name: 'url', xs: 12 },
+        { name: 'user', xs: 6 },
+        { name: 'pass', xs: 6 },
+      ]}
+    />
+  );
+}
 
 export default DatabaseConfig;
