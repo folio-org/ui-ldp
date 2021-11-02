@@ -1,3 +1,4 @@
+import isEqual from 'lodash/isEqual';
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -9,10 +10,14 @@ import stripesFetch from '../util/stripesFetch';
 
 function DatabaseConfig(props) {
   const key = 'dbinfo';
+  const fields = [
+    { name: 'url', xs: 12 },
+    { name: 'user', xs: 6 },
+    { name: 'pass', xs: 6 },
+  ];
+
   const [loadedConfig, setLoadedConfig] = useState();
-  const [url, setUrl] = useState();
-  const [user, setUser] = useState();
-  const [pass, setPass] = useState();
+  const [currentConfig, setCurrentConfig] = useState({});
   const [error, setError] = useState();
   const [submitting, setSubmitting] = useState(false);
   const stripes = useStripes();
@@ -25,9 +30,7 @@ function DatabaseConfig(props) {
         const json = await res.json();
         const data = JSON.parse(json.value);
         setLoadedConfig(data);
-        setUrl(data.url);
-        setUser(data.user);
-        setPass(data.pass);
+        setCurrentConfig(data);
       } else {
         const content = await res.text();
         setError(`${res.statusText}: ${content}`);
@@ -41,19 +44,18 @@ function DatabaseConfig(props) {
 
   const saveData = async () => {
     setSubmitting(true);
-    const newConfig = { url, user, pass };
     const res = await stripesFetch(stripes, `/ldp/config/${key}`, {
       method: 'PUT',
       body: JSON.stringify({
         key,
         tenant: stripes.okapi.tenant,
-        value: JSON.stringify(newConfig),
+        value: JSON.stringify(currentConfig),
       }),
     });
 
     setSubmitting(false);
     if (res.ok) {
-      setLoadedConfig(newConfig);
+      setLoadedConfig(currentConfig);
       callout.sendCallout({
         message: <FormattedMessage id={`ui-ldp.settings.${key}.update.ok`} />
       });
@@ -63,10 +65,7 @@ function DatabaseConfig(props) {
     }
   };
 
-  const disabled = (submitting ||
-                    (url === loadedConfig.url &&
-                     user === loadedConfig.user &&
-                     pass === loadedConfig.pass));
+  const disabled = (submitting || isEqual(currentConfig, loadedConfig));
 
   return (
     <Pane paneTitle={props.label} defaultWidth="fill">
@@ -74,8 +73,8 @@ function DatabaseConfig(props) {
         <Col xs={12}>
           <TextField
             label={<FormattedMessage id={`ui-ldp.settings.${key}.url`} />}
-            value={url}
-            onChange={e => setUrl(e.target.value)}
+            value={currentConfig.url}
+            onChange={e => setCurrentConfig({ ...currentConfig, url: e.target.value })}
           />
         </Col>
       </Row>
@@ -83,15 +82,15 @@ function DatabaseConfig(props) {
         <Col xs={6}>
           <TextField
             label={<FormattedMessage id={`ui-ldp.settings.${key}.user`} />}
-            value={user}
-            onChange={e => setUser(e.target.value)}
+            value={currentConfig.user}
+            onChange={e => setCurrentConfig({ ...currentConfig, user: e.target.value })}
           />
         </Col>
         <Col xs={6}>
           <TextField
             label={<FormattedMessage id={`ui-ldp.settings.${key}.pass`} />}
-            value={pass}
-            onChange={e => setPass(e.target.value)}
+            value={currentConfig.pass}
+            onChange={e => setCurrentConfig({ ...currentConfig, pass: e.target.value })}
           />
         </Col>
       </Row>
