@@ -142,7 +142,9 @@
         "permissionName": "ui-ldp.settings.database-configuration",
         "displayName": "Settings (LDP): Can modify LDP database connection details",
         "subPermissions": [
-          "settings.enabled"
+          "settings.enabled",
+          "ldp.config.read",
+          "ldp.config.edit"
         ],
         "visible": true
       }
