@@ -40,19 +40,19 @@ function DatabaseConfig(props) {
 
   const saveData = async () => {
     setSubmitting(true);
+    const newConfig = { url, user, pass };
     const res = await stripesFetch(stripes, '/ldp/config/dbinfo', {
       method: 'PUT',
       body: JSON.stringify({
         key: 'dbinfo',
         tenant: stripes.okapi.tenant,
-        value: JSON.stringify({
-          url, user, pass,
-        }),
+        value: JSON.stringify(newConfig),
       }),
     });
 
     setSubmitting(false);
     if (res.ok) {
+      setLoadedConfig(newConfig);
       callout.sendCallout({
         message: <FormattedMessage id="ui-ldp.settings.database-configuration.update.ok" />
       });
