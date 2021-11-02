@@ -50,10 +50,16 @@
   "settings.dbinfo.user": "Username",
   "settings.dbinfo.pass": "Password",
   "settings.dbinfo.update.ok": "Updated database configuration",
-
+  "settings.sqconfig": "Saved queries configuration",
+  "settings.sqconfig.repo": "GitHub repository URL",
+  "settings.sqconfig.user": "GitHub user name",
+  "settings.sqconfig.pass": "GitHub password",
+  "settings.sqconfig.privateKey": "Private SSH key to access GutHub repository",
+  "settings.sqconfig.update.ok": "Updated saved queries configuration",
   "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
   "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
   "permission.settings.dbinfo": "Settings (LDP): Can modify LDP database connection details",
+  "permission.settings.sqconfig": "Settings (LDP): Can modify saved-query configuration details",
 
   "SENTINEL": ""
 }

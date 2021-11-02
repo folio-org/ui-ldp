@@ -147,6 +147,16 @@
           "ldp.config.edit"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.settings.sqconfig",
+        "displayName": "Settings (LDP): Can modify saved-query configuration details",
+        "subPermissions": [
+          "settings.enabled",
+          "ldp.config.read",
+          "ldp.config.edit"
+        ],
+        "visible": true
       }
     ]
   }
