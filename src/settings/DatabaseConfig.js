@@ -8,6 +8,27 @@ import BigError from '../components/BigError';
 import stripesFetch from '../util/stripesFetch';
 
 
+// Batch the fields up into rows whose xs values total no more than 12
+function compileRows(fields) {
+  const rows = [];
+
+  let row = [];
+  let acc = 0;
+  fields.forEach(field => {
+    if (row.length > 0 && field.xs + acc > 12) {
+      rows.push(row);
+      row = [];
+      acc = 0;
+    }
+    row.push(field);
+    acc += field.xs;
+  });
+  rows.push(row);
+
+  return rows;
+}
+
+
 function DatabaseConfig(props) {
   const key = 'dbinfo';
   const fields = [
@@ -57,6 +78,7 @@ function DatabaseConfig(props) {
     if (res.ok) {
       setLoadedConfig(currentConfig);
       callout.sendCallout({
+        // eslint-disable-next-line @calm/react-intl/missing-attribute
         message: <FormattedMessage id={`ui-ldp.settings.${key}.update.ok`} />
       });
     } else {
@@ -65,35 +87,25 @@ function DatabaseConfig(props) {
     }
   };
 
+  const rows = compileRows(fields);
   const disabled = (submitting || isEqual(currentConfig, loadedConfig));
 
   return (
     <Pane paneTitle={props.label} defaultWidth="fill">
-      <Row>
-        <Col xs={12}>
-          <TextField
-            label={<FormattedMessage id={`ui-ldp.settings.${key}.url`} />}
-            value={currentConfig.url}
-            onChange={e => setCurrentConfig({ ...currentConfig, url: e.target.value })}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6}>
-          <TextField
-            label={<FormattedMessage id={`ui-ldp.settings.${key}.user`} />}
-            value={currentConfig.user}
-            onChange={e => setCurrentConfig({ ...currentConfig, user: e.target.value })}
-          />
-        </Col>
-        <Col xs={6}>
-          <TextField
-            label={<FormattedMessage id={`ui-ldp.settings.${key}.pass`} />}
-            value={currentConfig.pass}
-            onChange={e => setCurrentConfig({ ...currentConfig, pass: e.target.value })}
-          />
-        </Col>
-      </Row>
+      {rows.map((row, i) => (
+        <Row key={i}>
+          {row.map((field, j) => (
+            <Col key={j} xs={field.xs}>
+              <TextField
+                // eslint-disable-next-line @calm/react-intl/missing-attribute
+                label={<FormattedMessage id={`ui-ldp.settings.${key}.${field.name}`} />}
+                value={currentConfig[field.name]}
+                onChange={e => setCurrentConfig({ ...currentConfig, [field.name]: e.target.value })}
+              />
+            </Col>
+          ))}
+        </Row>
+      ))}
       <Row>
         <Col xs={12}>
           <Button buttonStyle="primary" onClick={saveData} disabled={disabled}>
