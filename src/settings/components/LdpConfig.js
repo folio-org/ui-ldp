@@ -47,6 +47,14 @@ function LdpConfig({ label, configKey: key, fields }) {
         setCurrentConfig(data);
       } else {
         const content = await res.text();
+        if (res.status === 404 && content.startsWith('{')) {
+          // Check for JSON report of an as-yet nonexistent key
+          const details = JSON.parse(content);
+          if (details.message === `No such key ${key}`) {
+            setLoadedConfig({});
+            return;
+          }
+        }
         setError(`${res.statusText}: ${content}`);
       }
     }
