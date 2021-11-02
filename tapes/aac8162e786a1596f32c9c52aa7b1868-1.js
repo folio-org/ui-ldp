@@ -1,14 +1,14 @@
 var path = require("path");
 
 /**
- * GET /configurations/entries?query=("configName"=="localeSettings" AND "module"=="@folio/stripes-core" and userId=="5b85fe31-75c2-52d7-9782-4d460ab9b04d")
+ * GET /configurations/entries?query=("configName"=="localeSettings" AND "module"=="@folio/stripes-core" and userId=="583c037f-688e-5546-8030-8915b77a9246")
  *
  * connection: keep-alive
  * host: folio-snapshot-load-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * x-okapi-tenant: diku
- * x-okapi-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjViODVmZTMxLTc1YzItNTJkNy05NzgyLTRkNDYwYWI5YjA0ZCIsImlhdCI6MTYzMzAyODEwMiwidGVuYW50IjoiZGlrdSJ9.DpM7OGh6sPskRS5i4FPvLGgo6B87-TpPOExqfCU_HUA
- * user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
+ * x-okapi-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjU4M2MwMzdmLTY4OGUtNTU0Ni04MDMwLTg5MTViNzdhOTI0NiIsImlhdCI6MTYzNTg2NTgyMiwidGVuYW50IjoiZGlrdSJ9.fKY6L90KCVT7qVlef0H6bT-5KI2-UnAoWFgTdojqjOQ
+ * user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
  * content-type: application/json
  * accept: * / *
  * origin: http://localhost:3001
@@ -23,7 +23,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 200;
 
-  res.setHeader("date", "Thu, 30 Sep 2021 18:55:04 GMT");
+  res.setHeader("date", "Tue, 02 Nov 2021 15:10:24 GMT");
   res.setHeader("content-type", "application/json");
   res.setHeader("transfer-encoding", "chunked");
   res.setHeader("connection", "keep-alive");
@@ -31,12 +31,13 @@ module.exports = function (req, res) {
   res.setHeader("access-control-allow-origin", "*");
   res.setHeader("access-control-expose-headers", "location,X-Okapi-Trace,X-Okapi-Token,Authorization,X-Okapi-Request-Id,X-Okapi-Module-Id");
   res.setHeader("content-encoding", "gzip");
-  res.setHeader("x-okapi-trace", "GET mod-configuration-5.8.0-SNAPSHOT.97 http://10.36.1.13:9133/configurations/entries.. : 200 33692us");
 
   res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 
   res.write(new Buffer("H4sIAAAAAAAAAKrmAgAAAP//", "base64"));
-  res.write(new Buffer("UlBQSs7PS8tML1ayUojmAgAAAP//itUBiZTklyTmBKUm5xelgIQNdLgAAAAA//9SUCpKLS7NKfHMS8sHilSjKTHQUUpLTE4tATKjY3WUUjIT0/Pyi0syk8ECtVy1AAAAAP//AwD4cWeBaQAAAA==", "base64"));
+  res.write(new Buffer("UlBQSs7PS8tML1ayUojmAgAAAP//itUBiZTklyTmBKUm5xelgIQNdLgAAAAA//8=", "base64"));
+  res.write(new Buffer("UlAqSi0uzSnxzEvLB4pUoykx0FFKS0xOLQEyo2N1lFIyE9Pz8otLMpPBArVctQAAAAD//w==", "base64"));
+  res.write(new Buffer("AwD4cWeBaQAAAA==", "base64"));
   res.end();
 
   return __filename;

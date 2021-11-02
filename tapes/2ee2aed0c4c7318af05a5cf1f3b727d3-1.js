@@ -1,20 +1,20 @@
 var path = require("path");
 
 /**
- * OPTIONS /configurations/entries?query=("configName"=="localeSettings" AND "module"=="@folio/stripes-core" and userId=="5b85fe31-75c2-52d7-9782-4d460ab9b04d")
+ * OPTIONS /configurations/entries/b66cedd3-148e-4787-8c0b-da0a28758009
  *
  * connection: keep-alive
  * host: folio-snapshot-load-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * accept: * / *
- * access-control-request-method: GET
+ * access-control-request-method: PUT
  * access-control-request-headers: content-type,x-okapi-tenant,x-okapi-token
  * origin: http://localhost:3001
- * user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
+ * user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
  * sec-fetch-mode: cors
  * sec-fetch-site: same-site
  * sec-fetch-dest: empty
- * referer: http://localhost:3001/
+ * referer: http://localhost:3001/settings/ldp/limits
  * accept-encoding: gzip
  * accept-language: en-GB
  */
@@ -22,7 +22,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 204;
 
-  res.setHeader("date", "Thu, 30 Sep 2021 18:55:03 GMT");
+  res.setHeader("date", "Tue, 02 Nov 2021 15:10:49 GMT");
   res.setHeader("connection", "keep-alive");
   res.setHeader("access-control-allow-origin", "*");
   res.setHeader("access-control-allow-methods", "PUT,PATCH,DELETE,GET,POST");
