@@ -10,11 +10,9 @@ function SavedQueries({ config }) {
   const [commit, setCommit] = useState();
 
   useEffect(() => {
-    // GitHub URL is of the form https://github.com/RandomOtherGuy/ldp-queries
-    const [, owner, repo] = config.repo.match(/.*\/(.*)\/(.*)/);
-
     async function fetchData() {
-      const res = await gitHubFetch(config, `repos/${owner}/${repo}/commits/HEAD`);
+      const { owner, repo, branch } = config;
+      const res = await gitHubFetch(config, `repos/${owner}/${repo}/commits/${branch}`);
       if (!res.ok) {
         const content = await res.text();
         setError(`${res.statusText}: ${content}`);
@@ -31,11 +29,6 @@ function SavedQueries({ config }) {
   return (
     <Paneset>
       <Pane defaultWidth="fill">
-        <h3>Config</h3>
-        <pre>
-          {JSON.stringify(config, null, 2)}
-        </pre>
-        <h3>Commit</h3>
         <pre>
           {JSON.stringify(commit, null, 2)}
         </pre>
@@ -47,8 +40,9 @@ function SavedQueries({ config }) {
 
 SavedQueries.propTypes = {
   config: PropTypes.shape({
+    owner: PropTypes.string,
     repo: PropTypes.string,
-    token: PropTypes.string,
+    branch: PropTypes.string,
   }).isRequired,
 };
 

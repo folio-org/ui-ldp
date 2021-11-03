@@ -7,7 +7,9 @@ function SavedQueriesConfig(props) {
       {...props}
       configKey="sqconfig"
       fields={[
-        { name: 'repo', xs: 12 },
+        { name: 'owner', xs: 4 },
+        { name: 'repo', xs: 4 },
+        { name: 'branch', xs: 4 },
         { name: 'token', xs: 12 },
       ]}
     />
