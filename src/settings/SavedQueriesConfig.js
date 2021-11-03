@@ -8,9 +8,7 @@ function SavedQueriesConfig(props) {
       configKey="sqconfig"
       fields={[
         { name: 'repo', xs: 12 },
-        { name: 'user', xs: 6 },
-        { name: 'pass', xs: 6 },
-        { name: 'privateKey', xs: 12 },
+        { name: 'token', xs: 12 },
       ]}
     />
   );
