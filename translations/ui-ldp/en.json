@@ -10,6 +10,7 @@
   "error.load-results": "Could not load results: {error}",
   "nav": "Navigation",
   "nav.query-builder": "Query builder",
+  "nav.saved-queries": "Saved queries",
   "nav.logs": "Logs",
   "nav.playground": "Playground",
   "heading.current-settings": "Current settings",
