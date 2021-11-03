@@ -10,18 +10,14 @@ function SavedQueries({ config }) {
   const [commit, setCommit] = useState();
 
   useEffect(() => {
-    async function fetchData() {
-      const { owner, repo, branch } = config;
-      const res = await gitHubFetch(config, `repos/${owner}/${repo}/commits/${branch}`);
-      if (!res.ok) {
-        const content = await res.text();
-        setError(`${res.statusText}: ${content}`);
+    (async () => {
+      const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/commits/${config.branch || 'HEAD'}`);
+      if (res.ok) {
+        setCommit(await res.json());
       } else {
-        const json = await res.json();
-        setCommit(json);
+        setError(`${res.statusText}: ${await res.text()}`);
       }
-    }
-    fetchData();
+    })();
   }, [config]);
 
   if (error) return <BigError message={error} />;
