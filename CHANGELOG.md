@@ -9,6 +9,7 @@
 * Protect settings pages with permissions. Fixes UILDP-30.
 * Factor out common code in `load*` functions. Fixes UILDP-21.
 * Add settings page for saved-query GitHub repo details. Fixes UILDP-31.
+* Fix translation tags used for aria-labels when choosing sorting criteria. Fixes UILDP-33.
 * Implement browser for saved queries, fetched from GitHub. Fixes UILDP-32.
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (2021-10-01)
