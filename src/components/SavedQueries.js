@@ -23,26 +23,30 @@ function SavedQueries({ config }) {
   }, [config]);
 
   useEffect(() => {
-    (async () => {
-      const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/git/trees/${commit.commit.tree.sha}`);
-      if (res.ok) {
-        setTree(await res.json());
-      } else {
-        setError(`${res.statusText}: ${await res.text()}`);
-      }
-    })();
+    if (commit) {
+      (async () => {
+        const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/git/trees/${commit.commit.tree.sha}`);
+        if (res.ok) {
+          setTree(await res.json());
+        } else {
+          setError(`${res.statusText}: ${await res.text()}`);
+        }
+      })();
+    }
   }, [config, commit]);
 
   useEffect(() => {
-    (async () => {
-      const directorySHA = tree.tree.filter(x => x.path === 'queries')[0].sha;
-      const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/git/trees/${directorySHA}`);
-      if (res.ok) {
-        setDirectory(await res.json());
-      } else {
-        setError(`${res.statusText}: ${await res.text()}`);
-      }
-    })();
+    if (tree) {
+      (async () => {
+        const directorySHA = tree.tree.filter(x => x.path === 'queries')[0].sha;
+        const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/git/trees/${directorySHA}`);
+        if (res.ok) {
+          setDirectory(await res.json());
+        } else {
+          setError(`${res.statusText}: ${await res.text()}`);
+        }
+      })();
+    }
   }, [config, tree]);
 
   if (error) return <BigError message={error} />;
