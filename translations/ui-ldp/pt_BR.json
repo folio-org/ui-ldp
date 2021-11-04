@@ -45,5 +45,20 @@
     "nulls": "Classificar nulos",
     "placeholder.column": "(Coluna)",
     "nav": "Navegação",
-    "button.clear": "Clear"
+    "button.clear": "Limpar",
+    "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
+    "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
+    "settings.dbinfo": "Configuração do banco de dados",
+    "settings.dbinfo.url": "URL do banco de dados",
+    "settings.dbinfo.user": "Nome de usuário",
+    "settings.dbinfo.pass": "Senha",
+    "settings.dbinfo.update.ok": "Updated database configuration",
+    "settings.sqconfig": "Saved queries configuration",
+    "settings.sqconfig.repo": "URL do repositório do GitHub",
+    "settings.sqconfig.user": "Nome do usuário do GitHub",
+    "settings.sqconfig.pass": "Senha do GitHub",
+    "settings.sqconfig.privateKey": "Chave SSH privada para acessar o repositório GitHub",
+    "settings.sqconfig.update.ok": "Updated saved queries configuration",
+    "permission.settings.dbinfo": "Settings (LDP): Can modify LDP database connection details",
+    "permission.settings.sqconfig": "Settings (LDP): Can modify saved-query configuration details"
 }

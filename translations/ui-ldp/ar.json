@@ -45,5 +45,20 @@
     "nulls": "فرز القيم الخالية",
     "placeholder.column": "(العمود)",
     "nav": "التصفح",
-    "button.clear": "مسح"
+    "button.clear": "مسح",
+    "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
+    "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
+    "settings.dbinfo": "تهيئة قاعدة البيانات",
+    "settings.dbinfo.url": "عنوان URL لقاعدة البيانات",
+    "settings.dbinfo.user": "اسم المستخدم",
+    "settings.dbinfo.pass": "كلمة المرور",
+    "settings.dbinfo.update.ok": "تحديث تهيئة قاعدة البيانات",
+    "settings.sqconfig": "تهيئة الاستعلامات المحفوظة",
+    "settings.sqconfig.repo": "عنوان URL لمستودع GitHub",
+    "settings.sqconfig.user": "اسم مستخدم GitHub",
+    "settings.sqconfig.pass": "كلمة مرور GitHub",
+    "settings.sqconfig.privateKey": "مفتاح SSH الخاص للوصول إلى مستودع GutHub",
+    "settings.sqconfig.update.ok": "تم تحديث تهيئة الاستعلامات المحفوظة",
+    "permission.settings.dbinfo": "Settings (LDP): Can modify LDP database connection details",
+    "permission.settings.sqconfig": "Settings (LDP): Can modify saved-query configuration details"
 }

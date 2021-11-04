@@ -45,5 +45,20 @@
     "nulls": "排序空值",
     "placeholder.column": "（列）",
     "nav": "导航",
-    "button.clear": "Clear"
+    "button.clear": "Clear",
+    "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
+    "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
+    "settings.dbinfo": "Database configuration",
+    "settings.dbinfo.url": "Database URL",
+    "settings.dbinfo.user": "Username",
+    "settings.dbinfo.pass": "Password",
+    "settings.dbinfo.update.ok": "Updated database configuration",
+    "settings.sqconfig": "Saved queries configuration",
+    "settings.sqconfig.repo": "GitHub repository URL",
+    "settings.sqconfig.user": "GitHub user name",
+    "settings.sqconfig.pass": "GitHub password",
+    "settings.sqconfig.privateKey": "Private SSH key to access GutHub repository",
+    "settings.sqconfig.update.ok": "Updated saved queries configuration",
+    "permission.settings.dbinfo": "Settings (LDP): Can modify LDP database connection details",
+    "permission.settings.sqconfig": "Settings (LDP): Can modify saved-query configuration details"
 }
