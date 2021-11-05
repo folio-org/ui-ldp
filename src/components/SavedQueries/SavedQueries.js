@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Paneset, Pane } from '@folio/stripes/components';
-import gitHubFetch from '../util/gitHubFetch';
-import BigError from './BigError';
+import gitHubFetch from '../../util/gitHubFetch';
+import BigError from '../BigError';
 
 
 const queries = {};
