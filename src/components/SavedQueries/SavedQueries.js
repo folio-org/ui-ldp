@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Paneset, Pane } from '@folio/stripes/components';
 import gitHubFetch from '../../util/gitHubFetch';
 import BigError from '../BigError';
+import ListSavedQueries from './ListSavedQueries';
 
 
 const queries = {};
@@ -68,15 +68,7 @@ function SavedQueries({ config }) {
 
   if (error) return <BigError message={error} />;
 
-  return (
-    <Paneset>
-      <Pane defaultWidth="fill">
-        <pre>
-          {JSON.stringify(queries, null, 2)}
-        </pre>
-      </Pane>
-    </Paneset>
-  );
+  return <ListSavedQueries config={config} queries={queries} />;
 }
 
 
