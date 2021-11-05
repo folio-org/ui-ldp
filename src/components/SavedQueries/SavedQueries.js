@@ -5,14 +5,12 @@ import BigError from '../BigError';
 import ListSavedQueries from './ListSavedQueries';
 
 
-const queries = {};
-
 function SavedQueries({ config }) {
   const [error, setError] = useState();
   const [commit, setCommit] = useState();
   const [tree, setTree] = useState();
   const [directory, setDirectory] = useState();
-  const [, setRandomNumber] = useState(0);
+  const [queries, setQueries] = useState({});
 
   useEffect(() => {
     (async () => {
@@ -58,8 +56,10 @@ function SavedQueries({ config }) {
         directory.tree.forEach(x => {
           gitHubFetch(config, `repos/${config.owner}/${config.repo}/contents/queries/${x.path}`)
             .then(async res => {
-              queries[x.path] = await res.json();
-              setRandomNumber(Math.random()); // Force re-render
+              const json = await res.json();
+              setQueries(old => {
+                return ({ ...old, [x.path]: json });
+              });
             });
         });
       })();
