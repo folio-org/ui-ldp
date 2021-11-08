@@ -31,59 +31,25 @@ function ListSavedQueries({ config, queries }) {
 
   const contentData = !processed ? undefined : (
     processed.map(x => {
-      console.log('considering', x);
       return {
+        ...x.json.META,
         name: x.name,
-        ...x.json,
       }
     })
   );
 
-  const c2 = [
-    {
-      "displayName": "Active users in alphabetical order by username",
-      "autoRun": true,
-      "creator": "diku_adin",
-      "created": "2021-11-03T15:16:24+0000",
-      "updated": "2021-11-03T15:16:24+0000",
-      "comment": "The second query, copied and modified from all-users",
-      "fileName": "active-users.json"
-    },
-    {
-      "displayName": "All users in alphabetical order by username",
-      "autoRun": true,
-      "creator": "diku_adin",
-      "created": "2021-11-02T15:27:19+0000",
-      "updated": "2021-11-02T16:01:33+0000",
-      "comment": "The very first same query, created by hand",
-      "fileName": "all-users.json"
-    },
-    {
-      "fileName": "dummy.json"
-    }
-  ];
-
   if (!contentData) return <LoadingPane />;
 
-  console.log('passing contentData', contentData, 'to MCL');
   return (
     <Paneset>
       <Pane defaultWidth="fill">
         <MultiColumnList
           contentData={contentData}
+          visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', /*'updated',*/ 'comment']}
         />
         <pre>
           {JSON.stringify(contentData, null, 2)}
         </pre>
-
-        {/*
-        <MultiColumnList
-          contentData={c2}
-        />
-        <pre>
-          {JSON.stringify(c2, null, 2)}
-        </pre>
-        */}
       </Pane>
     </Paneset>
   );
