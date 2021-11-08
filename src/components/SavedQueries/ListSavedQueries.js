@@ -16,10 +16,6 @@ function processQueries(queries) {
       ...obj,
       decoded,
       json,
-      contentData: {
-        ...json.META,
-        fileName: key,
-      }
     };
   });
 }
@@ -33,7 +29,15 @@ function ListSavedQueries({ config, queries }) {
     setProcessed(processQueries(queries));
   }, [queries]);
 
-  const contentData = processed ? processed.map(x => x.contentData): undefined;
+  const contentData = !processed ? undefined : (
+    processed.map(x => {
+      console.log('considering', x);
+      return {
+        name: x.name,
+        ...x.json,
+      }
+    })
+  );
 
   const c2 = [
     {
@@ -61,6 +65,7 @@ function ListSavedQueries({ config, queries }) {
 
   if (!contentData) return <LoadingPane />;
 
+  console.log('passing contentData', contentData, 'to MCL');
   return (
     <Paneset>
       <Pane defaultWidth="fill">
@@ -71,12 +76,14 @@ function ListSavedQueries({ config, queries }) {
           {JSON.stringify(contentData, null, 2)}
         </pre>
 
+        {/*
         <MultiColumnList
           contentData={c2}
         />
         <pre>
           {JSON.stringify(c2, null, 2)}
         </pre>
+        */}
       </Pane>
     </Paneset>
   );
