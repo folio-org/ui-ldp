@@ -2,7 +2,7 @@
   "meta.title": "LDP",
   "something-went-wrong": "Something went wrong.",
   "refresh": "Refresh",
-  "error.http": "HTTP error: status {status}: {text}",
+  "error.http": "HTTP error {status} ({text}) -- {detail}",
   "error.fetch-reject": "fetch() rejected (never happens): {error}",
   "error.load-config": "Could not load configuration: {error}",
   "error.load-tables": "Could not load tables: {error}",
