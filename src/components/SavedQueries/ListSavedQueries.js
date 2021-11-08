@@ -47,9 +47,6 @@ function ListSavedQueries({ config, queries }) {
           contentData={contentData}
           visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', /*'updated',*/ 'comment']}
         />
-        <pre>
-          {JSON.stringify(contentData, null, 2)}
-        </pre>
       </Pane>
     </Paneset>
   );
