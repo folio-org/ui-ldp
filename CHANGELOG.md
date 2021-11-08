@@ -10,6 +10,7 @@
 * Factor out common code in `load*` functions. Fixes UILDP-21.
 * Add settings page for saved-query GitHub repo details. Fixes UILDP-31.
 * Fix translation tags used for aria-labels when choosing sorting criteria. Fixes UILDP-33.
+* Better error-reporting for when the LDP database is unavailable. Fixes UILDP-27.
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (2021-10-01)
 
