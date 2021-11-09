@@ -54,7 +54,7 @@ function ListSavedQueries({ config, queries }) {
       <Pane defaultWidth="fill">
         <MultiColumnList
           contentData={contentData}
-          visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', /* 'updated', */ 'comment', 'deleteQuery']}
+          visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', /* 'updated', */ 'comment']}
           columnMapping={{
             name: <FormattedMessage id="ui-ldp.saved-queries.columns.name" />,
             displayName: <FormattedMessage id="ui-ldp.saved-queries.columns.displayName" />,
