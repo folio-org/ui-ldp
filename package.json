@@ -19,6 +19,7 @@
     "lsof": "lsof -P -i :3001 -i :3002 || true",
     "kill": "yarn lsof | awk '{print $2}' | egrep '^[0-9]+$' | xargs kill",
     "lint": "eslint --format unix .",
+    "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
     "lintwatch": "esw . -w --color"
   },
   "devDependencies": {
