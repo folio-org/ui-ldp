@@ -45,7 +45,6 @@ function ListSavedQueries({ config, queries }) {
   }));
 
   function executeQuery(_unusedEvent, item) {
-    console.log('executeQuery event', item);
     localforage.setItem(namespace, { tables: item.json.tables })
       .then(() => history.push('/ldp'));
   }
