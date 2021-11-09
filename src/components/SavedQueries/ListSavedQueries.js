@@ -56,12 +56,12 @@ function ListSavedQueries({ config, queries }) {
           contentData={contentData}
           visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', /* 'updated', */ 'comment']}
           columnMapping={{
-            name: <FormattedMessage id="ui-ldp.saved-queries.columns.name" />,
-            displayName: <FormattedMessage id="ui-ldp.saved-queries.columns.displayName" />,
-            autoRun: <FormattedMessage id="ui-ldp.saved-queries.columns.autoRun" />,
-            creator: <FormattedMessage id="ui-ldp.saved-queries.columns.creator" />,
-            created: <FormattedMessage id="ui-ldp.saved-queries.columns.created" />,
-            comment: <FormattedMessage id="ui-ldp.saved-queries.columns.comment" />,
+            name: <FormattedMessage id="ui-ldp.saved-queries.name" />,
+            displayName: <FormattedMessage id="ui-ldp.saved-queries.displayName" />,
+            autoRun: <FormattedMessage id="ui-ldp.saved-queries.autoRun" />,
+            creator: <FormattedMessage id="ui-ldp.saved-queries.creator" />,
+            created: <FormattedMessage id="ui-ldp.saved-queries.created" />,
+            comment: <FormattedMessage id="ui-ldp.saved-queries.comment" />,
             deleteQuery: '',
           }}
           columnWidths={{
@@ -75,7 +75,7 @@ function ListSavedQueries({ config, queries }) {
           formatter={{
             name: r => <code>{r.name.replace('.json', '')}</code>,
             creator: r => <code>{r.creator}</code>,
-            deleteQuery: r => <IconButton icon="trash" onClick={() => console.log('deleting ' + r.name)} />
+            deleteQuery: () => <IconButton icon="trash" onClick={() => undefined} />
           }}
           onRowClick={executeQuery}
         />
