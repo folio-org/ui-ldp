@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import localforage from 'localforage';
 import { useNamespace } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
