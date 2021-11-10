@@ -49,6 +49,8 @@
   "saved-queries.created": "Date created",
   "saved-queries.comment": "Comment",
   "save-query": "Save query",
+  "save-query.update.ok": "Saved query {displayName}",
+  "save-query.update.fail": "Could not save query {displayName}: error {code} ({statusText}): {detail}",
   "settings.record-limits": "Record limits",
   "settings.record-limits.default-show": "Default number to show",
   "settings.record-limits.max-show": "Maximum number to show",
