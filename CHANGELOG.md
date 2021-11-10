@@ -12,7 +12,8 @@
 * Fix translation tags used for aria-labels when choosing sorting criteria. Fixes UILDP-33.
 * Better error-reporting for when the LDP database is unavailable. Fixes UILDP-27.
 * Show null values as `[NULL]` in grey. Fixes UILDP-22.
-* Implement browser for saved queries, fetched from GitHub. Fixes UILDP-32.
+* Implement browser saved queries, fetched from GitHub, able to select and run. Fixes UILDP-32.
+* Ability to save a query to GitHub. Fixes UILDP-35.
 
 ## [1.5.0](https://github.com/folio-org/ui-ldp/tree/v1.5.0) (2021-10-01)
 
