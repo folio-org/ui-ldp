@@ -2,7 +2,7 @@
     "meta.title": "LDP",
     "something-went-wrong": "出了些问题。",
     "refresh": "刷新",
-    "error.http": "HTTP错误：状态{status} ： {text}",
+    "error.http": "HTTP错误：状态{status} ({text}) -- {detail}",
     "error.fetch-reject": "fetch() 被拒绝（从来没有发生过）： {error}",
     "error.load-config": "无法加载配置： {error}",
     "error.load-tables": "无法加载表：{error}",
