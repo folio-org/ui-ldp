@@ -45,7 +45,8 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
             mutators: { push, pop }
           }
         }) => {
-          stateMayHaveChanged(stateHasChanged, getState().values);
+          const queryFormValues = getState().values;
+          stateMayHaveChanged(stateHasChanged, queryFormValues);
           return (
             <form
               id="form-querybuilder"
@@ -104,11 +105,15 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                   </div>
                 </div>
               </div>
+              <SaveQueryModal
+                open={showSaveModal}
+                onClose={() => setShowSaveModal(false)}
+                queryFormValues={queryFormValues}
+              />
             </form>
           );
         }}
       />
-      <SaveQueryModal open={showSaveModal} onClose={() => setShowSaveModal(false)} />
     </Paneset>
   );
 }
