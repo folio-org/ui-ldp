@@ -6,10 +6,11 @@ import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, Paneset } from '@folio/stripes/components';
+import { Pane, Paneset, IconButton } from '@folio/stripes/components';
 import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 import loadResults from '../../util/loadResults';
+import SaveQueryModal from './SaveQueryModal';
 
 
 let _savedValues; // Private to stateMayHaveChanged
@@ -25,6 +26,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
 
@@ -43,7 +45,8 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
             mutators: { push, pop }
           }
         }) => {
-          stateMayHaveChanged(stateHasChanged, getState().values);
+          const queryFormValues = getState().values;
+          stateMayHaveChanged(stateHasChanged, queryFormValues);
           return (
             <form
               id="form-querybuilder"
@@ -66,6 +69,12 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                           defaultWidth="50%"
                           key={namePrefix}
                           paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
+                          lastMenu={<IconButton
+                            icon="save"
+                            ariaLabel={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
+                            onClick={() => setShowSaveModal(true)}
+                            data-cy={`${namePrefix}.saveQuery`}
+                          />}
                         >
                           <QuerySingleTable
                             namePrefix={namePrefix}
@@ -96,6 +105,11 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                   </div>
                 </div>
               </div>
+              <SaveQueryModal
+                open={showSaveModal}
+                onClose={() => setShowSaveModal(false)}
+                queryFormValues={queryFormValues}
+              />
             </form>
           );
         }}
