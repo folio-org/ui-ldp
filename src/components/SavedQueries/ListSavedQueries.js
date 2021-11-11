@@ -68,7 +68,7 @@ function ListSavedQueries({ config, queries }) {
             name: 150,
             displayName: 300,
             autoRun: 90,
-            creator: 110,
+            creator: 120,
             created: 120,
             comment: 250
           }}
