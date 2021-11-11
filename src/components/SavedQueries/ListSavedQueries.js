@@ -75,6 +75,7 @@ function ListSavedQueries({ config, queries }) {
           formatter={{
             name: r => <code>{r.name.replace('.json', '')}</code>,
             creator: r => <code>{r.creator}</code>,
+            created: r => new Date(r.created).toLocaleString(),
             deleteQuery: () => <IconButton icon="trash" onClick={() => undefined} />
           }}
           onRowClick={executeQuery}
