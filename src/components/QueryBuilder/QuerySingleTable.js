@@ -239,7 +239,7 @@ const QuerySingleTable = ({
             )}
           </span>
           <Button
-            ariaLabel={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
+            aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
             disabled={!get(queryResponse, 'resp.length')}
             onClick={() => exportCsv(queryResponse.resp, {})}
             xstyle={{ marginTop: '-1em' }}
