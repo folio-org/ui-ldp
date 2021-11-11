@@ -120,8 +120,9 @@ function SaveQueryModal({ open, onClose, queryFormValues }) {
       <Row>
         <Col xs={12}>
           <Checkbox
+            checked={values.autoRun}
             label={<FormattedMessage id="ui-ldp.saved-queries.autoRun" />}
-            onChange={e => setValues({ ...values, autoRun: e.target.value })}
+            onChange={e => setValues({ ...values, autoRun: e.target.checked })}
           />
         </Col>
       </Row>
