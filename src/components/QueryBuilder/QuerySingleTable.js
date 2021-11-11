@@ -6,7 +6,7 @@ import { Field, FormSpy, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { OnChange } from 'react-final-form-listeners';
 import { useStripes } from '@folio/stripes/core';
-import { Button, Label, MultiSelection, OptionSegment, Select, IconButton, Selection } from '@folio/stripes/components';
+import { Button, Label, MultiSelection, OptionSegment, Select, Selection } from '@folio/stripes/components';
 import { exportCsv } from '@folio/stripes/util';
 import { useLdp } from '../../LdpContext';
 import loadColumns from '../../util/loadColumns';
@@ -238,14 +238,15 @@ const QuerySingleTable = ({
                 <FormattedMessage id="ui-ldp.found-more-than" values={{ count: queryResponse.count }} />
             )}
           </span>
-          <IconButton
-            icon="save"
-            ariaLabel={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
+          <Button
+            aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
             disabled={!get(queryResponse, 'resp.length')}
             onClick={() => exportCsv(queryResponse.resp, {})}
-            style={{ marginTop: '-1em' }}
+            xstyle={{ marginTop: '-1em' }}
             data-cy={`${namePrefix}.downloadCSV`}
-          />
+          >
+            <FormattedMessage id="ui-ldp.button.csv" />
+          </Button>
         </div>
       </div>
     </div>

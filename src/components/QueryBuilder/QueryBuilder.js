@@ -71,7 +71,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                           paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
                           lastMenu={<IconButton
                             icon="save"
-                            ariaLabel={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
+                            aria-label={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
                             onClick={() => setShowSaveModal(true)}
                             data-cy={`${namePrefix}.saveQuery`}
                           />}
