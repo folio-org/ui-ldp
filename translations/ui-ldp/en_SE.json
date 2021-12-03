@@ -73,5 +73,6 @@
     "save-query": "Save query",
     "save-query.update.ok": "Saved query {displayName}",
     "save-query.update.fail": "Could not save query {displayName}: error {code} ({statusText}): {detail}",
-    "button.csv": "CSV"
+    "button.csv": "CSV",
+    "button.clear": "Clear"
 }
