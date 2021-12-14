@@ -74,5 +74,5 @@
     "save-query.update.ok": "الاستعلام المحفوظ {displayName}",
     "save-query.update.fail": "تعذر حفظ الاستعلام {displayName}: خطأ {code} ({statusText}): {detail}",
     "button.csv": "CSV",
-    "button.clear": "Clear"
+    "button.clear": "مسح"
 }
