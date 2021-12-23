@@ -72,7 +72,7 @@
     "saved-queries.comment": "Commentaire",
     "save-query": "Enregistrer la recherche",
     "save-query.update.ok": "Recherche enregistrée {displayName}",
-    "save-query.update.fail": "Impossible de sauvegarder la recherche {displayName} : erreur {code} ({statusText}) : {detail}. ({statusText}) : {detail} (détails)",
+    "save-query.update.fail": "Impossible de sauvegarder la recherche {displayName} : erreur {code} ({statusText}) : {detail}.",
     "button.csv": "CSV",
     "button.clear": "Effacer"
 }
