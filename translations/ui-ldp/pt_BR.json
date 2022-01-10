@@ -74,5 +74,5 @@
     "save-query.update.ok": "Consulta salva {displayName}",
     "save-query.update.fail": "Não foi possível salvar a consulta {displayName}: erro {code} ({statusText}): {detail}",
     "button.csv": "CSV",
-    "button.clear": "Clear"
+    "button.clear": "Limpar"
 }
