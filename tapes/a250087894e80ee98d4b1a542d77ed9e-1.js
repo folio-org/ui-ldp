@@ -4,7 +4,7 @@ var path = require("path");
  * OPTIONS /ldp/db/query
  *
  * connection: keep-alive
- * host: folio-snapshot-load-okapi.dev.folio.org
+ * host: folio-snapshot-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * accept: * / *
  * access-control-request-method: POST
@@ -22,7 +22,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 204;
 
-  res.setHeader("date", "Tue, 02 Nov 2021 15:11:21 GMT");
+  res.setHeader("date", "Wed, 02 Feb 2022 17:48:51 GMT");
   res.setHeader("connection", "keep-alive");
   res.setHeader("access-control-allow-origin", "*");
   res.setHeader("access-control-allow-methods", "PUT,PATCH,DELETE,GET,POST");

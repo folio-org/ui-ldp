@@ -4,12 +4,12 @@ var path = require("path");
  * GET /configurations/entries?query=(module==LDP and configName==recordLimits)
  *
  * connection: keep-alive
- * host: folio-snapshot-load-okapi.dev.folio.org
+ * host: folio-snapshot-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * accept: application/json
  * x-okapi-tenant: diku
  * accept-language: en-US
- * x-okapi-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjU4M2MwMzdmLTY4OGUtNTU0Ni04MDMwLTg5MTViNzdhOTI0NiIsImlhdCI6MTYzNTg2NTgyMiwidGVuYW50IjoiZGlrdSJ9.fKY6L90KCVT7qVlef0H6bT-5KI2-UnAoWFgTdojqjOQ
+ * x-okapi-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6Ijk4ZTU0MjA1LTNiZWQtNWVmNy1iMjJmLTk3MTAyOGMyNWNiMyIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2NDM4MjQwNzEsInRlbmFudCI6ImRpa3UifQ.kXV7Vk3ZcxaT6BH1xjAuuNnYTDc7Cqlblb4twp6ptPc
  * user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
  * content-type: application/json
  * origin: http://localhost:3001
@@ -23,7 +23,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 200;
 
-  res.setHeader("date", "Tue, 02 Nov 2021 15:10:53 GMT");
+  res.setHeader("date", "Wed, 02 Feb 2022 17:48:22 GMT");
   res.setHeader("content-type", "application/json");
   res.setHeader("transfer-encoding", "chunked");
   res.setHeader("connection", "keep-alive");
@@ -34,10 +34,12 @@ module.exports = function (req, res) {
 
   res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 
-  res.write(new Buffer("H4sIAAAAAAAAAKrmAgAAAP//UlBQSs7PS8tML1ayUojmAgAAAP//lJBfS8MwFMW/S15dxk3atGkfZT4IQwTnk5WRNrcz0K4zf3Qy9t1NNhniw8CXCzn3d88h50CMJjVpi6JDrTPKcok0L2VJZQct1QoUl6WQABWZkXHSYcDILxeP8Xk2elBjkix2k9VLMxrv4g63qh0wensbcEY+1BASdWiIxl6FwT+9TZ8NqRvCABoya8io9r+1i3i3303WX+Szro07+a/SdHH50pB+Gsy0tphws91Qi+8BnXdr43F0p7O/SHBo3VppbdE5vMZs7BR2EXg9ph7QK628IvWBdBaVR72II/6PA2eUMQp8xUTNoM7lnIvqBqAGSJWd6duv5+h6n6oXMusgK3tayFi9EHlBJWRAZcVEW5aq4nkRD8NOX4sRfJ4zcYn5of8bczx+AwAA//8=", "base64"));
-  res.write(new Buffer("itUBpZCS/JLEnCBwhIKSiaEOFwAAAP//", "base64"));
-  res.write(new Buffer("UgDGbzEw1jzz0vKBItVoSgx1lNISk1OBMW8VHasDjJ3E9Lz84pLMZLBALVctAAAA//8=", "base64"));
-  res.write(new Buffer("AwA299Q2eQIAAA==", "base64"));
+  res.write(new Buffer("H4sIAAAAAAAAAKrmAgAAAP//", "base64"));
+  res.write(new Buffer("UlBQSs7PS8tML1ayUojmAgAAAP//lJFfS8MwFMW/S15dRpI2a5tHmQ/CEGHzycpIe29noF1n/szJ2Hc32WSIoCCECzn3d88hN0digCjCK10WWcUocChpnmtBywpaKtqG67yYScE5mZBhhNBj5Bfzx3i9GD3oIUkW29HCwgzGu9jDrW56jN7eBpyQve5Doo41Aex06P3ydXyviaoJZ6wmk5oM+vBdu4p3h91o/VW+6GDc2X+VqovN55p0Y2/GtcWEm+2GWnwL6LxbG4+DO4/9RIJD69YawKJz+BezsWPYReAlEtHWGnRLvUeI0eyUVoNeg/aaqCNpLWqPMI8lPlkwIShLZ8VniheK5dOKZTeMKcbSFi/07cdTDLpPv1GVKHPBJM0aBCqxK2gjREergjNRtkK2TRYHww5+iSlUXirBplLOrjFf9H9jTqdPAAAA//8=", "base64"));
+  res.write(new Buffer("itXhAgAAAP//", "base64"));
+  res.write(new Buffer("AiaakvySxJwgcByDUo6hDhcAAAD//w==", "base64"));
+  res.write(new Buffer("AgoCQw0Yk555aflAoWo0NYY6SmmJyanA1GAVHasDjLHE9Lz84pLMZLBALVctAAAA//8=", "base64"));
+  res.write(new Buffer("AwC232ZTjQIAAA==", "base64"));
   res.end();
 
   return __filename;

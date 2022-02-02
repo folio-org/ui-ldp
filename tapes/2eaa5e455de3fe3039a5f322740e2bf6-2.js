@@ -1,7 +1,7 @@
 var path = require("path");
 
 /**
- * GET /configurations/entries?query=(module==PLUGINS)
+ * GET /ldp/config/sqconfig
  *
  * connection: keep-alive
  * host: folio-snapshot-okapi.dev.folio.org
@@ -15,7 +15,7 @@ var path = require("path");
  * sec-fetch-site: same-site
  * sec-fetch-mode: cors
  * sec-fetch-dest: empty
- * referer: http://localhost:3001/
+ * referer: http://localhost:3001/ldp
  * accept-encoding: gzip
  * accept-language: en-GB
  */
@@ -23,20 +23,17 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 200;
 
-  res.setHeader("date", "Wed, 02 Feb 2022 17:48:45 GMT");
+  res.setHeader("date", "Wed, 02 Feb 2022 17:48:48 GMT");
   res.setHeader("content-type", "application/json");
   res.setHeader("transfer-encoding", "chunked");
   res.setHeader("connection", "keep-alive");
   res.setHeader("vary", "origin");
   res.setHeader("access-control-allow-origin", "*");
   res.setHeader("access-control-expose-headers", "location,X-Okapi-Trace,X-Okapi-Token,Authorization,X-Okapi-Request-Id,X-Okapi-Module-Id");
-  res.setHeader("content-encoding", "gzip");
 
   res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 
-  res.write(new Buffer("H4sIAAAAAAAAAKrmAgAAAP//", "base64"));
-  res.write(new Buffer("UlBQSs7PS8tML1ayUojmAgAAAP//itXhAgAAAP//AoqU5Jck5gSlJucXpYCEDXS4AAAAAP//", "base64"));
-  res.write(new Buffer("AgoWpRaX5pR45qXlA4Wq0dQY6CilJSanlgCZ0bE6SimZiel5+cUlmclggVquWgAAAAD//wMAUgpboWoAAAA=", "base64"));
+  res.write(new Buffer("ewogICJ2YWx1ZSIgOiAie1wib3duZXJcIjpcIlJhbmRvbU90aGVyR3V5XCIsXCJyZXBvXCI6XCJsZHAtcXVlcmllc1wiLFwidG9rZW5cIjpcImdocF94aDY2SUxsTWZON1BYYjRBVkw0TEFMUDAyaEY1TEoxQWVkTFZcIn0iLAogICJ0ZW5hbnQiIDogImRpa3UiLAogICJrZXkiIDogInNxY29uZmlnIgp9", "base64"));
   res.end();
 
   return __filename;
