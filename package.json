@@ -11,9 +11,10 @@
   "scripts": {
     "start": "stripes serve stripes.config.js",
     "build": "stripes build --output ./output",
-    "test-snapshot-load": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-load-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
+    "test-snapshot": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
+    "test-snapshot-load": "echo Use test-snapshot instead",
     "test": "stripes serve --coverage --port 3001 --okapi http://localhost:3002 & pid1=$! && env LOGCAT=startup yakbak-proxy -i -x -n & pid2=$! && wait-on http://localhost:3001 && cypress run; kill $pid1 $pid2",
-    "regenerate": "stripes serve --port 3001 --okapi http://localhost:3002 & pid1=$! && rm -rf tapes && env LOGCAT=startup yakbak-proxy -i -x https://folio-snapshot-load-okapi.dev.folio.org & pid2=$! && wait-on http://localhost:3001 && cypress run; kill $pid1 $pid2",
+    "regenerate": "stripes serve --port 3001 --okapi http://localhost:3002 & pid1=$! && rm -rf tapes && env LOGCAT=startup yakbak-proxy -i -x https://folio-snapshot-okapi.dev.folio.org & pid2=$! && wait-on http://localhost:3001 && cypress run; kill $pid1 $pid2",
     "coverage-summary": "nyc report --reporter=text-summary",
     "coverage": "nyc report --reporter=text",
     "lsof": "lsof -P -i :3001 -i :3002 || true",

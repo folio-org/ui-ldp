@@ -4,10 +4,10 @@ var path = require("path");
  * GET /ldp/db/columns?schema=public&table=user_users
  *
  * connection: keep-alive
- * host: folio-snapshot-load-okapi.dev.folio.org
+ * host: folio-snapshot-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * x-okapi-tenant: diku
- * x-okapi-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6IjU4M2MwMzdmLTY4OGUtNTU0Ni04MDMwLTg5MTViNzdhOTI0NiIsImlhdCI6MTYzNTg2NTg3NSwidGVuYW50IjoiZGlrdSJ9.94g7mSBDWRz_vNwb94GSdfo3382tsrfhp1OyFbpkZKE
+ * x-okapi-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaWt1X2FkbWluIiwidXNlcl9pZCI6Ijk4ZTU0MjA1LTNiZWQtNWVmNy1iMjJmLTk3MTAyOGMyNWNiMyIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2NDM4MjQxMjQsInRlbmFudCI6ImRpa3UifQ.muoNJftK7GH2hInrD1bfzFcCmRltZX33SsFh8GwPsuk
  * user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
  * content-type: application/json
  * accept: * / *
@@ -23,7 +23,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 200;
 
-  res.setHeader("date", "Tue, 02 Nov 2021 15:11:20 GMT");
+  res.setHeader("date", "Wed, 02 Feb 2022 17:48:50 GMT");
   res.setHeader("content-type", "application/json");
   res.setHeader("transfer-encoding", "chunked");
   res.setHeader("connection", "keep-alive");

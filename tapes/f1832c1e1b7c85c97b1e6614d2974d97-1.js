@@ -1,13 +1,13 @@
 var path = require("path");
 
 /**
- * OPTIONS /configurations/entries
+ * OPTIONS /configurations/entries/19a87390-d1d8-44a2-89dc-2cb1a4765211
  *
  * connection: keep-alive
- * host: folio-snapshot-load-okapi.dev.folio.org
+ * host: folio-snapshot-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * accept: * / *
- * access-control-request-method: POST
+ * access-control-request-method: PUT
  * access-control-request-headers: content-type,x-okapi-tenant,x-okapi-token
  * origin: http://localhost:3001
  * user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/7.7.0 Chrome/89.0.4328.0 Electron/12.0.0-beta.14 Safari/537.36
@@ -22,7 +22,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 204;
 
-  res.setHeader("date", "Tue, 02 Nov 2021 15:10:47 GMT");
+  res.setHeader("date", "Wed, 02 Feb 2022 17:48:15 GMT");
   res.setHeader("connection", "keep-alive");
   res.setHeader("access-control-allow-origin", "*");
   res.setHeader("access-control-allow-methods", "PUT,PATCH,DELETE,GET,POST");

@@ -4,7 +4,7 @@ var path = require("path");
  * GET /saml/check
  *
  * connection: keep-alive
- * host: folio-snapshot-load-okapi.dev.folio.org
+ * host: folio-snapshot-okapi.dev.folio.org
  * proxy-connection: keep-alive
  * x-okapi-tenant: diku
  * accept: application/json
@@ -21,7 +21,7 @@ var path = require("path");
 module.exports = function (req, res) {
   res.statusCode = 200;
 
-  res.setHeader("date", "Tue, 02 Nov 2021 15:10:20 GMT");
+  res.setHeader("date", "Wed, 02 Feb 2022 17:47:49 GMT");
   res.setHeader("content-type", "application/json");
   res.setHeader("transfer-encoding", "chunked");
   res.setHeader("connection", "keep-alive");
