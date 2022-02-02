@@ -74,5 +74,5 @@
     "save-query.update.ok": "已保存查询{displayName}",
     "save-query.update.fail": "无法保存查询{displayName} ：错误{code} （ {statusText} ）： {detail}",
     "button.csv": "CSV",
-    "button.clear": "Clear"
+    "button.clear": "清除"
 }
