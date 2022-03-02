@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [1.6.0](https://github.com/folio-org/ui-ldp/tree/v1.6.0) (IN PROGRESS)
+## [1.6.0](https://github.com/folio-org/ui-ldp/tree/v1.6.0) (2022-03-02)
 
 * Maintain query-form state when navigating away and returning. Fixes UILDP-10.
 * Add a Clear button that resets form state. Fixes UILDP-26.
