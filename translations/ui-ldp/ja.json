@@ -63,7 +63,7 @@
     "settings.sqconfig.token": "OAuth token for access to repository",
     "button.save-query": "Save query",
     "button.save": "Save",
-    "button.cancel": "Cancel",
+    "button.cancel": "キャンセル",
     "saved-queries.name": "Filename",
     "saved-queries.displayName": "Display name",
     "saved-queries.autoRun": "Auto-run?",
