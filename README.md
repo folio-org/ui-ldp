@@ -4,6 +4,21 @@ Copyright (C) 2020-2021 The Open Library Foundation
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for more information.
 
+<!-- md2toc -l 2 README.md -->
+* [Introduction](#introduction)
+* [Pre-reqs for local development](#pre-reqs-for-local-development)
+* [Run](#run)
+* [Side-loading mod-ldp](#side-loading-mod-ldp)
+* [Configuration](#configuration)
+    * [dbinfo](#dbinfo)
+    * [sqconfig](#sqconfig)
+    * [Use of mod-configuration](#use-of-mod-configuration)
+* [Additional information](#additional-information)
+    * [Other documentation](#other-documentation)
+    * [Code of Conduct](#code-of-conduct)
+    * [Issue tracker](#issue-tracker)
+
+
 ## Introduction
 
 LDP query builder UI for FOLIO/ReShare.
