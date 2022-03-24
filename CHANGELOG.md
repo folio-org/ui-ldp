@@ -3,6 +3,7 @@
 ## [1.6.1](https://github.com/folio-org/ui-ldp/tree/v1.6.1) (IN PROGRESS)
 
 * If any schema-names loaded into the form from the previous session's state refer to schemas no longer supported by the back-end database, they are now changed to refer to a valid schema instead. Fixes UILDP-48.
+* Complete revamp of permissions. Fixes UILDP-47.
 
 ## [1.6.0](https://github.com/folio-org/ui-ldp/tree/v1.6.0) (2022-03-02)
 
