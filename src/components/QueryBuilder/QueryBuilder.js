@@ -22,6 +22,20 @@ function stateMayHaveChanged(stateHasChanged, values) {
 }
 
 
+// It can happen that the schema names that were stored as parts of
+// the form state in the previous session refer to schemas that are no
+// longer available in the underlying database (UILDP-48). When this
+// happens, we change them to refer to the first legitimate schema.
+//
+function ensureSchemasAreAvailable(initialState, schemaNames) {
+  initialState.tables.forEach(t => {
+    if (!schemaNames.includes(t.schema)) {
+      t.schema = schemaNames[0];
+    }
+  });
+}
+
+
 function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, setError }) {
   const intl = useIntl();
   const stripes = useStripes();
@@ -29,6 +43,8 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
   const [showSaveModal, setShowSaveModal] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
+
+  ensureSchemasAreAvailable(initialState, Object.keys(tables));
 
   return (
     <Paneset>
