@@ -110,15 +110,17 @@
     "permissionSets": [
       {
         "permissionName": "module.ldp.enabled",
-        "displayName": "LDP: all permissions",
+        "displayName": "UI: LDP module is enabled",
         "subPermissions": [
-          "ldp.read"
+          "ldp.read",
+          "ldp.config.read",
+          "configuration.entries.collection.get"
         ],
         "visible": true
       },
       {
         "permissionName": "settings.ldp.enabled",
-        "displayName": "Settings (LDP): Can view, create, edit, and remove",
+        "displayName": "Settings (LDP): Can view settings",
         "subPermissions": [
           "settings.enabled"
         ],
@@ -128,7 +130,9 @@
         "permissionName": "ui-ldp.settings.record-limits",
         "displayName": "Settings (LDP): Can modify default record limits",
         "subPermissions": [
-          "settings.enabled"
+          "settings.ldp.enabled",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put"
         ],
         "visible": true
       },
@@ -136,7 +140,9 @@
         "permissionName": "ui-ldp.settings.table-availability",
         "displayName": "Settings (LDP): Can select which tables are available to search",
         "subPermissions": [
-          "settings.enabled"
+          "settings.ldp.enabled",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put"
         ],
         "visible": true
       },
@@ -144,7 +150,7 @@
         "permissionName": "ui-ldp.settings.dbinfo",
         "displayName": "Settings (LDP): Can modify LDP database connection details",
         "subPermissions": [
-          "settings.enabled",
+          "settings.ldp.enabled",
           "ldp.config.read",
           "ldp.config.edit"
         ],
@@ -154,9 +160,21 @@
         "permissionName": "ui-ldp.settings.sqconfig",
         "displayName": "Settings (LDP): Can modify saved-query configuration details",
         "subPermissions": [
-          "settings.enabled",
+          "settings.ldp.enabled",
           "ldp.config.read",
           "ldp.config.edit"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.all",
+        "displayName": "LDP: All premissions",
+        "subPermissions": [
+          "module.ldp.enabled",
+          "ui-ldp.settings.record-limits",
+          "ui-ldp.settings.table-availability",
+          "ui-ldp.settings.dbinfo",
+          "ui-ldp.settings.sqconfig"
         ],
         "visible": true
       }
