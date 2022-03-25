@@ -2,7 +2,7 @@ import fetch from 'cross-fetch';
 
 // GitHub API notes
 //
-// User-Agent header is required, can be name of app, e.g. `User-Agent: Awesome-Octocat-App`
+// User-Agent header is required, but supplied by HTTP library or browser
 // Send header `Accept: application/vnd.github.v3+json`
 // Authentication method 1 (HTTP Basic): `curl -u "username:password" https://api.github.com`
 // Authentication method 2 preferred (OAuth2 token): `curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com`
@@ -14,7 +14,6 @@ async function gitHubFetch(config, path, options) {
   return fetch(`https://api.github.com/${path}`, {
     ...options,
     headers: {
-      'User-Agent': 'FOLIO ui-ldp',
       'Accept': 'application/vnd.github.v3+json',
       'Content-Type': 'application/json',
       'Authorization': `token ${config.token}`,
