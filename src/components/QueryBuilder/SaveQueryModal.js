@@ -8,11 +8,12 @@ import gitHubFetch from '../../util/gitHubFetch';
 import BigError from '../BigError';
 
 
-function SaveQueryModal({ open, onClose, queryFormValues }) {
+function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const [config, setConfig] = useState();
   const [error, setError] = useState();
+  const [updateName, setUpdateName] = useState(autoUpdateName);
 
   useEffect(() => {
     fetchSavedQueryConfig(stripes, setConfig, setError);
@@ -97,7 +98,7 @@ function SaveQueryModal({ open, onClose, queryFormValues }) {
   return (
     <Modal
       id="save-query-modal"
-      open={open}
+      open
       onClose={onClose}
       dismissible
       label={<FormattedMessage id="ui-ldp.save-query" />}
@@ -106,14 +107,30 @@ function SaveQueryModal({ open, onClose, queryFormValues }) {
       <Row>
         <Col xs={4}>
           <TextField
+            id="save-query-modal-name"
             label={<FormattedMessage id="ui-ldp.saved-queries.name" />}
-            onChange={e => setValues({ ...values, name: e.target.value })}
+            onChange={
+              e => {
+                setUpdateName(false);
+                setValues({ ...values, name: e.target.value });
+              }
+            }
+            value={values.name}
           />
         </Col>
         <Col xs={8}>
           <TextField
             label={<FormattedMessage id="ui-ldp.saved-queries.displayName" />}
-            onChange={e => setValues({ ...values, displayName: e.target.value })}
+            onChange={
+              e => {
+                const newValues = { ...values, displayName: e.target.value };
+                if (updateName) {
+                  newValues.name = e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '_');
+                }
+                setValues(newValues);
+              }
+            }
+            autoFocus
           />
         </Col>
       </Row>
@@ -156,7 +173,6 @@ function SaveQueryModal({ open, onClose, queryFormValues }) {
 
 
 SaveQueryModal.propTypes = {
-  open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   queryFormValues: PropTypes.shape({
     tables: PropTypes.arrayOf(
@@ -166,6 +182,7 @@ SaveQueryModal.propTypes = {
       }).isRequired,
     ).isRequired
   }).isRequired,
+  autoUpdateName: PropTypes.bool.isRequired,
 };
 
 
