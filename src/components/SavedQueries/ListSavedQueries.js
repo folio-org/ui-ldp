@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import localforage from 'localforage';
-import { useNamespace } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
+import { useNamespace, CalloutContext } from '@folio/stripes/core';
+import { LoadingPane, Paneset, Pane, MultiColumnList, IconButton, ConfirmationModal } from '@folio/stripes/components';
 
 
 function processQueries(queries) {
@@ -26,11 +26,13 @@ function processQueries(queries) {
 
 
 // eslint-disable-next-line no-unused-vars
-function ListSavedQueries({ config, queries }) {
+function ListSavedQueries({ config, queries, deleteQuery }) {
   const [processed, setProcessed] = useState();
+  const [queryToDelete, setQueryToDelete] = useState();
   const history = useHistory();
   const [, getNamespace] = useNamespace();
   const namespace = getNamespace({ key: 'formState' });
+  const callout = useContext(CalloutContext);
 
   useEffect(() => {
     setProcessed(processQueries(queries));
@@ -42,6 +44,7 @@ function ListSavedQueries({ config, queries }) {
     ...obj.json.META,
     name: obj.name,
     json: obj.json,
+    sha: obj.sha,
   }));
 
   function executeQuery(_unusedEvent, item) {
@@ -49,12 +52,34 @@ function ListSavedQueries({ config, queries }) {
       .then(() => history.push('/ldp'));
   }
 
+  function maybeDeleteQuery(e, item) {
+    e.stopPropagation();
+    setQueryToDelete(item);
+  }
+
+  function actuallyDeleteQuery(item) {
+    deleteQuery(item).then(() => {
+      setQueryToDelete(undefined);
+      callout.sendCallout({
+        message: (
+          <FormattedMessage
+            id="ui-ldp.saved-queries.delete.deleted"
+            values={{
+              name: item.name,
+              code: chunks => <code>{chunks}</code>,
+            }}
+          />
+        ),
+      });
+    });
+  }
+
   return (
     <Paneset>
       <Pane defaultWidth="fill">
         <MultiColumnList
           contentData={contentData}
-          visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', /* 'updated', */ 'comment']}
+          visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', 'comment', 'deleteQuery']}
           columnMapping={{
             name: <FormattedMessage id="ui-ldp.saved-queries.name" />,
             displayName: <FormattedMessage id="ui-ldp.saved-queries.displayName" />,
@@ -76,10 +101,39 @@ function ListSavedQueries({ config, queries }) {
             name: r => <code>{r.name.replace('.json', '')}</code>,
             creator: r => <code>{r.creator}</code>,
             created: r => new Date(r.created).toLocaleString(),
-            deleteQuery: () => <IconButton icon="trash" onClick={() => undefined} />
+            deleteQuery: r => <IconButton icon="trash" onClick={e => maybeDeleteQuery(e, r)} />
           }}
           onRowClick={executeQuery}
         />
+
+        {queryToDelete !== undefined &&
+          <ConfirmationModal
+            open
+            heading={<FormattedMessage id="ui-ldp.saved-queries.delete.deleteQuery" />}
+            bodyTag="div"
+            message={(
+              <div style={{ textAlign: 'center' }}>
+                <p>
+                  {queryToDelete.displayName}
+                  {' '}
+                  (<code>{queryToDelete.name}</code>)
+                </p>
+                <p>
+                  <FormattedMessage
+                    id="ui-ldp.saved-queries.delete.createdBy"
+                    values={{
+                      creator: queryToDelete.creator,
+                      code: chunks => <code>{chunks}</code>,
+                    }}
+                  />
+                </p>
+              </div>
+            )}
+            confirmLabel={<FormattedMessage id="ui-ldp.saved-queries.delete.confirm" />}
+            onConfirm={() => actuallyDeleteQuery(queryToDelete)}
+            onCancel={() => setQueryToDelete(undefined)}
+          />
+        }
       </Pane>
     </Paneset>
   );
@@ -96,9 +150,9 @@ ListSavedQueries.propTypes = {
     PropTypes.shape({
       content: PropTypes.string.isRequired,
       encoding: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired, // XXX hopefully to use for deletion
     })
   ).isRequired,
+  deleteQuery: PropTypes.func.isRequired,
 };
 
 
