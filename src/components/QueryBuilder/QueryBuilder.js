@@ -121,11 +121,14 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                   </div>
                 </div>
               </div>
-              <SaveQueryModal
-                open={showSaveModal}
-                onClose={() => setShowSaveModal(false)}
-                queryFormValues={queryFormValues}
-              />
+              {
+                showSaveModal &&
+                  <SaveQueryModal
+                    onClose={() => setShowSaveModal(false)}
+                    queryFormValues={queryFormValues}
+                    autoUpdateName
+                  />
+              }
             </form>
           );
         }}
