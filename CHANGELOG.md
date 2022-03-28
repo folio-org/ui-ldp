@@ -5,6 +5,7 @@
 * If any schema-names loaded into the form from the previous session's state refer to schemas no longer supported by the back-end database, they are now changed to refer to a valid schema instead. Fixes UILDP-48.
 * Complete revamp of permissions. Fixes UILDP-47.
 * When saving a new query, the filename is auto-generated from the display-name. Fixes UILDP-46.
+* Saved queries can now be deleted. Fixes UILDP-49.
 
 ## [1.6.0](https://github.com/folio-org/ui-ldp/tree/v1.6.0) (2022-03-02)
 

@@ -68,7 +68,16 @@ function SavedQueries({ config }) {
 
   if (error) return <BigError message={error} />;
 
-  return <ListSavedQueries config={config} queries={queries} />;
+  const deleteQuery = (item) => {
+    const search = new URLSearchParams({
+      sha: item.sha,
+      message: 'Deleted from UI',
+    }).toString();
+    const url = `repos/${config.owner}/${config.repo}/contents/queries/${item.name}?${search}`;
+    return gitHubFetch(config, url, { method: 'DELETE' });
+  };
+
+  return <ListSavedQueries config={config} queries={queries} deleteQuery={deleteQuery} />;
 }
 
 
