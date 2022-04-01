@@ -69,10 +69,14 @@
     "saved-queries.autoRun": "Auto-run?",
     "saved-queries.creator": "Creator",
     "saved-queries.created": "Date created",
-    "saved-queries.comment": "Comment",
+    "saved-queries.comment": "コメント",
     "save-query": "Save query",
     "save-query.update.ok": "Saved query {displayName}",
     "save-query.update.fail": "Could not save query {displayName}: error {code} ({statusText}): {detail}",
     "button.csv": "CSV",
-    "button.clear": "Clear"
+    "button.clear": "Clear",
+    "saved-queries.delete.deleteQuery": "Delete query?",
+    "saved-queries.delete.createdBy": "Created by <code>{creator}</code>",
+    "saved-queries.delete.confirm": "Confirm",
+    "saved-queries.delete.deleted": "Deleted query <code>{name}</code>. Note that it may take some time before the query is no longer visible in the list."
 }

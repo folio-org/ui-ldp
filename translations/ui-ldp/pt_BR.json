@@ -74,5 +74,9 @@
     "save-query.update.ok": "Consulta salva {displayName}",
     "save-query.update.fail": "Não foi possível salvar a consulta {displayName}: erro {code} ({statusText}): {detail}",
     "button.csv": "CSV",
-    "button.clear": "Limpar"
+    "button.clear": "Limpar",
+    "saved-queries.delete.deleteQuery": "Deletar a consulta?",
+    "saved-queries.delete.createdBy": "Criado por <code> {creator} </code>",
+    "saved-queries.delete.confirm": "Confirmar",
+    "saved-queries.delete.deleted": "Consulta <code>{name}</code> excluída. Observe que pode levar algum tempo até que a consulta não esteja mais visível na lista."
 }
