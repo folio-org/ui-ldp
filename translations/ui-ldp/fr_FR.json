@@ -74,5 +74,9 @@
     "save-query.update.ok": "Recherche enregistrée {displayName}",
     "save-query.update.fail": "Impossible de sauvegarder la recherche {displayName} : erreur {code} ({statusText}) : {detail}.",
     "button.csv": "CSV",
-    "button.clear": "Effacer"
+    "button.clear": "Effacer",
+    "saved-queries.delete.deleteQuery": "Delete query?",
+    "saved-queries.delete.createdBy": "Created by <code>{creator}</code>",
+    "saved-queries.delete.confirm": "Confirm",
+    "saved-queries.delete.deleted": "Deleted query <code>{name}</code>. Note that it may take some time before the query is no longer visible in the list."
 }
