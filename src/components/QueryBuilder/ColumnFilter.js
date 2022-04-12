@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Field } from 'react-final-form';
-import { IconButton, Selection, TextField } from '@folio/stripes/components';
+import { IconButton, Selection, Select, TextField } from '@folio/stripes/components';
+
+
+const operations = ['=', '<>', '<', '<=', '>', '>=', 'LIKE', 'ILIKE'].map(op => ({ value: op, label: op }));
+
 
 const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
   const intl = useIntl();
@@ -19,7 +23,15 @@ const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
           disabled={disabled}
         />
       </div>
-      =
+      <div style={{ flex: 1, marginLeft: 5 }}>
+        <Field
+          name={`${name}.op`}
+          data-cy={`${name}.op`}
+          component={Select}
+          dataOptions={operations}
+          disabled={disabled}
+        />
+      </div>
       <div style={{ flex: 1, marginLeft: 5 }}>
         <Field
           name={`${name}.value`}
