@@ -26,7 +26,7 @@
     "placeholder.columns.all": "(All)",
     "button.add-filter": "Add filter",
     "button.add-ordering-criterion": "Add ordering criterion",
-    "button.submit": "Submit",
+    "button.submit": "送信",
     "button.download-csv": "Download as CSV",
     "button.add-join-table": "Add join table",
     "found-records": "Found {count} records",
