@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.7.0](https://github.com/folio-org/ui-ldp/tree/v1.7.0) (IN PROGRESS)
+
+* Allow user to specify operation in column filters. Fixes UILDP-50.
+
 ## [1.6.2](https://github.com/folio-org/ui-ldp/tree/v1.6.2) (2022-04-04)
 
 * If any schema-names loaded into the form from the previous session's state refer to schemas no longer supported by the back-end database, they are now changed to refer to a valid schema instead. Fixes UILDP-48.
