@@ -8,18 +8,6 @@ import loadTables from '../util/loadTables';
 import BigError from '../components/BigError';
 import QueryBuilder from '../components/QueryBuilder';
 
-const initialInitialState = {
-  tables: [
-    {
-      schema: 'public',
-      tableName: null,
-      columnFilters: [{}],
-      showColumns: [],
-      orderBy: [],
-      // limit is set below, from dynamically loaded defaults
-    }
-  ]
-};
 
 const QueryBuilderRoute = () => {
   const intl = useIntl();
@@ -34,7 +22,18 @@ const QueryBuilderRoute = () => {
     loadTables(intl, stripes, setTables, setError);
   }, [intl, stripes, stripes.okapi, setTables]);
 
-  initialInitialState.tables[0].limit = ldp.defaultShow;
+  const initialInitialState = {
+    tables: [
+      {
+        schema: 'public',
+        tableName: null,
+        columnFilters: [{}],
+        showColumns: [],
+        orderBy: [],
+        limit: ldp.defaultShow,
+      }
+    ]
+  };
 
   const namespace = getNamespace({ key: 'formState' });
   useEffect(() => {
@@ -42,6 +41,8 @@ const QueryBuilderRoute = () => {
       // console.log(`localforage.getItem('${namespace}') got state`, state);
       setInitialState(state || initialInitialState);
     });
+    // Including initialInitialState in the dependency array makes weird things happen
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [namespace]);
 
   if (error) return <BigError message={error} />;
