@@ -6,6 +6,7 @@
 * [Front-end work](#front-end-work)
 * [Back-end work](#back-end-work)
 * [Metadata file format](#metadata-file-format)
+* [Handling configuration storage](#handling-configuration-storage)
 
 
 
@@ -53,7 +54,8 @@ For #3, we need the ability to return the set of git repositories that are assoc
 
 For #7, we need a new ability to submit a literal SQL query, as opposed to the present searching WSAPI provided by mod-ldp, which accepts a set of form-values and builds the SQL itself. Depending on exactly how we do this, we may want to include the parameter values separately from the query instead of substituting them in.
 
-Stages #2, 4, 5 and 6 do not require any new back-end support.
+Stages #2, 4, 5 and 6 do not require any new back-end support. Stage 7 unambigously requires a new back-end facility, but it should 
+be trivial to provide. For stages 1 and 3 there may be a workaround -- see [Handling configuration storage](#handling-configuration-storage) below.
 
 
 ## Metadata file format
@@ -99,3 +101,35 @@ Such a file might look like this (for [this SQL query[(https://github.com/folio-
   ]
 }
 ```
+
+
+## Handling configuration storage
+
+The requirements for back-end storage of GitHub repositories are as follows:
+1. Each FOLIO user must have his own set of repositories, and we need a way of fetching a given user's repositories.
+2. Each user's set can contain arbitrarily many repositories.
+3. We want a user to be able to retrieve all their own configuration information efficiently.
+4. For each repository, we need to store repository owner, repository name, branch, and taken.
+5. We want to prevent any user from seeing any other user's authentication tokens, and ideally any of their data.
+
+Two facilities are presently available to use:
+* `mod-ldp`'s built-in key-value store (`/ldp/config`), which we use to store the existing git-repository configuration for saved queries. In this case, the key is `sqconfig` and the value is a JSON document such as `{"owner":"RandomOtherGuy","repo":"ldp-queries","token":"ghp_x66hILMfl7NXP4AbLVLA4P0L2h5FJL1eAdLV"}`.
+* [`mod-configuration`](https://github.com/folio-org/mod-configuration), a core module used by much of FOLIO, which provides much more functionality, including user-specific values. However, the module is not widely loved and is in fact deprecated -- though not in favour of anything but the suggestion that modules should DIY their configuration storage. For historical reasons, `mod-ldp` uses this facility for some of its configuration (record limits and table availability).
+
+This situation is unsatisfactory in multiple ways:
+* The LDP module should not use two separate storage solutions for its configuration.
+* The built-in facility is in multiple respects too primitive for what we want to do here.
+* `mod-configuration`, while better, is deprecated.
+* `mod-configuration` does not provide a way to protect one user's data from another user (which is one reason it's deprecated).
+* It seems there is no real plan within FOLIO to replace `mod-configuration`.
+
+From this structure, we have to build the necessary configuration storage for the LDP app.
+
+Ideally, we would do this entirely with existing facilities, not requiring any new back-end work. Unfortunately there is no way to enforce user separation with either of the current facilities. This means that we have no option but to require new back-end developement in `mod-ldp`.
+
+This being so, the obvious thing to do is update the config facility to handle everything we need, and also to change the UI module's existing use of `mod-configuration` to use LDP-specific configuration.
+
+But it's ridiculous for us in the LDP project to design and build a general-purpose configuration facility when so many other modules are all solving the same problem at the same time. There was [some effort to address the configuration problem on a FOLIO-wide basis](https://wiki.folio.org/display/DD/Distributed+Configuration) but this seems to have faded away into nothing -- the most recent comments are from Septemeber 2020.
+
+Perhaps the best thing we could do is create a general configuration system as a Java library that `mod-config` uses, and offer it to the rest of the the FOLIO community to use as they wish. On the other hand, perhaps given the amount of work involved in doing this, we would do better to bodge the problem for now, using mod-configuration (security issues and all) until the wider community comes up with its own solution.
+
