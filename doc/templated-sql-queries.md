@@ -7,6 +7,7 @@
 * [Back-end work](#back-end-work)
 * [Metadata file format](#metadata-file-format)
 * [Handling configuration storage](#handling-configuration-storage)
+    * [Short-term solution](#short-term-solution)
 
 
 
@@ -73,7 +74,8 @@ The metadata file will require the following information for each templated para
   * For `controlled`, list of acceptable values
   * For `range`, minimum and maximum allowed values
 
-Such a file might look like this (for [this SQL query[(https://github.com/folio-org/folio-analytics/blob/main/sql/report_queries/title_count/title_count.sql)):
+Such a file might look like this (for [this SQL query
+](https://github.com/folio-org/folio-analytics/blob/main/sql/report_queries/title_count/title_count.sql)):
 ```
 {
   "displayName": "Title count",
@@ -131,5 +133,39 @@ This being so, the obvious thing to do is update the config facility to handle e
 
 But it's ridiculous for us in the LDP project to design and build a general-purpose configuration facility when so many other modules are all solving the same problem at the same time. There was [some effort to address the configuration problem on a FOLIO-wide basis](https://wiki.folio.org/display/DD/Distributed+Configuration) but this seems to have faded away into nothing -- the most recent comments are from Septemeber 2020.
 
-Perhaps the best thing we could do is create a general configuration system as a Java library that `mod-config` uses, and offer it to the rest of the the FOLIO community to use as they wish. On the other hand, perhaps given the amount of work involved in doing this, we would do better to bodge the problem for now, using mod-configuration (security issues and all) until the wider community comes up with its own solution.
+Perhaps the best thing we could do is create a general configuration system as a Java library that `mod-config` uses, and offer it to the rest of the the FOLIO community to use as they wish. On the other hand, perhaps given the amount of work involved in doing this, we would do better to bodge the problem for now, `using mod-configuration` (security issues and all) until the wider community comes up with its own solution.
+
+
+### Short-term solution
+
+Having consulted with various FOLIO core developers, it has become apparent that no general solution to configuration in FOLIO modules is likely to emerge for some time, so we will have to either use what already exists or roll our own in mod-ldp. Since front-end development is easier than back-end -- at least, when the latter has to be done in Java -- the most efficient short-term solution is to use existing configuration-storage facilities and accept the insecurity and inefficiency that it brings. (This might not be acceptable if we were storing more important secrets, but all we have is limited-lifespan read-only tokens for WSAPI access to GitHub repositories that will mostly be free to browse on the Web anyway.)
+
+Given the dubious state of `mod-configuration` -- some say it is deprecated, some that it is not -- it feels safer as well as simpler to rely instead on `mod-ldp`'s own key-value store. Because this facility's only entry-points are Get All Entries and Read or Write Single Entry, there are only two approaches to storing all the GitHub repositories of a user, `mike`, say:
+
+1. Use a single setting, `repositories.mike`, whose value is a JSON array containing a structure for each repository. Every time a change is made (add, delete, edit), rewrite the whole object.
+2. Use multiple settings, `repositories.mike.INDEX`, the value of each being the structure for a single repository. Loading the list would consist of loading _all_ configuring entries and discarding those that are not of the form `repositories.mike.*`; each change involves rewriting only a single object. It doesn't matter what the INDEX parts of the key are so long as they are unique: we could use an incrementing counter, a UUID, or a value taken from the structure itself.
+
+The advantage of #1 is that loading the list is quick; making changes less so, and the time taken to make a change to the list scales with the number of repositories. The advantage of #2 is that changes are efficient, but the initial load is slow and scales both with the number of users and the average number of repositories per user. More than that, it feels conceptually uncomfortable to have a single user's information sprinkled across the database.
+
+So we will use `GET /ldp/config/repositories.mike` to obtain:
+```
+{
+  "tenant": "diku",
+  "key": "repositories.mike",
+  "value": [
+    {
+      "owner": "ThatRandomGuy",
+      "repo": "queries",
+      "token": "ghp_6xI6hMfL7PXl4NVb4LAALP2hF0L51LeJLAdV"
+    },
+    {
+      "owner": "RandomOtherGuy",
+      "repo": "sql-queries",
+      "token": "ghp_h6xI6lMfL7PXN4bVA4LALPL2hF0L51AeJLVd"
+    }
+  ]
+}
+```
+In the configuration UI, adding a new repository will result in the list being rewritten with an additional structure appended; deleting an existing repository will rewrite the list with that entry removed.
+
 
