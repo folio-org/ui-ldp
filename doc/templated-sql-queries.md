@@ -168,4 +168,6 @@ So we will use `GET /ldp/config/repositories.mike` to obtain:
 ```
 In the configuration UI, adding a new repository will result in the list being rewritten with an additional structure appended; deleting an existing repository will rewrite the list with that entry removed.
 
+If and when new, more secure and efficient, configuration-storage facilities appear on the back-end, we can consider rewriting to use those facilities.
+
 
