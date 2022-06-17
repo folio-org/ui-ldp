@@ -24,6 +24,7 @@ In general each flower release of FOLIO requires many modules to be re-released.
 
 ## What needs to be re-released?
 
+
 ### What versions were in the previous release?
 
 The first thing to do is establish which of these modules even need a release for the new FOLIO release: some may not have changed at all. Begin by [finding which versions of your modules were included in the previous flower release](https://github.com/folio-org/platform-complete/blob/master/doc/finding-module-versions.md). Following the instructions in that document, we find:
@@ -53,8 +54,13 @@ Now we can compare the present state of these modules with those included in the
 
 ### Do dependencies need to be updated?
 
-XXX Stripes, RMB
+Front-end modules depend on the Stripes toolkit. In accordance with standard [semantic versioning](https://semver.org/) rules, if the version of [`@folio/stripes`](https://github.com/folio-org/stripes) included in a FOLIO release is still on the same major version as that required by a UI module, then everything should work fine. But if the new FOLIO release goes to a new major version of Stripes, then modules using the older version must be upgraded -- often just by changing the dependency -- and re-released. In the present case, the more recent release of Stripes was [v7.2.0](https://github.com/folio-org/stripes/releases/tag/v7.2.0) of 15 June 2022. For the three UI modules:
+* `ui-courses` v5.1.0 [depends on `@folio/stripes: ^7.0.0`](https://github.com/folio-org/ui-courses/blob/v5.1.0/package.json#L202)
+* `ui-plugin-eusage-reports` v2.2.3 [depends on `@folio/stripes: ^7.0.0`](https://github.com/folio-org/ui-plugin-eusage-reports/blob/v2.2.3/package.json#L102)
+* `ui-ldp` v1.6.2 [depends on `@folio/stripes: ^6.0.0 || ^7.0.0`](https://github.com/folio-org/ui-ldp/blob/v1.6.2/package.json#L87)
 
+So all of these are fine.
 
+(Similarly, back-end modules may depend on RMB, some kind of Spring Way library or other things. Fortunately none of those pertain in the case of mod-graphql or the Z39.50 server, so I have no need to consider major-version dependency upgrades.)
 
 
