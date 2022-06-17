@@ -6,6 +6,8 @@
     * [What versions were in the previous release?](#what-versions-were-in-the-previous-release)
     * [What has changed since the previous release?](#what-has-changed-since-the-previous-release)
     * [Do dependencies need to be updated?](#do-dependencies-need-to-be-updated)
+* [Conclusion](#conclusion)
+
 
 
 ## Introduction
@@ -20,6 +22,7 @@ In general each flower release of FOLIO requires many modules to be re-released.
 * `Net-Z3950-FOLIO` (likewise)
 
 (We will ignore the `harvester-admin` app, as not being included in `platform-complete` means that it is not tied to the Flower-release schedule. We will still need to ensure that periodic updates keep it compatible with recent versions of the FOLIO platform, but that is not the concern of the present document.)
+
 
 
 ## What needs to be re-released?
@@ -62,5 +65,14 @@ Front-end modules depend on the Stripes toolkit. In accordance with standard [se
 So all of these are fine.
 
 (Similarly, back-end modules may depend on RMB, some kind of Spring Way library or other things. Fortunately none of those pertain in the case of mod-graphql or the Z39.50 server, so I have no need to consider major-version dependency upgrades.)
+
+
+
+## Conclusion
+
+* `ui-courses` and `ui-plugin-eusage-reports` need not be released for Morning Glory, but could be in order to include more translations.
+* `ui-ldp` does need to be released, and its change-log should be updated to specify the reasons why a new version is required.
+* `mod-graphql` needs to be re-released because of the switch to Node 14.
+* `Net-Z3950-FOLIO` does not presently need to be re-released -- although work to be done regarding [FOLIO-3388](https://issues.folio.org/browse/FOLIO-3388) may mean that a release is necessary before the Morning Glory deadline for other reasons.
 
 
