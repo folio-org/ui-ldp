@@ -100,6 +100,7 @@ function LdpConfig({ label, configKey: key, fields }) {
                 label={<FormattedMessage id={`ui-ldp.settings.${key}.${field.name}`} />}
                 value={currentConfig[field.name]}
                 onChange={e => setCurrentConfig({ ...currentConfig, [field.name]: e.target.value })}
+                placeholder={field.placeholder}
               />
             </Col>
           ))}
