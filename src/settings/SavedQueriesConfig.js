@@ -1,7 +1,10 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import LdpConfig from './components/LdpConfig';
 
 function SavedQueriesConfig(props) {
+  const intl = useIntl();
+
   return (
     <LdpConfig
       {...props}
@@ -10,7 +13,7 @@ function SavedQueriesConfig(props) {
         { name: 'owner', xs: 4 },
         { name: 'repo', xs: 4 },
         { name: 'branch', xs: 4 },
-        { name: 'token', xs: 12 },
+        { name: 'token', xs: 12, placeholder: intl.formatMessage({ id: 'ui-ldp.placeholder.hidden' }) },
       ]}
     />
   );
