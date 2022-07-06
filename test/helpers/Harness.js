@@ -7,6 +7,8 @@ import { noop } from 'lodash';
 //   QueryClient,
 // } from 'react-query';
 
+// We know we have stripes-core, because we depend on @folio/stripes
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 // import createReactQueryClient from '@folio/stripes-core/src/createReactQueryClient';
 
