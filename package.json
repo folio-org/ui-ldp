@@ -21,6 +21,7 @@
     "kill": "yarn lsof | awk '{print $2}' | egrep '^[0-9]+$' | xargs kill",
     "lint": "eslint --format unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "lintwatch": "esw . -w --color"
   },
   "devDependencies": {
