@@ -4,6 +4,7 @@
 
 * Allow user to specify operation in column filters. Fixes UILDP-50.
 * Clear button in query-builder now works consistently. Fixes UILDP-34.
+* Allow for non-display of JDBC password and GitHub token. Fixes UILDP-42.
 
 ## [1.6.2](https://github.com/folio-org/ui-ldp/tree/v1.6.2) (2022-04-04)
 
