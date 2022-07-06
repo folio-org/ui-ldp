@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 import { IconButton, Selection, Select, TextField } from '@folio/stripes/components';
 
 
-const operations = ['=', '<>', '<', '<=', '>', '>=', 'LIKE', 'ILIKE'].map(op => ({ value: op, label: op }));
+const operations = ['=', '<>', '<', '<=', '>', '>='].map(op => ({ value: op, label: op }));
 
 
 const ColumnFilter = ({ name, availableColumns, disabled, onRemove }) => {
