@@ -1,6 +1,6 @@
 # ui-ldp
 
-Copyright (C) 2020-2021 The Open Library Foundation
+Copyright (C) 2020-2022 The Open Library Foundation
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for more information.
 
@@ -13,6 +13,8 @@ This software is distributed under the terms of the Apache License, Version 2.0.
     * [dbinfo](#dbinfo)
     * [sqconfig](#sqconfig)
     * [Use of mod-configuration](#use-of-mod-configuration)
+* [Permissions](#permissions)
+* [Database issues](#database-issues)
 * [Additional information](#additional-information)
     * [Other documentation](#other-documentation)
     * [Code of Conduct](#code-of-conduct)
@@ -78,6 +80,21 @@ For example, if `owner` is set to `RandomOtherGuy`, `repo` to `ldp-queries` and 
 
 For historical reasons, ui-ldp also makes use of mod-configuration to store two further peices of configuration information: the limits on how many records to show in search results, and the tables to be disabled for searching. Both of these should probably be moved to use mod-ldp's own configuration store.
 
+
+## Permissions
+
+For users who need only to search in the LDP, it suffices to assign the `module.ldp.enabled` permission ("UI: LDP module is enabled").
+
+The `settings.ldp.enabled` permission ("Settings (LDP): Can view settings") should be assigned only to administrators, along with whichever specific `ui-ldp.settings.*` permissions are appropriate.
+
+
+## Database issues
+
+In the LDP database, the `srs_marctab` table uses a special index which is not yet supported by the LDP app, and as a result it could put a lot of load on the LDP database. To prevent this, go to **Settings** > **LDP** > **Table availability**m and under **Schema `public`**, check `srs_marctab`. This will disable that table in the LDP app. (In the future we plan for the LDP app to support the `srs_marctab` table fully.)
+
+For any local tables that are visible in the LDP App, indexes should be created on all columns. Again this will avoid putting too much load on the database. In the future we plan for the LDP App to disable filtering automatically on columns that do not have indexes (see [UILDP-52](https://issues.folio.org/browse/UILDP-52).)
+
+
 ## Additional information
 
 ### Other documentation
@@ -94,7 +111,6 @@ Refer to the Wiki [FOLIO Code of Conduct](https://wiki.folio.org/display/COMMUNI
 
 ### Issue tracker
 
-This project intially used [its own GitHub issue tracker](https://github.com/folio-org/ui-ldp/issues).
-It is in the process of transitioning to [a JIRA tracker](https://issues.folio.org/projects/UILDP).
-For the present, issues may be found in both places.
+Issues are tracked in [the JIRA issue UILFP](https://issues.folio.org/projects/UILDP).
+
 
