@@ -98,7 +98,7 @@ function LdpConfig({ label, configKey: key, fields }) {
             <Col key={j} xs={field.xs}>
               <TextField
                 label={<FormattedMessage id={`ui-ldp.settings.${key}.${field.name}`} />}
-                value={currentConfig[field.name]}
+                value={field.fakeReadOnly ? '' : currentConfig[field.name]}
                 onChange={e => setCurrentConfig({ ...currentConfig, [field.name]: e.target.value })}
                 placeholder={field.placeholder}
               />

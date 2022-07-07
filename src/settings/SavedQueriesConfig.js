@@ -13,7 +13,7 @@ function SavedQueriesConfig(props) {
         { name: 'owner', xs: 4 },
         { name: 'repo', xs: 4 },
         { name: 'branch', xs: 4 },
-        { name: 'token', xs: 12, placeholder: intl.formatMessage({ id: 'ui-ldp.placeholder.hidden' }) },
+        { name: 'token', xs: 12, fakeReadOnly: true, placeholder: intl.formatMessage({ id: 'ui-ldp.placeholder.hidden' }) },
       ]}
     />
   );
