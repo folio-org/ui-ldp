@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [1.7.0](https://github.com/folio-org/ui-ldp/tree/v1.7.0) (IN PROGRESS)
+## [1.7.0](https://github.com/folio-org/ui-ldp/tree/v1.7.0) (2022-07-07)
 
 * Allow user to specify operation in column filters. Fixes UILDP-50.
 * Clear button in query-builder now works consistently. Fixes UILDP-34.

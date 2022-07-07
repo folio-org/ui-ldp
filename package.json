@@ -1,6 +1,6 @@
 {
   "name": "@folio/ldp",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Dashboard for the Library Data Platform",
   "main": "src/index.js",
   "repository": "",
