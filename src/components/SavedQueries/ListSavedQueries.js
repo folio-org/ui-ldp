@@ -99,7 +99,7 @@ function ListSavedQueries({ config, queries, deleteQuery }) {
           }}
           formatter={{
             name: r => <code>{r.name.replace('.json', '')}</code>,
-            autoRun: r => r.autoRun ? '✓' : '',
+            autoRun: r => (r.autoRun ? '✓' : ''),
             creator: r => <code>{r.creator}</code>,
             created: r => new Date(r.created).toLocaleString(),
             deleteQuery: r => <IconButton icon="trash" onClick={e => maybeDeleteQuery(e, r)} />
