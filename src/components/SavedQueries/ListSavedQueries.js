@@ -90,7 +90,7 @@ function ListSavedQueries({ config, queries, deleteQuery }) {
             deleteQuery: '',
           }}
           columnWidths={{
-            name: 150,
+            name: 180,
             displayName: 300,
             autoRun: 90,
             creator: 120,
@@ -99,6 +99,7 @@ function ListSavedQueries({ config, queries, deleteQuery }) {
           }}
           formatter={{
             name: r => <code>{r.name.replace('.json', '')}</code>,
+            autoRun: r => r.autoRun ? '✓' : '',
             creator: r => <code>{r.creator}</code>,
             created: r => new Date(r.created).toLocaleString(),
             deleteQuery: r => <IconButton icon="trash" onClick={e => maybeDeleteQuery(e, r)} />
