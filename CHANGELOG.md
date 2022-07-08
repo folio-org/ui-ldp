@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (IN PROGRESS)
+## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (2022-07-08)
 
 * Make `autoRun` work when loading a saved query. Fixes UILDP-38.
 
