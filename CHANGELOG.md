@@ -2,7 +2,7 @@
 
 ## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (IN PROGRESS)
 
-* Make `autoRun` work when loading a saved query. Fixes UILDP-28.
+* Make `autoRun` work when loading a saved query. Fixes UILDP-38.
 
 ## [1.7.0](https://github.com/folio-org/ui-ldp/tree/v1.7.0) (2022-07-07)
 
