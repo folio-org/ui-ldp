@@ -36,7 +36,7 @@ function ensureSchemasAreAvailable(initialState, schemaNames) {
 }
 
 
-function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, setError }) {
+function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, setError, execute }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
@@ -45,6 +45,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
 
   ensureSchemasAreAvailable(initialState, Object.keys(tables));
+  if (execute) onSubmit(initialState);
 
   return (
     <Paneset>
@@ -152,6 +153,7 @@ QueryBuilder.propTypes = {
   ).isRequired,
   setError: P.func.isRequired,
   onClear: P.func.isRequired,
+  execute: P.bool.isRequired,
 };
 
 
