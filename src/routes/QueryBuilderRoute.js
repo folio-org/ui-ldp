@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+import queryString from 'query-string';
 import localforage from 'localforage';
 import { useStripes, useNamespace } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
@@ -9,7 +11,7 @@ import BigError from '../components/BigError';
 import QueryBuilder from '../components/QueryBuilder';
 
 
-const QueryBuilderRoute = () => {
+const QueryBuilderRoute = ({ location }) => {
   const intl = useIntl();
   const stripes = useStripes();
   const [, getNamespace] = useNamespace();
@@ -17,6 +19,7 @@ const QueryBuilderRoute = () => {
   const [initialState, setInitialState] = useState();
   const [tables, setTables] = useState();
   const [error, setError] = useState(false);
+  const params = queryString.parse(location.search);
 
   useEffect(() => {
     loadTables(intl, stripes, setTables, setError);
@@ -55,9 +58,14 @@ const QueryBuilderRoute = () => {
     tables={tables}
     setError={setError}
     onClear={() => setInitialState(initialInitialState)}
+    execute={'execute' in params}
   />;
 };
 
-QueryBuilderRoute.propTypes = {};
+QueryBuilderRoute.propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default QueryBuilderRoute;

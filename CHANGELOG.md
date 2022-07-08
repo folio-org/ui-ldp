@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (IN PROGRESS)
+
+* Make `autoRun` work when loading a saved query. Fixes UILDP-28.
+
 ## [1.7.0](https://github.com/folio-org/ui-ldp/tree/v1.7.0) (2022-07-07)
 
 * Allow user to specify operation in column filters. Fixes UILDP-50.
