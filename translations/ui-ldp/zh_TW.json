@@ -50,7 +50,7 @@
     "settings.dbinfo": "Database configuration",
     "settings.dbinfo.url": "Database URL",
     "settings.dbinfo.user": "Username",
-    "settings.dbinfo.pass": "Password",
+    "settings.dbinfo.pass": "Password (write-only)",
     "settings.dbinfo.update.ok": "Updated database configuration",
     "settings.sqconfig": "Saved queries configuration",
     "settings.sqconfig.repo": "Repository name",
@@ -60,7 +60,7 @@
     "nav.saved-queries": "Saved queries",
     "settings.sqconfig.owner": "GitHub repository owner",
     "settings.sqconfig.branch": "Branch",
-    "settings.sqconfig.token": "OAuth token for access to repository",
+    "settings.sqconfig.token": "OAuth token for access to repository (write-only)",
     "button.save-query": "Save query",
     "button.save": "Save",
     "button.cancel": "取消",
@@ -78,5 +78,6 @@
     "saved-queries.delete.deleteQuery": "Delete query?",
     "saved-queries.delete.createdBy": "Created by <code>{creator}</code>",
     "saved-queries.delete.confirm": "Confirm",
-    "saved-queries.delete.deleted": "Deleted query <code>{name}</code>. Note that it may take some time before the query is no longer visible in the list."
+    "saved-queries.delete.deleted": "Deleted query <code>{name}</code>. Note that it may take some time before the query is no longer visible in the list.",
+    "placeholder.hidden": "[Hidden]"
 }

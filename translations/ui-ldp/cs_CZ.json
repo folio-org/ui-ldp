@@ -50,7 +50,7 @@
     "settings.dbinfo": "Konfigurace databáze",
     "settings.dbinfo.url": "Adresa URL databáze",
     "settings.dbinfo.user": "Uživatelské jméno",
-    "settings.dbinfo.pass": "Heslo",
+    "settings.dbinfo.pass": "Heslo (pouze pro zápis)",
     "settings.dbinfo.update.ok": "Aktualizovaná konfigurace databáze",
     "settings.sqconfig": "Konfigurace uložených dotazů",
     "settings.sqconfig.repo": "Název úložiště",
@@ -60,7 +60,7 @@
     "nav.saved-queries": "Uložené dotazy",
     "settings.sqconfig.owner": "Vlastník úložiště GitHub",
     "settings.sqconfig.branch": "Pobočka",
-    "settings.sqconfig.token": "Token OAuth pro přístup k úložišti",
+    "settings.sqconfig.token": "Token OAuth pro přístup k úložišti (pouze pro zápis)",
     "button.save-query": "Uložit dotaz",
     "button.save": "Uložit",
     "button.cancel": "Zrušit",
@@ -78,5 +78,6 @@
     "saved-queries.delete.deleteQuery": "Odstranit dotaz?",
     "saved-queries.delete.createdBy": "Vytvořil <code>{creator}</code>",
     "saved-queries.delete.confirm": "Potvrdit",
-    "saved-queries.delete.deleted": "Odstraněný dotaz <code>{name}</code>. Všimněte si, že může nějakou dobu trvat, než dotaz již nebude v seznamu viditelný."
+    "saved-queries.delete.deleted": "Odstraněný dotaz <code>{name}</code>. Všimněte si, že může nějakou dobu trvat, než dotaz již nebude v seznamu viditelný.",
+    "placeholder.hidden": "[Skryté]"
 }
