@@ -167,7 +167,7 @@
       },
       {
         "permissionName": "ui-ldp.all",
-        "displayName": "LDP: All premissions",
+        "displayName": "LDP: All permissions",
         "subPermissions": [
           "module.ldp.enabled",
           "ui-ldp.settings.record-limits",

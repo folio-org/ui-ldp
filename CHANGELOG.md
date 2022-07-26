@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (IN PROGRESS)
+
+* Fix typo in permission name. Fixes UILDP-59.
+
 ## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (2022-07-08)
 
 * Make `autoRun` work when loading a saved query. Fixes UILDP-38.
