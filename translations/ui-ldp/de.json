@@ -37,7 +37,7 @@
     "settings.record-limits.default-show": "Standardmäßig anzuzeigende Anzahl",
     "settings.record-limits.max-show": "Maximal anzuzeigende Anzahl",
     "settings.record-limits.max-export": "Maximal zu exportierende Anzahl",
-    "settings.table-availability": "Table availability",
+    "settings.table-availability": "Verfügbarkeit von Tabellen",
     "settings.table-availability.schema": "Schema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Tabellen, die für Abfragen deaktiviert werden sollen",
     "SENTINEL": "",
