@@ -50,7 +50,7 @@
     "settings.dbinfo": "数据库配置",
     "settings.dbinfo.url": "数据库URL",
     "settings.dbinfo.user": "用户名",
-    "settings.dbinfo.pass": "密码",
+    "settings.dbinfo.pass": "密码（只可写入）",
     "settings.dbinfo.update.ok": "已更新数据库配置",
     "settings.sqconfig": "已保存查询配置",
     "settings.sqconfig.repo": "存储库名称",
@@ -60,7 +60,7 @@
     "nav.saved-queries": "保存的查询",
     "settings.sqconfig.owner": "GitHub存储库所有者",
     "settings.sqconfig.branch": "分支",
-    "settings.sqconfig.token": "用于访问存储库的OAuth令牌",
+    "settings.sqconfig.token": "用于访问存储库的OAuth令牌（只可写入）",
     "button.save-query": "保存查询",
     "button.save": "保存",
     "button.cancel": "取消",
@@ -79,5 +79,5 @@
     "saved-queries.delete.createdBy": "创建者<code> {creator} </code>",
     "saved-queries.delete.confirm": "确认",
     "saved-queries.delete.deleted": "已删除查询<code> {name} </code> 。注意，查询在列表中不再可见可能需要一些时间。",
-    "placeholder.hidden": "[Hidden]"
+    "placeholder.hidden": "[已隐藏]"
 }
