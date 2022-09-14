@@ -75,9 +75,9 @@
     "save-query.update.fail": "Nelze uložit dotaz {displayName}: chyba {code} ({statusText}): {detail}",
     "button.csv": "CSV",
     "button.clear": "Vymazat",
-    "saved-queries.delete.deleteQuery": "Odstranit dotaz?",
+    "saved-queries.delete.deleteQuery": "Smazat dotaz?",
     "saved-queries.delete.createdBy": "Vytvořil <code>{creator}</code>",
     "saved-queries.delete.confirm": "Potvrdit",
-    "saved-queries.delete.deleted": "Odstraněný dotaz <code>{name}</code>. Všimněte si, že může nějakou dobu trvat, než dotaz již nebude v seznamu viditelný.",
+    "saved-queries.delete.deleted": "Smazaný dotaz <code>{name}</code>. Všimněte si, že může nějakou dobu trvat, než dotaz již nebude v seznamu viditelný.",
     "placeholder.hidden": "[Skryté]"
 }
