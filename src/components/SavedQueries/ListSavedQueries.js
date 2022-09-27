@@ -47,10 +47,10 @@ function ListSavedQueries({ config, queries, deleteQuery }) {
     sha: obj.sha,
   }));
 
-  function executeQuery(_unusedEvent, item) {
+  const executeQuery = (_unusedEvent, item) => {
     localforage.setItem(namespace, { tables: item.json.tables })
       .then(() => history.push(`/ldp${item.autoRun ? '?execute' : ''}`));
-  }
+  };
 
   function maybeDeleteQuery(e, item) {
     e.stopPropagation();
