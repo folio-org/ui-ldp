@@ -96,6 +96,14 @@ const QuerySingleTable = ({
 
   const disabled = availableColumns.list.length === 0;
 
+  const maybeExportCsv = (qr) => {
+    if (qr.isComplete) {
+      exportCsv(qr.resp, {});
+    } else {
+      alert('cannot export incomplete response');
+    }
+  };
+
   return (
     <div className={css.QuerySingleTable} data-test-table>
       <div className="query-input">
@@ -241,7 +249,7 @@ const QuerySingleTable = ({
           <Button
             aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
             disabled={!get(queryResponse, 'resp.length')}
-            onClick={() => exportCsv(queryResponse.resp, {})}
+            onClick={() => maybeExportCsv(queryResponse)}
             xstyle={{ marginTop: '-1em' }}
             data-cy={`${namePrefix}.downloadCSV`}
           >
