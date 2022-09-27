@@ -77,6 +77,7 @@ const QuerySingleTable = ({
   // onRemove,
   push,
   onClear,
+  searchWithoutLimit,
 }) => {
   const intl = useIntl();
   const stripes = useStripes();
@@ -100,7 +101,7 @@ const QuerySingleTable = ({
     if (qr.isComplete) {
       exportCsv(qr.resp, {});
     } else {
-      alert('cannot export incomplete response');
+      searchWithoutLimit(r => exportCsv(r.resp, {}));
     }
   };
 
@@ -269,6 +270,7 @@ QuerySingleTable.propTypes = {
   push: PropTypes.func,
   // pop: PropTypes.func,
   onClear: PropTypes.func.isRequired,
+  searchWithoutLimit: PropTypes.func.isRequired,
 };
 
 
