@@ -3,6 +3,7 @@
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (IN PROGRESS)
 
 * Fix typo in permission name. Fixes UILDP-59.
+* Fix bug: auto-run queries would execute continuously in a loop. Fixes UILDP-64.
 
 ## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (2022-07-08)
 

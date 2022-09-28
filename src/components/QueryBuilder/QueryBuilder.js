@@ -41,11 +41,15 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [alreadyExecuted, setAlreadyExecuted] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
 
   ensureSchemasAreAvailable(initialState, Object.keys(tables));
-  if (execute) onSubmit(initialState);
+  if (execute && !alreadyExecuted) {
+    setAlreadyExecuted(true);
+    onSubmit(initialState);
+  }
 
   return (
     <Paneset>
