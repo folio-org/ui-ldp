@@ -17,6 +17,7 @@
 * Clear button in query-builder now works consistently. Fixes UILDP-34.
 * Allow for non-display of JDBC password and GitHub token. Fixes UILDP-42.
 * Updates to documentation. Fixes UILDP-51.
+* Upgrade from `babel-eslint` (now deprecated) to `@babel/eslint-parser`. Fixes UILDP-53.
 
 ## [1.6.2](https://github.com/folio-org/ui-ldp/tree/v1.6.2) (2022-04-04)
 
