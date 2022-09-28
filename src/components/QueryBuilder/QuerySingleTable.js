@@ -95,7 +95,7 @@ const QuerySingleTable = ({
 
   if (error) return <BigError message={error} />;
 
-  const disabled = availableColumns.list.length === 0;
+  const disabled = !selectedTableName;
 
   const maybeExportCsv = (qr) => {
     if (qr.isComplete) {
