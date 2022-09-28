@@ -94,7 +94,7 @@ const QuerySingleTable = ({
 
   if (error) return <BigError message={error} />;
 
-  const disabled = availableColumns.list.length === 0;
+  const disabled = !selectedTableName;
 
   return (
     <div className={css.QuerySingleTable} data-test-table>
