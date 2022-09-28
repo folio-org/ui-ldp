@@ -77,6 +77,7 @@ const QuerySingleTable = ({
   // onRemove,
   push,
   onClear,
+  searchWithoutLimit,
 }) => {
   const intl = useIntl();
   const stripes = useStripes();
@@ -95,6 +96,14 @@ const QuerySingleTable = ({
   if (error) return <BigError message={error} />;
 
   const disabled = !selectedTableName;
+
+  const maybeExportCsv = (qr) => {
+    if (qr.isComplete) {
+      exportCsv(qr.resp, {});
+    } else {
+      searchWithoutLimit(r => exportCsv(r.resp, {}));
+    }
+  };
 
   return (
     <div className={css.QuerySingleTable} data-test-table>
@@ -241,7 +250,7 @@ const QuerySingleTable = ({
           <Button
             aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
             disabled={!get(queryResponse, 'resp.length')}
-            onClick={() => exportCsv(queryResponse.resp, {})}
+            onClick={() => maybeExportCsv(queryResponse)}
             xstyle={{ marginTop: '-1em' }}
             data-cy={`${namePrefix}.downloadCSV`}
           >
@@ -261,6 +270,7 @@ QuerySingleTable.propTypes = {
   push: PropTypes.func,
   // pop: PropTypes.func,
   onClear: PropTypes.func.isRequired,
+  searchWithoutLimit: PropTypes.func.isRequired,
 };
 
 

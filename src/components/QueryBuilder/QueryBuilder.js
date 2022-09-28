@@ -44,6 +44,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
   const [alreadyExecuted, setAlreadyExecuted] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
+  const searchWithoutLimit = setResponse => loadResults(intl, stripes, _savedValues, setResponse, setError, true);
 
   ensureSchemasAreAvailable(initialState, Object.keys(tables));
   if (execute && !alreadyExecuted) {
@@ -106,6 +107,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                             push={push}
                             pop={pop}
                             onClear={onClear}
+                            searchWithoutLimit={searchWithoutLimit}
                           />
                         </Pane>
                       ))}

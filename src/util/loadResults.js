@@ -2,12 +2,12 @@ import cloneDeep from 'lodash.clonedeep';
 import { v4 as uuidv4 } from 'uuid';
 import loadData from './loadData';
 
-const loadResults = async (intl, stripes, values, setQueryResponse, setError) => {
+const loadResults = async (intl, stripes, values, setQueryResponse, setError, ignoreLimit) => {
   const limit = values.tables[0].limit;
 
   function setData(raw) {
     raw.forEach(v => { delete v.data; });
-    const isComplete = raw.length < limit;
+    const isComplete = ignoreLimit || raw.length < limit;
 
     if (!isComplete) {
       let firstField;
@@ -24,15 +24,19 @@ const loadResults = async (intl, stripes, values, setQueryResponse, setError) =>
 
     setQueryResponse({
       key: uuidv4(),
-      count: isComplete ? raw.length : limit,
+      count: isComplete || ignoreLimit ? raw.length : limit,
       isComplete,
       resp: raw,
     });
   }
 
-  // Send a limit value one greater than what the user specified
   const modifiedValues = cloneDeep(values);
-  modifiedValues.tables[0].limit = parseInt(limit, 10) + 1;
+  if (ignoreLimit) {
+    modifiedValues.tables[0].limit = undefined;
+  } else {
+    // Send a limit value one greater than what the user specified
+    modifiedValues.tables[0].limit = parseInt(limit, 10) + 1;
+  }
 
   loadData(intl, stripes, 'results', '/ldp/db/query', setData, setError, {
     method: 'POST',

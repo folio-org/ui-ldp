@@ -29,7 +29,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
   if (!config) return <LoadingPane />;
 
 
-  function saveQuery() {
+  const saveQuery = () => {
     const content = {
       ...queryFormValues,
       META: {
@@ -78,7 +78,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
         // eslint-disable-next-line no-console
         console.error("can't happen, err =", err);
       });
-  }
+  };
 
 
   const footer = (
