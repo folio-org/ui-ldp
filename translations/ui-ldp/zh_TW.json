@@ -68,7 +68,7 @@
     "saved-queries.displayName": "Display name",
     "saved-queries.autoRun": "Auto-run?",
     "saved-queries.creator": "Creator",
-    "saved-queries.created": "Date created",
+    "saved-queries.created": "建立日期",
     "saved-queries.comment": "Comment",
     "save-query": "Save query",
     "save-query.update.ok": "Saved query {displayName}",

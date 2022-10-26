@@ -45,7 +45,7 @@
     "nulls": "Sort nulls",
     "placeholder.column": "(Column)",
     "nav": "Navigation",
-    "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
+    "permission.settings.record-limits": "Impostazioni (LDP): modificare i limiti di record predefiniti",
     "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
     "settings.dbinfo": "Database configuration",
     "settings.dbinfo.url": "Database URL",
