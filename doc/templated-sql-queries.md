@@ -133,7 +133,7 @@ This being so, the obvious thing to do is update the config facility to handle e
 
 But it's ridiculous for us in the LDP project to design and build a general-purpose configuration facility when so many other modules are all solving the same problem at the same time. There was [some effort to address the configuration problem on a FOLIO-wide basis](https://wiki.folio.org/display/DD/Distributed+Configuration) but this seems to have faded away into nothing -- the most recent comments are from Septemeber 2020.
 
-Perhaps the best thing we could do is create a general configuration system as a Java library that `mod-config` uses, and offer it to the rest of the the FOLIO community to use as they wish. On the other hand, perhaps given the amount of work involved in doing this, we would do better to bodge the problem for now, `using mod-configuration` (security issues and all) until the wider community comes up with its own solution.
+Perhaps the best thing we could do is create a general configuration system as a Java library that `mod-config` uses, and offer it to the rest of the the FOLIO community to use as they wish. On the other hand, perhaps given the amount of work involved in doing this, we would do better to bodge the problem for now, using `mod-configuration` (security issues and all) until the wider community comes up with its own solution.
 
 
 ### Short-term solution
