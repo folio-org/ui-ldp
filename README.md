@@ -6,7 +6,7 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 
 <!-- md2toc -l 2 README.md -->
 * [Introduction](#introduction)
-* [Pre-reqs for local development](#pre-reqs-for-local-development)
+* [Prerequisites for local development](#prerequisites-for-local-development)
 * [Run](#run)
 * [Side-loading mod-ldp](#side-loading-mod-ldp)
 * [Configuration](#configuration)
@@ -29,7 +29,7 @@ LDP query builder UI for FOLIO/ReShare.
 
 Currently has one page, a Query Builder for the [Library Data Platform](https://github.com/library-data-platform/ldp) (LDP).
 
-## Pre-reqs for local development
+## Prerequisites for local development
 
 - This repo is bootstrapped by the Stripes CLI, so an Okapi backend is required to be running to login. The [testing-backend](https://app.vagrantup.com/folio/boxes/testing-backend) Vagrant box will work.
 - mod-ldp must be running and registered with Okapi
