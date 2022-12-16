@@ -113,4 +113,3 @@ Refer to the Wiki [FOLIO Code of Conduct](https://wiki.folio.org/display/COMMUNI
 
 Issues are tracked in [the JIRA issue UILFP](https://issues.folio.org/projects/UILDP).
 
-
