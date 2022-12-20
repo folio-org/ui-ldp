@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## 1.10.0 (IN PROGRESS)
+
+* `core-js` promoted from peer-dependency to full dependency. Fixes UILDP-66.
+
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 
 * Fix typo in permission name. Fixes UILDP-59.
