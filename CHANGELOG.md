@@ -2,7 +2,7 @@
 
 ## 1.10.0 (IN PROGRESS)
 
-* `core-js` promoted from peer-dependency to full dependency. Fixes UILDP-66.
+* `core-js` no longer listed as a dependency. Fixes UILDP-66.
 
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 
