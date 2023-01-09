@@ -7,7 +7,7 @@ import {
   HasCommand,
   Pane,
   PaneFooter,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import styles from './ConfigManager.css';
 

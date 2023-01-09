@@ -1,6 +1,6 @@
 import React from 'react';
 
-import stripesForm from '@folio/stripes-form';
+import stripesForm from '@folio/stripes/form';
 
 import ConfigForm from './ConfigForm';
 

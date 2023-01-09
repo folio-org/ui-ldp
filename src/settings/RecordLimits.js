@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
-import { ConfigManager } from '../stripes-smart-components';
+import { ConfigManager } from '../stripes-smart-components'; // eslint-disable-next-line import/order
 import { Col, Row, Select } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import generateOptions from '../util/generateOptions';

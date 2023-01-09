@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Field } from 'redux-form';
 import { useStripes } from '@folio/stripes/core';
-import { ConfigManager } from '../stripes-smart-components';
+import { ConfigManager } from '../stripes-smart-components'; // eslint-disable-next-line import/order
 import { Loading, Checkbox } from '@folio/stripes/components';
 import { useLdp } from '../LdpContext';
 import BigError from '../components/BigError';

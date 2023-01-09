@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Callout } from '@folio/stripes-components';
+import { Callout } from '@folio/stripes/components';
 
 import ConfigReduxForm from './ConfigReduxForm';
 import ConfigFinalForm from './ConfigFinalForm';
@@ -62,6 +62,7 @@ class ConfigManager extends React.Component {
   onSave(data) {
     const { resources, mutator, moduleName, configName, calloutMessage, onBeforeSave, onAfterSave } = this.props;
     const value = (onBeforeSave) ? onBeforeSave(data) : data[configName];
+    // eslint-disable-next-line prefer-object-spread
     const setting = Object.assign({}, resources.settings.records[0], {
       module: moduleName,
       configName,
