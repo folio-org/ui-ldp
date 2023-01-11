@@ -18,7 +18,7 @@ class ConfigManager extends React.Component {
           res = `configurations/entries?query=(module==${props.moduleName} and configName==${props.configName})`;
           logger.log('action', 'returning mod-configuration path', res);
         } else {
-          res = `settings/entries?query=(scope==${props.scope} and key==${props.key})`;
+          res = `settings/entries?query=(scope==${props.scope} and key==${props.configName})`;
           logger.log('action', 'returning mod-settings path', res);
         }
         return res;
@@ -40,10 +40,9 @@ class ConfigManager extends React.Component {
     calloutMessage: PropTypes.node,
     children: PropTypes.node,
     configFormComponent: PropTypes.func,
-    configName: PropTypes.string,       // either this or key is required
+    configName: PropTypes.string.isRequired,
     formType: PropTypes.oneOf(['redux-form', 'final-form']),
     getInitialValues: PropTypes.func,
-    key: PropTypes.string,              // either this or configName is required
     label: PropTypes.node.isRequired,
     moduleName: PropTypes.string,       // either this or scope is required
     mutator: PropTypes.shape({
@@ -73,8 +72,8 @@ class ConfigManager extends React.Component {
   }
 
   onSave(data) {
-    const { resources, mutator, moduleName, configName, scope, key, calloutMessage, onBeforeSave, onAfterSave } = this.props;
-    const value = (onBeforeSave) ? onBeforeSave(data) : data[moduleName ? configName : key];
+    const { resources, mutator, moduleName, configName, scope, calloutMessage, onBeforeSave, onAfterSave } = this.props;
+    const value = (onBeforeSave) ? onBeforeSave(data) : data[configName];
     // eslint-disable-next-line prefer-object-spread
     const setting = Object.assign(
       {},
@@ -82,7 +81,7 @@ class ConfigManager extends React.Component {
       { value },
       (moduleName ?
         { module: moduleName, configName } :
-        { scope, key })
+        { scope, key: configName })
     );
 
     const action = (setting.id) ? 'PUT' : 'POST';
@@ -118,7 +117,7 @@ class ConfigManager extends React.Component {
   }
 
   getInitialValues() {
-    const { resources, moduleName, configName, key, getInitialValues } = this.props;
+    const { resources, configName, getInitialValues } = this.props;
     const settings = (resources.settings || {}).records || [];
 
     if (getInitialValues) {
@@ -126,7 +125,7 @@ class ConfigManager extends React.Component {
     }
 
     const value = settings.length === 0 ? '' : settings[0].value;
-    return { [moduleName ? configName : key]: value };
+    return { [configName]: value };
   }
 
   render() {
