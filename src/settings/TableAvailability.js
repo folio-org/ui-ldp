@@ -59,8 +59,8 @@ function TableAvailability(props) {
   return (
     <ConnectedConfigManager
       label={props.label}
-      moduleName="LDP"
-      configName="recordLimits"
+      scope="ui-ldp.admin"
+      configName="disabledTables"
       getInitialValues={getInitialValues}
       onBeforeSave={beforeSave}
     >
