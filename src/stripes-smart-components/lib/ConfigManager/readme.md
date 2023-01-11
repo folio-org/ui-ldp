@@ -13,7 +13,7 @@ Name | type | description
 --- | --- | ---
 label | string | Title string for object-listing pane
 configName | string | Name of the configuration property, e.g. "locale or "disabledTables". This is used as the `configName` field mod-configuration, and as the `key` field for mod-settings.
-moduleName _or_ scope | string | Name of the module, e.g. "ORG", if mod-configuration is to be used; scope of the entry (e.g. "ui-ldp.config") if mod-settings is to be used.
+moduleName _or_ scope | string | Name of the module, e.g. "ORG", if mod-configuration is to be used; scope of the entry (e.g. "ui-ldp.admin") if mod-settings is to be used.
 children | node | Content to be rendered inside the config-form: the actual form elements.
 
 ### Optional Props
