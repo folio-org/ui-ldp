@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { v4 as uuidv4 } from 'uuid';
 import { Callout } from '@folio/stripes/components';
 
 import ConfigReduxForm from './ConfigReduxForm';
@@ -12,12 +13,26 @@ class ConfigManager extends React.Component {
     settings: {
       type: 'okapi',
       records: 'configs',
-      path: 'configurations/entries?query=(module==!{moduleName} and configName==!{configName})',
+      path: (_q, _p, _r, logger, props) => {
+        let res;
+        if (props.moduleName) {
+          res = `configurations/entries?query=(module==${props.moduleName} and configName==${props.configName})`;
+          logger.log('action', 'returning mod-configuration path', res);
+        } else {
+          res = `settings/entries?query=(scope==${props.scope} and key==${props.key})`;
+          logger.log('action', 'returning mod-settings path', res);
+        }
+        return res;
+      },
       POST: {
-        path: 'configurations/entries',
+        path: (_q, _p, _r, _l, props) => {
+          return `${props.moduleName ? 'configurations' : 'settings'}/entries`;
+        },
       },
       PUT: {
-        path: 'configurations/entries/%{recordId}',
+        path: (_q, _p, _r, _l, props) => {
+          return `${props.moduleName ? 'configurations' : 'settings'}/entries`;
+        },
       },
     },
   });
@@ -26,11 +41,12 @@ class ConfigManager extends React.Component {
     calloutMessage: PropTypes.node,
     children: PropTypes.node,
     configFormComponent: PropTypes.func,
-    configName: PropTypes.string.isRequired,
+    configName: PropTypes.string,       // either this or key is required
     formType: PropTypes.oneOf(['redux-form', 'final-form']),
     getInitialValues: PropTypes.func,
+    key: PropTypes.string,              // either this or configName is required
     label: PropTypes.node.isRequired,
-    moduleName: PropTypes.string.isRequired,
+    moduleName: PropTypes.string,       // either this or scope is required
     mutator: PropTypes.shape({
       recordId: PropTypes.shape({
         replace: PropTypes.func,
@@ -43,6 +59,7 @@ class ConfigManager extends React.Component {
     onAfterSave: PropTypes.func,
     onBeforeSave: PropTypes.func,
     resources: PropTypes.object.isRequired,
+    scope: PropTypes.string,            // either this or moduleName is required
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }),
@@ -60,16 +77,20 @@ class ConfigManager extends React.Component {
   }
 
   onSave(data) {
-    const { resources, mutator, moduleName, configName, calloutMessage, onBeforeSave, onAfterSave } = this.props;
-    const value = (onBeforeSave) ? onBeforeSave(data) : data[configName];
+    const { resources, mutator, moduleName, configName, scope, key, calloutMessage, onBeforeSave, onAfterSave } = this.props;
+    const value = (onBeforeSave) ? onBeforeSave(data) : data[moduleName ? configName : key];
     // eslint-disable-next-line prefer-object-spread
-    const setting = Object.assign({}, resources.settings.records[0], {
-      module: moduleName,
-      configName,
-      value,
-    });
+    const setting = Object.assign(
+      {},
+      resources.settings.records[0],
+      { value },
+      (moduleName ?
+        { module: moduleName, configName } :
+        { scope, key })
+    );
 
     const action = (setting.id) ? 'PUT' : 'POST';
+    if (!moduleName && !setting.id) setting.id = uuidv4();
 
     if (setting.id) mutator.recordId.replace(setting.id);
     if (setting.metadata) delete setting.metadata;
@@ -103,7 +124,7 @@ class ConfigManager extends React.Component {
   }
 
   getInitialValues() {
-    const { resources, configName, getInitialValues } = this.props;
+    const { resources, moduleName, configName, key, getInitialValues } = this.props;
     const settings = (resources.settings || {}).records || [];
 
     if (getInitialValues) {
@@ -111,7 +132,7 @@ class ConfigManager extends React.Component {
     }
 
     const value = settings.length === 0 ? '' : settings[0].value;
-    return { [configName]: value };
+    return { [moduleName ? configName : key]: value };
   }
 
   render() {
