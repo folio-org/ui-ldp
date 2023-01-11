@@ -9,7 +9,6 @@ import ConfigFinalForm from './ConfigFinalForm';
 
 class ConfigManager extends React.Component {
   static manifest = Object.freeze({
-    recordId: {},
     settings: {
       type: 'okapi',
       records: 'configs',
@@ -48,9 +47,6 @@ class ConfigManager extends React.Component {
     label: PropTypes.node.isRequired,
     moduleName: PropTypes.string,       // either this or scope is required
     mutator: PropTypes.shape({
-      recordId: PropTypes.shape({
-        replace: PropTypes.func,
-      }),
       settings: PropTypes.shape({
         POST: PropTypes.func,
         PUT: PropTypes.func,
@@ -91,8 +87,6 @@ class ConfigManager extends React.Component {
 
     const action = (setting.id) ? 'PUT' : 'POST';
     if (!moduleName && !setting.id) setting.id = uuidv4();
-
-    if (setting.id) mutator.recordId.replace(setting.id);
     if (setting.metadata) delete setting.metadata;
 
     return mutator.settings[action](setting).then(() => {
