@@ -80,7 +80,7 @@ function TableAvailability(props) {
             <ul style={{ listStyleType: 'none' }}>
               {
                 tables[key]
-                  .sort((a, b) => (a.label < b.label ? -1 : a.label > b.label ? -1 : 0))
+                  .sort((a, b) => (a.label < b.label ? -1 : a.label > b.label ? 1 : 0))
                   .map(entry => (
                     <li key={entry.value}>
                       <Field
