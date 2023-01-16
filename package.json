@@ -177,13 +177,13 @@
         "visible": true
       },
       {
-        "permissionName": "settings.global.read.ui-ldp.admin",
-        "displayName": "Settings: read LDP adminstrative settings",
+        "permissionName": "mod-settings.global.read.ui-ldp.admin",
+        "displayName": "Settings: read LDP administrative settings",
         "visible": true
       },
       {
-        "permissionName": "settings.global.write.ui-ldp.admin",
-        "displayName": "Settings: write LDP adminstrative settings",
+        "permissionName": "mod-settings.global.write.ui-ldp.admin",
+        "displayName": "Settings: write LDP administrative settings",
         "visible": true
       }
     ]
