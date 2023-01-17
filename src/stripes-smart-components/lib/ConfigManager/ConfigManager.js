@@ -11,7 +11,6 @@ class ConfigManager extends React.Component {
   static manifest = Object.freeze({
     settings: {
       type: 'okapi',
-      records: 'configs',
       path: (_q, _p, _r, logger, props) => {
         let res;
         if (props.moduleName) {
@@ -77,7 +76,7 @@ class ConfigManager extends React.Component {
     // eslint-disable-next-line prefer-object-spread
     const setting = Object.assign(
       {},
-      resources.settings.records[0],
+      resources.settings.records[0]['configs'][0],
       { value },
       (moduleName ?
         { module: moduleName, configName } :
@@ -118,7 +117,7 @@ class ConfigManager extends React.Component {
 
   getInitialValues() {
     const { resources, configName, getInitialValues } = this.props;
-    const settings = (resources.settings || {}).records || [];
+    const settings = (resources.settings || {}).records[0]['configs'] || [];
 
     if (getInitialValues) {
       return getInitialValues(settings);
