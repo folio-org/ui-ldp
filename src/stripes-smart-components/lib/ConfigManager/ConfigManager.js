@@ -76,8 +76,8 @@ class ConfigManager extends React.Component {
     // eslint-disable-next-line prefer-object-spread
     const setting = Object.assign(
       {},
-      resources.settings.records[0]['configs'][0],
-      { value },
+      resources.settings.records[0][moduleName ? 'configs' : 'items'][0],
+      { value: moduleName ? value : JSON.parse(value) },
       (moduleName ?
         { module: moduleName, configName } :
         { scope, key: configName })
@@ -116,14 +116,21 @@ class ConfigManager extends React.Component {
   }
 
   getInitialValues() {
-    const { resources, configName, getInitialValues } = this.props;
-    const settings = (resources.settings || {}).records[0]['configs'] || [];
+    const { resources, moduleName, configName, getInitialValues } = this.props;
+    const settings = (resources.settings || {}).records[0][moduleName ? 'configs' : 'items'] || [];
 
-    if (getInitialValues) {
-      return getInitialValues(settings);
+    let massagedSettings = settings;
+    if (!moduleName && settings[0]) {
+      // Present value as a string to remain compatible with existing getInitialValues function-props
+      const newVal = JSON.stringify(settings[0].value);
+      massagedSettings = [{ ...settings[0], value: newVal }];
     }
 
-    const value = settings.length === 0 ? '' : settings[0].value;
+    if (getInitialValues) {
+      return getInitialValues(massagedSettings);
+    }
+
+    const value = massagedSettings.length === 0 ? '' : massagedSettings[0].value;
     return { [configName]: value };
   }
 
