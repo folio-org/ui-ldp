@@ -77,7 +77,7 @@ class ConfigManager extends React.Component {
     const setting = Object.assign(
       {},
       resources.settings.records[0][moduleName ? 'configs' : 'items'][0],
-      { value: moduleName ? value : JSON.parse(value) },
+      { value },
       (moduleName ?
         { module: moduleName, configName } :
         { scope, key: configName })
@@ -119,18 +119,11 @@ class ConfigManager extends React.Component {
     const { resources, moduleName, configName, getInitialValues } = this.props;
     const settings = (resources.settings || {}).records[0][moduleName ? 'configs' : 'items'] || [];
 
-    let massagedSettings = settings;
-    if (!moduleName && settings[0]) {
-      // Present value as a string to remain compatible with existing getInitialValues function-props
-      const newVal = JSON.stringify(settings[0].value);
-      massagedSettings = [{ ...settings[0], value: newVal }];
-    }
-
     if (getInitialValues) {
-      return getInitialValues(massagedSettings);
+      return getInitialValues(settings);
     }
 
-    const value = massagedSettings.length === 0 ? '' : massagedSettings[0].value;
+    const value = settings.length === 0 ? '' : settings[0].value;
     return { [configName]: value };
   }
 
