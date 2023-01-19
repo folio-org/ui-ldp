@@ -60,7 +60,7 @@ function TableAvailability(props) {
     <ConnectedConfigManager
       label={props.label}
       scope="ui-ldp.admin"
-      configName="disabledTables"
+      configName="config"
       getInitialValues={getInitialValues}
       onBeforeSave={beforeSave}
     >
