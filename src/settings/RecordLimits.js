@@ -46,8 +46,8 @@ function RecordLimits(props) {
   return (
     <ConnectedConfigManager
       label={props.label}
-      moduleName="LDP"
-      configName="recordLimits"
+      scope="ui-ldp.admin"
+      configName="config"
       getInitialValues={getInitialValues}
       onBeforeSave={beforeSave}
       onAfterSave={afterSave}
