@@ -15,10 +15,8 @@ class ConfigManager extends React.Component {
         let res;
         if (props.moduleName) {
           res = `configurations/entries?query=(module==${props.moduleName} and configName==${props.configName})`;
-          logger.log('action', 'returning mod-configuration path', res);
         } else {
           res = `settings/entries?query=(scope==${props.scope} and key==${props.configName})`;
-          logger.log('action', 'returning mod-settings path', res);
         }
         return res;
       },
