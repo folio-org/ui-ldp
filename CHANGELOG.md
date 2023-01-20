@@ -4,6 +4,7 @@
 
 * `core-js` no longer listed as a dependency. Fixes UILDP-66.
 * List of tables in "Table availability" settings page is now sorted correctly. Fixes UILDP-80
+* Update Record Limits/Table Availability to use mod-settings. Fixes UILDP-81.
 
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 
