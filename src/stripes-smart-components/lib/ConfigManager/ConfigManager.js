@@ -11,24 +11,15 @@ class ConfigManager extends React.Component {
   static manifest = Object.freeze({
     settings: {
       type: 'okapi',
-      path: (_q, _p, _r, logger, props) => {
-        let res;
-        if (props.moduleName) {
-          res = `configurations/entries?query=(module==${props.moduleName} and configName==${props.configName})`;
-        } else {
-          res = `settings/entries?query=(scope==${props.scope} and key==${props.configName})`;
-        }
-        return res;
-      },
+      path: (_q, _p, _r, _l, props) => (props.moduleName ?
+        `configurations/entries?query=(module==${props.moduleName} and configName==${props.configName})` :
+        `settings/entries?query=(scope==${props.scope} and key==${props.configName})`
+      ),
       POST: {
-        path: (_q, _p, _r, _l, props) => {
-          return `${props.moduleName ? 'configurations' : 'settings'}/entries`;
-        },
+        path: (_q, _p, _r, _l, props) => `${props.moduleName ? 'configurations' : 'settings'}/entries`,
       },
       PUT: {
-        path: (_q, _p, _r, _l, props) => {
-          return `${props.moduleName ? 'configurations' : 'settings'}/entries`;
-        },
+        path: (_q, _p, _r, _l, props) => `${props.moduleName ? 'configurations' : 'settings'}/entries`,
       },
     },
   });
