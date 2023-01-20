@@ -96,7 +96,8 @@
     "displayName": "ui-ldp.meta.title",
     "route": "/ldp",
     "okapiInterfaces": {
-      "ldp-query": "1.1"
+      "ldp-query": "1.1",
+      "settings": "1.0"
     },
     "icons": [
       {
