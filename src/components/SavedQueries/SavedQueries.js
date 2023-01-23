@@ -32,7 +32,11 @@ function SavedQueries() {
   }));
 
   const deleteQuery = (_item) => {
-    console.log(_item);
+    // It's no good forcing a re-fetch to show the deleted search
+    // gone, because there is a race condition where the fetch happens
+    // before the delete is complete. Instead, we must manually remove
+    // the relevant record.
+    setData({ items: data.items.filter(x => x.id !== _item.id) });
     return stripesFetch(stripes, `/settings/entries/${_item.id}`, { method: 'DELETE' });
   };
 
