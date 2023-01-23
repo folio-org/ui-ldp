@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { v4 as uuidv4 } from 'uuid';
 import { useStripes, CalloutContext } from '@folio/stripes/core';
 import { LoadingPane, ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@folio/stripes/components';
 import fetchSavedQueryConfig from '../../util/fetchSavedQueryConfig';
-import gitHubFetch from '../../util/gitHubFetch';
+import stripesFetch from '../../util/stripesFetch';
 import BigError from '../BigError';
 
 
@@ -29,7 +30,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
   if (!config) return <LoadingPane />;
 
 
-  const saveQuery = () => {
+  const saveQuery = async () => {
     const content = {
       ...queryFormValues,
       META: {
@@ -42,42 +43,31 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
       },
     };
 
-    const data = {
-      branch: config.branch,
-      path: `/ldp-queries/${values.name}.json`,
-      committer: {
-        name: stripes.user?.user?.firstName + ' ' + stripes.user?.user?.lastName,
-        email: stripes.user?.user?.email,
-      },
-      message: 'Saved from LDP app',
+    // XXX When overwriting an existing saved search, we should PUT instead of POST, and use the existing id.
+    const res = await stripesFetch(stripes, '/settings/entries', {
+      method: 'POST',
+      body: JSON.stringify({
+        id: uuidv4(),
+        scope: 'ui-ldp.admin', // XXX scope: 'ui-ldp.queries',
+        key: values.name,
+        value: content,
+      }),
+    });
 
-      content: btoa(JSON.stringify(content, null, 2)),
-    };
-
-    gitHubFetch(
-      config,
-      `repos/${config.owner}/${config.repo}/contents/queries/${values.name}.json`,
-      { method: 'PUT', body: JSON.stringify(data) }
-    )
-      .then(async res => {
-        onClose();
-        const { displayName } = values;
-        if (res.ok) {
-          callout.sendCallout({
-            message: <FormattedMessage id="ui-ldp.save-query.update.ok" values={{ displayName }} />
-          });
-        } else {
-          const { code, statusText } = res;
-          const detail = await res.text();
-          callout.sendCallout({
-            type: 'error',
-            message: <FormattedMessage id="ui-ldp.save-query.update.fail" values={{ displayName, code, statusText, detail }} />
-          });
-        }
-      }).catch(err => {
-        // eslint-disable-next-line no-console
-        console.error("can't happen, err =", err);
+    onClose();
+    const { displayName } = values;
+    if (res.ok) {
+      callout.sendCallout({
+        message: <FormattedMessage id="ui-ldp.save-query.update.ok" values={{ displayName }} />
       });
+    } else {
+      const { code, statusText } = res;
+      const detail = await res.text();
+      callout.sendCallout({
+        type: 'error',
+        message: <FormattedMessage id="ui-ldp.save-query.update.fail" values={{ displayName, code, statusText, detail }} />
+      });
+    }
   };
 
 

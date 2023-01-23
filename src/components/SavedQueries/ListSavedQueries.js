@@ -1,51 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import localforage from 'localforage';
 import { useNamespace, CalloutContext } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList, IconButton, ConfirmationModal } from '@folio/stripes/components';
-
-
-function processQueries(queries) {
-  return Object.keys(queries).sort().map(key => {
-    const obj = queries[key];
-    if (obj.encoding !== 'base64') {
-      throw new Error(`Unsupported GitHub content encoding ${obj.encoding}`);
-    }
-
-    const decoded = atob(obj.content);
-    const json = JSON.parse(decoded);
-    return {
-      ...obj,
-      decoded,
-      json,
-    };
-  });
-}
+import { Paneset, Pane, MultiColumnList, IconButton, ConfirmationModal } from '@folio/stripes/components';
 
 
 // eslint-disable-next-line no-unused-vars
-function ListSavedQueries({ config, queries, deleteQuery }) {
-  const [processed, setProcessed] = useState();
+function ListSavedQueries({ queries, deleteQuery }) {
   const [queryToDelete, setQueryToDelete] = useState();
   const history = useHistory();
   const [, getNamespace] = useNamespace();
   const namespace = getNamespace({ key: 'formState' });
   const callout = useContext(CalloutContext);
-
-  useEffect(() => {
-    setProcessed(processQueries(queries));
-  }, [queries]);
-
-  if (!processed) return <LoadingPane />;
-
-  const contentData = processed.map(obj => ({
-    ...obj.json.META,
-    name: obj.name,
-    json: obj.json,
-    sha: obj.sha,
-  }));
 
   const executeQuery = (_unusedEvent, item) => {
     localforage.setItem(namespace, { tables: item.json.tables })
@@ -78,7 +46,7 @@ function ListSavedQueries({ config, queries, deleteQuery }) {
     <Paneset>
       <Pane defaultWidth="fill">
         <MultiColumnList
-          contentData={contentData}
+          contentData={queries}
           visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', 'comment', 'deleteQuery']}
           columnMapping={{
             name: <FormattedMessage id="ui-ldp.saved-queries.name" />,
@@ -142,16 +110,9 @@ function ListSavedQueries({ config, queries, deleteQuery }) {
 
 
 ListSavedQueries.propTypes = {
-  config: PropTypes.shape({
-    owner: PropTypes.string,
-    repo: PropTypes.string,
-    branch: PropTypes.string,
-  }).isRequired,
-  queries: PropTypes.objectOf(
+  queries: PropTypes.arrayOf(
     PropTypes.shape({
-      content: PropTypes.string.isRequired,
-      encoding: PropTypes.string.isRequired,
-    })
+    }).isRequired,
   ).isRequired,
   deleteQuery: PropTypes.func.isRequired,
 };
