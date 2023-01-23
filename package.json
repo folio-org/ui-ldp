@@ -186,6 +186,16 @@
         "permissionName": "mod-settings.global.write.ui-ldp.admin",
         "displayName": "Settings: write LDP administrative settings",
         "visible": true
+      },
+      {
+        "permissionName": "mod-settings.global.read.ui-ldp.queries",
+        "displayName": "Settings: browse and load LDP saved queries",
+        "visible": true
+      },
+      {
+        "permissionName": "mod-settings.global.write.ui-ldp.queries",
+        "displayName": "Settings: create and update LDP saved queries",
+        "visible": true
       }
     ]
   }
