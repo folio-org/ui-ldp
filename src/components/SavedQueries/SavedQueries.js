@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { LoadingPane } from '@folio/stripes/components';
 import loadData from '../../util/loadData';
+import stripesFetch from '../../util/stripesFetch';
 import BigError from '../BigError';
 import ListSavedQueries from './ListSavedQueries';
 
@@ -31,7 +32,8 @@ function SavedQueries() {
   }));
 
   const deleteQuery = (_item) => {
-    alert("XXX can't delete save searches yet");
+    console.log(_item);
+    return stripesFetch(stripes, `/settings/entries/${_item.id}`, { method: 'DELETE' });
   };
 
   return <ListSavedQueries queries={queries} deleteQuery={deleteQuery} />;
