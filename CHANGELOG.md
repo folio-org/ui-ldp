@@ -5,6 +5,9 @@
 * `core-js` no longer listed as a dependency. Fixes UILDP-66.
 * List of tables in "Table availability" settings page is now sorted correctly. Fixes UILDP-80
 * Update Record Limits/Table Availability to use mod-settings. Fixes UILDP-81.
+* Modify JSON query saving/loading to use FOLIO storage (mod-settings). Fixes UILDP-57.
+* Newly saved queries now appear on the Saved Query list immediately. Fixes UILDP-41.
+* This module is no longer dependent on mod-configuration. Fixes UILDP-78.
 
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 
