@@ -4,7 +4,6 @@ import { Settings } from '@folio/stripes/smart-components';
 import RecordLimits from './RecordLimits';
 import TableAvailability from './TableAvailability';
 import DatabaseConfig from './DatabaseConfig';
-import SavedQueriesConfig from './SavedQueriesConfig';
 
 export default class LdpSettings extends React.Component {
   pages = [
@@ -25,12 +24,6 @@ export default class LdpSettings extends React.Component {
       label: <FormattedMessage id="ui-ldp.settings.dbinfo" />,
       component: DatabaseConfig,
       perm: 'ui-ldp.settings.dbinfo',
-    },
-    {
-      route: 'savedqueries',
-      label: <FormattedMessage id="ui-ldp.settings.sqconfig" />,
-      component: SavedQueriesConfig,
-      perm: 'ui-ldp.settings.sqconfig',
     },
   ];
 
