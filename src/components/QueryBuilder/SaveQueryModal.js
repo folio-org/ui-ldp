@@ -1,34 +1,22 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 import { useStripes, CalloutContext } from '@folio/stripes/core';
-import { LoadingPane, ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@folio/stripes/components';
-import fetchSavedQueryConfig from '../../util/fetchSavedQueryConfig';
+import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@folio/stripes/components';
 import stripesFetch from '../../util/stripesFetch';
-import BigError from '../BigError';
 
 
 function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
-  const [config, setConfig] = useState();
-  const [error, setError] = useState();
   const [updateName, setUpdateName] = useState(autoUpdateName);
-
-  useEffect(() => {
-    fetchSavedQueryConfig(stripes, setConfig, setError);
-  }, [stripes]);
 
   const [values, setValues] = useState({
     autoRun: true,
     creator: stripes.user?.user?.username,
     created: new Date(),
   });
-
-  if (error) return <BigError message={error} />;
-  if (!config) return <LoadingPane />;
-
 
   const saveQuery = async () => {
     const content = {
@@ -69,7 +57,6 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
       });
     }
   };
-
 
   const footer = (
     <ModalFooter>
