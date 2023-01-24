@@ -1,93 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import gitHubFetch from '../../util/gitHubFetch';
+import { useIntl } from 'react-intl';
+import { useStripes } from '@folio/stripes/core';
+import { LoadingPane } from '@folio/stripes/components';
+import loadData from '../../util/loadData';
+import stripesFetch from '../../util/stripesFetch';
 import BigError from '../BigError';
 import ListSavedQueries from './ListSavedQueries';
 
 
-function SavedQueries({ config }) {
+function SavedQueries() {
+  const intl = useIntl();
+  const stripes = useStripes();
+  const [data, setData] = useState();
   const [error, setError] = useState();
-  const [commit, setCommit] = useState();
-  const [tree, setTree] = useState();
-  const [directory, setDirectory] = useState();
-  const [queries, setQueries] = useState({});
 
+  const path = '/settings/entries?query=scope=="ui-ldp.admin"'; // XXX ui-ldp.queries
   useEffect(() => {
-    (async () => {
-      const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/commits/${config.branch || 'HEAD'}`);
-      if (res.ok) {
-        setCommit(await res.json());
-      } else {
-        setError(`${res.statusText}: ${await res.text()}`);
-      }
-    })();
-  }, [config]);
-
-  useEffect(() => {
-    if (commit) {
-      (async () => {
-        const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/git/trees/${commit.commit.tree.sha}`);
-        if (res.ok) {
-          setTree(await res.json());
-        } else {
-          setError(`${res.statusText}: ${await res.text()}`);
-        }
-      })();
-    }
-  }, [config, commit]);
-
-  useEffect(() => {
-    if (tree) {
-      (async () => {
-        const directorySHA = tree.tree.filter(x => x.path === 'queries')[0].sha;
-        const res = await gitHubFetch(config, `repos/${config.owner}/${config.repo}/git/trees/${directorySHA}`);
-        if (res.ok) {
-          setDirectory(await res.json());
-        } else {
-          setError(`${res.statusText}: ${await res.text()}`);
-        }
-      })();
-    }
-  }, [config, tree]);
-
-  useEffect(() => {
-    if (directory) {
-      (async () => {
-        directory.tree.forEach(x => {
-          gitHubFetch(config, `repos/${config.owner}/${config.repo}/contents/queries/${x.path}`)
-            .then(async res => {
-              const json = await res.json();
-              setQueries(old => {
-                return ({ ...old, [x.path]: json });
-              });
-            });
-        });
-      })();
-    }
-  }, [config, directory]);
+    loadData(intl, stripes, 'queries', path, setData, setError);
+  }, [intl, stripes]); // XXX Do we also need to add stripes.okapi as we do, for some reason, in some other cases?
 
   if (error) return <BigError message={error} />;
+  if (!data) return <LoadingPane />;
 
-  const deleteQuery = (item) => {
-    const search = new URLSearchParams({
-      sha: item.sha,
-      message: 'Deleted from UI',
-    }).toString();
-    const url = `repos/${config.owner}/${config.repo}/contents/queries/${item.name}?${search}`;
-    return gitHubFetch(config, url, { method: 'DELETE' });
+  const queries = data.items.map(entry => ({
+    ...entry.value.META,
+    json: {
+      tables: entry.value.tables,
+    },
+    name: entry.key,
+    id: entry.id,
+  }));
+
+  const deleteQuery = (_item) => {
+    // It's no good forcing a re-fetch to show the deleted search
+    // gone, because there is a race condition where the fetch happens
+    // before the delete is complete. Instead, we must manually remove
+    // the relevant record.
+    setData({ items: data.items.filter(x => x.id !== _item.id) });
+    return stripesFetch(stripes, `/settings/entries/${_item.id}`, { method: 'DELETE' });
   };
 
-  return <ListSavedQueries config={config} queries={queries} deleteQuery={deleteQuery} />;
+  return <ListSavedQueries queries={queries} deleteQuery={deleteQuery} />;
 }
-
-
-SavedQueries.propTypes = {
-  config: PropTypes.shape({
-    owner: PropTypes.string,
-    repo: PropTypes.string,
-    branch: PropTypes.string,
-  }).isRequired,
-};
 
 
 export default SavedQueries;

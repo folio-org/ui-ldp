@@ -18,7 +18,7 @@ const loadConfig = async (intl, stripes, ldp, setConfigLoaded, setError) => {
     setConfigLoaded(true);
   }
 
-  const path = '/configurations/entries?query=(module==LDP and configName==recordLimits)';
+  const path = '/settings/entries?query=(scope=="ui-ldp.admin" and key=="config")';
   loadData(intl, stripes, 'config', path, setData, setError, { noSideLoad: true });
 };
 
