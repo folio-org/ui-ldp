@@ -7,7 +7,6 @@ import { useNamespace, CalloutContext } from '@folio/stripes/core';
 import { Paneset, Pane, MultiColumnList, IconButton, ConfirmationModal } from '@folio/stripes/components';
 
 
-// eslint-disable-next-line no-unused-vars
 function ListSavedQueries({ queries, deleteQuery }) {
   const [queryToDelete, setQueryToDelete] = useState();
   const history = useHistory();
