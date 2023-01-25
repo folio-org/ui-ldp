@@ -15,9 +15,9 @@ function ListSavedQueries({ queries, deleteQuery }) {
   const namespace = getNamespace({ key: 'formState' });
   const callout = useContext(CalloutContext);
 
-  const executeQuery = (_unusedEvent, item) => {
-    localforage.setItem(namespace, { tables: item.json.tables })
-      .then(() => history.push(`/ldp${item.autoRun ? '?execute' : ''}`));
+  const executeQuery = async (_unusedEvent, item) => {
+    await localforage.setItem(namespace, { tables: item.json.tables });
+    history.push(`/ldp${item.autoRun ? '?execute' : ''}`);
   };
 
   function maybeDeleteQuery(e, item) {
