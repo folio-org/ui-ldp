@@ -79,5 +79,6 @@
     "saved-queries.delete.createdBy": "Erstellt von <code> {creator} </code>",
     "saved-queries.delete.confirm": "Bestätigen",
     "saved-queries.delete.deleted": "Gelöschte Abfrage <code> {name} </code> . Bitte beachten, dass es einige Zeit dauern kann, bis die Abfrage nicht mehr in der Liste sichtbar ist.",
-    "placeholder.hidden": "[Versteckt]"
+    "placeholder.hidden": "[Versteckt]",
+    "error.load-queries": "Could not load saved queries: {error}"
 }
