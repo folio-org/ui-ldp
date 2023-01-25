@@ -79,5 +79,6 @@
     "saved-queries.delete.createdBy": "تم الإنشاء بواسطة <code>{creator}</code>",
     "saved-queries.delete.confirm": "تأكيد",
     "saved-queries.delete.deleted": "استعلام محذوف <code>{name}</code>. لاحظ أن الأمر قد يستغرق بعض الوقت قبل أن يصبح الاستعلام غير مرئي في القائمة.",
-    "placeholder.hidden": "[مخفي]"
+    "placeholder.hidden": "[مخفي]",
+    "error.load-queries": "Could not load saved queries: {error}"
 }
