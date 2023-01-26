@@ -52,7 +52,6 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
       body: JSON.stringify({
         id,
         scope: 'ui-ldp.queries',
-        scope: 'ui-ldp.admin', // XXX scope: 'ui-ldp.queries',
         key: values.name,
         value: content,
       }),
