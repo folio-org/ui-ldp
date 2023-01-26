@@ -11,12 +11,17 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const [updateName, setUpdateName] = useState(autoUpdateName);
+  console.log('queryFormValues.metadata =', queryFormValues?.metadata);
 
   const [values, setValues] = useState({
-    autoRun: true,
+    name: queryFormValues?.metadata.name,
+    displayName: queryFormValues?.metadata.displayName,
+    autoRun: queryFormValues?.metadata.autoRun,
     creator: stripes.user?.user?.username,
-    created: new Date(),
+    created: new Date(), // XXX handle updated
+    comment: queryFormValues?.metadata.comment,
   });
+  console.log('values =', values);
 
   const saveQuery = async () => {
     const content = {
@@ -31,12 +36,23 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
       },
     };
 
-    // XXX When overwriting an existing saved search, we should PUT instead of POST, and use the existing id.
-    const res = await stripesFetch(stripes, '/settings/entries', {
-      method: 'POST',
+    let method, path, id; // eslint-disable-line one-var, one-var-declaration-per-line
+    if (queryFormValues.metadata) {
+      method = 'PUT';
+      path = `/settings/entries/${queryFormValues.metadata.id}`;
+      id = queryFormValues?.metadata.id;
+    } else {
+      method = 'POST';
+      path = '/settings/entries';
+      id = uuidv4();
+    }
+
+    const res = await stripesFetch(stripes, path, {
+      method,
       body: JSON.stringify({
-        id: uuidv4(),
+        id,
         scope: 'ui-ldp.queries',
+        scope: 'ui-ldp.admin', // XXX scope: 'ui-ldp.queries',
         key: values.name,
         value: content,
       }),
@@ -107,6 +123,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
                 setValues(newValues);
               }
             }
+            value={values.displayName}
             autoFocus
           />
         </Col>
@@ -141,6 +158,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
           <TextField
             label={<FormattedMessage id="ui-ldp.saved-queries.comment" />}
             onChange={e => setValues({ ...values, comment: e.target.value })}
+            value={values.comment}
           />
         </Col>
       </Row>
@@ -152,6 +170,13 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
 SaveQueryModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   queryFormValues: PropTypes.shape({
+    metadata: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      displayName: PropTypes.string.isRequired,
+      autoRun: PropTypes.bool.isRequired,
+      comment: PropTypes.string.isRequired,
+    }),
     tables: PropTypes.arrayOf(
       PropTypes.shape({
         schema: PropTypes.string.isRequired,
