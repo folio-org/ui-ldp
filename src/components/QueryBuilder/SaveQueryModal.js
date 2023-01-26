@@ -36,7 +36,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
       method: 'POST',
       body: JSON.stringify({
         id: uuidv4(),
-        scope: 'ui-ldp.admin', // XXX scope: 'ui-ldp.queries',
+        scope: 'ui-ldp.queries',
         key: values.name,
         value: content,
       }),

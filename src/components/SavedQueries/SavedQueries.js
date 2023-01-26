@@ -14,7 +14,7 @@ function SavedQueries() {
   const [data, setData] = useState();
   const [error, setError] = useState();
 
-  const path = '/settings/entries?query=scope=="ui-ldp.admin"'; // XXX ui-ldp.queries
+  const path = '/settings/entries?query=scope=="ui-ldp.queries"';
   useEffect(() => {
     loadData(intl, stripes, 'queries', path, setData, setError);
   }, [intl, stripes]); // XXX Do we also need to add stripes.okapi as we do, for some reason, in some other cases?
