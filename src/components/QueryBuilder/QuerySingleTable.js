@@ -76,7 +76,6 @@ const QuerySingleTable = ({
   queryResponse,
   // onRemove,
   push,
-  onClear,
   searchWithoutLimit,
 }) => {
   const intl = useIntl();
@@ -230,15 +229,6 @@ const QuerySingleTable = ({
             >
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
-            <Button
-              type="button"
-              buttonStyle="default"
-              disabled={false}
-              data-cy={`${namePrefix}.clear`}
-              onClick={onClear}
-            >
-              <FormattedMessage id="ui-ldp.button.clear" />
-            </Button>
           </span>
           <span data-cy={`${namePrefix}.message`}>
             {queryResponse.key && (
@@ -269,7 +259,6 @@ QuerySingleTable.propTypes = {
   queryResponse: PropTypes.object,
   push: PropTypes.func,
   // pop: PropTypes.func,
-  onClear: PropTypes.func.isRequired,
   searchWithoutLimit: PropTypes.func.isRequired,
 };
 

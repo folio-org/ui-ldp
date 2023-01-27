@@ -122,7 +122,6 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}
-                            onClear={onClear}
                             searchWithoutLimit={searchWithoutLimit}
                           />
                         </Pane>
