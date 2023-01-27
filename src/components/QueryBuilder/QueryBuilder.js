@@ -6,7 +6,7 @@ import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, Paneset, IconButton } from '@folio/stripes/components';
+import { Pane, Paneset, IconButton, ConfirmationModal } from '@folio/stripes/components';
 import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 import loadResults from '../../util/loadResults';
@@ -40,6 +40,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const [showNewModal, setShowNewModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [alreadyExecuted, setAlreadyExecuted] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
@@ -51,6 +52,11 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
     setAlreadyExecuted(true);
     onSubmit(initialState);
   }
+
+  const newQuery = async () => {
+    onClear();
+    setShowNewModal(false);
+  };
 
   return (
     <Paneset>
@@ -91,12 +97,22 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                           defaultWidth="50%"
                           key={namePrefix}
                           paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
-                          lastMenu={<IconButton
-                            icon="save"
-                            aria-label={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
-                            onClick={() => setShowSaveModal(true)}
-                            data-cy={`${namePrefix}.saveQuery`}
-                          />}
+                          lastMenu={
+                            <>
+                              <IconButton
+                                icon="document"
+                                aria-label={intl.formatMessage({ id: 'ui-ldp.button.new-query' })}
+                                onClick={() => setShowNewModal(true)}
+                                data-cy={`${namePrefix}.saveQuery`}
+                              />
+                              <IconButton
+                                icon="save"
+                                aria-label={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
+                                onClick={() => setShowSaveModal(true)}
+                                data-cy={`${namePrefix}.saveQuery`}
+                              />
+                            </>
+                          }
                         >
                           <QuerySingleTable
                             namePrefix={namePrefix}
@@ -128,6 +144,14 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                   </div>
                 </div>
               </div>
+              <ConfirmationModal
+                open={showNewModal}
+                heading={<FormattedMessage id="ui-ldp.button.new-query" />}
+                message={<FormattedMessage id="ui-ldp.desc.new-query" />}
+                confirmLabel={<FormattedMessage id="ui-ldp.button.new-query" />}
+                onConfirm={newQuery}
+                onCancel={() => setShowNewModal(false)}
+              />
               {
                 showSaveModal &&
                   <SaveQueryModal
