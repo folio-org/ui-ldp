@@ -25,7 +25,7 @@ const QueryBuilderRoute = ({ location }) => {
     loadTables(intl, stripes, setTables, setError);
   }, [intl, stripes, stripes.okapi, setTables]);
 
-  const initialInitialState = {
+  const newQueryState = {
     tables: [
       {
         schema: 'public',
@@ -38,13 +38,15 @@ const QueryBuilderRoute = ({ location }) => {
     ]
   };
 
+  const newQuery = () => setInitialState(newQueryState);
+
   const namespace = getNamespace({ key: 'formState' });
   useEffect(() => {
     localforage.getItem(namespace).then((state) => {
       // console.log(`localforage.getItem('${namespace}') got state`, state);
-      setInitialState(state || initialInitialState);
+      setInitialState(state || newQueryState);
     });
-    // Including initialInitialState in the dependency array makes weird things happen
+    // Including newQueryState in the dependency array makes weird things happen
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [namespace]);
 
@@ -57,7 +59,7 @@ const QueryBuilderRoute = ({ location }) => {
     stateHasChanged={values => localforage.setItem(namespace, values)}
     tables={tables}
     setError={setError}
-    onClear={() => setInitialState(initialInitialState)}
+    onClear={newQuery}
     execute={'execute' in params}
   />;
 };
