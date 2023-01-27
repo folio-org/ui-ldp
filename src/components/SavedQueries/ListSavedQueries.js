@@ -15,8 +15,8 @@ function ListSavedQueries({ queries, deleteQuery }) {
   const callout = useContext(CalloutContext);
 
   const executeQuery = async (_unusedEvent, item) => {
-    console.log('metadata ', item);
-    await localforage.setItem(namespace, { metadata: item, tables: item.json.tables });
+    console.log('executeQuery ', item);
+    await localforage.setItem(namespace, { META: item, tables: item.json.tables });
     history.push(`/ldp${item.autoRun ? '?execute' : ''}`);
   };
 
