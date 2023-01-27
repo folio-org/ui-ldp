@@ -11,15 +11,15 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const [updateName, setUpdateName] = useState(autoUpdateName);
-  console.log('queryFormValues.metadata =', queryFormValues?.metadata);
+  console.log('queryFormValues.META =', queryFormValues?.META);
 
   const [values, setValues] = useState({
-    name: queryFormValues?.metadata.name,
-    displayName: queryFormValues?.metadata.displayName,
-    autoRun: queryFormValues?.metadata.autoRun,
+    name: queryFormValues?.META?.name,
+    displayName: queryFormValues?.META?.displayName,
+    autoRun: queryFormValues?.META?.autoRun,
     creator: stripes.user?.user?.username,
     created: new Date(), // XXX handle updated
-    comment: queryFormValues?.metadata.comment,
+    comment: queryFormValues?.META?.comment,
   });
   console.log('values =', values);
 
@@ -37,10 +37,10 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
     };
 
     let method, path, id; // eslint-disable-line one-var, one-var-declaration-per-line
-    if (queryFormValues.metadata) {
+    if (queryFormValues.META) {
       method = 'PUT';
-      path = `/settings/entries/${queryFormValues.metadata.id}`;
-      id = queryFormValues?.metadata.id;
+      path = `/settings/entries/${queryFormValues.META.id}`;
+      id = queryFormValues?.META.id;
     } else {
       method = 'POST';
       path = '/settings/entries';
@@ -169,7 +169,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
 SaveQueryModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   queryFormValues: PropTypes.shape({
-    metadata: PropTypes.shape({
+    META: PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       displayName: PropTypes.string.isRequired,
