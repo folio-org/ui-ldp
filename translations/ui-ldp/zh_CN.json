@@ -80,5 +80,5 @@
     "saved-queries.delete.confirm": "确认",
     "saved-queries.delete.deleted": "已删除查询<code> {name} </code> 。注意，查询在列表中不再可见可能需要一些时间。",
     "placeholder.hidden": "[已隐藏]",
-    "error.load-queries": "Could not load saved queries: {error}"
+    "error.load-queries": "无法加载保存的查询： {error}"
 }
