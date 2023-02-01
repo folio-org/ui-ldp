@@ -6,7 +6,7 @@ import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, Paneset, IconButton } from '@folio/stripes/components';
+import { Pane, Paneset, IconButton, ConfirmationModal } from '@folio/stripes/components';
 import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 import loadResults from '../../util/loadResults';
@@ -36,10 +36,11 @@ function ensureSchemasAreAvailable(initialState, schemaNames) {
 }
 
 
-function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, setError, execute }) {
+function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, onClear, tables, setError, execute }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const [showNewModal, setShowNewModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [alreadyExecuted, setAlreadyExecuted] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
@@ -51,6 +52,11 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
     setAlreadyExecuted(true);
     onSubmit(initialState);
   }
+
+  const newQuery = async () => {
+    onClear();
+    setShowNewModal(false);
+  };
 
   return (
     <Paneset>
@@ -68,6 +74,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
           }
         }) => {
           const queryFormValues = getState().values;
+          // console.log('QueryBuilder: queryFormValues =', queryFormValues);
           stateMayHaveChanged(stateHasChanged, queryFormValues);
           return (
             <form
@@ -91,12 +98,22 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                           defaultWidth="50%"
                           key={namePrefix}
                           paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
-                          lastMenu={<IconButton
-                            icon="save"
-                            aria-label={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
-                            onClick={() => setShowSaveModal(true)}
-                            data-cy={`${namePrefix}.saveQuery`}
-                          />}
+                          lastMenu={
+                            <>
+                              <IconButton
+                                icon="document"
+                                aria-label={intl.formatMessage({ id: 'ui-ldp.button.new-query' })}
+                                onClick={() => setShowNewModal(true)}
+                                data-cy={`${namePrefix}.newQuery`}
+                              />
+                              <IconButton
+                                icon="save"
+                                aria-label={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
+                                onClick={() => setShowSaveModal(true)}
+                                data-cy={`${namePrefix}.saveQuery`}
+                              />
+                            </>
+                          }
                         >
                           <QuerySingleTable
                             namePrefix={namePrefix}
@@ -106,7 +123,6 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}
-                            onClear={onClear}
                             searchWithoutLimit={searchWithoutLimit}
                           />
                         </Pane>
@@ -128,12 +144,21 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                   </div>
                 </div>
               </div>
+              <ConfirmationModal
+                open={showNewModal}
+                heading={<FormattedMessage id="ui-ldp.button.new-query" />}
+                message={<FormattedMessage id="ui-ldp.desc.new-query" />}
+                confirmLabel={<FormattedMessage id="ui-ldp.button.new-query" />}
+                onConfirm={newQuery}
+                onCancel={() => setShowNewModal(false)}
+              />
               {
                 showSaveModal &&
                   <SaveQueryModal
                     onClose={() => setShowSaveModal(false)}
                     queryFormValues={queryFormValues}
                     autoUpdateName
+                    metadataHasChanged={metadataHasChanged}
                   />
               }
             </form>
@@ -149,6 +174,7 @@ QueryBuilder.propTypes = {
   ldp: P.shape({}).isRequired,
   initialState: P.object.isRequired,
   stateHasChanged: P.func.isRequired,
+  metadataHasChanged: P.func.isRequired,
   tables: P.objectOf(
     P.arrayOf(
       P.shape({

@@ -17,6 +17,7 @@ const QueryBuilderRoute = ({ location }) => {
   const [, getNamespace] = useNamespace();
   const ldp = useLdp();
   const [initialState, setInitialState] = useState();
+  const [metadataChangeCount, setMetadataChangeCount] = useState(0);
   const [tables, setTables] = useState();
   const [error, setError] = useState(false);
   const params = queryString.parse(location.search);
@@ -25,7 +26,8 @@ const QueryBuilderRoute = ({ location }) => {
     loadTables(intl, stripes, setTables, setError);
   }, [intl, stripes, stripes.okapi, setTables]);
 
-  const initialInitialState = {
+  const newQueryState = {
+    // META undefined until a query is loaded or saved
     tables: [
       {
         schema: 'public',
@@ -38,15 +40,18 @@ const QueryBuilderRoute = ({ location }) => {
     ]
   };
 
+  const newQuery = () => setInitialState(newQueryState);
+
   const namespace = getNamespace({ key: 'formState' });
   useEffect(() => {
+    // console.log(`QueryBuilderRoute, metadataChangeCount=${metadataChangeCount}, setting final-form state`);
     localforage.getItem(namespace).then((state) => {
       // console.log(`localforage.getItem('${namespace}') got state`, state);
-      setInitialState(state || initialInitialState);
+      setInitialState(state || newQueryState);
     });
-    // Including initialInitialState in the dependency array makes weird things happen
+    // Including newQueryState in the dependency array makes weird things happen
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [namespace]);
+  }, [namespace, metadataChangeCount]);
 
   if (error) return <BigError message={error} />;
   if (!initialState || !tables) return <Loading size="xlarge" />;
@@ -54,10 +59,15 @@ const QueryBuilderRoute = ({ location }) => {
   return <QueryBuilder
     ldp={ldp}
     initialState={initialState}
-    stateHasChanged={values => localforage.setItem(namespace, values)}
+    stateHasChanged={async values => localforage.setItem(namespace, values)}
+    metadataHasChanged={async values => {
+      // console.log('metadataHasChanged to', values.META);
+      await localforage.setItem(namespace, values);
+      setMetadataChangeCount(metadataChangeCount + 1);
+    }}
     tables={tables}
     setError={setError}
-    onClear={() => setInitialState(initialInitialState)}
+    onClear={newQuery}
     execute={'execute' in params}
   />;
 };

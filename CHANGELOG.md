@@ -8,6 +8,7 @@
 * Modify JSON query saving/loading to use FOLIO storage (mod-settings). Fixes UILDP-57.
 * Newly saved queries now appear on the Saved Query list immediately. Fixes UILDP-41.
 * This module is no longer dependent on mod-configuration. Fixes UILDP-78.
+* Saved queries, once loaded, can be edited and re-saved. Fixes UILDP-45.
 
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 

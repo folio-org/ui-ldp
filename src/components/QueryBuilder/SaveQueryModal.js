@@ -7,41 +7,55 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
-function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
+function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasChanged }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const [updateName, setUpdateName] = useState(autoUpdateName);
+  // console.log('SaveQueryModal: queryFormValues.META =', queryFormValues?.META);
 
   const [values, setValues] = useState({
-    autoRun: true,
+    name: queryFormValues?.META?.name,
+    displayName: queryFormValues?.META?.displayName,
+    autoRun: queryFormValues?.META?.autoRun,
     creator: stripes.user?.user?.username,
-    created: new Date(),
+    created: new Date(), // XXX handle updated
+    comment: queryFormValues?.META?.comment,
   });
 
   const saveQuery = async () => {
-    const content = {
-      ...queryFormValues,
-      META: {
-        displayName: values.displayName,
-        autoRun: values.autoRun,
-        creator: values.creator,
-        created: values.created.toISOString(),
-        // XXX We should set `updated` instead if the query already exists
-        comment: values.comment,
-      },
+    const META = {
+      displayName: values.displayName,
+      autoRun: values.autoRun,
+      creator: values.creator,
+      created: values.created.toISOString(),
+      // XXX We should set `updated` instead if the query already exists
+      comment: values.comment,
     };
 
-    // XXX When overwriting an existing saved search, we should PUT instead of POST, and use the existing id.
-    const res = await stripesFetch(stripes, '/settings/entries', {
-      method: 'POST',
+    const content = { ...queryFormValues, META };
+
+    let method, path, id; // eslint-disable-line one-var, one-var-declaration-per-line
+    if (queryFormValues.META?.id) {
+      method = 'PUT';
+      path = `/settings/entries/${queryFormValues.META.id}`;
+      id = queryFormValues.META.id;
+    } else {
+      method = 'POST';
+      path = '/settings/entries';
+      id = uuidv4();
+    }
+
+    const res = await stripesFetch(stripes, path, {
+      method,
       body: JSON.stringify({
-        id: uuidv4(),
+        id,
         scope: 'ui-ldp.queries',
         key: values.name,
         value: content,
       }),
     });
 
+    metadataHasChanged(content);
     onClose();
     const { displayName } = values;
     if (res.ok) {
@@ -107,6 +121,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
                 setValues(newValues);
               }
             }
+            value={values.displayName}
             autoFocus
           />
         </Col>
@@ -141,6 +156,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
           <TextField
             label={<FormattedMessage id="ui-ldp.saved-queries.comment" />}
             onChange={e => setValues({ ...values, comment: e.target.value })}
+            value={values.comment}
           />
         </Col>
       </Row>
@@ -152,6 +168,13 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
 SaveQueryModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   queryFormValues: PropTypes.shape({
+    META: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      displayName: PropTypes.string.isRequired,
+      autoRun: PropTypes.bool,
+      comment: PropTypes.string,
+    }),
     tables: PropTypes.arrayOf(
       PropTypes.shape({
         schema: PropTypes.string.isRequired,
@@ -160,6 +183,7 @@ SaveQueryModal.propTypes = {
     ).isRequired
   }).isRequired,
   autoUpdateName: PropTypes.bool.isRequired,
+  metadataHasChanged: PropTypes.func.isRequired,
 };
 
 
