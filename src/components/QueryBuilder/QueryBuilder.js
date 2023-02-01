@@ -16,6 +16,7 @@ import SaveQueryModal from './SaveQueryModal';
 let _savedValues; // Private to stateMayHaveChanged
 function stateMayHaveChanged(stateHasChanged, values) {
   if (!isEqual(values, _savedValues)) {
+    console.log('stateMayHaveChanged: it HAS!');
     stateHasChanged(values);
     _savedValues = values;
   }
@@ -74,6 +75,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
           }
         }) => {
           const queryFormValues = getState().values;
+          // console.log('QueryBuilder: queryFormValues =', queryFormValues);
           stateMayHaveChanged(stateHasChanged, queryFormValues);
           return (
             <form
@@ -103,7 +105,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                                 icon="document"
                                 aria-label={intl.formatMessage({ id: 'ui-ldp.button.new-query' })}
                                 onClick={() => setShowNewModal(true)}
-                                data-cy={`${namePrefix}.saveQuery`}
+                                data-cy={`${namePrefix}.newQuery`}
                               />
                               <IconButton
                                 icon="save"
@@ -157,6 +159,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                     onClose={() => setShowSaveModal(false)}
                     queryFormValues={queryFormValues}
                     autoUpdateName
+                    stateHasChanged={stateHasChanged}
                   />
               }
             </form>

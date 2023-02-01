@@ -14,8 +14,8 @@ function ListSavedQueries({ queries, deleteQuery }) {
   const namespace = getNamespace({ key: 'formState' });
   const callout = useContext(CalloutContext);
 
-  const executeQuery = async (_unusedEvent, item) => {
-    console.log('executeQuery ', item);
+  const selectQuery = async (_unusedEvent, item) => {
+    console.log('selectQuery ', item);
     await localforage.setItem(namespace, { META: item, tables: item.json.tables });
     history.push(`/ldp${item.autoRun ? '?execute' : ''}`);
   };
@@ -72,7 +72,7 @@ function ListSavedQueries({ queries, deleteQuery }) {
             created: r => new Date(r.created).toLocaleString(),
             deleteQuery: r => <IconButton icon="trash" onClick={e => maybeDeleteQuery(e, r)} />
           }}
-          onRowClick={executeQuery}
+          onRowClick={selectQuery}
         />
 
         {queryToDelete !== undefined &&

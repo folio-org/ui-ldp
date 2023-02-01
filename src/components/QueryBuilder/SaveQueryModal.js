@@ -7,11 +7,11 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
-function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
+function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, stateHasChanged }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const [updateName, setUpdateName] = useState(autoUpdateName);
-  console.log('queryFormValues.META =', queryFormValues?.META);
+  // console.log('SaveQueryModal: queryFormValues.META =', queryFormValues?.META);
 
   const [values, setValues] = useState({
     name: queryFormValues?.META?.name,
@@ -21,26 +21,24 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
     created: new Date(), // XXX handle updated
     comment: queryFormValues?.META?.comment,
   });
-  console.log('values =', values);
 
   const saveQuery = async () => {
-    const content = {
-      ...queryFormValues,
-      META: {
-        displayName: values.displayName,
-        autoRun: values.autoRun,
-        creator: values.creator,
-        created: values.created.toISOString(),
-        // XXX We should set `updated` instead if the query already exists
-        comment: values.comment,
-      },
+    const META = {
+      displayName: values.displayName,
+      autoRun: values.autoRun,
+      creator: values.creator,
+      created: values.created.toISOString(),
+      // XXX We should set `updated` instead if the query already exists
+      comment: values.comment,
     };
 
+    const content = { ...queryFormValues, META };
+
     let method, path, id; // eslint-disable-line one-var, one-var-declaration-per-line
-    if (queryFormValues.META) {
+    if (queryFormValues.META?.id) {
       method = 'PUT';
       path = `/settings/entries/${queryFormValues.META.id}`;
-      id = queryFormValues?.META.id;
+      id = queryFormValues.META.id;
     } else {
       method = 'POST';
       path = '/settings/entries';
@@ -56,6 +54,9 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName }) {
         value: content,
       }),
     });
+
+    console.log('saved, changing state to', content);
+    stateHasChanged(content);
 
     onClose();
     const { displayName } = values;
@@ -170,11 +171,11 @@ SaveQueryModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   queryFormValues: PropTypes.shape({
     META: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      name: PropTypes.string,
       displayName: PropTypes.string.isRequired,
-      autoRun: PropTypes.bool.isRequired,
-      comment: PropTypes.string.isRequired,
+      autoRun: PropTypes.bool,
+      comment: PropTypes.string,
     }),
     tables: PropTypes.arrayOf(
       PropTypes.shape({
@@ -184,6 +185,7 @@ SaveQueryModal.propTypes = {
     ).isRequired
   }).isRequired,
   autoUpdateName: PropTypes.bool.isRequired,
+  stateHasChanged: PropTypes.func.isRequired,
 };
 
 
