@@ -44,7 +44,7 @@ const QueryBuilderRoute = ({ location }) => {
 
   const namespace = getNamespace({ key: 'formState' });
   useEffect(() => {
-    console.log(`QueryBuilderRoute, metadataChangeCount=${metadataChangeCount}, setting final-form state`);
+    // console.log(`QueryBuilderRoute, metadataChangeCount=${metadataChangeCount}, setting final-form state`);
     localforage.getItem(namespace).then((state) => {
       // console.log(`localforage.getItem('${namespace}') got state`, state);
       setInitialState(state || newQueryState);
@@ -61,7 +61,7 @@ const QueryBuilderRoute = ({ location }) => {
     initialState={initialState}
     stateHasChanged={async values => localforage.setItem(namespace, values)}
     metadataHasChanged={async values => {
-      console.log('*** stateHasChanged to', values);
+      // console.log('metadataHasChanged to', values.META);
       await localforage.setItem(namespace, values);
       setMetadataChangeCount(metadataChangeCount + 1);
     }}

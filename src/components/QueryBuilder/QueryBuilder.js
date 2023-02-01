@@ -16,7 +16,6 @@ import SaveQueryModal from './SaveQueryModal';
 let _savedValues; // Private to stateMayHaveChanged
 function stateMayHaveChanged(stateHasChanged, values) {
   if (!isEqual(values, _savedValues)) {
-    console.log('stateMayHaveChanged: it HAS!');
     stateHasChanged(values);
     _savedValues = values;
   }
