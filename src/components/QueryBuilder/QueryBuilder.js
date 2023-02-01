@@ -37,7 +37,7 @@ function ensureSchemasAreAvailable(initialState, schemaNames) {
 }
 
 
-function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, setError, execute }) {
+function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, onClear, tables, setError, execute }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
@@ -159,7 +159,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, onClear, tables, set
                     onClose={() => setShowSaveModal(false)}
                     queryFormValues={queryFormValues}
                     autoUpdateName
-                    stateHasChanged={stateHasChanged}
+                    metadataHasChanged={metadataHasChanged}
                   />
               }
             </form>
@@ -175,6 +175,7 @@ QueryBuilder.propTypes = {
   ldp: P.shape({}).isRequired,
   initialState: P.object.isRequired,
   stateHasChanged: P.func.isRequired,
+  metadataHasChanged: P.func.isRequired,
   tables: P.objectOf(
     P.arrayOf(
       P.shape({

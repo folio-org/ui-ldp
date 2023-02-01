@@ -7,7 +7,7 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
-function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, stateHasChanged }) {
+function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasChanged }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const [updateName, setUpdateName] = useState(autoUpdateName);
@@ -56,7 +56,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, stateHasChan
     });
 
     console.log('saved, changing state to', content);
-    stateHasChanged(content);
+    metadataHasChanged(content);
 
     onClose();
     const { displayName } = values;
@@ -185,7 +185,7 @@ SaveQueryModal.propTypes = {
     ).isRequired
   }).isRequired,
   autoUpdateName: PropTypes.bool.isRequired,
-  stateHasChanged: PropTypes.func.isRequired,
+  metadataHasChanged: PropTypes.func.isRequired,
 };
 
 

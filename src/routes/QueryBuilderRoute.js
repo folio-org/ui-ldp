@@ -17,7 +17,7 @@ const QueryBuilderRoute = ({ location }) => {
   const [, getNamespace] = useNamespace();
   const ldp = useLdp();
   const [initialState, setInitialState] = useState();
-  const [stateChangeCount, setStateChangeCount] = useState(0);
+  const [metadataChangeCount, setMetadataChangeCount] = useState(0);
   const [tables, setTables] = useState();
   const [error, setError] = useState(false);
   const params = queryString.parse(location.search);
@@ -44,14 +44,14 @@ const QueryBuilderRoute = ({ location }) => {
 
   const namespace = getNamespace({ key: 'formState' });
   useEffect(() => {
-    console.log(`QueryBuilderRoute, stateChangeCount=${stateChangeCount}, setting final-form state`);
+    console.log(`QueryBuilderRoute, metadataChangeCount=${metadataChangeCount}, setting final-form state`);
     localforage.getItem(namespace).then((state) => {
       // console.log(`localforage.getItem('${namespace}') got state`, state);
       setInitialState(state || newQueryState);
     });
     // Including newQueryState in the dependency array makes weird things happen
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [namespace, stateChangeCount]);
+  }, [namespace, metadataChangeCount]);
 
   if (error) return <BigError message={error} />;
   if (!initialState || !tables) return <Loading size="xlarge" />;
@@ -59,10 +59,11 @@ const QueryBuilderRoute = ({ location }) => {
   return <QueryBuilder
     ldp={ldp}
     initialState={initialState}
-    stateHasChanged={async values => {
+    stateHasChanged={async values => localforage.setItem(namespace, values)}
+    metadataHasChanged={async values => {
       console.log('*** stateHasChanged to', values);
       await localforage.setItem(namespace, values);
-      setStateChangeCount(stateChangeCount + 1);
+      setMetadataChangeCount(metadataChangeCount + 1);
     }}
     tables={tables}
     setError={setError}
