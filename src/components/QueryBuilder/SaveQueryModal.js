@@ -24,6 +24,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
 
   const saveQuery = async () => {
     const META = {
+      name: values.name,
       displayName: values.displayName,
       autoRun: values.autoRun,
       creator: values.creator,
