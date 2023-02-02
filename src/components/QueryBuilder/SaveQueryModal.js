@@ -43,7 +43,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
     } else {
       method = 'POST';
       path = '/settings/entries';
-      id = uuidv4();
+      content.META.id = id = uuidv4();
     }
 
     const res = await stripesFetch(stripes, path, {
