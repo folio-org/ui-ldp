@@ -56,7 +56,9 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
       }),
     });
 
+    content.META.id = id;
     metadataHasChanged(content);
+
     onClose();
     const { displayName } = values;
     if (res.ok) {

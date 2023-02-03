@@ -11,6 +11,7 @@
 * Saved queries, once loaded, can be edited and re-saved. Fixes UILDP-45.
 * Fix "provided object should contain property key" when saving queries. Fixes UILDP-82.
 * Fix "Could not save query [...]: error (): Forbidden". Fixes UILDP-83.
+* After saving a query, re-saving the same query no longer creates a duplicate. Fixes UILDP-85.
 
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 
