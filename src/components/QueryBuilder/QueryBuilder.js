@@ -90,7 +90,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
           }
         }) => {
           const queryFormValues = getState().values;
-          // console.log('QueryBuilder: queryFormValues =', queryFormValues);
+          console.log('QueryBuilder: queryFormValues =', queryFormValues);
           stateMayHaveChanged(stateHasChanged, queryFormValues);
           return (
             <form
@@ -113,7 +113,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                           id={`table${tableIndex}`}
                           defaultWidth="50%"
                           key={namePrefix}
-                          paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
+                          paneTitle={queryFormValues.META?.displayName}
                           lastMenu={
                             <>
                               <IconButton
