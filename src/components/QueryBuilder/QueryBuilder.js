@@ -179,7 +179,6 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                   <SaveQueryModal
                     onClose={() => setShowSaveModal(false)}
                     queryFormValues={queryFormValues}
-                    autoUpdateName
                     metadataHasChanged={metadataHasChanged}
                   />
               }

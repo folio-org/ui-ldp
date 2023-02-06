@@ -32,8 +32,9 @@ function ListSavedQueries({ queries, deleteQuery }) {
           <FormattedMessage
             id="ui-ldp.saved-queries.delete.deleted"
             values={{
-              name: item.name,
-              code: chunks => <code>{chunks}</code>,
+              name: item.displayName,
+              b: chunks => <b>{chunks}</b>,
+              code: chunks => <b>{chunks}</b>, // For old translations that still use <code>
             }}
           />
         ),
@@ -46,9 +47,8 @@ function ListSavedQueries({ queries, deleteQuery }) {
       <Pane defaultWidth="fill">
         <MultiColumnList
           contentData={queries}
-          visibleColumns={['name', 'displayName', 'autoRun', 'creator', 'created', 'comment', 'deleteQuery']}
+          visibleColumns={['displayName', 'autoRun', 'creator', 'created', 'comment', 'deleteQuery']}
           columnMapping={{
-            name: <FormattedMessage id="ui-ldp.saved-queries.name" />,
             displayName: <FormattedMessage id="ui-ldp.saved-queries.displayName" />,
             autoRun: <FormattedMessage id="ui-ldp.saved-queries.autoRun" />,
             creator: <FormattedMessage id="ui-ldp.saved-queries.creator" />,
@@ -57,7 +57,6 @@ function ListSavedQueries({ queries, deleteQuery }) {
             deleteQuery: '',
           }}
           columnWidths={{
-            name: 180,
             displayName: 300,
             autoRun: 90,
             creator: 120,
@@ -65,7 +64,6 @@ function ListSavedQueries({ queries, deleteQuery }) {
             comment: 250
           }}
           formatter={{
-            name: r => <code>{r.name.replace('.json', '')}</code>,
             autoRun: r => (r.autoRun ? '✓' : ''),
             creator: r => <code>{r.creator}</code>,
             created: r => new Date(r.created).toLocaleString(),
@@ -83,8 +81,6 @@ function ListSavedQueries({ queries, deleteQuery }) {
               <div style={{ textAlign: 'center' }}>
                 <p>
                   {queryToDelete.displayName}
-                  {' '}
-                  (<code>{queryToDelete.name}</code>)
                 </p>
                 <p>
                   <FormattedMessage
