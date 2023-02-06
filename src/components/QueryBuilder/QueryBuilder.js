@@ -42,6 +42,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
   const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
   const [showNewModal, setShowNewModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showCopyModal, setShowCopyModal] = useState(false);
   const [alreadyExecuted, setAlreadyExecuted] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
@@ -56,6 +57,21 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
   const newQuery = async () => {
     onClear();
     setShowNewModal(false);
+  };
+
+  const copyQuery = async () => {
+    const newState = {
+      ...initialState,
+      META: { ...initialState.META },
+    };
+    delete newState.META.id;
+    newState.META.displayName = intl.formatMessage(
+      { id: 'ui-ldp.copy-of' },
+      { string: newState.META.displayName }
+    );
+
+    metadataHasChanged(newState);
+    setShowCopyModal(false);
   };
 
   return (
@@ -97,7 +113,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                           id={`table${tableIndex}`}
                           defaultWidth="50%"
                           key={namePrefix}
-                          paneTitle={<FormattedMessage id="ui-ldp.nav.query-builder" />}
+                          paneTitle={queryFormValues.META?.displayName}
                           lastMenu={
                             <>
                               <IconButton
@@ -111,6 +127,12 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                                 aria-label={intl.formatMessage({ id: 'ui-ldp.button.save-query' })}
                                 onClick={() => setShowSaveModal(true)}
                                 data-cy={`${namePrefix}.saveQuery`}
+                              />
+                              <IconButton
+                                icon="duplicate"
+                                aria-label={intl.formatMessage({ id: 'ui-ldp.button.copy-query' })}
+                                onClick={() => setShowCopyModal(true)}
+                                data-cy={`${namePrefix}.copyQuery`}
                               />
                             </>
                           }
@@ -157,10 +179,17 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                   <SaveQueryModal
                     onClose={() => setShowSaveModal(false)}
                     queryFormValues={queryFormValues}
-                    autoUpdateName
                     metadataHasChanged={metadataHasChanged}
                   />
               }
+              <ConfirmationModal
+                open={showCopyModal}
+                heading={<FormattedMessage id="ui-ldp.button.copy-query" />}
+                message={<FormattedMessage id="ui-ldp.desc.copy-query" />}
+                confirmLabel={<FormattedMessage id="ui-ldp.button.copy-query" />}
+                onConfirm={copyQuery}
+                onCancel={() => setShowCopyModal(false)}
+              />
             </form>
           );
         }}

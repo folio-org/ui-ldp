@@ -7,14 +7,12 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
-function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasChanged }) {
+function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
-  const [updateName, setUpdateName] = useState(autoUpdateName);
   // console.log('SaveQueryModal: queryFormValues.META =', queryFormValues?.META);
 
   const [values, setValues] = useState({
-    name: queryFormValues?.META?.name,
     displayName: queryFormValues?.META?.displayName,
     autoRun: queryFormValues?.META?.autoRun,
     creator: stripes.user?.user?.username,
@@ -24,7 +22,6 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
 
   const saveQuery = async () => {
     const META = {
-      name: values.name,
       displayName: values.displayName,
       autoRun: values.autoRun,
       creator: values.creator,
@@ -43,7 +40,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
     } else {
       method = 'POST';
       path = '/settings/entries';
-      content.META.id = id = uuidv4();
+      content.META.id = id = uuidv4(); // eslint-disable-line no-multi-assign
     }
 
     const res = await stripesFetch(stripes, path, {
@@ -51,7 +48,7 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
       body: JSON.stringify({
         id,
         scope: 'ui-ldp.queries',
-        key: values.name,
+        key: id, // We don't actually use this, it's just a disambigutor
         value: content,
       }),
     });
@@ -99,31 +96,10 @@ function SaveQueryModal({ onClose, queryFormValues, autoUpdateName, metadataHasC
       footer={footer}
     >
       <Row>
-        <Col xs={4}>
-          <TextField
-            id="save-query-modal-name"
-            label={<FormattedMessage id="ui-ldp.saved-queries.name" />}
-            onChange={
-              e => {
-                setUpdateName(false);
-                setValues({ ...values, name: e.target.value });
-              }
-            }
-            value={values.name}
-          />
-        </Col>
-        <Col xs={8}>
+        <Col xs={12}>
           <TextField
             label={<FormattedMessage id="ui-ldp.saved-queries.displayName" />}
-            onChange={
-              e => {
-                const newValues = { ...values, displayName: e.target.value };
-                if (updateName) {
-                  newValues.name = e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '_');
-                }
-                setValues(newValues);
-              }
-            }
+            onChange={e => setValues({ ...values, displayName: e.target.value })}
             value={values.displayName}
             autoFocus
           />
@@ -173,7 +149,6 @@ SaveQueryModal.propTypes = {
   queryFormValues: PropTypes.shape({
     META: PropTypes.shape({
       id: PropTypes.string,
-      name: PropTypes.string,
       displayName: PropTypes.string.isRequired,
       autoRun: PropTypes.bool,
       comment: PropTypes.string,
@@ -185,7 +160,6 @@ SaveQueryModal.propTypes = {
       }).isRequired,
     ).isRequired
   }).isRequired,
-  autoUpdateName: PropTypes.bool.isRequired,
   metadataHasChanged: PropTypes.func.isRequired,
 };
 
