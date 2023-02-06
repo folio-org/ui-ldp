@@ -90,7 +90,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
           }
         }) => {
           const queryFormValues = getState().values;
-          console.log('QueryBuilder: queryFormValues =', queryFormValues);
+          // console.log('QueryBuilder: queryFormValues =', queryFormValues);
           stateMayHaveChanged(stateHasChanged, queryFormValues);
           return (
             <form
