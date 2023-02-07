@@ -58,6 +58,7 @@
   "save-query": "Save query",
   "save-query.update.ok": "Saved query {displayName}",
   "save-query.update.fail": "Could not save query {displayName}: error {code} ({statusText}): {detail}",
+  "save-query.update.notFound": "The query you loaded was deleted. Make a copy and save that.",
   "saved-queries.delete.deleteQuery": "Delete query?",
   "saved-queries.delete.createdBy": "Created by <code>{creator}</code>",
   "saved-queries.delete.confirm": "Confirm",

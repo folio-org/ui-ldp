@@ -14,6 +14,7 @@
 * After saving a query, re-saving the same query no longer creates a duplicate. Fixes UILDP-85.
 * Add a **Copy query** button. Fixes UILDP-86.
 * Remove all traces of the old `sqconfig` (permissions, settings pages, etc.)
+* Handle disappearing queries more gracefully. Fixes UILDP-88.
 
 ## [1.9.0](https://github.com/folio-org/ui-ldp/tree/v1.9.0) (2022-10-24)
 
