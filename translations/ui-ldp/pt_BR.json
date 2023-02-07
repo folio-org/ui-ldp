@@ -64,7 +64,6 @@
     "button.save-query": "Salvar consulta",
     "button.save": "Salvar",
     "button.cancel": "Cancelar",
-    "saved-queries.name": "Nome do arquivo",
     "saved-queries.displayName": "Nome de exibição",
     "saved-queries.autoRun": "Auto-execução?",
     "saved-queries.creator": "Criador",
@@ -80,5 +79,10 @@
     "saved-queries.delete.confirm": "Confirmar",
     "saved-queries.delete.deleted": "Consulta <code>{name}</code> excluída. Observe que pode levar algum tempo até que a consulta não esteja mais visível na lista.",
     "placeholder.hidden": "[Oculto]",
-    "error.load-queries": "Não foi possível carregar as consultas salvas: {error}"
+    "error.load-queries": "Não foi possível carregar as consultas salvas: {error}",
+    "button.new-query": "Nova consulta",
+    "desc.new-query": "Isso limpará a consulta atual pronta, para criar uma nova.",
+    "copy-of": "Copy of {string}",
+    "button.copy-query": "Copy query",
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
 }

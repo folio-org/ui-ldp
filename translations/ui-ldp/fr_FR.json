@@ -64,7 +64,6 @@
     "button.save-query": "Enregistrer la requête",
     "button.save": "Sauvegarder",
     "button.cancel": "Annuler",
-    "saved-queries.name": "Nom de fichier",
     "saved-queries.displayName": "Afficher le nom",
     "saved-queries.autoRun": "Exécution automatique ?",
     "saved-queries.creator": "Créateur",
@@ -78,7 +77,12 @@
     "saved-queries.delete.deleteQuery": "Supprimer la requête ?",
     "saved-queries.delete.createdBy": "Créé par <code> {creator} </code>",
     "saved-queries.delete.confirm": "Confirmer",
-    "saved-queries.delete.deleted": "Deleted query <code>{name}</code>. Note that it may take some time before the query is no longer visible in the list.",
+    "saved-queries.delete.deleted": "Deleted query <b>{name}</b>.",
     "placeholder.hidden": "[Hidden]",
-    "error.load-queries": "Could not load saved queries: {error}"
+    "error.load-queries": "Could not load saved queries: {error}",
+    "button.new-query": "New query",
+    "desc.new-query": "This will clear the present query ready to create a new one.",
+    "copy-of": "Copy of {string}",
+    "button.copy-query": "Copy query",
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
 }

@@ -64,7 +64,6 @@
     "button.save-query": "Abfrage speichern",
     "button.save": "Speichern",
     "button.cancel": "Abbrechen",
-    "saved-queries.name": "Dateiname",
     "saved-queries.displayName": "Anzeigename",
     "saved-queries.autoRun": "Automatisch ausführen?",
     "saved-queries.creator": "Erstellt von",
@@ -80,5 +79,10 @@
     "saved-queries.delete.confirm": "Bestätigen",
     "saved-queries.delete.deleted": "Gelöschte Abfrage <code> {name} </code> . Bitte beachten, dass es einige Zeit dauern kann, bis die Abfrage nicht mehr in der Liste sichtbar ist.",
     "placeholder.hidden": "[Versteckt]",
-    "error.load-queries": "Could not load saved queries: {error}"
+    "error.load-queries": "Could not load saved queries: {error}",
+    "button.new-query": "New query",
+    "desc.new-query": "This will clear the present query ready to create a new one.",
+    "copy-of": "Copy of {string}",
+    "button.copy-query": "Copy query",
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
 }
