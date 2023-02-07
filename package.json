@@ -113,7 +113,9 @@
         "subPermissions": [
           "ldp.read",
           "ldp.config.read",
-          "configuration.entries.collection.get"
+          "mod-settings.entries.collection.get",
+          "mod-settings.global.read.ui-ldp.admin",
+          "mod-settings.global.read.ui-ldp.queries"
         ],
         "visible": true
       },
@@ -121,7 +123,8 @@
         "permissionName": "settings.ldp.enabled",
         "displayName": "Settings (LDP): Can view settings",
         "subPermissions": [
-          "settings.enabled"
+          "settings.enabled",
+          "mod-settings.global.read.ui-ldp.admin"
         ],
         "visible": true
       },
@@ -130,8 +133,10 @@
         "displayName": "Settings (LDP): Can modify default record limits",
         "subPermissions": [
           "settings.ldp.enabled",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "mod-settings.entries.item.post",
+          "mod-settings.entries.item.put",
+          "mod-settings.global.read.ui-ldp.admin",
+          "mod-settings.global.write.ui-ldp.admin"
         ],
         "visible": true
       },
@@ -140,8 +145,10 @@
         "displayName": "Settings (LDP): Can select which tables are available to search",
         "subPermissions": [
           "settings.ldp.enabled",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "mod-settings.entries.item.post",
+          "mod-settings.entries.item.put",
+          "mod-settings.global.read.ui-ldp.admin",
+          "mod-settings.global.write.ui-ldp.admin"
         ],
         "visible": true
       },
