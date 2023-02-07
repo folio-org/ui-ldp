@@ -163,24 +163,13 @@
         "visible": true
       },
       {
-        "permissionName": "ui-ldp.settings.sqconfig",
-        "displayName": "Settings (LDP): Can modify saved-query configuration details",
-        "subPermissions": [
-          "settings.ldp.enabled",
-          "ldp.config.read",
-          "ldp.config.edit"
-        ],
-        "visible": true
-      },
-      {
         "permissionName": "ui-ldp.all",
         "displayName": "LDP: All permissions",
         "subPermissions": [
           "module.ldp.enabled",
           "ui-ldp.settings.record-limits",
           "ui-ldp.settings.table-availability",
-          "ui-ldp.settings.dbinfo",
-          "ui-ldp.settings.sqconfig"
+          "ui-ldp.settings.dbinfo"
         ],
         "visible": true
       },

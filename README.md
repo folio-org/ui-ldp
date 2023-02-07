@@ -11,7 +11,6 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 * [Side-loading mod-ldp](#side-loading-mod-ldp)
 * [Configuration](#configuration)
     * [dbinfo](#dbinfo)
-    * [sqconfig](#sqconfig)
     * [Use of mod-configuration](#use-of-mod-configuration)
 * [Permissions](#permissions)
 * [Database issues](#database-issues)
@@ -64,17 +63,6 @@ The value is a JSON structure of three keys specifying how to access the underly
 * `url` -- the full URL to the LDP database, e.g. `jdbc:postgresql://some.domain.com:5432/ldp`
 * `user` -- the username that should be used to access the database: the nominated user need only have read access to the relevant tables and indexes, and should not have additional and unnecessary write access for security reasons
 * `pass` -- the password corresponding to this username
-
-### sqconfig
-
-The value is a JSON structure of four keys which indicate where in GitHub the saved queries are stored, and how to gain access to them.
-
-* `owner` -- The name of a GitHub account, such as `RandomOtherGuy`
-* `repo` -- The name of a repository owned by that GItHub user, such as `ldp-queries`
-* `branch` -- If specifed, the name of a particular branch of the repository to use; if omitted, then the master or main branch is used.
-* `token` -- A GitHub application token that has access to both read and write specified branch of the specified repository.
-
-For example, if `owner` is set to `RandomOtherGuy`, `repo` to `ldp-queries` and `branch` left empty, then the reference is to the repository at https://github.com/RandomOtherGuy/ldp-queries
 
 ### Use of mod-configuration
 
