@@ -64,7 +64,6 @@
     "button.save-query": "保存查询",
     "button.save": "保存",
     "button.cancel": "取消",
-    "saved-queries.name": "文件名",
     "saved-queries.displayName": "显示名称",
     "saved-queries.autoRun": "自动运行？",
     "saved-queries.creator": "创建者",
@@ -80,5 +79,10 @@
     "saved-queries.delete.confirm": "确认",
     "saved-queries.delete.deleted": "已删除查询<code> {name} </code> 。注意，查询在列表中不再可见可能需要一些时间。",
     "placeholder.hidden": "[已隐藏]",
-    "error.load-queries": "无法加载保存的查询： {error}"
+    "error.load-queries": "无法加载保存的查询： {error}",
+    "button.new-query": "New query",
+    "desc.new-query": "This will clear the present query ready to create a new one.",
+    "copy-of": "Copy of {string}",
+    "button.copy-query": "Copy query",
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
 }

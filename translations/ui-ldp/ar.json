@@ -64,7 +64,6 @@
     "button.save-query": "حفظ الاستعلام",
     "button.save": "حفظ",
     "button.cancel": "إلغاء",
-    "saved-queries.name": "اسم الملف",
     "saved-queries.displayName": "اسم العرض",
     "saved-queries.autoRun": "تشغيل تلقائي؟",
     "saved-queries.creator": "المنشئ",
@@ -80,5 +79,10 @@
     "saved-queries.delete.confirm": "تأكيد",
     "saved-queries.delete.deleted": "استعلام محذوف <code>{name}</code>. لاحظ أن الأمر قد يستغرق بعض الوقت قبل أن يصبح الاستعلام غير مرئي في القائمة.",
     "placeholder.hidden": "[مخفي]",
-    "error.load-queries": "Could not load saved queries: {error}"
+    "error.load-queries": "Could not load saved queries: {error}",
+    "button.new-query": "New query",
+    "desc.new-query": "This will clear the present query ready to create a new one.",
+    "copy-of": "Copy of {string}",
+    "button.copy-query": "Copy query",
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
 }

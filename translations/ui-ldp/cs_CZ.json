@@ -64,7 +64,6 @@
     "button.save-query": "Uložit dotaz",
     "button.save": "Uložit",
     "button.cancel": "Zrušit",
-    "saved-queries.name": "Název souboru",
     "saved-queries.displayName": "Zobrazení názvu",
     "saved-queries.autoRun": "Spuštěno automaticky?",
     "saved-queries.creator": "Tvůrce",
@@ -80,5 +79,10 @@
     "saved-queries.delete.confirm": "Potvrdit",
     "saved-queries.delete.deleted": "Smazaný dotaz <code>{name}</code>. Všimněte si, že může nějakou dobu trvat, než dotaz již nebude v seznamu viditelný.",
     "placeholder.hidden": "[Skryté]",
-    "error.load-queries": "Nelze načíst uložené dotazy: {error}"
+    "error.load-queries": "Nelze načíst uložené dotazy: {error}",
+    "button.new-query": "New query",
+    "desc.new-query": "This will clear the present query ready to create a new one.",
+    "copy-of": "Copy of {string}",
+    "button.copy-query": "Copy query",
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
 }
