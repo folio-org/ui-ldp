@@ -63,11 +63,15 @@ function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
         message: <FormattedMessage id="ui-ldp.save-query.update.ok" values={{ displayName }} />
       });
     } else {
-      const { code, statusText } = res;
+      const { status, statusText } = res;
       const detail = await res.text();
+      const messageTag = status === 404 ? 'notFound' : 'fail';
       callout.sendCallout({
         type: 'error',
-        message: <FormattedMessage id="ui-ldp.save-query.update.fail" values={{ displayName, code, statusText, detail }} />
+        message: <FormattedMessage
+          id={`ui-ldp.save-query.update.${messageTag}`}
+          values={{ displayName, code: status, statusText, detail }}
+        />
       });
     }
   };
