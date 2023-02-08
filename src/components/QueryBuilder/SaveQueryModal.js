@@ -7,7 +7,7 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
-async function saveQuery(stripes, callout, values, queryFormValues, metadataHasChanged, onClose) {
+async function saveQuery(stripes, callout, queryFormValues, values, metadataHasChanged, onClose) {
   const META = {
     displayName: values.displayName,
     autoRun: values.autoRun,
@@ -81,7 +81,7 @@ function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
     <ModalFooter>
       <Button
         buttonStyle="primary"
-        onClick={() => saveQuery(stripes, callout, values, queryFormValues, metadataHasChanged, onClose)}
+        onClick={() => saveQuery(stripes, callout, queryFormValues, values, metadataHasChanged, onClose)}
       >
         <FormattedMessage id="ui-ldp.button.save" />
       </Button>
