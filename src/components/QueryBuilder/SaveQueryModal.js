@@ -12,12 +12,11 @@ function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
   const stripes = useStripes();
   // console.log('SaveQueryModal: queryFormValues.META =', queryFormValues?.META);
 
+  const isNew = !queryFormValues.META?.id;
   const [values, setValues] = useState({
-    displayName: queryFormValues?.META?.displayName,
-    autoRun: queryFormValues?.META?.autoRun,
-    creator: stripes.user?.user?.username,
-    created: new Date(), // XXX handle updated
-    comment: queryFormValues?.META?.comment,
+    ...queryFormValues?.META,
+    [isNew ? 'creator' : 'updater']: stripes.user?.user?.username,
+    [isNew ? 'created' : 'updated']: new Date(),
   });
 
   const saveQuery = async () => {
@@ -25,8 +24,9 @@ function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
       displayName: values.displayName,
       autoRun: values.autoRun,
       creator: values.creator,
-      created: values.created.toISOString(),
-      // XXX We should set `updated` instead if the query already exists
+      created: values.created,
+      updater: values.updater,
+      updated: values.updated,
       comment: values.comment,
     };
 
@@ -129,7 +129,23 @@ function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
         <Col xs={8}>
           <TextField
             label={<FormattedMessage id="ui-ldp.saved-queries.created" />}
-            value={values.created.toString()}
+            value={values.created ? new Date(values.created).toLocaleString() : ''}
+            disabled
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={4}>
+          <TextField
+            label={<FormattedMessage id="ui-ldp.saved-queries.updater" />}
+            value={values.updater || ''}
+            disabled
+          />
+        </Col>
+        <Col xs={8}>
+          <TextField
+            label={<FormattedMessage id="ui-ldp.saved-queries.updated" />}
+            value={values.updated ? new Date(values.updated).toLocaleString() : ''}
             disabled
           />
         </Col>
@@ -153,7 +169,7 @@ SaveQueryModal.propTypes = {
   queryFormValues: PropTypes.shape({
     META: PropTypes.shape({
       id: PropTypes.string,
-      displayName: PropTypes.string.isRequired,
+      displayName: PropTypes.string,
       autoRun: PropTypes.bool,
       comment: PropTypes.string,
     }),
