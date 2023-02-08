@@ -7,6 +7,64 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
+async function saveQuery(stripes, callout, values, queryFormValues, metadataHasChanged, onClose) {
+  const META = {
+    displayName: values.displayName,
+    autoRun: values.autoRun,
+    creator: values.creator,
+    created: values.created,
+    updater: values.updater,
+    updated: values.updated,
+    comment: values.comment,
+  };
+
+  const content = { ...queryFormValues, META };
+
+  let method, path, id; // eslint-disable-line one-var, one-var-declaration-per-line
+  if (queryFormValues.META?.id) {
+    method = 'PUT';
+    path = `/settings/entries/${queryFormValues.META.id}`;
+    id = queryFormValues.META.id;
+  } else {
+    method = 'POST';
+    path = '/settings/entries';
+    content.META.id = id = uuidv4(); // eslint-disable-line no-multi-assign
+  }
+
+  const res = await stripesFetch(stripes, path, {
+    method,
+    body: JSON.stringify({
+      id,
+      scope: 'ui-ldp.queries',
+      key: id, // We don't actually use this, it's just a disambigutor
+      value: content,
+    }),
+  });
+
+  content.META.id = id;
+  metadataHasChanged(content);
+
+  onClose();
+  const { displayName } = values;
+  if (res.ok) {
+    callout.sendCallout({
+      message: <FormattedMessage id="ui-ldp.save-query.update.ok" values={{ displayName }} />
+    });
+  } else {
+    const { status, statusText } = res;
+    const detail = await res.text();
+    const messageTag = status === 404 ? 'notFound' : 'fail';
+    callout.sendCallout({
+      type: 'error',
+      message: <FormattedMessage
+        id={`ui-ldp.save-query.update.${messageTag}`}
+        values={{ displayName, code: status, statusText, detail }}
+      />
+    });
+  }
+}
+
+
 function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
   const callout = useContext(CalloutContext);
   const stripes = useStripes();
@@ -19,68 +77,11 @@ function SaveQueryModal({ onClose, queryFormValues, metadataHasChanged }) {
     [isNew ? 'created' : 'updated']: new Date(),
   });
 
-  const saveQuery = async () => {
-    const META = {
-      displayName: values.displayName,
-      autoRun: values.autoRun,
-      creator: values.creator,
-      created: values.created,
-      updater: values.updater,
-      updated: values.updated,
-      comment: values.comment,
-    };
-
-    const content = { ...queryFormValues, META };
-
-    let method, path, id; // eslint-disable-line one-var, one-var-declaration-per-line
-    if (queryFormValues.META?.id) {
-      method = 'PUT';
-      path = `/settings/entries/${queryFormValues.META.id}`;
-      id = queryFormValues.META.id;
-    } else {
-      method = 'POST';
-      path = '/settings/entries';
-      content.META.id = id = uuidv4(); // eslint-disable-line no-multi-assign
-    }
-
-    const res = await stripesFetch(stripes, path, {
-      method,
-      body: JSON.stringify({
-        id,
-        scope: 'ui-ldp.queries',
-        key: id, // We don't actually use this, it's just a disambigutor
-        value: content,
-      }),
-    });
-
-    content.META.id = id;
-    metadataHasChanged(content);
-
-    onClose();
-    const { displayName } = values;
-    if (res.ok) {
-      callout.sendCallout({
-        message: <FormattedMessage id="ui-ldp.save-query.update.ok" values={{ displayName }} />
-      });
-    } else {
-      const { status, statusText } = res;
-      const detail = await res.text();
-      const messageTag = status === 404 ? 'notFound' : 'fail';
-      callout.sendCallout({
-        type: 'error',
-        message: <FormattedMessage
-          id={`ui-ldp.save-query.update.${messageTag}`}
-          values={{ displayName, code: status, statusText, detail }}
-        />
-      });
-    }
-  };
-
   const footer = (
     <ModalFooter>
       <Button
         buttonStyle="primary"
-        onClick={saveQuery}
+        onClick={() => saveQuery(stripes, callout, values, queryFormValues, metadataHasChanged, onClose)}
       >
         <FormattedMessage id="ui-ldp.button.save" />
       </Button>
