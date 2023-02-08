@@ -47,12 +47,14 @@ function ListSavedQueries({ queries, deleteQuery }) {
       <Pane defaultWidth="fill">
         <MultiColumnList
           contentData={queries}
-          visibleColumns={['displayName', 'autoRun', 'creator', 'created', 'comment', 'deleteQuery']}
+          visibleColumns={['displayName', 'autoRun', 'creator', 'created', 'updater', 'updated', 'comment', 'deleteQuery']}
           columnMapping={{
             displayName: <FormattedMessage id="ui-ldp.saved-queries.displayName" />,
             autoRun: <FormattedMessage id="ui-ldp.saved-queries.autoRun" />,
             creator: <FormattedMessage id="ui-ldp.saved-queries.creator" />,
             created: <FormattedMessage id="ui-ldp.saved-queries.created" />,
+            updater: <FormattedMessage id="ui-ldp.saved-queries.updater" />,
+            updated: <FormattedMessage id="ui-ldp.saved-queries.updated" />,
             comment: <FormattedMessage id="ui-ldp.saved-queries.comment" />,
             deleteQuery: '',
           }}
@@ -61,12 +63,16 @@ function ListSavedQueries({ queries, deleteQuery }) {
             autoRun: 90,
             creator: 120,
             created: 120,
+            updater: 120,
+            updated: 120,
             comment: 250
           }}
           formatter={{
             autoRun: r => (r.autoRun ? '✓' : ''),
             creator: r => <code>{r.creator}</code>,
             created: r => new Date(r.created).toLocaleString(),
+            updater: r => <code>{r.updater}</code>,
+            updated: r => new Date(r.updated).toLocaleString(),
             deleteQuery: r => <IconButton icon="trash" onClick={e => maybeDeleteQuery(e, r)} />
           }}
           onRowClick={selectQuery}
@@ -80,13 +86,23 @@ function ListSavedQueries({ queries, deleteQuery }) {
             message={(
               <div style={{ textAlign: 'center' }}>
                 <p>
-                  {queryToDelete.displayName}
+                  <b>{queryToDelete.displayName}</b>
                 </p>
                 <p>
                   <FormattedMessage
                     id="ui-ldp.saved-queries.delete.createdBy"
                     values={{
                       creator: queryToDelete.creator,
+                      created: new Date(queryToDelete.created).toLocaleString(),
+                      code: chunks => <code>{chunks}</code>,
+                    }}
+                  />
+                  <br />
+                  <FormattedMessage
+                    id="ui-ldp.saved-queries.delete.updatedBy"
+                    values={{
+                      updater: queryToDelete.creator,
+                      updated: new Date(queryToDelete.updated).toLocaleString(),
                       code: chunks => <code>{chunks}</code>,
                     }}
                   />
