@@ -31,6 +31,7 @@ const loadResults = async (intl, stripes, values, setQueryResponse, setError, ig
   }
 
   const modifiedValues = cloneDeep(values);
+  delete modifiedValues.META;
   if (ignoreLimit) {
     modifiedValues.tables[0].limit = undefined;
   } else {
