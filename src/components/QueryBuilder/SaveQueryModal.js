@@ -7,6 +7,11 @@ import { ModalFooter, Button, Modal, Row, Col, TextField, Checkbox } from '@foli
 import stripesFetch from '../../util/stripesFetch';
 
 
+// XXX I feel that there is something inelegant about how we maintain
+// META as a separate copy of `values`, which is in turn more or less
+// a copy of `queryFormValues.META` ... but who has time to mess with
+// this kind of thing? The present version works.
+
 async function saveQuery(stripes, callout, queryFormValues, values, metadataHasChanged, onClose) {
   const META = {
     displayName: values.displayName,
