@@ -46,7 +46,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
   const [alreadyExecuted, setAlreadyExecuted] = useState(false);
   const showDevInfo = stripes.config?.showDevInfo;
   const onSubmit = values => loadResults(intl, stripes, values, setQueryResponse, setError);
-  const searchWithoutLimit = setResponse => loadResults(intl, stripes, _savedValues, setResponse, setError, true);
+  const searchWithoutLimit = setResponse => loadResults(intl, stripes, _savedValues, setResponse, setError, ldp.maxExport);
 
   ensureSchemasAreAvailable(initialState, Object.keys(tables));
   if (execute && !alreadyExecuted) {
