@@ -200,7 +200,9 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
 
 
 QueryBuilder.propTypes = {
-  ldp: P.shape({}).isRequired,
+  ldp: P.shape({
+    maxExport: P.number.isRequired,
+  }).isRequired,
   initialState: P.object.isRequired,
   stateHasChanged: P.func.isRequired,
   metadataHasChanged: P.func.isRequired,

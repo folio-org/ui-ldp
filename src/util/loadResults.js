@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import loadData from './loadData';
 
 const loadResults = async (intl, stripes, values, setQueryResponse, setError, limit) => {
+  // eslint-disable-next-line no-param-reassign
   if (limit === undefined) limit = values.tables[0].limit;
 
   function setData(raw) {
