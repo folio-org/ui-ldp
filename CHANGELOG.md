@@ -2,6 +2,7 @@
 
 ## 1.10.0 (IN PROGRESS)
 
+* Upgrade from Stripes v7 to Stripes v8 (though should still work with v7). Fixes UILDP-79.
 * `core-js` no longer listed as a dependency. Fixes UILDP-66.
 * List of tables in "Table availability" settings page is now sorted correctly. Fixes UILDP-80
 * Update Record Limits/Table Availability to use mod-settings. Fixes UILDP-81.
