@@ -82,7 +82,11 @@
     "error.load-queries": "Não foi possível carregar as consultas salvas: {error}",
     "button.new-query": "Nova consulta",
     "desc.new-query": "Isso limpará a consulta atual pronta, para criar uma nova.",
-    "copy-of": "Copy of {string}",
-    "button.copy-query": "Copy query",
-    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
+    "copy-of": "Cópia de {string}",
+    "button.copy-query": "Copiar consulta",
+    "desc.copy-query": "Isso copiará a consulta atual para uma nova que pode ser editada, executada e salva.",
+    "save-query.update.notFound": "A consulta que você carregou foi apagada. Faça uma cópia e salve-a.",
+    "saved-queries.updater": "Última atualização por",
+    "saved-queries.updated": "Data da última atualização",
+    "saved-queries.delete.updatedBy": "Última atualização por <code>{atualizado}</code>, {atualizado}"
 }
