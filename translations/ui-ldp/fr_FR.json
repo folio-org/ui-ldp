@@ -84,5 +84,9 @@
     "desc.new-query": "This will clear the present query ready to create a new one.",
     "copy-of": "Copy of {string}",
     "button.copy-query": "Copy query",
-    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved."
+    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved.",
+    "save-query.update.notFound": "The query you loaded was deleted. Make a copy and save that.",
+    "saved-queries.updater": "Last updated by",
+    "saved-queries.updated": "Date last updated",
+    "saved-queries.delete.updatedBy": "Last updated by <code>{updater}</code>, {updated}"
 }
