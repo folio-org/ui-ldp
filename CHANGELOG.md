@@ -1,12 +1,13 @@
 # Change history for ui-ldp
 
-## 1.10.0 (IN PROGRESS)
+## [1.10.0](https://github.com/folio-org/ui-ldp/tree/v1.10.0) (2023-02-24)
 
 * Upgrade from Stripes v7 to Stripes v8 (though should still work with v7). Fixes UILDP-79.
 * `core-js` no longer listed as a dependency. Fixes UILDP-66.
 * List of tables in "Table availability" settings page is now sorted correctly. Fixes UILDP-80
 * Update Record Limits/Table Availability to use mod-settings. Fixes UILDP-81.
 * Modify JSON query saving/loading to use FOLIO storage (mod-settings). Fixes UILDP-57.
+* Rework high-level permissions to work with mod-settings. Fixes UILDP-89
 * Newly saved queries now appear on the Saved Query list immediately. Fixes UILDP-41.
 * This module is no longer dependent on mod-configuration. Fixes UILDP-78.
 * Saved queries, once loaded, can be edited and re-saved. Fixes UILDP-45.
@@ -14,7 +15,7 @@
 * Fix "Could not save query [...]: error (): Forbidden". Fixes UILDP-83.
 * After saving a query, re-saving the same query no longer creates a duplicate. Fixes UILDP-85.
 * Add a **Copy query** button. Fixes UILDP-86.
-* Remove all traces of the old `sqconfig` (permissions, settings pages, etc.)
+* Remove all traces of the old `sqconfig` (permissions, settings pages, etc.). Fixes UILDP-91.
 * Handle disappearing queries more gracefully. Fixes UILDP-88.
 * Saved queries: maintain username/date for both created and updated events. Fixes UILDP-87.
 * Record export limit now applies to sets larger than mod-ldp's default of 500. Fixes UILDP-68.
