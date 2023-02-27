@@ -26,6 +26,7 @@
 * Fix bug: auto-run queries would execute continuously in a loop. Fixes UILDP-64.
 * The **Clear** button now consistently disables *Submit*. Fixes UILDP-63.
 * Results exported to CSV now include all results, not just those displayed on screen. Fixes UILDP-60.
+* Scroll bars are once more working in the result sets of autoRun queries. Fixes UILFP-76.
 
 ## [1.8.0](https://github.com/folio-org/ui-ldp/tree/v1.8.0) (2022-07-08)
 
