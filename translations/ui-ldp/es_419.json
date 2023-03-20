@@ -80,13 +80,13 @@
     "saved-queries.delete.deleted": "Deleted query <b>{name}</b>.",
     "placeholder.hidden": "[Hidden]",
     "error.load-queries": "No se han podido cargar las consultas guardadas: {error}",
-    "button.new-query": "New query",
-    "desc.new-query": "This will clear the present query ready to create a new one.",
-    "copy-of": "Copy of {string}",
-    "button.copy-query": "Copy query",
-    "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved.",
-    "save-query.update.notFound": "The query you loaded was deleted. Make a copy and save that.",
-    "saved-queries.updater": "Last updated by",
-    "saved-queries.updated": "Date last updated",
-    "saved-queries.delete.updatedBy": "Last updated by <code>{updater}</code>, {updated}"
+    "button.new-query": "Nueva consulta",
+    "desc.new-query": "Esto borrará la consulta actual para crear una nueva.",
+    "copy-of": "Copia de {string}",
+    "button.copy-query": "Copiar consulta",
+    "desc.copy-query": "Esto copiará la consulta actual en una nueva que podrá editarse, ejecutarse y guardarse.",
+    "save-query.update.notFound": "La consulta que has cargado se ha borrado. Haz una copia y guárdala.",
+    "saved-queries.updater": "Última actualización",
+    "saved-queries.updated": "Fecha de la última actualización",
+    "saved-queries.delete.updatedBy": "Última actualización por <code>{updater}</code>, {updated}"
 }
