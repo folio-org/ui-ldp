@@ -75,7 +75,7 @@
     "button.csv": "CSV",
     "button.clear": "Clear",
     "saved-queries.delete.deleteQuery": "Delete query?",
-    "saved-queries.delete.createdBy": "Created by <code>{creator}</code>",
+    "saved-queries.delete.createdBy": "Created by <code>{creator}</code>, {created}",
     "saved-queries.delete.confirm": "Confirm",
     "saved-queries.delete.deleted": "Deleted query <code>{name}</code>. Note that it may take some time before the query is no longer visible in the list.",
     "placeholder.hidden": "[Hidden]",
