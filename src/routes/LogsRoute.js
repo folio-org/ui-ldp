@@ -115,7 +115,7 @@ const LogsPage = () => {
             <Datepicker label={<FormattedMessage id="ui-ldp.label.start-date" />} onChange={handleStartDateChange} value={state.filters.startDate} />
           </Col>
           <Col>
-            <Datepicker label=<FormattedMessage id="ui-ldp.label.end-date" /> onChange={handleEndDateChange} value={state.filters.endDate} />
+            <Datepicker label={<FormattedMessage id="ui-ldp.label.end-date" />} onChange={handleEndDateChange} value={state.filters.endDate} />
           </Col>
         </Row>
         <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
