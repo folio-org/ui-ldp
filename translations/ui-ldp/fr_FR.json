@@ -75,7 +75,7 @@
     "button.csv": "CSV",
     "button.clear": "Effacer",
     "saved-queries.delete.deleteQuery": "Supprimer la requête ?",
-    "saved-queries.delete.createdBy": "Créé par <code> {creator} </code>",
+    "saved-queries.delete.createdBy": "Créé par <code> {creator} </code>, {created}",
     "saved-queries.delete.confirm": "Confirmer",
     "saved-queries.delete.deleted": "Deleted query <b>{name}</b>.",
     "placeholder.hidden": "[Hidden]",
