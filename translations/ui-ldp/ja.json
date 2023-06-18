@@ -74,7 +74,7 @@
     "save-query.update.fail": "Could not save query {displayName}: error {code} ({statusText}): {detail}",
     "button.csv": "CSV",
     "button.clear": "クリア",
-    "saved-queries.delete.deleteQuery": "Delete query?",
+    "saved-queries.delete.deleteQuery": "クエリの削除",
     "saved-queries.delete.createdBy": "Created by <code>{creator}</code>, {created}",
     "saved-queries.delete.confirm": "Confirm",
     "saved-queries.delete.deleted": "Deleted query <b>{name}</b>.",
