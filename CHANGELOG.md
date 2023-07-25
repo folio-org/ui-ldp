@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## IN PROGRESS
+
+* Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
+
 ## [1.10.0](https://github.com/folio-org/ui-ldp/tree/v1.10.0) (2023-02-24)
 
 * Upgrade from Stripes v7 to Stripes v8 (though should still work with v7). Fixes UILDP-79.

@@ -10,13 +10,16 @@ async function stripesFetch(stripes, path, options) {
     okapiUrl = stripes?.config?.modLdpUrl || okapi.url;
   }
 
+  const headers = {
+    'X-Okapi-Tenant': okapi.tenant,
+    'Content-Type': 'application/json',
+  };
+  if (okapi.token) headers['X-Okapi-Token'] = okapi.token;
+
   return fetch(`${okapiUrl}${path}`, {
     ...options,
-    headers: {
-      'X-Okapi-Tenant': okapi.tenant,
-      'X-Okapi-Token': okapi.token,
-      'Content-Type': 'application/json'
-    }
+    headers,
+    credentials: 'include',
   });
 }
 
