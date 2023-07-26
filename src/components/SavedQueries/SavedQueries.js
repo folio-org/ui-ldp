@@ -14,7 +14,7 @@ function SavedQueries() {
   const [data, setData] = useState();
   const [error, setError] = useState();
 
-  const path = '/settings/entries?query=scope=="ui-ldp.queries"';
+  const path = '/settings/entries?query=scope=="ui-ldp.queries"&limit=1000';
   useEffect(() => {
     loadData(intl, stripes, 'queries', path, setData, setError);
   }, [intl, stripes]); // XXX Do we also need to add stripes.okapi as we do, for some reason, in some other cases?
@@ -30,6 +30,16 @@ function SavedQueries() {
     name: entry.key,
     id: entry.id,
   }));
+
+  queries.sort((a, b) => {
+    const an = a.displayName?.toLowerCase();
+    const bn = b.displayName?.toLowerCase();
+    if (!an) return -1;
+    if (!bn) return 1;
+    if (an < bn) return -1;
+    if (an > bn) return 1;
+    return 0;
+  });
 
   const deleteQuery = (_item) => {
     // It's no good forcing a re-fetch to show the deleted search
