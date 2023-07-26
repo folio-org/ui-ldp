@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## IN PROGRESS
+## 1.11.0 (IN PROGRESS)
 
 * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
 * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
