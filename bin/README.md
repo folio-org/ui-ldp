@@ -1,5 +1,12 @@
 # folio-port-ldp-queries
 
+<!-- md2toc -l 2 README.md -->
+* [Overview](#overview)
+* [Installation](#installation)
+* [Environment](#environment)
+* [Command-line](#command-line)
+
+
 ## Overview
 
 [`folio-port-ldp-queries`](folio-port-ldp-queries.mjs)
