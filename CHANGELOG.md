@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
+
+* Add `folio-port-ldp-queries` script, used to port old GitHub-based saved queries over to mod-settings. Fixes UILDP-103.
+
 ## [1.10.0](https://github.com/folio-org/ui-ldp/tree/v1.10.0) (2023-02-24)
 
 * Upgrade from Stripes v7 to Stripes v8 (though should still work with v7). Fixes UILDP-79.
