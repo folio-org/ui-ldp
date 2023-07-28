@@ -4,6 +4,7 @@ import { Settings } from '@folio/stripes/smart-components';
 import RecordLimits from './RecordLimits';
 import TableAvailability from './TableAvailability';
 import DatabaseConfig from './DatabaseConfig';
+import TemplatedQueryRepos from './TemplatedQueryRepos';
 
 export default class LdpSettings extends React.Component {
   pages = [
@@ -24,6 +25,12 @@ export default class LdpSettings extends React.Component {
       label: <FormattedMessage id="ui-ldp.settings.dbinfo" />,
       component: DatabaseConfig,
       perm: 'ui-ldp.settings.dbinfo',
+    },
+    {
+      route: 'tqrepos',
+      label: <FormattedMessage id="ui-ldp.settings.tqrepos" />,
+      component: TemplatedQueryRepos,
+      perm: 'ui-ldp.settings.tqrepos',
     },
   ];
 
