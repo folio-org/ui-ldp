@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { ConfigManager } from '@folio/stripes/smart-components';
-import { Loading, Row, Col, TextField, Label, IconButton, Button } from '@folio/stripes/components';
+import { Loading, Row, Col, TextField, IconButton } from '@folio/stripes/components';
 
 
 
@@ -18,16 +18,17 @@ function TemplatedQueryRepos(props) {
   if (!ConnectedConfigManager) return <Loading size="xlarge" />;
 
   const getInitialValues = (settings) => {
-    console.log('getInitialValues', settings);
     const res = settings.length === 0 ? '{}' : settings[0].value;
-    console.log('-->', res);
     return { repos: res };
   };
 
   const beforeSave = (data) => {
-    console.log('beforeSave: data =', data);
-    return data.repos;
+    return data.repos || [];
   };
+
+  const userLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.user" />;
+  const repoLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.repo" />;
+  const dirLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.directory" />;
 
   return (
     <ConnectedConfigManager
@@ -38,35 +39,44 @@ function TemplatedQueryRepos(props) {
       getInitialValues={getInitialValues}
       onBeforeSave={beforeSave}
     >
-      <FormattedMessage id="ui-ldp.settings.tqrepos.githubRepos">
-        {label => (
-          <>
-            {label && <Label>{label}</Label>}
-            <FieldArray name="repos">
-              {({ fields }) => (
-                <>
-                  {fields.map((subname, index) => (
-                    <Row>
-                      <Col xs={11}>
-                        <Field name={subname} component={TextField} />
-                      </Col>
-                      <Col xs={1}>
-                        <IconButton icon="trash" onClick={() => fields.remove(index)} />
-                      </Col>
-                    </Row>
-                  ))}
-                    <Row>
-                      <Col xs={11} />
-                      <Col xs={1}>
-                        <IconButton icon="plus-sign" onClick={() => fields.push('')} />
-                      </Col>
-                    </Row>
-                </>
-              )}
-            </FieldArray>
-          </>
-        )}
-      </FormattedMessage>
+      <>
+        <FieldArray name="repos">
+          {({ fields }) => (
+            <>
+              {fields.map((subname, index) => (
+                <div key={index}>
+                  <Row>
+                    <Col xs={11}>
+                      <Field name={`${subname}.user`} label={userLabel} component={TextField} />
+                      <Field name={`${subname}.repo`} label={repoLabel} component={TextField} />
+                      <Field name={`${subname}.branch`} label={repoLabel} component={TextField} />
+                      <Field name={`${subname}.dir`} label={dirLabel} component={TextField} />
+                    </Col>
+                    <Col xs={1}>
+                      <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                    </Col>
+                    <Col xs={12}>{
+                        // eslint-disable-next-line @calm/react-intl/missing-formatted-message
+                      }
+                      https://github.com/
+                      {fields.value[index].user}
+                      /
+                      {fields.value[index].repo}
+                      /tree/
+                      {fields.value[index].branch}
+                      /
+                      {fields.value[index].dir}
+                      <hr />
+                      <br />
+                    </Col>
+                  </Row>
+                </div>
+              ))}
+              <IconButton icon="plus-sign" onClick={() => fields.push('')} />
+            </>
+          )}
+        </FieldArray>
+      </>
     </ConnectedConfigManager>
   );
 }
