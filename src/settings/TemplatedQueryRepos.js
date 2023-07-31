@@ -19,7 +19,12 @@ function TemplatedQueryRepos(props) {
     console.log('getInitialValues', settings);
     const res = settings.length === 0 ? '{}' : settings[0].value;
     console.log('-->', res);
-    return res;
+    return { repos: res };
+  };
+
+  const beforeSave = (data) => {
+    console.log('beforeSave: data =', data);
+    return data.repos;
   };
 
   return (
@@ -27,7 +32,8 @@ function TemplatedQueryRepos(props) {
       label={props.label}
       scope="ui-ldp.admin"
       configName="tqrepos"
-      xgetInitialValues={getInitialValues}
+      getInitialValues={getInitialValues}
+      onBeforeSave={beforeSave}
     >
       <FormattedMessage id="ui-ldp.settings.tqrepos.githubRepos">
         {label => (
