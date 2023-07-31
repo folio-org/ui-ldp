@@ -5,6 +5,7 @@
 * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
 * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
 * Rip out old redundant copy of stripes-smart-components/ConfigManager. Fixes UILDP-101.
+* Settings page for maintaining set of GitHub repos containing Templated Queries. Fixes UILDP-97.
 
 ## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
 
