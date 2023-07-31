@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { ConfigManager } from '@folio/stripes/smart-components';
-import { Loading, TextField } from '@folio/stripes/components';
+import { Loading, Row, Col, TextField, Label, IconButton, Button } from '@folio/stripes/components';
+
 
 
 function TemplatedQueryRepos(props) {
@@ -29,6 +31,7 @@ function TemplatedQueryRepos(props) {
 
   return (
     <ConnectedConfigManager
+      formType="final-form"
       label={props.label}
       scope="ui-ldp.admin"
       configName="tqrepos"
@@ -37,12 +40,31 @@ function TemplatedQueryRepos(props) {
     >
       <FormattedMessage id="ui-ldp.settings.tqrepos.githubRepos">
         {label => (
-          <Field
-            component={TextField}
-            id="repos"
-            name="repos"
-            label={label}
-          />
+          <>
+            {label && <Label>{label}</Label>}
+            <FieldArray name="repos">
+              {({ fields }) => (
+                <>
+                  {fields.map((subname, index) => (
+                    <Row>
+                      <Col xs={11}>
+                        <Field name={subname} component={TextField} />
+                      </Col>
+                      <Col xs={1}>
+                        <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                      </Col>
+                    </Row>
+                  ))}
+                    <Row>
+                      <Col xs={11} />
+                      <Col xs={1}>
+                        <IconButton icon="plus-sign" onClick={() => fields.push('')} />
+                      </Col>
+                    </Row>
+                </>
+              )}
+            </FieldArray>
+          </>
         )}
       </FormattedMessage>
     </ConnectedConfigManager>
