@@ -13,6 +13,7 @@
   "nav": "Navigation",
   "nav.query-builder": "Query builder",
   "nav.saved-queries": "Saved queries",
+  "nav.templated-queries": "Templated queries",
   "nav.logs": "Logs",
   "nav.playground": "Playground",
   "heading.current-settings": "Current settings",
