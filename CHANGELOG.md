@@ -6,6 +6,7 @@
 * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
 * Rip out old redundant copy of stripes-smart-components/ConfigManager. Fixes UILDP-101.
 * Settings page for maintaining set of GitHub repos containing Templated Queries. Fixes UILDP-97.
+* New "Templates" tab that lists available Templated Queries. Fixes UILDP-98.
 
 ## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
 
