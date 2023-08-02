@@ -9,10 +9,10 @@ import { Loading, Row, Col, TextField, IconButton } from '@folio/stripes/compone
 
 
 function TemplatedQueryRepos(props) {
-  const [ConnectedConfigManager, setConfigManager] = useState();
+  const [ConnectedConfigManager, setConnectedConfigManager] = useState();
 
   useEffect(() => {
-    setConfigManager(props.stripes.connect(ConfigManager));
+    setConnectedConfigManager(props.stripes.connect(ConfigManager));
   }, [props.stripes]);
 
   if (!ConnectedConfigManager) return <Loading size="xlarge" />;
@@ -28,6 +28,7 @@ function TemplatedQueryRepos(props) {
 
   const userLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.user" />;
   const repoLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.repo" />;
+  const branchLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.branch" />;
   const dirLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.directory" />;
 
   return (
@@ -52,7 +53,7 @@ function TemplatedQueryRepos(props) {
                       <Col xs={11}>
                         <Field name={`${subname}.user`} label={userLabel} component={TextField} />
                         <Field name={`${subname}.repo`} label={repoLabel} component={TextField} />
-                        <Field name={`${subname}.branch`} label={repoLabel} component={TextField} />
+                        <Field name={`${subname}.branch`} label={branchLabel} component={TextField} />
                         <Field name={`${subname}.dir`} label={dirLabel} component={TextField} />
                       </Col>
                       <Col xs={1}>
