@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Paneset, Pane, MultiColumnList, NoValue } from '@folio/stripes/components';
+import { Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
+import { useLdp } from '../../LdpContext';
+import templatedQueryName from '../../util/templatedQueryName';
+
 
 function TemplatedQueries({ queries }) {
-  const [query, setQuery] = useState();
+  const history = useHistory();
+  const ldp = useLdp();
+
+  function navigateToQuery(q) {
+    const qname = templatedQueryName(q);
+    const existing = ldp.tqTabs.filter(tab => tab.name === qname);
+    if (existing.length === 0) ldp.tqTabs.push({ ...q, name: qname });
+    history.push(`/ldp/tq/${qname}`);
+  }
 
   return (
     <Paneset>
@@ -23,18 +35,13 @@ function TemplatedQueries({ queries }) {
             displayName: r => r.json?.displayName,
             repo: r => `${r.config.user}/${r.config.repo}`,
           }}
-          onRowClick={(_, q) => setQuery(q)}
+          onRowClick={(_, q) => navigateToQuery(q)}
         />
       </Pane>
-      {query &&
-        <Pane defaultWidth="50%" paneTitle="Fill in query parameters">
-          <NoValue />
-          <pre>{JSON.stringify(query, null, 2)}</pre>
-        </Pane>
-      }
     </Paneset>
   );
 }
+
 
 TemplatedQueries.propTypes = {
   queries: PropTypes.arrayOf(
@@ -51,5 +58,6 @@ TemplatedQueries.propTypes = {
     }).isRequired,
   ),
 };
+
 
 export default TemplatedQueries;
