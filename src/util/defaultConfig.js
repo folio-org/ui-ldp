@@ -6,6 +6,9 @@ const defaultConfig = {
 
   // Managed in ../settings/TableAvailability.js
   disabledTables: [],
+
+  // Managed in ../components/TemplatedQueries/TemplatedQueries.js
+  tqTabs: [],
 };
 
 export default defaultConfig;
