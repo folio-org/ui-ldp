@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Pane, Accordion } from '@folio/stripes/components';
+import TemplatedQueryForm from './TemplatedQueryForm';
 import css from './TemplatedQuery.css';
 
 function TemplatedQuery({ query }) {
@@ -13,8 +14,9 @@ function TemplatedQuery({ query }) {
           <FormattedMessage id="ui-ldp.templated-queries.no-json" />
         </div>
       ) : (
-        <div>XXX actual stuff</div>
+        <TemplatedQueryForm query={query} />
       )}
+      <br style={{ marginTop: '2em' }} />
       <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
         <pre>{JSON.stringify(query, null, 2)}</pre>
       </Accordion>

@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+import baseName from './baseName';
 
 
 function directoryPath(config) {
@@ -56,8 +57,6 @@ function rawFilePath(config, filename) {
 
 
 function mergeSQLandJSON(data) {
-  const baseName = filename => filename.replace(/(.*)\..*/, '$1');
-
   const jsonRegister = {};
   data.forEach(entry => {
     if (entry.filename.endsWith('.json')) {
