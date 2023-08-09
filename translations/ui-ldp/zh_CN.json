@@ -88,5 +88,15 @@
     "save-query.update.notFound": "您加载的查询已删除。复制并保存。",
     "saved-queries.updater": "上次更新者",
     "saved-queries.updated": "上次更新日期",
-    "saved-queries.delete.updatedBy": "最后由<code> {updater} </code>更新， {updated}"
+    "saved-queries.delete.updatedBy": "最后由<code> {updater} </code>更新， {updated}",
+    "settings.tqrepos": "Templated Query repos",
+    "settings.tqrepos.user": "GitHub user",
+    "settings.tqrepos.repo": "Repository name within user's area",
+    "settings.tqrepos.branch": "Branch of the specified repository",
+    "settings.tqrepos.directory": "Directory within repository",
+    "nav.templated-queries": "Templated queries",
+    "templated-queries.column.displayName": "Display name",
+    "templated-queries.column.filename": "Filename",
+    "templated-queries.column.repo": "GitHub repository",
+    "error.no-such-query": "No such templated query: {qname}"
 }

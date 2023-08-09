@@ -88,5 +88,15 @@
     "save-query.update.notFound": "A consulta que você carregou foi apagada. Faça uma cópia e salve-a.",
     "saved-queries.updater": "Última atualização por",
     "saved-queries.updated": "Data da última atualização",
-    "saved-queries.delete.updatedBy": "Última atualização por <code>{updater}</code>, {updated}"
+    "saved-queries.delete.updatedBy": "Última atualização por <code>{updater}</code>, {updated}",
+    "settings.tqrepos": "Repositório de modelo de consultas",
+    "settings.tqrepos.user": "Usuário do GitHub",
+    "settings.tqrepos.repo": "Nome do repositório na área do usuário",
+    "settings.tqrepos.branch": "Branch do repositório especificado",
+    "settings.tqrepos.directory": "Diretório dentro do repositório",
+    "nav.templated-queries": "Consultas modelo",
+    "templated-queries.column.displayName": "Nome de exibição",
+    "templated-queries.column.filename": "Nome do arquivo",
+    "templated-queries.column.repo": "Repositório GitHub",
+    "error.no-such-query": "Nenhum modelo de consulta: {qname}"
 }

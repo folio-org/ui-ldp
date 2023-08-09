@@ -88,5 +88,15 @@
     "save-query.update.notFound": "Načtený dotaz byl smazán. Vytvořte kopii a uložte ji.",
     "saved-queries.updater": "Naposledy aktualizoval",
     "saved-queries.updated": "Datum poslední aktualizace",
-    "saved-queries.delete.updatedBy": "Naposledy aktualizoval <code>{updater}</code>, {updated}"
+    "saved-queries.delete.updatedBy": "Naposledy aktualizoval <code>{updater}</code>, {updated}",
+    "settings.tqrepos": "Úložiště dotazů podle šablony",
+    "settings.tqrepos.user": "Uživatel GitHubu",
+    "settings.tqrepos.repo": "Název úložiště v uživatelské oblasti",
+    "settings.tqrepos.branch": "Větev zadaného úložiště",
+    "settings.tqrepos.directory": "Adresář v úložišti",
+    "nav.templated-queries": "Dotazování pomocí šablon",
+    "templated-queries.column.displayName": "Zobrazení názvu",
+    "templated-queries.column.filename": "Název souboru",
+    "templated-queries.column.repo": "Úložiště GitHub",
+    "error.no-such-query": "Žádný takový dotaz šablony: {qname}"
 }
