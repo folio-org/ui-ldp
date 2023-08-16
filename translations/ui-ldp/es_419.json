@@ -98,5 +98,5 @@
     "templated-queries.column.displayName": "Mostrar nombre",
     "templated-queries.column.filename": "Archivo",
     "templated-queries.column.repo": "Repositorio GitHub",
-    "error.no-such-query": "No such templated query: {qname}"
+    "error.no-such-query": "No existe tal consulta: {qname}"
 }
