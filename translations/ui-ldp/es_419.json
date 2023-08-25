@@ -88,5 +88,15 @@
     "save-query.update.notFound": "La consulta que has cargado se ha borrado. Haz una copia y guárdala.",
     "saved-queries.updater": "Última actualización",
     "saved-queries.updated": "Fecha de la última actualización",
-    "saved-queries.delete.updatedBy": "Última actualización por <code>{updater}</code>, {updated}"
+    "saved-queries.delete.updatedBy": "Última actualización por <code>{updater}</code>, {updated}",
+    "settings.tqrepos": "Repositorios de plantillas de consulta",
+    "settings.tqrepos.user": "Usuario de GitHub",
+    "settings.tqrepos.repo": "Nombre del repositorio en el área de usuario",
+    "settings.tqrepos.branch": "Rama del repositorio especificado",
+    "settings.tqrepos.directory": "Directorio dentro del repositorio",
+    "nav.templated-queries": "Consultas con plantillas",
+    "templated-queries.column.displayName": "Mostrar nombre",
+    "templated-queries.column.filename": "Archivo",
+    "templated-queries.column.repo": "Repositorio GitHub",
+    "error.no-such-query": "No existe tal consulta: {qname}"
 }

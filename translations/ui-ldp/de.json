@@ -88,5 +88,15 @@
     "save-query.update.notFound": "Die  geladene Abfrage wurde gelöscht. Bitte eine Kopie erstellen und diese speichern.",
     "saved-queries.updater": "Zuletzt aktualisiert durch",
     "saved-queries.updated": "Datum der letzten Aktualisierung",
-    "saved-queries.delete.updatedBy": "Zuletzt aktualisiert von <code> {updater} </code> , {updated}"
+    "saved-queries.delete.updatedBy": "Zuletzt aktualisiert von <code> {updater} </code> , {updated}",
+    "settings.tqrepos": "Templated Query repos",
+    "settings.tqrepos.user": "GitHub user",
+    "settings.tqrepos.repo": "Repository name within user's area",
+    "settings.tqrepos.branch": "Branch of the specified repository",
+    "settings.tqrepos.directory": "Directory within repository",
+    "nav.templated-queries": "Templated queries",
+    "templated-queries.column.displayName": "Display name",
+    "templated-queries.column.filename": "Filename",
+    "templated-queries.column.repo": "GitHub repository",
+    "error.no-such-query": "No such templated query: {qname}"
 }
