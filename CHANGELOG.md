@@ -8,6 +8,7 @@
 * Settings page for maintaining set of GitHub repos containing Templated Queries. Fixes UILDP-97.
 * New "Templates" tab that lists available Templated Queries. Fixes UILDP-98.
 * Create dynamic tabs for selected Templated Queries. Fixes UILDP-99.
+* Update Node.js to v18 in GitHub Actions. Fixes UILDP-106.
 
 ## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
 
