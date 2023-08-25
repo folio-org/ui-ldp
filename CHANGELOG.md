@@ -1,7 +1,8 @@
 # Change history for ui-ldp
 
-## IN PROGRESS
+## 2.0.0 (IN PROGRESS) XXX update Jira issues to point to this version instead of 1.11.0
 
+* BREAKING: upgrade React to v18. Fixes UILDP-102.
 * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
 * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
 * Rip out old redundant copy of stripes-smart-components/ConfigManager. Fixes UILDP-101.
