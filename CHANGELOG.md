@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## 2.0.0 (IN PROGRESS) XXX update Jira issues to point to this version instead of 1.11.0
+## 2.0.0 (IN PROGRESS)
 
 * BREAKING: upgrade React to v18. Fixes UILDP-102.
 * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
