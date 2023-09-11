@@ -2,14 +2,82 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
-import { TextField, Datepicker, Button } from '@folio/stripes/components';
+import { TextField, Datepicker, Select, AutoSuggest, Button } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
 
 
-function type2component(type) {
-  if (type === 'date') return Datepicker;
-  // Others?
-  return TextField;
+const testItems = [
+  {
+    value: 'book',
+    label: 'Book',
+  },
+  {
+    value: 'cd',
+    label: 'CD',
+  },
+  {
+    value: 'ebook',
+    label: 'eBook',
+  },
+  {
+    value: 'vinyl',
+    label: 'Vinyl',
+  },
+  {
+    value: 'audiobook',
+    label: 'Audiobook',
+  },
+];
+
+
+function type2component(param) {
+  if (param.type === 'date') {
+    return [Datepicker, 'Datepicker'];
+  } else if (param.type !== 'text') {
+    // We could throw an "unsupported type" error, but it's probably friendlier to default to text
+    return [TextField, 'DEFAULT'];
+  } else if (param['controlled.options'] && param['controlled.allowOtherValues']) {
+    return [AutoSuggest, 'AutoSuggest'];
+  } else if (param['controlled.options']) {
+    return [Select, 'Select'];
+  } else {
+    return [TextField, 'TextField'];
+  }
+}
+
+
+function type2options(param) {
+  const rawData = param['controlled.options'];
+  if (!rawData || param['controlled.allowOtherValues']) return undefined;
+  return rawData.map(x => ({ value: x, label: x }));
+}
+
+
+function type2items(param) {
+  const rawData = param['controlled.options'];
+  if (!rawData || !param['controlled.allowOtherValues']) return undefined;
+  return rawData.map(x => ({ value: x, label: x }));
+}
+
+
+function parameterizedField(param) {
+  if (param.displayName !== 'Permanent location filter') return undefined;
+  const [component, cname] = type2component(param);
+  const dataOptions = type2options(param);
+  const items = type2items(param);
+  // console.log(`parameterizedField: component=${cname} dataOptions=${dataOptions} items=${items} for`, param);
+
+  return (
+    <Field
+      key={param.name}
+      name={param.name}
+      label={param.displayName}
+      required={param.required}
+      component={component}
+      dataOptions={dataOptions}
+      items={items}
+    />
+  );
 }
 
 
@@ -17,9 +85,9 @@ function TemplatedQueryForm({ query }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
-  function onSubmit(a, b, c) {
+  const onSubmit = (a, b, c) => {
     console.log('onSubmit:', a, b, c);
-  }
+  };
 
   return (
     <>
@@ -44,15 +112,8 @@ function TemplatedQueryForm({ query }) {
       <Form onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            {json.parameters.map(param => (
-              <Field
-                key={param.name}
-                name={param.name}
-                label={param.displayName}
-                required={param.required}
-                component={type2component(param.type)}
-              />
-            ))}
+            <AutoSuggest label="autoSuggestTest" items={testItems} />
+            {json.parameters.map(param => parameterizedField(param))}
             <Button type="submit">
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
