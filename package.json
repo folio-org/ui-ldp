@@ -110,16 +110,15 @@
           "mod-settings.global.read.ui-ldp.admin",
           "mod-settings.global.read.ui-ldp.queries"
         ],
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "settings.ldp.enabled",
         "displayName": "Settings (LDP): Can view settings",
         "subPermissions": [
-          "settings.enabled",
-          "mod-settings.global.read.ui-ldp.admin"
+          "settings.enabled"
         ],
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "ui-ldp.settings.record-limits",
@@ -173,7 +172,8 @@
           "ui-ldp.settings.record-limits",
           "ui-ldp.settings.table-availability",
           "ui-ldp.settings.dbinfo",
-          "ui-ldp.settings.tqrepos"
+          "ui-ldp.settings.tqrepos",
+          "mod-settings.global.write.ui-ldp.queries"
         ],
         "visible": true
       },
