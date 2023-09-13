@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@indexdata/foliojs": "^1.0.0"
+  }
+}
