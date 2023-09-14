@@ -38,7 +38,7 @@ function type2items(param) {
 
 function parameterizedField(param) {
   if (param.displayName !== 'Permanent location filter') return undefined;
-  const [component, cname] = type2component(param);
+  const [component, _cname] = type2component(param);
   const dataOptions = type2options(param);
   const items = type2items(param);
   // console.log(`parameterizedField: component=${cname} dataOptions=${dataOptions} items=${items} for`, param);
@@ -62,6 +62,7 @@ function TemplatedQueryForm({ query }) {
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
   const onSubmit = (a, b, c) => {
+    // eslint-disable-next-line no-console
     console.log('onSubmit:', a, b, c);
   };
 
