@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-# Run as: ./add-tq-repo.js PASSWORD
-# See also: foliojs/bin/folio-port-ldp-queries.js
+// Run as: ./add-tq-repo.js PASSWORD
+// See also: foliojs/bin/folio-port-ldp-queries.js
 
 import Folio from '@indexdata/foliojs';
 
