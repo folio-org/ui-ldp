@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+# Run as: ./add-tq-repo.js PASSWORD
+# See also: foliojs/bin/folio-port-ldp-queries.js
+
 import Folio from '@indexdata/foliojs';
 
 const id = 'bd76ccec-2942-41f2-9bde-38f562d41842';
