@@ -37,7 +37,6 @@ function type2items(param) {
 
 
 function parameterizedField(param) {
-  if (param.displayName !== 'Permanent location filter') return undefined;
   const [component, _cname] = type2component(param);
   const dataOptions = type2options(param);
   const items = type2items(param);
