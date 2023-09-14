@@ -6,30 +6,6 @@ import { TextField, Datepicker, Select, AutoSuggest, Button } from '@folio/strip
 import baseName from '../../util/baseName';
 
 
-const testItems = [
-  {
-    value: 'book',
-    label: 'Book',
-  },
-  {
-    value: 'cd',
-    label: 'CD',
-  },
-  {
-    value: 'ebook',
-    label: 'eBook',
-  },
-  {
-    value: 'vinyl',
-    label: 'Vinyl',
-  },
-  {
-    value: 'audiobook',
-    label: 'Audiobook',
-  },
-];
-
-
 function type2component(param) {
   if (param.type === 'date') {
     return [Datepicker, 'Datepicker'];
@@ -112,7 +88,6 @@ function TemplatedQueryForm({ query }) {
       <Form onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <AutoSuggest label="autoSuggestTest" items={testItems} />
             {json.parameters.map(param => parameterizedField(param))}
             <Button type="submit">
               <FormattedMessage id="ui-ldp.button.submit" />
