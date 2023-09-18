@@ -42,6 +42,10 @@ function parameterizedField(param) {
   const items = type2items(param);
   // console.log(`parameterizedField: component=${cname} dataOptions=${dataOptions} items=${items} for`, param);
 
+  const extraParams = {};
+  if (dataOptions) extraParams.dataOptions = dataOptions;
+  if (items) extraParams.items = items;
+
   return (
     <Field
       key={param.name}
@@ -49,8 +53,7 @@ function parameterizedField(param) {
       label={param.displayName}
       required={param.required}
       component={component}
-      dataOptions={dataOptions}
-      items={items}
+      {...extraParams}
     />
   );
 }
