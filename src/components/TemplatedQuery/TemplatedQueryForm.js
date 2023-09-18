@@ -63,7 +63,7 @@ function TemplatedQueryForm({ query }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
-  const formSubmitted = (values, form, callback) => {
+  const formSubmitted = (values) => {
     // eslint-disable-next-line no-console
     console.log('formSubmitted:', values);
   };
