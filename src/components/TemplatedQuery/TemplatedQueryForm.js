@@ -63,9 +63,9 @@ function TemplatedQueryForm({ query }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
-  const onSubmit = (a, b, c) => {
+  const formSubmitted = (a, b, c) => {
     // eslint-disable-next-line no-console
-    console.log('onSubmit:', a, b, c);
+    console.log('formSubmitted:', a, b, c);
   };
 
   return (
@@ -88,9 +88,13 @@ function TemplatedQueryForm({ query }) {
           <p>{json.instructions}</p>
         </>
       )}
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={formSubmitted}>
         {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(a, b, c) => {
+            console.log('onSubmit', a, b, c);
+            handleSubmit(a, b, c);
+          }}
+          >
             {json.parameters.map(param => parameterizedField(param))}
             <Button type="submit">
               <FormattedMessage id="ui-ldp.button.submit" />
