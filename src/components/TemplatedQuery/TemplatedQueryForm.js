@@ -63,9 +63,9 @@ function TemplatedQueryForm({ query }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
-  const formSubmitted = (a, b, c) => {
+  const formSubmitted = (values, form, callback) => {
     // eslint-disable-next-line no-console
-    console.log('formSubmitted:', a, b, c);
+    console.log('formSubmitted:', values);
   };
 
   return (
@@ -90,9 +90,9 @@ function TemplatedQueryForm({ query }) {
       )}
       <Form onSubmit={formSubmitted}>
         {({ handleSubmit }) => (
-          <form onSubmit={(a, b, c) => {
-            console.log('onSubmit', a, b, c);
-            handleSubmit(a, b, c);
+          <form onSubmit={event => {
+            console.log('onSubmit event =', event);
+            handleSubmit(event);
           }}
           >
             {json.parameters.map(param => parameterizedField(param))}
