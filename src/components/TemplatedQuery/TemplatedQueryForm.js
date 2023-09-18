@@ -90,11 +90,7 @@ function TemplatedQueryForm({ query }) {
       )}
       <Form onSubmit={formSubmitted}>
         {({ handleSubmit }) => (
-          <form onSubmit={event => {
-            console.log('onSubmit event =', event);
-            handleSubmit(event);
-          }}
-          >
+          <form onSubmit={handleSubmit}>
             {json.parameters.map(param => parameterizedField(param))}
             <Button type="submit">
               <FormattedMessage id="ui-ldp.button.submit" />
