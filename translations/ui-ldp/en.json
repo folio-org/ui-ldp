@@ -1,5 +1,6 @@
 {
   "meta.title": "LDP",
+  "devinfo": "Developer information",
   "something-went-wrong": "Something went wrong.",
   "refresh": "Refresh",
   "copy-of": "Copy of {string}",
@@ -94,6 +95,11 @@
   "templated-queries.column.displayName": "Display name",
   "templated-queries.column.filename": "Filename",
   "templated-queries.column.repo": "GitHub repository",
+  "templated-queries.no-json": "This templated query has no associated JSON metadata, so it is not possible to present a form for filling in its parameters.",
+  "templated-queries.source": "Source",
+  "templated-queries.source.sql": "SQL query",
+  "templated-queries.source.json": "JSON metadata",
+  "templated-queries.instructions": "Instructions",
   "permission.settings.record-limits": "Settings (LDP): Can modify default record limits",
   "permission.settings.table-availability": "Settings (LDP): Can select which tables are available to search",
   "permission.settings.dbinfo": "Settings (LDP): Can modify LDP database connection details",

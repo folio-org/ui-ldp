@@ -30,7 +30,11 @@
         "requireDefaultMessage": false
       }
     ],
-    "@calm/react-intl/missing-values": 2
+    "@calm/react-intl/missing-values": 2,
+    "no-unused-vars": ["warn", {
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^(_|React)" 
+    }],
   },
   "overrides": [{
     "files": [ "src/routes/Playground.js", "*.mock.js" ],
