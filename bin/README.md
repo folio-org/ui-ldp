@@ -40,7 +40,7 @@ For example, it is possible to port queries into [FOLIO Snapshot](https://folio-
 ```
 export OKAPI_URL=https://folio-snapshot-okapi.dev.folio.org
 export OKAPI_TENANT=diku
-export OKAPI_USER=diku_admine
+export OKAPI_USER=diku_admin
 export OKAPI_PW=********
 ```
 

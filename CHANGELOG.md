@@ -13,6 +13,7 @@
 * `module.ldp.enabled` and `settings.ldp.enabled` permissionss are no longer visible, in accordance with standard practice in FOLIO. Fixes UILDP-95.
 * All appropriate LDP permissions are now correctly included as subpermissions of `ui-ldp.all`. Fixes UILDP-108.
 * *BREAKING* bump `react-intl` to `v6.4.4`. Refs UILDP-109.
+* Handle form generation and filling for templated queries. Fixes UILDP-105.
 
 ## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
 
