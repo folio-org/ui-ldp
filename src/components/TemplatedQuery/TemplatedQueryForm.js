@@ -40,7 +40,6 @@ function parameterizedField(param) {
   const [component, _cname] = type2component(param);
   const dataOptions = type2options(param);
   const items = type2items(param);
-  // console.log(`parameterizedField: component=${cname} dataOptions=${dataOptions} items=${items} for`, param);
 
   const extraParams = {};
   if (dataOptions) extraParams.dataOptions = dataOptions;
@@ -64,8 +63,8 @@ function TemplatedQueryForm({ query }) {
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
   const formSubmitted = (values) => {
-    // eslint-disable-next-line no-console
-    console.log('formSubmitted:', values);
+    // eslint-disable-next-line no-alert
+    alert('formSubmitted: ' + JSON.stringify(values, null, 2));
   };
 
   return (
