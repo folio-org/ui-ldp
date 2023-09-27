@@ -58,14 +58,9 @@ function parameterizedField(param) {
 }
 
 
-function TemplatedQueryForm({ query }) {
+function TemplatedQueryForm({ query, onSubmit }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
-
-  const formSubmitted = (values) => {
-    // eslint-disable-next-line no-alert
-    alert('formSubmitted: ' + JSON.stringify(values, null, 2));
-  };
 
   return (
     <>
@@ -87,7 +82,7 @@ function TemplatedQueryForm({ query }) {
           <p>{json.instructions}</p>
         </>
       )}
-      <Form onSubmit={formSubmitted}>
+      <Form onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             {json.parameters.map(param => parameterizedField(param))}
@@ -119,6 +114,7 @@ TemplatedQueryForm.propTypes = {
       ).isRequired,
     }),
   }).isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default TemplatedQueryForm;

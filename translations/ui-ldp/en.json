@@ -10,6 +10,7 @@
   "error.load-tables": "Could not load tables: {error}",
   "error.load-columns": "Could not load columns: {error}",
   "error.load-results": "Could not load results: {error}",
+  "error.load-report": "Could not run report: {error}",
   "error.load-queries": "Could not load saved queries: {error}",
   "error.no-such-query": "No such templated query: {qname}",
   "nav": "Navigation",
