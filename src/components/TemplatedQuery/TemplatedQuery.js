@@ -5,6 +5,7 @@ import { useStripes } from '@folio/stripes/core';
 import { Pane, Accordion } from '@folio/stripes/components';
 import loadData from '../../util/loadData';
 import BigError from '../BigError';
+import ResultsList from '../QueryBuilder/ResultsList';
 import TemplatedQueryForm from './TemplatedQueryForm';
 import css from './TemplatedQuery.css';
 
@@ -31,18 +32,24 @@ function TemplatedQuery({ query }) {
   if (error) return <BigError message={error} />;
 
   return (
-    <Pane defaultWidth="fill" paneTitle={title}>
-      {!query.json ? (
-        <div className={css.noJsonError}>
-          <FormattedMessage id="ui-ldp.templated-queries.no-json" />
-        </div>
+    <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
+      {data ? (
+        <ResultsList results={{ key: 'report-results', resp: data.records }} />
       ) : (
-        <TemplatedQueryForm query={query} onSubmit={onSubmit} />
+        <>
+          {!query.json ? (
+            <div className={css.noJsonError}>
+              <FormattedMessage id="ui-ldp.templated-queries.no-json" />
+            </div>
+          ) : (
+            <TemplatedQueryForm query={query} onSubmit={onSubmit} />
+          )}
+          <br style={{ marginTop: '2em' }} />
+          <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
+            <pre>{JSON.stringify(query, null, 2)}</pre>
+          </Accordion>
+        </>
       )}
-      <br style={{ marginTop: '2em' }} />
-      <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
-        <pre>{JSON.stringify(query, null, 2)}</pre>
-      </Accordion>
     </Pane>
   );
 }
