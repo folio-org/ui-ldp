@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Pane, Accordion } from '@folio/stripes/components';
+import { useLdp } from '../../LdpContext';
 import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
 import ResultsList from '../QueryBuilder/ResultsList';
@@ -14,12 +15,13 @@ function TemplatedQuery({ query }) {
   const [error, setError] = useState();
   const intl = useIntl();
   const stripes = useStripes();
+  const ldp = useLdp();
   const title = query.json?.displayName || query.name;
 
   const onSubmit = async (values) => {
     const qc = query.config;
     const url = `https://raw.githubusercontent.com/${qc.user}/${qc.repo}/${qc.branch}/${qc.dir}/${query.filename}`;
-    const limit = 5; // XXX
+    const limit = ldp.maxShow;
     loadReport(intl, stripes, url, values, setData, setError, limit);
   };
 
