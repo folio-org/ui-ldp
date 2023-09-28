@@ -20,7 +20,7 @@ function TemplatedQueries({ queries }) {
 
   return (
     <Paneset>
-      <Pane defaultWidth="fill" paneTitle="Select templated query">
+      <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.templated-queries.select" />}>
         <MultiColumnList
           contentData={queries}
           visibleColumns={['displayName', 'filename', 'repo']}

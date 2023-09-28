@@ -54,6 +54,7 @@ const Ldp = (props) => {
                 <NavListItem data-cy="nav-savedQueries" to={`${match.path}/queries`}>
                   <FormattedMessage id="ui-ldp.nav.saved-queries" />
                 </NavListItem>
+                <br />
                 <NavListItem data-cy="nav-savedQueries" to={`${match.path}/templated`}>
                   <FormattedMessage id="ui-ldp.nav.templated-queries" />
                 </NavListItem>
