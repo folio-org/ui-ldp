@@ -16,6 +16,7 @@
 * Handle form generation and filling for templated queries. Fixes UILDP-105.
 * Show results of running templated query. Fixes UILDP-100.
 * Number of records retrieved for templated queries is limited according to configured parameters. Fixes UILDP-112.
+* Update terminology in UI. Fixes UILDP-111.
 
 ## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
 
