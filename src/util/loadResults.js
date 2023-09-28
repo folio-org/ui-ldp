@@ -19,7 +19,7 @@ const loadResults = async (intl, stripes, values, setQueryResponse, setError, li
       });
 
       raw[raw.length - 1] = {
-        [firstField]: '... More records ...',
+        [firstField]: intl.formatMessage({ id: 'ui-ldp.more-records' }),
       };
     }
 

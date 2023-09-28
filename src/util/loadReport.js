@@ -13,7 +13,7 @@ const loadReport = async (intl, stripes, url, params, setQueryResponse, setError
         if (!firstField) firstField = key;
       });
 
-      raw.records.push({ [firstField]: '... More records ...' });
+      raw.records.push({ [firstField]: intl.formatMessage({ id: 'ui-ldp.more-records' }) });
     }
 
     setQueryResponse({
