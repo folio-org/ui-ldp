@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Pane, Accordion } from '@folio/stripes/components';
-import loadData from '../../util/loadData';
+import { useLdp } from '../../LdpContext';
+import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
 import ResultsList from '../QueryBuilder/ResultsList';
 import TemplatedQueryForm from './TemplatedQueryForm';
@@ -14,19 +15,14 @@ function TemplatedQuery({ query }) {
   const [error, setError] = useState();
   const intl = useIntl();
   const stripes = useStripes();
+  const ldp = useLdp();
   const title = query.json?.displayName || query.name;
 
   const onSubmit = async (values) => {
     const qc = query.config;
     const url = `https://raw.githubusercontent.com/${qc.user}/${qc.repo}/${qc.branch}/${qc.dir}/${query.filename}`;
-    loadData(intl, stripes, 'report', '/ldp/db/reports', setData, setError, {
-      method: 'POST',
-      body: JSON.stringify({
-        url,
-        // limit: XXX,
-        params: values,
-      }),
-    });
+    const limit = ldp.maxShow;
+    loadReport(intl, stripes, url, values, setData, setError, limit);
   };
 
   if (error) return <BigError message={error} />;
@@ -34,7 +30,7 @@ function TemplatedQuery({ query }) {
   return (
     <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
       {data ? (
-        <ResultsList results={{ key: 'report-results', resp: data.records }} />
+        <ResultsList results={data} />
       ) : (
         <>
           {!query.json ? (
