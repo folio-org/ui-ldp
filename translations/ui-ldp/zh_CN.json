@@ -98,5 +98,12 @@
     "templated-queries.column.displayName": "显示名称",
     "templated-queries.column.filename": "文件名",
     "templated-queries.column.repo": "GitHub 存储库",
-    "error.no-such-query": "没有这样的模板查询： {qname}"
+    "error.no-such-query": "没有这样的模板查询： {qname}",
+    "devinfo": "开发者信息",
+    "templated-queries.no-json": "此模板化查询没有关联的JSON元数据，因此无法提供用于填写其参数的表单。",
+    "templated-queries.source": "来源",
+    "templated-queries.source.sql": "SQL查询",
+    "templated-queries.source.json": "JSON元数据",
+    "templated-queries.instructions": "说明",
+    "error.load-report": "无法运行报告： {error}"
 }

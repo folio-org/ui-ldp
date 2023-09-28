@@ -98,5 +98,12 @@
     "templated-queries.column.displayName": "Nome de exibição",
     "templated-queries.column.filename": "Nome do arquivo",
     "templated-queries.column.repo": "Repositório GitHub",
-    "error.no-such-query": "Nenhum modelo de consulta: {qname}"
+    "error.no-such-query": "Nenhum modelo de consulta: {qname}",
+    "devinfo": "Informações do desenvolvedor",
+    "templated-queries.no-json": "Esta consulta modelo não tem metadados JSON associados, portanto, não é possível apresentar um formulário para preenchimento de seus parâmetros.",
+    "templated-queries.source": "Fonte",
+    "templated-queries.source.sql": "Consulta SQL",
+    "templated-queries.source.json": "Metadados JSON",
+    "templated-queries.instructions": "Instruções",
+    "error.load-report": "Não foi possível executar o relatório: {erro}"
 }
