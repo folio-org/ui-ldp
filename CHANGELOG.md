@@ -2,21 +2,26 @@
 
 ## 2.0.0 (IN PROGRESS)
 
-* BREAKING: upgrade React to v18. Fixes UILDP-102.
-* Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
-* List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
-* Rip out old redundant copy of stripes-smart-components/ConfigManager. Fixes UILDP-101.
-* Settings page for maintaining set of GitHub repos containing Templated Queries. Fixes UILDP-97.
-* New "Templates" tab that lists available Templated Queries. Fixes UILDP-98.
-* Create dynamic tabs for selected Templated Queries. Fixes UILDP-99.
-* Update Node.js to v18 in GitHub Actions. Fixes UILDP-106.
-* `module.ldp.enabled` and `settings.ldp.enabled` permissionss are no longer visible, in accordance with standard practice in FOLIO. Fixes UILDP-95.
-* All appropriate LDP permissions are now correctly included as subpermissions of `ui-ldp.all`. Fixes UILDP-108.
-* *BREAKING* bump `react-intl` to `v6.4.4`. Refs UILDP-109.
-* Handle form generation and filling for templated queries. Fixes UILDP-105.
-* Show results of running templated query. Fixes UILDP-100.
-* Number of records retrieved for templated queries is limited according to configured parameters. Fixes UILDP-112.
-* Update terminology in UI. Fixes UILDP-111.
+* _Infrastructure changes_
+  * **BREAKING**: upgrade Stripes to v9 and React to v18. Fixes UILDP-102.
+  * **BREAKING**: bump `react-intl` to `v6.4.4`. Refs UILDP-109.
+  * Update Node.js to v18 in GitHub Actions. Fixes UILDP-106.
+  * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
+* _New feature: reports_
+  * Settings page for maintaining set of GitHub repos containing reports. Fixes UILDP-97.
+  * New "Run report" tab that lists available Templated Queries. Fixes UILDP-98.
+  * Create dynamic tabs for selected reports. Fixes UILDP-99.
+  * Handle form generation and filling for reports. Fixes UILDP-105.
+  * Show results of running a report. Fixes UILDP-100.
+  * Number of records retrieved for reports is limited according to configured parameters. Fixes UILDP-112.
+* _Bug fixes_
+  * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
+  * `module.ldp.enabled` and `settings.ldp.enabled` permissionss are no longer visible, in accordance with standard practice in FOLIO. Fixes UILDP-95.
+  * All appropriate LDP permissions are now correctly included as subpermissions of `ui-ldp.all`. Fixes UILDP-108.
+* _Housekeeping_
+  * Rip out old redundant copy of stripes-smart-components/ConfigManager. Fixes UILDP-101.
+  * Update terminology in UI. Fixes UILDP-111.
+  * Change name of app to "Reporting"
 
 ## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
 
