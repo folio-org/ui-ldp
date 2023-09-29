@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, Accordion } from '@folio/stripes/components';
+import { Pane, Accordion, Button } from '@folio/stripes/components';
+import { exportCsv } from '@folio/stripes/util';
 import { useLdp } from '../../LdpContext';
 import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
@@ -30,7 +31,26 @@ function TemplatedQuery({ query }) {
   return (
     <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
       {data ? (
-        <ResultsList results={data} />
+        <>
+          <div className={css.centerContainer}>
+            <div className={css.center}>
+              {data.isComplete ?
+                <FormattedMessage id="ui-ldp.found-records" values={{ count: data.count }} /> :
+                <FormattedMessage id="ui-ldp.found-more-than" values={{ count: data.count }} />
+              }
+            </div>
+            <div className={css.right}>
+              <Button
+                aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
+                disabled={data.length === 0}
+                onClick={() => exportCsv(data.resp, {})}
+              >
+                <FormattedMessage id="ui-ldp.button.csv" />
+              </Button>
+            </div>
+          </div>
+          <ResultsList results={data} />
+        </>
       ) : (
         <>
           {!query.json ? (

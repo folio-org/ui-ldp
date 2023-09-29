@@ -6,3 +6,7 @@
     margin: 2em 6em;
     border: 1px solid #600;
 }
+
+.centerContainer { text-align: center; }
+.center { display: inline-block; }
+.right { float: right; }
