@@ -2,9 +2,10 @@
 
 <!-- md2toc -l 2 reports.md -->
 * [Overview](#overview)
-* [Writing your templated SQL query](#writing-your-templated-sql-query)
+* [Storing and publishing reports](#storing-and-publishing-reports)
+* [Writing your SQL query](#writing-your-sql-query)
 * [Writing JSON metadata for your query](#writing-json-metadata-for-your-query)
-* [Setting up the Reporting app to find your query](#setting-up-the-reporting-app-to-find-your-query)
+* [Setting up the Reporting app to find your report](#setting-up-the-reporting-app-to-find-your-report)
 * [Using your query](#using-your-query)
 
 
