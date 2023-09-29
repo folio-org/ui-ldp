@@ -14,6 +14,7 @@
   * Handle form generation and filling for reports. Fixes UILDP-105.
   * Show results of running a report. Fixes UILDP-100.
   * Number of records retrieved for reports is limited according to configured parameters. Fixes UILDP-112.
+  * Download results of running a query as CSV. Fixes UILDP-113.
 * _Bug fixes_
   * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
   * `module.ldp.enabled` and `settings.ldp.enabled` permissionss are no longer visible, in accordance with standard practice in FOLIO. Fixes UILDP-95.
