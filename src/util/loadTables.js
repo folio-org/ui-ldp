@@ -6,9 +6,6 @@ const loadTables = async (intl, stripes, setTables, setError) => {
     const acc = {};
     for (let i = 0; i < raw.length; i++) {
       const schemaName = raw[i].tableSchema;
-      if (!['public', 'local', 'folio_reporting'].includes(schemaName)) {
-        throw Error(`cannot happen: tableSchema='${schemaName}'`);
-      }
 
       if (!acc[schemaName]) acc[schemaName] = [];
       acc[schemaName].push(raw[i].tableName);

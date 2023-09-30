@@ -7,6 +7,8 @@
   * **BREAKING**: bump `react-intl` to `v6.4.4`. Refs UILDP-109.
   * Update Node.js to v18 in GitHub Actions. Fixes UILDP-106.
   * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
+* Support for MetaDB
+  * Port ui-ldp to work with MetaDB as well as LDP Classic. Fixes UILDP-92.
 * _New feature: reports_
   * Settings page for maintaining set of GitHub repos containing reports. Fixes UILDP-97.
   * New "Run report" tab that lists available Templated Queries. Fixes UILDP-98.
