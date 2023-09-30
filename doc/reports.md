@@ -42,11 +42,11 @@ A SQL report, contained in a file ending in `.sql`, contains a SQL query package
 * A blank line.
 * A `CREATE FUNCTION <NAME>` SQL statement that creates the function.
 
-where <NAME> is the name of the report.
+where `<NAME>` is the name of the report.
 
 For more information about creating SQL reports:
-* LDP: [LDP User Guide > Creating reports](https://github.com/library-data-platform/ldp/blob/main/doc/User_Guide.md#5-creating-reports)
-* Metadb: [Metadb Documentation > Creating reports](https://metadb.dev/doc/#_creating_reports)
+* For LDP: [LDP User Guide > Creating reports](https://github.com/library-data-platform/ldp/blob/main/doc/User_Guide.md#5-creating-reports)
+* For Metadb: [Metadb Documentation > Creating reports](https://metadb.dev/doc/#_creating_reports)
 
 In a simple LDP 2.x report to list users created between specified dates, the SQL file might look like this:
 ```
