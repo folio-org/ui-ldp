@@ -26,11 +26,11 @@ function TemplatedQuery({ query }) {
     loadReport(intl, stripes, url, values, setData, setError, limit);
   };
 
-  if (error) return <BigError message={error} />;
-
   return (
     <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
-      {data ? (
+      {error ? (
+        <BigError message={error} />
+      ) : data ? (
         <>
           <div className={css.centerContainer}>
             <div className={css.center}>
