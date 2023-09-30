@@ -15,6 +15,7 @@
   * Show results of running a report. Fixes UILDP-100.
   * Number of records retrieved for reports is limited according to configured parameters. Fixes UILDP-112.
   * Download results of running a query as CSV. Fixes UILDP-113.
+  * Add documentation of [how to author reports and their metadata](doc/reports.md). Fixes UILDP-114.
 * _Bug fixes_
   * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
   * `module.ldp.enabled` and `settings.ldp.enabled` permissionss are no longer visible, in accordance with standard practice in FOLIO. Fixes UILDP-95.
