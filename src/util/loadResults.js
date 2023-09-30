@@ -7,7 +7,10 @@ const loadResults = async (intl, stripes, values, setQueryResponse, setError, li
   if (limit === undefined) limit = values.tables[0].limit;
 
   function setData(raw) {
-    raw.forEach(v => { delete v.data; });
+    raw.forEach(v => {
+      delete v.data; // raw data object from LDP Classic
+      delete v.jsonb; // raw data object from MetaDB
+    });
     const isComplete = raw.length < limit;
 
     if (!isComplete) {
