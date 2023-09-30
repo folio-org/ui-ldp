@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
+## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (IN PROGRESS)
 
 * _Infrastructure changes_
   * **BREAKING**: upgrade Stripes to v9 and React to v18. Fixes UILDP-102.
