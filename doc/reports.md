@@ -3,7 +3,7 @@
 <!-- md2toc -l 2 reports.md -->
 * [Overview](#overview)
 * [Storing and publishing reports](#storing-and-publishing-reports)
-* [Writing a SQL report](#writing-a-sql-report)
+* [Writing an SQL report](#writing-an-sql-report)
 * [Writing JSON metadata for your report](#writing-json-metadata-for-your-report)
 * [Setting up the Reporting app to find your report](#setting-up-the-reporting-app-to-find-your-report)
 * [Using your report](#using-your-report)
@@ -14,7 +14,7 @@
 
 Version 2.0 of the FOLIO Reporting App (formerly known as LDP) introduced a major new feature in reporting. This facility allows users to run SQL reports stored in GitHub, filling in parameters to get the specific information they need. (Go to the "Run report" tab of the Reporting app in your FOLIO instance.)
 
-While the reporting facility does not require end-users to write SQL, authoring reports to be used by this facility requires writing a SQL query and packaging it as a SQL function. This document provides an overview of the requirements.
+While the reporting facility does not require end-users to write SQL, authoring reports to be used by this facility requires writing an SQL query and packaging it as a SQL function. This document provides an overview of the requirements.
 
 
 ##  Storing and publishing reports
@@ -30,7 +30,7 @@ Since the Reporting app can draw reports from multiple sources (see below), it's
 For example, https://github.com/MikeTaylor/dummy-ldp-queries/tree/main/queries contains some dummy reports created during the software development process. One is represented by the files `sers_by_creation_date.sql` and `sers_by_creation_date.json`, the other by the files `mikes_query.sql`, `mikes_query.json` and (for documentation only) `mikes_query.md`.
 
 
-## Writing a SQL report
+## Writing an SQL report
 
 A SQL report, contained in a file ending in `.sql`, contains a SQL query packaged as a SQL function.  The structure of this file takes the following form:
 
