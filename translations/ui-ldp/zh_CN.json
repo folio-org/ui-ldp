@@ -105,5 +105,7 @@
     "templated-queries.source.sql": "SQL查询",
     "templated-queries.source.json": "JSON元数据",
     "templated-queries.instructions": "说明",
-    "error.load-report": "无法运行报告： {error}"
+    "error.load-report": "无法运行报告： {error}",
+    "more-records": "... More records ...",
+    "templated-queries.select": "Select report"
 }
