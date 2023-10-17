@@ -3,6 +3,7 @@
 ## [2.0.1](https://github.com/folio-org/ui-ldp/tree/v2.0.1) (IN PROGRESS)
 
 * In settings page *Report Repositories*, separate individual repositories. Fixes UILDP-120.
+* Permissions names changed from "LDP" to "Reporting" to match the rest of the UI. Fixes UILDP-119.
 
 ## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
 
