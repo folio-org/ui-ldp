@@ -20,7 +20,7 @@ const json = {
     {
       user: 'folio-org',
       repo: 'folio-analytics',
-      branch: 'count_loans_and_renewals_ldp',
+      branch: 'main',
       dir: 'reports/count_loans_and_renewals'
     },
   ],
