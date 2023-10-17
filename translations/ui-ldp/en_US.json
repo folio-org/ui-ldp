@@ -83,7 +83,6 @@
     "button.new-query": "New query",
     "desc.new-query": "This will clear the present query ready to create a new one.",
     "copy-of": "Copy of {string}",
-    "more-records": "... More records ...",
     "button.copy-query": "Copy query",
     "desc.copy-query": "This will copy the current query to a new one that can be edited, run and saved.",
     "save-query.update.notFound": "The query you loaded was deleted. Make a copy and save that.",
@@ -96,16 +95,17 @@
     "settings.tqrepos.branch": "Branch of the specified repository",
     "settings.tqrepos.directory": "Directory within repository",
     "nav.templated-queries": "Run report",
-    "templated-queries.select": "Select report",
     "templated-queries.column.displayName": "Display name",
     "templated-queries.column.filename": "Filename",
     "templated-queries.column.repo": "GitHub repository",
     "error.no-such-query": "No such report: {qname}",
-    "templated-queries.no-json": "This report has no associated JSON metadata, so it is not possible to present a form for filling in its parameters.",
     "devinfo": "Developer information",
+    "templated-queries.no-json": "This report has no associated JSON metadata, so it is not possible to present a form for filling in its parameters.",
     "templated-queries.source": "Source",
     "templated-queries.source.sql": "SQL query",
     "templated-queries.source.json": "JSON metadata",
     "templated-queries.instructions": "Instructions",
-    "error.load-report": "Could not run report: {error}"
+    "error.load-report": "Could not run report: {error}",
+    "more-records": "... More records ...",
+    "templated-queries.select": "Select report"
 }
