@@ -5,6 +5,7 @@
 * In settings page *Report Repositories*, separate individual repositories. Fixes UILDP-120.
 * Permissions names changed from "LDP" to "Reporting" to match the rest of the UI. Fixes UILDP-119.
 * Available reports are now sorted correctly. Fixes UILDP-122.
+* Reports lacking JSON metadata are no longer listed as available. Fixes UILDP-123.
 
 ## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
 
