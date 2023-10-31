@@ -180,22 +180,22 @@
       {
         "permissionName": "mod-settings.global.read.ui-ldp.admin",
         "displayName": "Settings (Reporting): read Reporting administrative settings",
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "mod-settings.global.write.ui-ldp.admin",
         "displayName": "Settings (Reporting): write Reporting administrative settings",
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "mod-settings.global.read.ui-ldp.queries",
         "displayName": "Settings (Reporting): browse and load Reporting saved queries",
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "mod-settings.global.write.ui-ldp.queries",
         "displayName": "Settings (Reporting): create and update Reporting saved queries",
-        "visible": true
+        "visible": false
       }
     ]
   }
