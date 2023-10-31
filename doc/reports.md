@@ -118,6 +118,7 @@ Each element of the `parameters` array is an object with the following keys:
   * `date` -- a date, which is chosen using a date-picker.
 * `default` -- if provided, a string or number that is placed into the generated form as a default value for the parameter.
 * `controlled.options` -- if the type is `text` and this is provided, then it must be an array of strings from which the user will be invited to select one.
+* `disabled` -- if provided and true, then the parameter is disabled, and will be omitted from the generated form.
 
 
 ## Setting up the Reporting app to find your report

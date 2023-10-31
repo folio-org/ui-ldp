@@ -91,7 +91,10 @@ function TemplatedQueryForm({ query, onSubmit }) {
       <Form initialValues={initialValues} onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            {json.parameters.map(param => parameterizedField(param))}
+            {json.parameters
+              .filter(param => !param.disabled)
+              .map(param => parameterizedField(param))
+            }
             <Button type="submit">
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
