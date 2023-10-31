@@ -9,6 +9,7 @@
 * Permission names tweaked to avoid obsolete reference to "LDP". Fixes UILDP-127.
 * Old `scripts` directory merged into `bin`. Fixes UILDP-128.
 * Make internal permissions used by mod-settings invisible. Fixes UILDP-127.
+* Report metadata files can specify default values for report parameters. Fixes UILDP-124.
 
 ## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
 

@@ -62,6 +62,12 @@ function TemplatedQueryForm({ query, onSubmit }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
+  const initialValues = {};
+  json.parameters.forEach(param => {
+    const v = param.default;
+    if (v !== undefined) initialValues[param.name] = v;
+  });
+
   return (
     <>
       <p>
@@ -82,7 +88,7 @@ function TemplatedQueryForm({ query, onSubmit }) {
           <p>{json.instructions}</p>
         </>
       )}
-      <Form onSubmit={onSubmit}>
+      <Form initialValues={initialValues} onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             {json.parameters.map(param => parameterizedField(param))}
