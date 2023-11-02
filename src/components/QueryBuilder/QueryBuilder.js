@@ -74,6 +74,15 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
     setShowCopyModal(false);
   };
 
+  if (queryResponse) {
+    const title = initialState.META?.displayName;
+    return (
+      <Pane defaultWidth="fill" paneTitle={title} dismissible onClose={() => setQueryResponse()}>
+        <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
+      </Pane>
+    );
+  }
+
   return (
     <Paneset>
       <FinalForm
@@ -157,11 +166,6 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                       </Pane>
                     }
                   </Paneset>
-                </div>
-                <div style={{ height: '100%' }}>
-                  <div style={{ height: '100%' }}>
-                    <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
-                  </div>
                 </div>
               </div>
               <ConfirmationModal
