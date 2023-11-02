@@ -39,7 +39,7 @@ function ensureSchemasAreAvailable(initialState, schemaNames) {
 function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, onClear, tables, setError, execute }) {
   const intl = useIntl();
   const stripes = useStripes();
-  const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const [queryResponse, setQueryResponse] = useState();
   const [showNewModal, setShowNewModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [showCopyModal, setShowCopyModal] = useState(false);

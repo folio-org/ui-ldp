@@ -14,7 +14,7 @@ const NULLValue = <span style={{ color: 'grey' }}>[NULL]</span>;
 const ResultsList = ({ results, searchWithoutLimit }) => {
   const intl = useIntl();
 
-  if (!results.key) return null;
+  if (!results) return null;
 
   const data = results.resp || [];
   const formatter = {};
@@ -36,15 +36,14 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
     <>
       <div className={css.ResultsSummary}>
         <span data-cy="results.message">
-          {results.key && (
-            results.isComplete ?
-              <FormattedMessage id="ui-ldp.found-records" values={{ count: results.count }} /> :
-              <FormattedMessage id="ui-ldp.found-more-than" values={{ count: results.count }} />
-          )}
+          {results.isComplete ?
+            <FormattedMessage id="ui-ldp.found-records" values={{ count: results.count }} /> :
+            <FormattedMessage id="ui-ldp.found-more-than" values={{ count: results.count }} />
+          }
         </span>
         <Button
           aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
-          disabled={!results.resp?.length}
+          disabled={!data.length}
           onClick={() => maybeExportCsv(results)}
           xstyle={{ marginTop: '-1em' }}
           data-cy="results.downloadCSV"
@@ -52,7 +51,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
           <FormattedMessage id="ui-ldp.button.csv" />
         </Button>
       </div>
-      <MultiColumnList key={results.key} contentData={data} formatter={formatter} virtualize autosize />
+      <MultiColumnList contentData={data} formatter={formatter} virtualize autosize />
     </>
   );
 };
