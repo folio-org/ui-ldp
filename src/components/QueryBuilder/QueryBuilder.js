@@ -141,11 +141,9 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                             namePrefix={namePrefix}
                             tableIndex={tableIndex}
                             tables={tables}
-                            queryResponse={queryResponse}
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}
-                            searchWithoutLimit={searchWithoutLimit}
                           />
                         </Pane>
                       ))}
@@ -162,7 +160,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                 </div>
                 <div style={{ height: '100%' }}>
                   <div style={{ height: '100%' }}>
-                    <ResultsList results={queryResponse} />
+                    <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
                   </div>
                 </div>
               </div>
