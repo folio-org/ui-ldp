@@ -40,7 +40,6 @@
     "settings.table-availability": "Disponibilidad de la tabla",
     "settings.table-availability.schema": "Esquema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Marque las tablas que desea deshabilitar para la consulta",
-    "SENTINEL": "Vacio",
     "direction": "Dirección de clasificación",
     "nulls": "Ordenar nulos",
     "placeholder.column": "(Columna)",
@@ -107,5 +106,6 @@
     "templated-queries.instructions": "Instructions",
     "error.load-report": "Could not run report: {error}",
     "more-records": "... More records ...",
-    "templated-queries.select": "Select report"
+    "templated-queries.select": "Select report",
+    "SENTINEL": ""
 }

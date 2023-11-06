@@ -40,7 +40,6 @@
     "settings.table-availability": "توافر الجدول",
     "settings.table-availability.schema": "مخطط <code> {name} </code>",
     "settings.table-availability.check-to-disable": "حدد الجداول لتعطيل الاستعلام",
-    "SENTINEL": ".",
     "direction": "اتجاه الفرز",
     "nulls": "فرز القيم الخالية",
     "placeholder.column": "(العمود)",
@@ -107,5 +106,6 @@
     "templated-queries.instructions": "Instructions",
     "error.load-report": "Could not run report: {error}",
     "more-records": "... More records ...",
-    "templated-queries.select": "Select report"
+    "templated-queries.select": "Select report",
+    "SENTINEL": ""
 }

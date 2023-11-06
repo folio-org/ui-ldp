@@ -40,7 +40,6 @@
     "settings.table-availability": "Disponibilité des tables",
     "settings.table-availability.schema": "Schéma <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Vérifiez les tables à désactiver pour les requêtes",
-    "SENTINEL": "",
     "direction": "Sort direction",
     "nulls": "Sort nulls",
     "placeholder.column": "(Column)",
@@ -107,5 +106,6 @@
     "templated-queries.instructions": "Instructions",
     "error.load-report": "Could not run report: {error}",
     "more-records": "... More records ...",
-    "templated-queries.select": "Select report"
+    "templated-queries.select": "Select report",
+    "SENTINEL": ""
 }
