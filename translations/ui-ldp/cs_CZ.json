@@ -40,7 +40,6 @@
     "settings.table-availability": "Dostupnost tabulky",
     "settings.table-availability.schema": "Schéma <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Zaškrtněte tabulky, které chcete zakázat pro dotazování.",
-    "SENTINEL": "Prázdné",
     "direction": "Směr seřazení",
     "nulls": "Seřadit nuly",
     "placeholder.column": "(Sloupec)",
@@ -107,5 +106,6 @@
     "templated-queries.instructions": "Instrukce",
     "error.load-report": "Výstup nelze spustit: {error}",
     "more-records": "... Další záznamy ...",
-    "templated-queries.select": "Vybrat výstup"
+    "templated-queries.select": "Vybrat výstup",
+    "SENTINEL": ""
 }

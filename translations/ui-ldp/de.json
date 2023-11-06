@@ -40,7 +40,6 @@
     "settings.table-availability": "Verfügbarkeit von Tabellen",
     "settings.table-availability.schema": "Schema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Tabellen, die für Abfragen deaktiviert werden sollen",
-    "SENTINEL": "Leer",
     "direction": "Sortierrichtung",
     "nulls": "Sort nulls",
     "placeholder.column": "(Spalte)",
@@ -107,5 +106,6 @@
     "templated-queries.instructions": "Instructions",
     "error.load-report": "Could not run report: {error}",
     "more-records": "... More records ...",
-    "templated-queries.select": "Select report"
+    "templated-queries.select": "Select report",
+    "SENTINEL": ""
 }
