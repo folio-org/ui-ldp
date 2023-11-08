@@ -40,7 +40,6 @@
     "settings.table-availability": "Disponibilidade da tabela",
     "settings.table-availability.schema": "Esquema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Verifique as tabelas a serem desabilitadas para consulta",
-    "SENTINEL": "",
     "direction": "Ordem de Classificação",
     "nulls": "Classificar nulos",
     "placeholder.column": "(Coluna)",
@@ -107,5 +106,6 @@
     "templated-queries.instructions": "Instruções",
     "error.load-report": "Não foi possível executar o relatório: {error}",
     "more-records": "... Mais registros ...",
-    "templated-queries.select": "Selecionar relatório"
+    "templated-queries.select": "Selecionar relatório",
+    "SENTINEL": ""
 }
