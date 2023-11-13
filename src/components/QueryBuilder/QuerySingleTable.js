@@ -103,7 +103,7 @@ const QuerySingleTable = ({
               data-cy={`${namePrefix}.schema`}
               label={<FormattedMessage id="ui-ldp.label.schema" />}
               component={Selection}
-              dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
+              dataOptions={Object.keys(tables).sort().map(schema => ({ label: schema, value: schema }))}
             />
           </div>
           <div style={{ flex: 2, marginLeft: 5 }}>
