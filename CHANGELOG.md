@@ -13,6 +13,7 @@
 * Report metadata files can specify that report parameters are disabled. Fixes UILDP-125.
 * Results from query-builder appear in place of, rather than below, the query for. Fixes UILDP-118, though we will revisit this UX in a future release.
 * When adding the initial report repository', `+` no longer creates two empty templates. Fixes UILDP-126.
+* Submitting a query from the builder, then closing the results, no longer resets to the last loaded query. Fixes UILDP-130.
 
 ## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
 
