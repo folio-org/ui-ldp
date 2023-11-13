@@ -74,14 +74,6 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
     setShowCopyModal(false);
   };
 
-  if (queryResponse) {
-    const title = initialState.META?.displayName;
-    return (
-      <Pane defaultWidth="fill" paneTitle={title} dismissible onClose={() => setQueryResponse()}>
-        <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
-      </Pane>
-    );
-  }
 
   return (
     <Paneset>
@@ -98,6 +90,15 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
             mutators: { push, pop }
           }
         }) => {
+          if (queryResponse) {
+            const title = initialState.META?.displayName;
+            return (
+              <Pane defaultWidth="fill" paneTitle={title} dismissible onClose={() => setQueryResponse()}>
+                <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
+              </Pane>
+            );
+          }
+
           const queryFormValues = getState().values;
           // console.log('QueryBuilder: queryFormValues =', queryFormValues);
           stateMayHaveChanged(stateHasChanged, queryFormValues);
