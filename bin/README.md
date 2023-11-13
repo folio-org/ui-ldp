@@ -20,7 +20,7 @@ the script to move old queries across is described in
 
 * [`add-tq-repo.js`](add-tq-repo.js) configures the nominated service with a set or reporting repositories to be used in the **Run report** tab of the app. Running this is equivalent to editing the set of repositories in **Settings** &rarr; **Reporting** &rarr; **Report repositories**.
 
-THese scripts are written in module-aware Node, and use
+These scripts are written in module-aware Node, and use
 [the FolioJS library](https://github.com/MikeTaylor/foliojs)
 for access to FOLIO.
 
@@ -61,3 +61,7 @@ Invoke the script with two command-line arguments: the owner of the GitHub repos
 folio-port-ldp-queries.mjs RandomOtherGuy ldp-queries
 ```
 
+<!--
+Run as
+env OKAPI_URL=https://folio-snapshot-okapi.dev.folio.org OKAPI_TENANT=diku OKAPI_USER=diku_admin OKAPI_PW=******** ./folio-port-ldp-queries.mjs RandomOtherGuy ldp-queries
+-->
