@@ -107,5 +107,5 @@
     "error.load-report": "Výstup nelze spustit: {error}",
     "more-records": "... Další záznamy ...",
     "templated-queries.select": "Vybrat výstup",
-    "SENTINEL": ""
+    "SENTINEL": "Prázdné"
 }
