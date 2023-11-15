@@ -59,7 +59,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
 
 ResultsList.propTypes = {
   results: PropTypes.object,
-  searchWithoutLimit: PropTypes.func.isRequired,
+  searchWithoutLimit: PropTypes.func, // not .isRequired when called from TemplatedQuery.js
 };
 
 
