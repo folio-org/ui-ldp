@@ -105,7 +105,9 @@ async function fetchTemplatedQueries(gitRepos, setQueries) {
   }));
 
   const merged = mergeSQLandJSON(data);
-  setQueries(merged);
+  const withMetadata = merged.filter(x => x.json);
+  withMetadata.sort((a, b) => a.json?.displayName.localeCompare(b.json?.displayName));
+  setQueries(withMetadata);
 }
 
 

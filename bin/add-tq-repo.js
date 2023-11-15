@@ -18,10 +18,10 @@ const json = {
       dir: 'queries'
     },
     {
-      user: 'folio-org',
-      repo: 'folio-analytics',
-      branch: 'count_loans_and_renewals_ldp',
-      dir: 'reports/count_loans_and_renewals'
+      user: 'metadb-project',
+      repo: 'metadb-examples',
+      branch: 'main',
+      dir: 'folio/reports'
     },
   ],
 };

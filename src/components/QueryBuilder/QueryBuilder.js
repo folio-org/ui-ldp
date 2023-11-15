@@ -39,7 +39,7 @@ function ensureSchemasAreAvailable(initialState, schemaNames) {
 function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, onClear, tables, setError, execute }) {
   const intl = useIntl();
   const stripes = useStripes();
-  const [queryResponse, setQueryResponse] = useState({ key: null, resp: [] });
+  const [queryResponse, setQueryResponse] = useState();
   const [showNewModal, setShowNewModal] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [showCopyModal, setShowCopyModal] = useState(false);
@@ -74,6 +74,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
     setShowCopyModal(false);
   };
 
+
   return (
     <Paneset>
       <FinalForm
@@ -89,6 +90,15 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
             mutators: { push, pop }
           }
         }) => {
+          if (queryResponse) {
+            const title = initialState.META?.displayName;
+            return (
+              <Pane defaultWidth="fill" paneTitle={title} dismissible onClose={() => setQueryResponse()}>
+                <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
+              </Pane>
+            );
+          }
+
           const queryFormValues = getState().values;
           // console.log('QueryBuilder: queryFormValues =', queryFormValues);
           stateMayHaveChanged(stateHasChanged, queryFormValues);
@@ -141,11 +151,9 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                             namePrefix={namePrefix}
                             tableIndex={tableIndex}
                             tables={tables}
-                            queryResponse={queryResponse}
                             onRemove={() => fields.remove(tableIndex)}
                             push={push}
                             pop={pop}
-                            searchWithoutLimit={searchWithoutLimit}
                           />
                         </Pane>
                       ))}
@@ -159,11 +167,6 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
                       </Pane>
                     }
                   </Paneset>
-                </div>
-                <div style={{ height: '100%' }}>
-                  <div style={{ height: '100%' }}>
-                    <ResultsList results={queryResponse} />
-                  </div>
                 </div>
               </div>
               <ConfirmationModal

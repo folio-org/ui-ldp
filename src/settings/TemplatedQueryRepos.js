@@ -5,6 +5,7 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { Loading, Row, Col, TextField, IconButton } from '@folio/stripes/components';
+import css from './Settings.css';
 
 
 
@@ -18,7 +19,7 @@ function TemplatedQueryRepos(props) {
   if (!ConnectedConfigManager) return <Loading size="xlarge" />;
 
   const getInitialValues = (settings) => {
-    const res = settings.length === 0 ? '{}' : settings[0].value;
+    const res = settings.length === 0 ? [] : settings[0].value;
     return { repos: res };
   };
 
@@ -61,14 +62,13 @@ function TemplatedQueryRepos(props) {
                       </Col>
                       <Col xs={12}>
                         <a target="_blank" rel="noreferrer" href={url}>{url}</a>
-                        <hr />
-                        <br />
+                        <hr className={css.darkHR} />
                       </Col>
                     </Row>
                   </div>
                 );
               })}
-              <IconButton icon="plus-sign" onClick={() => fields.push('')} />
+              <IconButton icon="plus-sign" onClick={() => fields.push({})} />
             </>
           )}
         </FieldArray>

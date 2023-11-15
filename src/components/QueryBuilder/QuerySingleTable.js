@@ -7,14 +7,13 @@ import { FieldArray } from 'react-final-form-arrays';
 import { OnChange } from 'react-final-form-listeners';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Label, MultiSelection, OptionSegment, Select, Selection } from '@folio/stripes/components';
-import { exportCsv } from '@folio/stripes/util';
 import { useLdp } from '../../LdpContext';
 import loadColumns from '../../util/loadColumns';
 import generateOptions from '../../util/generateOptions';
 import BigError from '../BigError';
 import ColumnFilter from './ColumnFilter';
 import OrderingCriterion from './OrderingCriterion';
-import css from './QuerySingleTable.css';
+import css from './QueryBuilder.css';
 
 
 const WhenFieldChanges = ({ field, set, to }) => (
@@ -73,10 +72,8 @@ const QuerySingleTable = ({
   namePrefix,
   tableIndex,
   tables,
-  queryResponse,
   // onRemove,
   push,
-  searchWithoutLimit,
 }) => {
   const intl = useIntl();
   const stripes = useStripes();
@@ -96,14 +93,6 @@ const QuerySingleTable = ({
 
   const disabled = !selectedTableName;
 
-  const maybeExportCsv = (qr) => {
-    if (qr.isComplete) {
-      exportCsv(qr.resp, {});
-    } else {
-      searchWithoutLimit(r => exportCsv(r.resp, {}));
-    }
-  };
-
   return (
     <div className={css.QuerySingleTable} data-test-table>
       <div className="query-input">
@@ -114,7 +103,7 @@ const QuerySingleTable = ({
               data-cy={`${namePrefix}.schema`}
               label={<FormattedMessage id="ui-ldp.label.schema" />}
               component={Selection}
-              dataOptions={Object.keys(tables).map(schema => ({ label: schema, value: schema }))}
+              dataOptions={Object.keys(tables).sort().map(schema => ({ label: schema, value: schema }))}
             />
           </div>
           <div style={{ flex: 2, marginLeft: 5 }}>
@@ -219,34 +208,14 @@ const QuerySingleTable = ({
           disabled={disabled}
         />
 
-        <div className={css.SubmitRow}>
-          <span>
-            <Button
-              type="submit"
-              buttonStyle="primary"
-              disabled={disabled}
-              data-cy={`${namePrefix}.submit`}
-            >
-              <FormattedMessage id="ui-ldp.button.submit" />
-            </Button>
-          </span>
-          <span data-cy={`${namePrefix}.message`}>
-            {queryResponse.key && (
-              queryResponse.isComplete ?
-                <FormattedMessage id="ui-ldp.found-records" values={{ count: queryResponse.count }} /> :
-                <FormattedMessage id="ui-ldp.found-more-than" values={{ count: queryResponse.count }} />
-            )}
-          </span>
-          <Button
-            aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
-            disabled={!get(queryResponse, 'resp.length')}
-            onClick={() => maybeExportCsv(queryResponse)}
-            xstyle={{ marginTop: '-1em' }}
-            data-cy={`${namePrefix}.downloadCSV`}
-          >
-            <FormattedMessage id="ui-ldp.button.csv" />
-          </Button>
-        </div>
+        <Button
+          type="submit"
+          buttonStyle="primary"
+          disabled={disabled}
+          data-cy={`${namePrefix}.submit`}
+        >
+          <FormattedMessage id="ui-ldp.button.submit" />
+        </Button>
       </div>
     </div>
   );
@@ -256,10 +225,8 @@ QuerySingleTable.propTypes = {
   namePrefix: PropTypes.string,
   tableIndex: PropTypes.number,
   tables: PropTypes.object,
-  queryResponse: PropTypes.object,
   push: PropTypes.func,
   // pop: PropTypes.func,
-  searchWithoutLimit: PropTypes.func.isRequired,
 };
 
 

@@ -1,5 +1,21 @@
 # Change history for ui-ldp
 
+## [2.0.1](https://github.com/folio-org/ui-ldp/tree/v2.0.1) (IN PROGRESS)
+
+* In settings page *Report Repositories*, separate individual repositories. Fixes UILDP-120.
+* Permissions names changed from "LDP" to "Reporting" to match the rest of the UI. Fixes UILDP-119.
+* Available reports are now sorted correctly. Fixes UILDP-122.
+* Reports lacking JSON metadata are no longer listed as available. Fixes UILDP-123.
+* Permission names tweaked to avoid obsolete reference to "LDP". Fixes UILDP-127.
+* Old `scripts` directory merged into `bin`. Fixes UILDP-128.
+* Make internal permissions used by mod-settings invisible. Fixes UILDP-127.
+* Report metadata files can specify default values for report parameters. Fixes UILDP-124.
+* Report metadata files can specify that report parameters are disabled. Fixes UILDP-125.
+* Results from query-builder appear in place of, rather than below, the query for. Fixes UILDP-118, though we will revisit this UX in a future release.
+* When adding the initial report repository', `+` no longer creates two empty templates. Fixes UILDP-126.
+* Submitting a query from the builder, then closing the results, no longer resets to the last loaded query. Fixes UILDP-130.
+* List of available schemas in query-builder is now sorted. Fixes UILDP-131.
+
 ## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
 
 * _Infrastructure changes_
