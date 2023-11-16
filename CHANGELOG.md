@@ -15,6 +15,7 @@
 * When adding the initial report repository', `+` no longer creates two empty templates. Fixes UILDP-126.
 * Submitting a query from the builder, then closing the results, no longer resets to the last loaded query. Fixes UILDP-130.
 * List of available schemas in query-builder is now sorted. Fixes UILDP-131.
+* Duplicate result-summary lines are no longer displayed when running a report. Fixes UILDP-134.
 
 ## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
 
