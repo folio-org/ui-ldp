@@ -60,7 +60,6 @@
   },
   "dependencies": {
     "chart.js": "^2.9.3",
-    "cross-fetch": "^3.0.6",
     "final-form": "^4.20.7",
     "final-form-arrays": "^3.0.2",
     "localforage": "^1.9.0",
