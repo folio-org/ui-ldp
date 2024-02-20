@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-
 // GitHub API notes
 //
 // User-Agent header is required, but supplied by HTTP library or browser

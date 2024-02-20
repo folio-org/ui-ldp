@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import baseName from './baseName';
 
 
