@@ -22,7 +22,7 @@
     "direction.desc": "Descending",
     "nulls.start": "Nulls at start",
     "nulls.end": "Nulls at end",
-    "placeholder.value": "(Value)",
+    "placeholder.value": "(Wartość)",
     "placeholder.columns.all": "(All)",
     "button.add-filter": "Add filter",
     "button.add-ordering-criterion": "Dodaj kryterium sortowania",
