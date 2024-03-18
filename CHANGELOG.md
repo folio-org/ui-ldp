@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## (IN PROGRESS)
+
+* Remove unnecessary `cross-fetch` dependency which may be interfering with new authentication regimen. Fixes UILDP-145.
+
 ## [2.0.1](https://github.com/folio-org/ui-ldp/tree/v2.0.1) (2023-11-16)
 
 * In settings page **Report Repositories**, separate individual repositories. Fixes UILDP-120.
