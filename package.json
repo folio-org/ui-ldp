@@ -19,6 +19,7 @@
     "lint": "eslint --format unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-ldp ./translations/ui-ldp/compiled",
     "lintwatch": "esw . -w --color"
   },
   "devDependencies": {
