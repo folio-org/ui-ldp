@@ -102,7 +102,7 @@
     "templated-queries.no-json": "This report has no associated JSON metadata, so it is not possible to present a form for filling in its parameters.",
     "templated-queries.source": "Source",
     "templated-queries.source.sql": "SQL query",
-    "templated-queries.source.json": "JSON metadata",
+    "templated-queries.source.json": "JSONメタデータ",
     "templated-queries.instructions": "Instructions",
     "error.load-report": "Could not run report: {error}",
     "more-records": "... More records ...",
