@@ -8,7 +8,7 @@
     "error.load-tables": "Não foi possível carregar as tabelas: {error}",
     "error.load-columns": "Não foi possível carregar colunas: {error}",
     "error.load-results": "Não foi possível carregar os resultados: {error}",
-    "nav.query-builder": "Construir consulta",
+    "nav.query-builder": "Criar consulta",
     "nav.logs": "Logs",
     "nav.playground": "Playground",
     "heading.current-settings": "Configurações atuais",
