@@ -67,7 +67,7 @@
     "saved-queries.autoRun": "Auto-run?",
     "saved-queries.creator": "Creator",
     "saved-queries.created": "Data utworzenia",
-    "saved-queries.comment": "Comment",
+    "saved-queries.comment": "Komentarz",
     "save-query": "Save query",
     "save-query.update.ok": "Saved query {displayName}",
     "save-query.update.fail": "Could not save query {displayName}: error {code} ({statusText}): {detail}",
