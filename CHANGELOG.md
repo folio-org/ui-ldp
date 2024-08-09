@@ -3,6 +3,7 @@
 ## [2.1.0](https://github.com/folio-org/ui-ldp/tree/v2.1.0) (2024-03-19)
 
 * Remove unnecessary `cross-fetch` dependency which may be interfering with new authentication regimen. Fixes UILDP-145.
+* Correctly read configuration (disabled tables and default result sizes) from mod-settings. Fixes UILDP-144.
 
 ## [2.0.1](https://github.com/folio-org/ui-ldp/tree/v2.0.1) (2023-11-16)
 
