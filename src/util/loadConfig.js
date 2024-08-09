@@ -9,8 +9,8 @@ const loadConfig = async (intl, stripes, ldp, setConfigLoaded, setError) => {
 
   function setData(raw) {
     let data;
-    if (raw.configs && raw.configs.length !== 0) {
-      data = JSON.parse(raw.configs[0].value);
+    if (raw.items && raw.items.length !== 0) {
+      data = JSON.parse(raw.items[0].value);
     } else {
       data = defaultConfig;
     }

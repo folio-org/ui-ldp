@@ -171,7 +171,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
               </div>
               <ConfirmationModal
                 open={showNewModal}
-                heading={<FormattedMessage id="ui-ldp.button.new-query" />}
+                heading={intl.formatMessage({ id: 'ui-ldp.button.new-query' })}
                 message={<FormattedMessage id="ui-ldp.desc.new-query" />}
                 confirmLabel={<FormattedMessage id="ui-ldp.button.new-query" />}
                 onConfirm={newQuery}
@@ -187,7 +187,7 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
               }
               <ConfirmationModal
                 open={showCopyModal}
-                heading={<FormattedMessage id="ui-ldp.button.copy-query" />}
+                heading={intl.formatMessage({ id: 'ui-ldp.button.copy-query' })}
                 message={<FormattedMessage id="ui-ldp.desc.copy-query" />}
                 confirmLabel={<FormattedMessage id="ui-ldp.button.copy-query" />}
                 onConfirm={copyQuery}
