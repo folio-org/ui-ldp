@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
-import { TextField, Datepicker, Select, AutoSuggest, Button } from '@folio/stripes/components';
+import { TextField, Datepicker, Select, /* AutoSuggest, */ Button } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
 
 
@@ -12,10 +12,13 @@ function type2component(param) {
   } else if (param.type !== 'text') {
     // We could throw an "unsupported type" error, but it's probably friendlier to default to text
     return [TextField, 'DEFAULT'];
+  } else if (param['controlled.options'] && !param['controlled.allowOtherValues']) {
+    return [Select, 'Select'];
+    /*
+  // For now, we don't use AutoSuggest, as it doesn't work inside a react-final-form: see UILDP-147
   } else if (param['controlled.options'] && param['controlled.allowOtherValues']) {
     return [AutoSuggest, 'AutoSuggest'];
-  } else if (param['controlled.options']) {
-    return [Select, 'Select'];
+    */
   } else {
     return [TextField, 'TextField'];
   }
