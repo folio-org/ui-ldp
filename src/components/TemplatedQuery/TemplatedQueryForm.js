@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
 import { TextField, Datepicker, Select, /* AutoSuggest, */ Button } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
+import ResultsList from '../QueryBuilder/ResultsList';
 
 
 function type2component(param) {
@@ -61,7 +62,7 @@ function parameterizedField(param) {
 }
 
 
-function TemplatedQueryForm({ query, onSubmit }) {
+function TemplatedQueryForm({ query, onSubmit, data }) {
   const { json, config } = query;
   const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
 
@@ -93,6 +94,7 @@ function TemplatedQueryForm({ query, onSubmit }) {
       )}
       <Form initialValues={initialValues} onSubmit={onSubmit}>
         {({ handleSubmit }) => (
+          data ? <ResultsList results={data} /> :
           <form onSubmit={handleSubmit}>
             {json.parameters
               .filter(param => !param.disabled)
@@ -126,6 +128,7 @@ TemplatedQueryForm.propTypes = {
       ).isRequired,
     }),
   }).isRequired,
+  data: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
 };
 

@@ -6,7 +6,6 @@ import { Pane, Accordion } from '@folio/stripes/components';
 import { useLdp } from '../../LdpContext';
 import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
-import ResultsList from '../QueryBuilder/ResultsList';
 import TemplatedQueryForm from './TemplatedQueryForm';
 import css from './TemplatedQuery.css';
 
@@ -29,8 +28,6 @@ function TemplatedQuery({ query }) {
     <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
       {error ? (
         <BigError message={error} />
-      ) : data ? (
-        <ResultsList results={data} />
       ) : (
         <>
           {!query.json ? (
@@ -38,7 +35,7 @@ function TemplatedQuery({ query }) {
               <FormattedMessage id="ui-ldp.templated-queries.no-json" />
             </div>
           ) : (
-            <TemplatedQueryForm query={query} onSubmit={onSubmit} />
+            <TemplatedQueryForm query={query} onSubmit={onSubmit} data={data} />
           )}
           <br style={{ marginTop: '2em' }} />
           <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
