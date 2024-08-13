@@ -58,7 +58,12 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
 
 
 ResultsList.propTypes = {
-  results: PropTypes.object,
+  results: PropTypes.shape({
+    count: PropTypes.number.isRequired,
+    isComplete: PropTypes.bool.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    resp: PropTypes.array.isRequired,
+  }),
   searchWithoutLimit: PropTypes.func, // not .isRequired when called from TemplatedQuery.js
 };
 
