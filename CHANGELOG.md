@@ -4,6 +4,7 @@
 
 * Correctly read configuration (disabled tables and default result sizes) from mod-settings. Fixes UILDP-144.
 * **Temporarily** use a simple textbox instead of `<AutoSuggest>` in generated query forms. Addresses UILDP-147.
+* Closing the results list from a "Run report" query no longer clears entered parameters. Fixes UILDP-138.
 
 ## [2.1.0](https://github.com/folio-org/ui-ldp/tree/v2.1.0) (2024-03-19)
 

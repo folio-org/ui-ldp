@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, Accordion } from '@folio/stripes/components';
+import { Pane } from '@folio/stripes/components';
 import { useLdp } from '../../LdpContext';
 import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
-import ResultsList from '../QueryBuilder/ResultsList';
 import TemplatedQueryForm from './TemplatedQueryForm';
 import css from './TemplatedQuery.css';
 
@@ -29,22 +28,14 @@ function TemplatedQuery({ query }) {
     <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
       {error ? (
         <BigError message={error} />
-      ) : data ? (
-        <ResultsList results={data} />
       ) : (
-        <>
-          {!query.json ? (
-            <div className={css.noJsonError}>
-              <FormattedMessage id="ui-ldp.templated-queries.no-json" />
-            </div>
-          ) : (
-            <TemplatedQueryForm query={query} onSubmit={onSubmit} />
-          )}
-          <br style={{ marginTop: '2em' }} />
-          <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
-            <pre>{JSON.stringify(query, null, 2)}</pre>
-          </Accordion>
-        </>
+        !query.json ? (
+          <div className={css.noJsonError}>
+            <FormattedMessage id="ui-ldp.templated-queries.no-json" />
+          </div>
+        ) : (
+          <TemplatedQueryForm query={query} onSubmit={onSubmit} data={data} />
+        )
       )}
     </Pane>
   );
