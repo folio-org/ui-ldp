@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
-import { TextField, Datepicker, Select, /* AutoSuggest, */ Button } from '@folio/stripes/components';
+import { TextField, Datepicker, Select, /* AutoSuggest, */ Button, Accordion } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
 import ResultsList from '../QueryBuilder/ResultsList';
 
@@ -103,6 +103,10 @@ function TemplatedQueryForm({ query, onSubmit, data }) {
             <Button type="submit">
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
+            <br style={{ marginTop: '2em' }} />
+            <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
+              <pre>{JSON.stringify(query, null, 2)}</pre>
+            </Accordion>
           </form>
         )}
       </Form>
