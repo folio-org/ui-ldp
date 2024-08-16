@@ -103,7 +103,7 @@
     "templated-queries.source": "Zdroj",
     "templated-queries.source.sql": "SQL dotaz",
     "templated-queries.source.json": "Metadata JSON",
-    "templated-queries.instructions": "Instrukce",
+    "templated-queries.instructions": "Pokyny",
     "error.load-report": "Výstup nelze spustit: {error}",
     "more-records": "... Další záznamy ...",
     "templated-queries.select": "Vybrat výstup",
