@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { ConfigManager } from '@folio/stripes/smart-components';
-import { Loading, Row, Col, TextField, IconButton } from '@folio/stripes/components';
+import { Loading, Row, Col, TextField, IconButton, Select } from '@folio/stripes/components';
+import { repoTypes, makeReportRepo } from '../util/repoTypes';
 import css from './Settings.css';
-
 
 
 function TemplatedQueryRepos(props) {
@@ -27,10 +27,13 @@ function TemplatedQueryRepos(props) {
     return data.repos || [];
   };
 
+  const typeLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.type" />;
   const userLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.user" />;
   const repoLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.repo" />;
   const branchLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.branch" />;
   const dirLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.directory" />;
+
+  const typeOptions = Object.keys(repoTypes).sort().map(key => ({ value: key, label: repoTypes[key].name() }));
 
   return (
     <ConnectedConfigManager
@@ -47,11 +50,14 @@ function TemplatedQueryRepos(props) {
             <>
               {fields.map((subname, index) => {
                 const val = fields.value[index];
-                const url = `https://github.com/${val.user}/${val.repo}/tree/${val.branch}/${val.dir}`;
+                const reportRepo = makeReportRepo(val.type, val.user, val.repo, val.branch, val.dir);
+                const url = reportRepo.webUrl();
+
                 return (
                   <div key={index}>
                     <Row>
                       <Col xs={11}>
+                        <Field name={`${subname}.type`} label={typeLabel} component={Select} dataOptions={typeOptions} />
                         <Field name={`${subname}.user`} label={userLabel} component={TextField} />
                         <Field name={`${subname}.repo`} label={repoLabel} component={TextField} />
                         <Field name={`${subname}.branch`} label={branchLabel} component={TextField} />
