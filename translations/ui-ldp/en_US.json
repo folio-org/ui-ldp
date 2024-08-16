@@ -89,7 +89,7 @@
     "saved-queries.updated": "Date last updated",
     "saved-queries.delete.updatedBy": "Last updated by <code>{updater}</code>, {updated}",
     "settings.tqrepos": "Report repositories",
-    "settings.tqrepos.user": "GitHub user",
+    "settings.tqrepos.user": "Git site user",
     "settings.tqrepos.repo": "Repository name within user's area",
     "settings.tqrepos.branch": "Branch of the specified repository",
     "settings.tqrepos.directory": "Directory within repository",
