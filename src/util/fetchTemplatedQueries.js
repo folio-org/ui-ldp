@@ -92,15 +92,11 @@ async function fetchTemplatedQueries(gitRepos, setQueries) {
 
   const promises2 = results.map(result => result.text());
   const texts = await Promise.all(promises2);
-  const data = resultsWithFC.map((rfc, i) => {
-    const reportRepo = createReportRepo(rfc.config);
-    const transformed = reportRepo.transformData(texts[i]);
-    return {
-      filename: rfc.filename,
-      config: rfc.config,
-      text: transformed,
-    };
-  });
+  const data = resultsWithFC.map((rfc, i) => ({
+    filename: rfc.filename,
+    config: rfc.config,
+    text: texts[i],
+  }));
 
   const merged = mergeSQLandJSON(data);
   const withMetadata = merged.filter(x => x.json);
