@@ -12,14 +12,22 @@ class QueryRepoGitHub extends QueryRepo {
   static name() { return 'GitHub'; }
   webUrl() { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
   apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/contents/${this.dir}?ref=${this.branch}`; }
+  rawFilePath(name) { return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${this.branch}/${this.dir}/${name}`; }
+  transformData(data) { return data; }
   urlBase(filename) { return `${this.webUrl()}/${filename}`; }
 }
 
-// Yes, this is very similar to the GitHub class, but we may need to diverge significantly
 class QueryRepoGitLab extends QueryRepo {
   static name() { return 'GitLab'; }
   webUrl() { return `https://gitlab.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
-  apiDirectoryPath() { return `https://api.gitlab.com/repos/${this.user}/${this.repo}/contents/${this.dir}?ref=${this.branch}`; }
+  apiDirectoryPath() { return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/tree?ref=${this.branch}&path=${this.dir}`; }
+
+  rawFilePath(name) {
+    const encodedPath = encodeURIComponent(`${this.dir}/${name}`);
+    return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/files/${encodedPath}/raw?ref=${this.branch}`;
+  }
+
+  transformData(data) { return data; }
   urlBase(filename) { return `${this.webUrl()}/${filename}`; }
 }
 
@@ -29,10 +37,10 @@ const repoTypes = {
   // More as we need them
 };
 
-function makeReportRepo(type, user, repo, branch, dir) {
-  const ReportRepoType = repoTypes[type || 'github'];
-  const reportRepo = new ReportRepoType(user, repo, branch, dir);
+function createReportRepo(config) {
+  const ReportRepoType = repoTypes[config.type || 'github'];
+  const reportRepo = new ReportRepoType(config.user, config.repo, config.branch, config.dir);
   return reportRepo;
 }
 
-export { repoTypes, makeReportRepo };
+export { repoTypes, createReportRepo };

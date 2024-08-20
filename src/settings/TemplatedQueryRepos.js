@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { Loading, Row, Col, TextField, IconButton, Select } from '@folio/stripes/components';
-import { repoTypes, makeReportRepo } from '../util/repoTypes';
+import { repoTypes, createReportRepo } from '../util/repoTypes';
 import css from './Settings.css';
 
 
@@ -49,8 +49,7 @@ function TemplatedQueryRepos(props) {
           {({ fields }) => (
             <>
               {fields.map((subname, index) => {
-                const val = fields.value[index];
-                const reportRepo = makeReportRepo(val.type, val.user, val.repo, val.branch, val.dir);
+                const reportRepo = createReportRepo(fields.value[index]);
                 const url = reportRepo.webUrl();
 
                 return (

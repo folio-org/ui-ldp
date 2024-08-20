@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Pane } from '@folio/stripes/components';
 import { useLdp } from '../../LdpContext';
+import { createReportRepo } from '../../util/repoTypes';
 import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
 import TemplatedQueryForm from './TemplatedQueryForm';
@@ -18,8 +19,8 @@ function TemplatedQuery({ query }) {
   const title = query.json?.displayName || query.name;
 
   const onSubmit = async (values) => {
-    const qc = query.config;
-    const url = `https://raw.githubusercontent.com/${qc.user}/${qc.repo}/${qc.branch}/${qc.dir}/${query.filename}`;
+    const reportRepo = createReportRepo(query.config);
+    const url = reportRepo.rawFilePath(query.filename);
     const limit = ldp.maxShow;
     loadReport(intl, stripes, url, values, setData, setError, limit);
   };
@@ -45,6 +46,7 @@ TemplatedQuery.propTypes = {
   query: PropTypes.shape({
     filename: PropTypes.string.isRequired,
     config: PropTypes.shape({
+      type: PropTypes.string.isRequired,
       user: PropTypes.string.isRequired,
       repo: PropTypes.string.isRequired,
       branch: PropTypes.string.isRequired,

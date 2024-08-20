@@ -1,9 +1,5 @@
 import baseName from './baseName';
-
-
-function directoryPath(config) {
-  return `https://api.github.com/repos/${config.user}/${config.repo}/contents/${config.dir}?ref=${config.branch}`;
-}
+import { createReportRepo } from './repoTypes';
 
 
 // In the unlikely event that performance becomes a problem here, we
@@ -14,7 +10,8 @@ function directoryPath(config) {
 //
 async function fetchTemplatedQueryFilenames(gitRepos) {
   const promises = gitRepos.map(config => {
-    const path = directoryPath(config);
+    const reportRepo = createReportRepo(config);
+    const path = reportRepo.apiDirectoryPath();
     return fetch(path);
   });
 
@@ -26,7 +23,8 @@ async function fetchTemplatedQueryFilenames(gitRepos) {
 
   const failed = resultsWithConfig.filter(rc => !rc.result.ok);
   if (failed.length !== 0) {
-    const path = directoryPath(failed[0].config);
+    const reportRepo = createReportRepo(failed[0].config);
+    const path = reportRepo.apiDirectoryPath();
     const result = failed[0].result;
     const text = await result.text();
     throw new Error(`could not load templated queries from ${path}: ${result.status} ${result.statusText} (${text})`);
@@ -47,11 +45,6 @@ async function fetchTemplatedQueryFilenames(gitRepos) {
   });
 
   return filenamesWithConfig;
-}
-
-
-function rawFilePath(config, filename) {
-  return `https://raw.githubusercontent.com/${config.user}/${config.repo}/${config.branch}/${config.dir}/${filename}`;
 }
 
 
@@ -77,7 +70,8 @@ async function fetchTemplatedQueries(gitRepos, setQueries) {
   const filenamesWithConfig = await fetchTemplatedQueryFilenames(gitRepos);
 
   const promises = filenamesWithConfig.map(fc => {
-    const path = rawFilePath(fc.config, fc.filename);
+    const reportRepo = createReportRepo(fc.config);
+    const path = reportRepo.rawFilePath(fc.filename);
     return fetch(path);
   });
 
@@ -89,7 +83,8 @@ async function fetchTemplatedQueries(gitRepos, setQueries) {
 
   const failed = resultsWithFC.filter(rfc => !rfc.result.ok);
   if (failed.length !== 0) {
-    const path = rawFilePath(failed[0].config, failed[0].filename);
+    const reportRepo = createReportRepo(failed[0].config);
+    const path = reportRepo.rawFilePath(failed[0].filename);
     const result = failed[0].result;
     const text = await result.text();
     throw new Error(`could not load templated query ${path}: ${result.status} ${result.statustext} (${text})`);
@@ -97,11 +92,15 @@ async function fetchTemplatedQueries(gitRepos, setQueries) {
 
   const promises2 = results.map(result => result.text());
   const texts = await Promise.all(promises2);
-  const data = resultsWithFC.map((rfc, i) => ({
-    filename: rfc.filename,
-    config: rfc.config,
-    text: texts[i],
-  }));
+  const data = resultsWithFC.map((rfc, i) => {
+    const reportRepo = createReportRepo(rfc.config);
+    const transformed = reportRepo.transformData(texts[i]);
+    return {
+      filename: rfc.filename,
+      config: rfc.config,
+      text: transformed,
+    };
+  });
 
   const merged = mergeSQLandJSON(data);
   const withMetadata = merged.filter(x => x.json);

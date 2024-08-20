@@ -33,7 +33,7 @@ function TemplatedQueries({ queries }) {
           }}
           formatter={{
             displayName: r => r.json?.displayName,
-            repo: r => `${r.config.user}/${r.config.repo}`,
+            repo: r => <span><code>{r.config.type || 'github'}</code> {r.config.user}/{r.config.repo}</span>,
           }}
           onRowClick={(_, q) => navigateToQuery(q)}
         />
