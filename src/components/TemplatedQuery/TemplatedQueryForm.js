@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
 import { TextField, Datepicker, Select, /* AutoSuggest, */ Button, Accordion } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
+import { createReportRepo } from '../../util/repoTypes';
 import ResultsList from '../QueryBuilder/ResultsList';
 
 
@@ -63,8 +64,9 @@ function parameterizedField(param) {
 
 
 function TemplatedQueryForm({ query, onSubmit, data }) {
-  const { json, config } = query;
-  const urlBase = `https://github.com/${config.user}/${config.repo}/blob/${config.branch}/${config.dir}/${query.filename}`;
+  const { json } = query;
+  const reportRepo = createReportRepo(query.config);
+  const urlBase = reportRepo.urlBase(query.filename);
 
   const initialValues = {};
   json.parameters.forEach(param => {
@@ -118,6 +120,7 @@ TemplatedQueryForm.propTypes = {
   query: PropTypes.shape({
     filename: PropTypes.string.isRequired,
     config: PropTypes.shape({
+      type: PropTypes.string.isRequired,
       user: PropTypes.string.isRequired,
       repo: PropTypes.string.isRequired,
       branch: PropTypes.string.isRequired,

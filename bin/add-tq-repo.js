@@ -14,10 +14,11 @@ const json = {
   key: 'tqrepos',
   value: [
     {
+      type: 'gitlab',
       user: 'MikeTaylor',
-      repo: 'dummy-ldp-queries',
+      repo: 'metadb-queries',
       branch: 'main',
-      dir: 'queries'
+      dir: 'folio/reports'
     },
     {
       user: 'metadb-project',
