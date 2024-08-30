@@ -89,7 +89,7 @@
     "saved-queries.updated": "Data da última atualização",
     "saved-queries.delete.updatedBy": "Última atualização por <code>{updater}</code>, {updated}",
     "settings.tqrepos": "Repositórios de relatórios",
-    "settings.tqrepos.user": "Usuário do GitHub",
+    "settings.tqrepos.user": "Usuário do site GitHub",
     "settings.tqrepos.repo": "Nome do repositório na área do usuário",
     "settings.tqrepos.branch": "Branch do repositório especificado",
     "settings.tqrepos.directory": "Diretório dentro do repositório",
@@ -107,5 +107,6 @@
     "error.load-report": "Não foi possível executar o relatório: {error}",
     "more-records": "... Mais registros ...",
     "templated-queries.select": "Selecionar relatório",
-    "SENTINEL": ""
+    "SENTINEL": "",
+    "settings.tqrepos.type": "Tipo"
 }

@@ -107,5 +107,6 @@
     "error.load-report": "無法運行報告： {error}",
     "more-records": "....更多記錄...",
     "templated-queries.select": "選擇報告",
-    "SENTINEL": "空白"
+    "SENTINEL": "空白",
+    "settings.tqrepos.type": "Type"
 }
