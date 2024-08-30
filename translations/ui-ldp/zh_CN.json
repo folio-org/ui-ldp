@@ -107,5 +107,6 @@
     "error.load-report": "无法运行报告： {error}",
     "more-records": "...更多记录...",
     "templated-queries.select": "选择报告",
-    "SENTINEL": "空"
+    "SENTINEL": "空",
+    "settings.tqrepos.type": "Type"
 }

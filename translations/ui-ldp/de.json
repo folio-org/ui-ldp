@@ -107,5 +107,6 @@
     "error.load-report": "Could not run report: {error}",
     "more-records": "... Weitere Datensätze ...",
     "templated-queries.select": "Select report",
-    "SENTINEL": ""
+    "SENTINEL": "",
+    "settings.tqrepos.type": "Type"
 }

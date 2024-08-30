@@ -57,7 +57,7 @@
     "permission.settings.dbinfo": "Nastavení (Výstupy): Může upravit podrobnosti připojení k databázi výstupů",
     "permission.settings.sqconfig": "Nastavení (Výstupy): Může upravit podrobnosti konfigurace uloženého dotazu",
     "nav.saved-queries": "Načíst dotaz",
-    "settings.sqconfig.owner": "Vlastník úložiště GitHub",
+    "settings.sqconfig.owner": "Vlastník úložiště Git",
     "settings.sqconfig.branch": "Pobočka",
     "settings.sqconfig.token": "Token OAuth pro přístup k úložišti (pouze pro zápis)",
     "button.save-query": "Uložit dotaz",
@@ -89,14 +89,14 @@
     "saved-queries.updated": "Datum poslední aktualizace",
     "saved-queries.delete.updatedBy": "Naposledy aktualizoval <code>{updater}</code>, {updated}",
     "settings.tqrepos": "Úložiště výstupů",
-    "settings.tqrepos.user": "Uživatel GitHubu",
+    "settings.tqrepos.user": "Uživatel webu Git",
     "settings.tqrepos.repo": "Název úložiště v uživatelské oblasti",
     "settings.tqrepos.branch": "Větev zadaného úložiště",
     "settings.tqrepos.directory": "Adresář v úložišti",
     "nav.templated-queries": "Spustit výstup",
     "templated-queries.column.displayName": "Zobrazení názvu",
     "templated-queries.column.filename": "Název souboru",
-    "templated-queries.column.repo": "Úložiště GitHub",
+    "templated-queries.column.repo": "Úložiště Git",
     "error.no-such-query": "Žádný takový výstup: {qname}",
     "devinfo": "Informace pro vývojáře",
     "templated-queries.no-json": "Tento výstup nemá přidružená metadata JSON, takže není možné předložit formulář pro vyplnění jeho parametrů.",
@@ -107,5 +107,6 @@
     "error.load-report": "Výstup nelze spustit: {error}",
     "more-records": "... Další záznamy ...",
     "templated-queries.select": "Vybrat výstup",
-    "SENTINEL": "Prázdné"
+    "SENTINEL": "Prázdné",
+    "settings.tqrepos.type": "Typ"
 }

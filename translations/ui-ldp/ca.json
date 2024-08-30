@@ -57,7 +57,7 @@
     "permission.settings.dbinfo": "Settings (Reporting): Can modify Reporting database connection details",
     "permission.settings.sqconfig": "Settings (Reporting): Can modify saved-query configuration details",
     "nav.saved-queries": "Load query",
-    "settings.sqconfig.owner": "GitHub repository owner",
+    "settings.sqconfig.owner": "Git repository owner",
     "settings.sqconfig.branch": "Branch",
     "settings.sqconfig.token": "OAuth token for access to repository (write-only)",
     "button.save-query": "Save query",
@@ -89,14 +89,14 @@
     "saved-queries.updated": "Date last updated",
     "saved-queries.delete.updatedBy": "Last updated by <code>{updater}</code>, {updated}",
     "settings.tqrepos": "Report repositories",
-    "settings.tqrepos.user": "GitHub user",
+    "settings.tqrepos.user": "Git site user",
     "settings.tqrepos.repo": "Repository name within user's area",
     "settings.tqrepos.branch": "Branch of the specified repository",
     "settings.tqrepos.directory": "Directory within repository",
     "nav.templated-queries": "Run report",
     "templated-queries.column.displayName": "Display name",
     "templated-queries.column.filename": "Filename",
-    "templated-queries.column.repo": "GitHub repository",
+    "templated-queries.column.repo": "Git repository",
     "error.no-such-query": "No such report: {qname}",
     "devinfo": "Developer information",
     "templated-queries.no-json": "This report has no associated JSON metadata, so it is not possible to present a form for filling in its parameters.",
@@ -107,5 +107,6 @@
     "error.load-report": "Could not run report: {error}",
     "more-records": "... More records ...",
     "templated-queries.select": "Select report",
-    "SENTINEL": ""
+    "SENTINEL": "",
+    "settings.tqrepos.type": "Type"
 }
