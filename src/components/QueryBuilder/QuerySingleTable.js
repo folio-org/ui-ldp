@@ -48,6 +48,11 @@ WhenFieldChanges.propTypes = {
 
 
 function filterAvailableTables(tables, selectedSchema, ldp) {
+  if (!tables[selectedSchema]) {
+    // Can happen when something is wrong on the backend: see UILDP-151
+    return [];
+  }
+
   const disabledMap = {};
   ldp.disabledTables.forEach(name => {
     const [s, t] = name.split('-');
