@@ -1,11 +1,12 @@
 # Change history for ui-ldp
 
-## [2.1.1](https://github.com/folio-org/ui-ldp/tree/v2.1.1) (IN PROGRESS)
+## [2.2.0](https://github.com/folio-org/ui-ldp/tree/v2.2.0) (IN PROGRESS)
 
 * Correctly read configuration (disabled tables and default result sizes) from mod-settings. Fixes UILDP-144.
 * **Temporarily** use a simple textbox instead of `<AutoSuggest>` in generated query forms. Addresses UILDP-147.
 * Closing the results list from a "Run report" query no longer clears entered parameters. Fixes UILDP-138.
 * Support GitLab as well as GitHub as a source for templated reports. Fixes UILDP-132.
+* When there are no tables in the selected schema (e.g. because a back-end problems reports no tables at all), the UI is now robust against this condition. Fixes UILDP-151.
 
 ## [2.1.0](https://github.com/folio-org/ui-ldp/tree/v2.1.0) (2024-03-19)
 
