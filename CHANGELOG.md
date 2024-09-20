@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [2.2.0](https://github.com/folio-org/ui-ldp/tree/v2.2.0) (IN PROGRESS)
+## [2.2.0](https://github.com/folio-org/ui-ldp/tree/v2.2.0) (2024-09-20)
 
 * Correctly read configuration (disabled tables and default result sizes) from mod-settings. Fixes UILDP-144.
 * **Temporarily** use a simple textbox instead of `<AutoSuggest>` in generated query forms. Addresses UILDP-147.
