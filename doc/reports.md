@@ -12,7 +12,7 @@
 
 ## Overview
 
-Version 2.0 of the FOLIO Reporting App (formerly known as LDP) introduced a major new feature in reporting. This facility allows users to run SQL reports stored in GitHub, filling in parameters to get the specific information they need. (Go to the "Run report" tab of the Reporting app in your FOLIO instance.)
+Version 2.0 of the FOLIO Reporting App (formerly known as LDP) introduced a major new feature in reporting. This facility allows users to run SQL reports stored in GitHub or GitLab, filling in parameters to get the specific information they need. (Go to the "Run report" tab of the Reporting app in your FOLIO instance.)
 
 While the reporting facility does not require end-users to write SQL, authoring reports to be used by this facility requires writing an SQL query and packaging it as a SQL function. This document provides an overview of the requirements.
 
@@ -23,11 +23,11 @@ Authoring and editing of templated reports is not done from within the Reporting
 
 Reports compatible with this app consist of two files that share a basename: one is the SQL report itself, named `NAME.sql`; the other is metadata about the report, written in JSON and named `NAME.json`. Optionally a third file, `NAME.md` can be created to hold further documentation about the report.
 
-Reports are published by pushing them to a GitHub repository -- specifically, a particular directory within a particular branch of a repository. The source is specific as a GitHub user, repository name, branch name and directory.
+Reports are published by pushing them to a GitHub or GitLab repository -- specifically, a particular directory within a particular branch of a repository. The source is specified as a git site user, repository name within the user's area, branch name and directory within the repository.
 
 Since the Reporting app can draw reports from multiple sources (see below), it's possible for a FOLIO instance to be configured with (for example) a global source holding reports developed by the FOLIO reporting community, a local source for reports developed within the institition, and perhaps a development source for reports still being worked on. Other configurations are possible.
 
-For example, https://github.com/MikeTaylor/dummy-ldp-queries/tree/main/queries contains some dummy reports created during the software development process. One is represented by the files `sers_by_creation_date.sql` and `sers_by_creation_date.json`, the other by the files `mikes_query.sql`, `mikes_query.json` and (for documentation only) `mikes_query.md`.
+For example, https://github.com/MikeTaylor/dummy-ldp-queries/tree/main/queries contains some dummy reports created during the software development process. One is represented by the files `users_by_creation_date.sql` and `users_by_creation_date.json`, the other by the files `mikes_query.sql`, `mikes_query.json` and (for documentation only) `mikes_query.md`.
 
 
 ## Writing an SQL report
@@ -123,10 +123,10 @@ Each element of the `parameters` array is an object with the following keys:
 
 ## Setting up the Reporting app to find your report
 
-Once a report or reports have been pushed to GitHub, you can make the Reporting app aware of them by going to **Settings** &rarr; **Reporting** &rarr; **Report repositories**.
+Once a report or reports have been pushed to GitHub or GitLab, you can make the Reporting app aware of them by going to **Settings** &rarr; **Reporting** &rarr; **Report repositories**.
 
-This page lists all the report sources currently known. You can edit the information about existing sources, or click the `+` sign at the bottom of the list to add a new source. Then enter the GitHub username, repo name, branch and directory. For example, to use reports from https://github.com/MikeTaylor/dummy-ldp-queries/tree/main/queries enter:
-* GitHub user `MikeTaylor`
+This page lists all the report sources currently known. You can edit the information about existing sources, or click the `+` sign at the bottom of the list to add a new source. Then enter the git site username, repo name, branch and directory. For example, to use reports from https://github.com/MikeTaylor/dummy-ldp-queries/tree/main/queries enter:
+* Git user `MikeTaylor`
 * Repository name within user's area `dummy-ldp-queries`
 * Branch of the specified repository `main`
 * Directory within repository `queries`
