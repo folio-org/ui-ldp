@@ -12,6 +12,8 @@ import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import SavedQueriesRoute from './routes/SavedQueriesRoute';
 import TemplatedQueriesRoute from './routes/TemplatedQueriesRoute';
 import TemplatedQueryRoute from './routes/TemplatedQueryRoute';
+import DashboardsRoute from './routes/DashboardsRoute';
+import DashboardRoute from './routes/DashboardRoute';
 import LogsRoute from './routes/LogsRoute';
 import Playground from './routes/Playground';
 import Settings from './settings';
@@ -76,6 +78,9 @@ const Ldp = (props) => {
                 }
                 {showDevInfo &&
                   <>
+                    <NavListItem data-cy="nav-dashboards" to={`${match.path}/dashboards`}>
+                      <FormattedMessage id="ui-ldp.nav.dashboards" />
+                    </NavListItem>
                     <NavListItem data-cy="nav-logs" to={`${match.path}/logs`}>
                       <FormattedMessage id="ui-ldp.nav.logs" />
                     </NavListItem>
@@ -112,6 +117,16 @@ const Ldp = (props) => {
               path={`${match.path}/logs`}
               exact
               component={LogsRoute}
+            />
+            <Route
+              path={`${match.path}/dashboards`}
+              exact
+              component={DashboardsRoute}
+            />
+            <Route
+              path={`${match.path}/dashboards/:id`}
+              exact
+              component={DashboardRoute}
             />
             <Route
               path={`${match.path}/playground`}
