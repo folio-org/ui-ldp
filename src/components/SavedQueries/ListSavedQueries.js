@@ -72,7 +72,7 @@ function ListSavedQueries({ queries, deleteQuery }) {
             creator: r => <code>{r.creator}</code>,
             created: r => new Date(r.created).toLocaleString(),
             updater: r => <code>{r.updater}</code>,
-            updated: r => r.updated ? new Date(r.updated).toLocaleString() : '',
+            updated: r => (r.updated ? new Date(r.updated).toLocaleString() : ''),
             deleteQuery: r => <IconButton icon="trash" onClick={e => maybeDeleteQuery(e, r)} />
           }}
           onRowClick={selectQuery}
