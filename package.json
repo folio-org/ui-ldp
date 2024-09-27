@@ -173,7 +173,8 @@
           "ui-ldp.settings.table-availability",
           "ui-ldp.settings.dbinfo",
           "ui-ldp.settings.tqrepos",
-          "mod-settings.global.write.ui-ldp.queries"
+          "mod-settings.global.write.ui-ldp.queries",
+          "mod-settings.global.write.ui-ldp.dashboards"
         ],
         "visible": true
       },
@@ -195,6 +196,16 @@
       {
         "permissionName": "mod-settings.global.write.ui-ldp.queries",
         "displayName": "Settings (Reporting): create and update Reporting saved queries",
+        "visible": false
+      },
+      {
+        "permissionName": "mod-settings.global.read.ui-ldp.dashboards",
+        "displayName": "Read dashboards and charts",
+        "visible": false
+      },
+      {
+        "permissionName": "mod-settings.global.write.ui-ldp.dashboards",
+        "displayName": "Create, update and delete dashboards and charts",
         "visible": false
       }
     ]
