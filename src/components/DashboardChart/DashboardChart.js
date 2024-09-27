@@ -5,7 +5,7 @@ import { CategoryScale } from 'chart.js';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Chart } from 'react-chartjs-2'; // eslint-disable-line no-unused-vars
 import { useStripes } from '@folio/stripes/core';
-import { Pane, LoadingPane } from '@folio/stripes/components';
+import { Loading } from '@folio/stripes/components';
 import BigError from '../BigError';
 import loadReport from '../../util/loadReport';
 
@@ -59,7 +59,7 @@ function DashboardChart({ id }) {
   if (error) {
     return <BigError message={error} />;
   } else if (!response) {
-    return <LoadingPane />;
+    return <Loading />;
   }
 
   // We have data and no error
@@ -79,14 +79,15 @@ function DashboardChart({ id }) {
   };
 
   return (
-    <Pane defaultWidth="fill" paneTitle={`${spec.name} (${id})`}>
+    <div>
+      <h3>{spec.name} ({id})</h3>
       <Chart
         redraw
         type={spec.chart.type}
         data={data}
         options={options}
       />
-    </Pane>
+    </div>
   );
 }
 
