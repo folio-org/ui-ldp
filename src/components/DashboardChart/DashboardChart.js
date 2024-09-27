@@ -79,8 +79,14 @@ function DashboardChart({ id }) {
   };
 
   return (
-    <div>
-      <h3>{spec.name} ({id})</h3>
+    <div style={{
+           border: '3px solid lightgray',
+           overflow: 'auto',
+           resize: 'both',
+           'min-height': '200px',
+           'min-width': '200px',
+         }}>
+      <h3 style={{ 'margin-left': '1em' }}>{spec.name} ({id})</h3>
       <Chart
         redraw
         type={spec.chart.type}
