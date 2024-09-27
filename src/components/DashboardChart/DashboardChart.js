@@ -13,40 +13,7 @@ import loadReport from '../../util/loadReport';
 ChartJS.register(CategoryScale);
 
 
-// XXX should load chart object from mod-settings
-const spec = {
-  id: 123,
-  name: 'Daily checkout counts through the year',
-  query: {
-    url: 'https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql',
-    params: {
-      start_date: '2023-09-01T05:00:00.000Z'
-    },
-    limit: 1000
-  },
-  chart: {
-    // Params to say how to draw this using Chart.js
-    type: 'line',
-    labelsField: 'checkin_date',
-  },
-  datasets: [
-    {
-      label: 'Number of checkins',
-      dataField: 'count',
-    },
-    {
-      label: 'Incremented',
-      dataField: 'more',
-    },
-    {
-      label: 'Halved',
-      dataField: 'less',
-    },
-  ],
-};
-
-
-function DashboardChart({ id }) {
+function DashboardChart({ id, spec }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [response, setResponse] = useState();
@@ -54,7 +21,7 @@ function DashboardChart({ id }) {
 
   useEffect(() => {
     loadReport(intl, stripes, spec.query.url, spec.query.params, setResponse, setError, spec.query.limit);
-  }, [intl, stripes]);
+  }, [intl, stripes, spec.query.url, spec.query.params, spec.query.limit]);
 
   if (error) {
     return <BigError message={error} />;
@@ -80,12 +47,14 @@ function DashboardChart({ id }) {
 
   return (
     <div style={{
-           border: '3px solid lightgray',
-           overflow: 'auto',
-           resize: 'both',
-           'min-height': '200px',
-           'min-width': '200px',
-         }}>
+      border: '3px solid lightgray',
+      overflow: 'auto',
+      resize: 'both',
+      'min-height': '200px',
+      'min-width': '200px',
+    }
+    }
+    >
       <h3 style={{ 'margin-left': '1em' }}>{spec.name} ({id})</h3>
       <Chart
         redraw
@@ -100,6 +69,24 @@ function DashboardChart({ id }) {
 
 DashboardChart.propTypes = {
   id: PropTypes.string.isRequired,
+  spec: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    query: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      params: PropTypes.object.isRequired,
+      limit: PropTypes.number.isRequired,
+    }).isRequired,
+    chart: PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      labelsField: PropTypes.string.isRequired,
+    }).isRequired,
+    datasets: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        dataField: PropTypes.string.isRequired,
+      }).isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 
 

@@ -4,10 +4,12 @@ import { Pane } from '@folio/stripes/components';
 import DashboardChart from '../DashboardChart';
 
 
-function SingleDashboard({ id }) {
+function SingleDashboard({ id, data }) {
   return (
     <Pane defaultWidth="fill" paneTitle={`Some dashboard containing some charts (${id})`}>
-      <DashboardChart id={12368} />
+      {data.chartSpecs.map(chartSpec => (
+        <DashboardChart keu={chartSpec.id} id={chartSpec.id} spec={chartSpec.value} />
+      ))}
     </Pane>
   );
 }
@@ -15,6 +17,14 @@ function SingleDashboard({ id }) {
 
 SingleDashboard.propTypes = {
   id: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    chartSpecs: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        value: PropTypes.object.isRequired,
+      }).isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 
 
