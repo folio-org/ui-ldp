@@ -1,13 +1,18 @@
-// XXX dashboards should in genreal contain multiple charts
+// XXX dashboards should in general contain multiple charts
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { /* FormattedMessage, */ useIntl } from 'react-intl';
+import { CategoryScale } from 'chart.js';
+import { Chart as ChartJS } from 'chart.js/auto';
 import { Chart } from 'react-chartjs-2'; // eslint-disable-line no-unused-vars
 import { useStripes } from '@folio/stripes/core';
 import { Pane, LoadingPane } from '@folio/stripes/components';
 import BigError from '../BigError';
 import loadReport from '../../util/loadReport';
+
+
+ChartJS.register(CategoryScale);
 
 
 // XXX should load chart object from mod-settings
@@ -21,15 +26,25 @@ const spec = {
     },
     limit: 1000
   },
-  dataset: {
-    labelsField: 'checkin_date',
-    label: 'Number of checkins',
-    dataField: 'count',
-  },
   chart: {
     // Params to say how to draw this using Chart.js
     type: 'line',
+    labelsField: 'checkin_date',
   },
+  datasets: [
+    {
+      label: 'Number of checkins',
+      dataField: 'count',
+    },
+    {
+      label: 'Incremented',
+      dataField: 'more',
+    },
+    {
+      label: 'Halved',
+      dataField: 'less',
+    },
+  ],
 };
 
 
@@ -53,44 +68,20 @@ function Dashboard({ id }) {
   const rows = response.resp;
 
   const data = {
-    labels: rows.map(r => r[spec.dataset.labelsField].substring(0, 10)),
-    datasets: [
-      {
-        label: spec.dataset.label,
-        data: rows.map(r => r[spec.dataset.dataField]),
-      },
-    ],
+    labels: rows.map(r => r[spec.chart.labelsField].substring(0, 10)),
+    datasets: spec.datasets.map(ds => ({
+      label: ds.label,
+      data: rows.map(r => r[ds.dataField]),
+    })),
   };
 
   const options = {
-    /*
-    indexAxis: 'y',
-    maintainAspectRatio: false,
-    plugins: {
-      tooltip: {
-        callbacks: {
-          title: t => {
-            const record = records[t[0].dataIndex];
-            return `${record.name} (${record.id})`;
-          },
-          label: t => {
-            const record = records[t.dataIndex];
-            const elementName = ['requires', 'provides'][t.datasetIndex];
-            const list = record[elementName] || [];
-            const emdash = '—';
-            return [
-              `${emdash} ${elementName} ${list.length} interfaces ${emdash}`,
-              ...list.map(x => `${x.id} v${x.version}`),
-            ];
-          },
-        },
-      },
-    }
-    */
+    // indexAxis: 'y',
+    // maintainAspectRatio: false,
   };
 
   return (
-    <Pane defaultWidth="fill" paneTitle={spec.name}>
+    <Pane defaultWidth="fill" paneTitle={`${spec.name} (${id})`}>
       <Chart
         redraw
         type={spec.chart.type}
