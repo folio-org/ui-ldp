@@ -1,0 +1,126 @@
+[
+  {
+    "id": "6db28306-bc1e-48f8-aca0-26aa489d958e",
+    "scope": "ui-ldp.admin",
+    "key": "chart-6db28306-bc1e-48f8-aca0-26aa489d958e",
+    "value": {
+      "name": "Daily checkout counts through the year",
+      "query": {
+        "url": "https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql",
+        "params": {
+          "start_date": "2023-09-01T05:00:00.000Z"
+        },
+        "limit": 1000
+      },
+      "chart": {
+        "type": "line",
+        "labelsField": "checkin_date"
+      },
+      "datasets": [
+        {
+          "label": "Number of checkins",
+          "dataField": "count"
+        },
+        {
+          "label": "Incremented",
+          "dataField": "more"
+        },
+        {
+          "label": "Halved",
+          "dataField": "less"
+        }
+      ]
+    }
+  },
+  {
+    "id": "914e1299-2ddb-47f2-88a5-4e492f833c07",
+    "scope": "ui-ldp.admin",
+    "key": "chart-914e1299-2ddb-47f2-88a5-4e492f833c07",
+    "value": {
+      "name": "Daily checkout counts as a bar graph",
+      "query": {
+        "url": "https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql",
+        "params": {
+          "start_date": "2023-09-01T05:00:00.000Z"
+        },
+        "limit": 1000
+      },
+      "chart": {
+        "type": "bar",
+        "labelsField": "checkin_date"
+      },
+      "datasets": [
+        {
+          "label": "Number of checkins",
+          "dataField": "count"
+        },
+        {
+          "label": "Incremented",
+          "dataField": "more"
+        },
+        {
+          "label": "Halved",
+          "dataField": "less"
+        }
+      ]
+    }
+  },
+  {
+    "id": "f897cb41-26ca-4713-ab79-96840b08bc0e",
+    "scope": "ui-ldp.admin",
+    "key": "chart-f897cb41-26ca-4713-ab79-96840b08bc0e",
+    "value": {
+      "name": "Daily checkout counts as a doughnut graph",
+      "query": {
+        "url": "https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql",
+        "params": {
+          "start_date": "2023-09-01T05:00:00.000Z"
+        },
+        "limit": 1000
+      },
+      "chart": {
+        "type": "doughnut",
+        "labelsField": "checkin_date"
+      },
+      "datasets": [
+        {
+          "label": "Number of checkins",
+          "dataField": "count"
+        },
+        {
+          "label": "Incremented",
+          "dataField": "more"
+        },
+        {
+          "label": "Halved",
+          "dataField": "less"
+        }
+      ]
+    }
+  },
+  {
+    "id": "a0f76eb6-1cc9-409f-a678-b685b29e2107",
+    "scope": "ui-ldp.admin",
+    "key": "chart-a0f76eb6-1cc9-409f-a678-b685b29e2107",
+    "value": {
+      "name": "Daily checkout counts as a pie chart",
+      "query": {
+        "url": "https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql",
+        "params": {
+          "start_date": "2023-09-01T05:00:00.000Z"
+        },
+        "limit": 1000
+      },
+      "chart": {
+        "type": "pie",
+        "labelsField": "checkin_date"
+      },
+      "datasets": [
+        {
+          "label": "Number of checkins",
+          "dataField": "count"
+        }
+      ]
+    }
+  }
+]
