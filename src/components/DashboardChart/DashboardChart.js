@@ -1,5 +1,3 @@
-// XXX dashboards should in general contain multiple charts
-
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { /* FormattedMessage, */ useIntl } from 'react-intl';
@@ -48,7 +46,7 @@ const spec = {
 };
 
 
-function Dashboard({ id }) {
+function DashboardChart({ id }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [response, setResponse] = useState();
@@ -93,9 +91,9 @@ function Dashboard({ id }) {
 }
 
 
-Dashboard.propTypes = {
+DashboardChart.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
 
-export default Dashboard;
+export default DashboardChart;

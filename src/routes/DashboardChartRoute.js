@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dashboard from '../components/Dashboard';
+import DashboardChart from '../components/DashboardChart';
 
-function DashboardRoute({ match }) {
+function DashboardChartRoute({ match }) {
   // XXX load details of nominated dashboard
-  return <Dashboard id={match.params.id} />;
+  return <DashboardChart id={match.params.id} />;
 }
 
-DashboardRoute.propTypes = {
+DashboardChartRoute.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -15,4 +15,4 @@ DashboardRoute.propTypes = {
   }).isRequired,
 };
 
-export default DashboardRoute;
+export default DashboardChartRoute;
