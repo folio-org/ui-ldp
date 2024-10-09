@@ -57,7 +57,7 @@
     "permission.settings.dbinfo": "设置（报告）：可以修改报告数据库连接详情",
     "permission.settings.sqconfig": "设置（报告）：可以修改保存的查询配置详情",
     "nav.saved-queries": "加载查询",
-    "settings.sqconfig.owner": "GitHub存储库所有者",
+    "settings.sqconfig.owner": "Git存储库所有者",
     "settings.sqconfig.branch": "分支",
     "settings.sqconfig.token": "用于访问存储库的OAuth令牌（只可写入）",
     "button.save-query": "保存查询",
@@ -89,14 +89,14 @@
     "saved-queries.updated": "上次更新日期",
     "saved-queries.delete.updatedBy": "最后由<code> {updater} </code>更新， {updated}",
     "settings.tqrepos": "报告存储库",
-    "settings.tqrepos.user": "GitHub 用户",
+    "settings.tqrepos.user": "Git 站点用户",
     "settings.tqrepos.repo": "用户区域内的存储库名称",
     "settings.tqrepos.branch": "指定存储库的分支",
     "settings.tqrepos.directory": "存储库内的目录",
     "nav.templated-queries": "运行报告",
     "templated-queries.column.displayName": "显示名称",
     "templated-queries.column.filename": "文件名",
-    "templated-queries.column.repo": "GitHub 存储库",
+    "templated-queries.column.repo": "Git存储库",
     "error.no-such-query": "没有这样的报告： {qname}",
     "devinfo": "开发者信息",
     "templated-queries.no-json": "此报告没有关联的JSON元数据，因此无法提供用于填写其参数的表单。",
@@ -108,5 +108,5 @@
     "more-records": "...更多记录...",
     "templated-queries.select": "选择报告",
     "SENTINEL": "空",
-    "settings.tqrepos.type": "Type"
+    "settings.tqrepos.type": "类型"
 }
