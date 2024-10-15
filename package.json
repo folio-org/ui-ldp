@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "stripes serve stripes.config.js",
+    "start2": "stripes serve --port 3010 --okapi https://indexdata-test-okapi.folio.indexdata.com --tenant indexdata stripes.config.js",
     "build": "stripes build --output ./output",
     "test-snapshot": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
     "test-snapshot-load": "echo Use test-snapshot instead",
