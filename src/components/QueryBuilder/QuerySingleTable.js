@@ -97,6 +97,11 @@ const QuerySingleTable = ({
   if (error) return <BigError message={error} />;
 
   const disabled = !selectedTableName;
+  const filterOptions = (input, list) => {
+    // Select options whose labels contain what the user has types
+    // Overrides the default of selecting only when the label STARTS WITH the user's input
+    return list.filter(entry => entry.label.toLowerCase().indexOf(input.toLowerCase()) !== -1);
+  };
 
   return (
     <div className={css.QuerySingleTable} data-test-table>
@@ -118,6 +123,7 @@ const QuerySingleTable = ({
               label={<FormattedMessage id="ui-ldp.label.table" />}
               component={Selection}
               dataOptions={filterAvailableTables(tables, selectedSchema, ldp)}
+              onFilter={filterOptions}
             />
           </div>
         </div>
