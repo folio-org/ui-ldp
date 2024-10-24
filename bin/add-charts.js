@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Run as: ./add-charts.js PASSWORD < charts.js
+// Run as: ./add-charts.js PASSWORD < charts.json
 // See also: foliojs/bin/folio-port-ldp-queries.js
 
 import fs from 'fs';
