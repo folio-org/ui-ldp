@@ -122,5 +122,30 @@
         }
       ]
     }
+  },
+  {
+    "id": "bf0bb4dc-dfce-4361-989b-ece9770dd6f2",
+    "scope": "ui-ldp.admin",
+    "key": "dashboard-bf0bb4dc-dfce-4361-989b-ece9770dd6f2",
+    "value": {
+      "name": "Daily checkout counts in various forms",
+      "description": "This is a sample dashboard used to illustrate how mutlipe charts can be included in a dashboard, either to illustrate a single report in different ways or to illustrate multiple reports together",
+      "charts": [
+        "6db28306-bc1e-48f8-aca0-26aa489d958e",
+        "914e1299-2ddb-47f2-88a5-4e492f833c07"
+      ]
+    }
+  },
+  {
+    "id": "628c94cc-8de5-4383-8d87-3c72d901c502",
+    "scope": "ui-ldp.admin",
+    "key": "dashboard-628c94cc-8de5-4383-8d87-3c72d901c502",
+    "value": {
+      "name": "Daily checkout counts as a pie chart",
+      "description": "A second sample dashboard",
+      "charts": [
+        "a0f76eb6-1cc9-409f-a678-b685b29e2107"
+      ]
+    }
   }
 ]
