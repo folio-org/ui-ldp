@@ -6,7 +6,8 @@ import DashboardChart from '../DashboardChart';
 
 function SingleDashboard({ id, data }) {
   return (
-    <Pane defaultWidth="fill" paneTitle={`Some dashboard containing some charts (${id})`}>
+    <Pane defaultWidth="fill" paneTitle={data.dashboard.value.name}>
+      <p>{data.dashboard.value.description}</p>
       {data.chartSpecs.map(chartSpec => (
         <DashboardChart key={chartSpec.id} id={chartSpec.id} spec={chartSpec.value} />
       ))}

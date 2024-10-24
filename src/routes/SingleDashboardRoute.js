@@ -5,10 +5,8 @@ import SingleDashboard from '../components/SingleDashboard';
 
 
 function SingleDashboardRoute({ match, resources }) {
-  // XXX Load details of nominated dashboard, not just of all charts
-  // console.log('resources =', resources);
   const data = {
-    dashboard: undefined, // XXX for now
+    dashboard: resources.dashboard.records[0],
     chartSpecs: resources.charts.records,
   };
 
@@ -17,13 +15,22 @@ function SingleDashboardRoute({ match, resources }) {
 
 
 SingleDashboardRoute.manifest = Object.freeze({
+  dashboard: {
+    type: 'okapi',
+    path: 'settings/entries/:{id}',
+  },
   charts: {
     type: 'okapi',
     records: 'items',
     path: 'settings/entries',
-    params: {
-      // XXX We'll need to be cleverer when we want only the charts of this dashboard
-      query: '(scope==ui-ldp.admin and key==chart-*)'
+    params: (_q, _p, _r, _l, props) => {
+      const dashboards = props.resources?.dashboard?.records;
+      if (!dashboards || dashboards.length === 0) return null;
+      const ids = dashboards[0].value.charts;
+      return {
+        limit: 100,
+        query: `id=(${ids.slice(0, 100).map(id => `"${id}"`).join(' or ')})`
+      };
     },
   },
 });
