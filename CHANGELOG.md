@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [2.3.0](https://github.com/folio-org/ui-ldp/tree/v2.3.0) (2024-10-17)
+
+* When choosing a table in the Query Builder, the set of options is now filtered according to whether name includes what the user has types, not by whether the name starts with that string. Fixes UILDP-137.
+
 ## [2.2.0](https://github.com/folio-org/ui-ldp/tree/v2.2.0) (2024-09-20)
 
 * Correctly read configuration (disabled tables and default result sizes) from mod-settings. Fixes UILDP-144.
