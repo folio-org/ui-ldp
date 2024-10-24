@@ -18,12 +18,11 @@ function SingleDashboardRoute({ match, resources }) {
 
 SingleDashboardRoute.manifest = Object.freeze({
   charts: {
-    // /settings/entries?query=(scope==ui-ldp.admin and key==chart-*)
     type: 'okapi',
     records: 'items',
     path: 'settings/entries',
     params: {
-      // We'll need to be cleverer when we want only the charts of this dashboard
+      // XXX We'll need to be cleverer when we want only the charts of this dashboard
       query: '(scope==ui-ldp.admin and key==chart-*)'
     },
   },
