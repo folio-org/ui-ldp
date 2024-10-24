@@ -8,7 +8,7 @@ function SingleDashboard({ id, data }) {
   return (
     <Pane defaultWidth="fill" paneTitle={`Some dashboard containing some charts (${id})`}>
       {data.chartSpecs.map(chartSpec => (
-        <DashboardChart keu={chartSpec.id} id={chartSpec.id} spec={chartSpec.value} />
+        <DashboardChart key={chartSpec.id} id={chartSpec.id} spec={chartSpec.value} />
       ))}
     </Pane>
   );
