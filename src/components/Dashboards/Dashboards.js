@@ -13,7 +13,7 @@ function Dashboards({ data }) {
   return (
     <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.dashboards.select" />}>
       <MultiColumnList
-        contentData={data.dashboards.map(entry => ({ id: entry.id, name: entry.value.name, editLink: 'XXX', deleteLink: 'YYY' }))}
+        contentData={data.dashboards.map(entry => ({ id: entry.id, name: entry.value.name, editLink: 'x', deleteLink: 'x' }))}
         visibleColumns={['name', 'editLink', 'deleteLink']}
         columnMapping={{
           name: <FormattedMessage id="ui-ldp.dashboard.name" />,
