@@ -1,25 +1,19 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
 
 
-// XXX get these from mod-settings
-const dashboardList = [
-  [123, 'Heat-map of checkouts through the week'],
-  [456, 'Daily checkout counts through the year'],
-  [789, 'Bar-graph of types of user checking out items'],
-];
-
-
-function Dashboards() {
+function Dashboards({ data }) {
   const history = useHistory();
+
+  const dashboardList = data.dashboards.map(entry => [entry.id, entry.value.name]);
 
   return (
     <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.dashboards.select" />}>
       <MultiColumnList
-        contentData={dashboardList.map(([id, name]) => ({ id, name, editLink: 'XXX', deleteLink: 'YYY' }))}
+        contentData={data.dashboards.map(entry => ({ id: entry.id, name: entry.value.name, editLink: 'XXX', deleteLink: 'YYY' }))}
         visibleColumns={['name', 'editLink', 'deleteLink']}
         columnMapping={{
           name: <FormattedMessage id="ui-ldp.dashboard.name" />,
@@ -43,8 +37,17 @@ function Dashboards() {
 
 
 Dashboards.propTypes = {
-  // None yet
+  data: PropTypes.shape({
+    dashboards: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        value: PropTypes.object.isRequired,
+      }).isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 
 
 export default Dashboards;
+
+
