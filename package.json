@@ -19,6 +19,7 @@
     "kill": "yarn lsof | awk '{print $2}' | egrep '^[0-9]+$' | xargs kill",
     "lint": "eslint --format unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
+    "qqlint": "eslint -f unix  --rule '{\"@calm/react-intl/missing-formatted-message\":\"off\"}' .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-ldp ./translations/ui-ldp/compiled",
     "lintwatch": "esw . -w --color"
