@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { Loading } from '@folio/stripes/components';
-import SingleDashboard from '../components/SingleDashboard';
+import ViewDashboard from '../components/ViewDashboard';
 
 
-function SingleDashboardRoute({ match, resources }) {
+function ViewDashboardRoute({ match, resources }) {
   const data = {
     dashboard: resources.dashboard.records[0],
     chartSpecs: resources.charts.records,
@@ -13,11 +13,11 @@ function SingleDashboardRoute({ match, resources }) {
 
   if (!data.dashboard) return <Loading size="xlarge" />;
 
-  return <SingleDashboard id={match.params.id} data={data} />;
+  return <ViewDashboard id={match.params.id} data={data} />;
 }
 
 
-SingleDashboardRoute.manifest = Object.freeze({
+ViewDashboardRoute.manifest = Object.freeze({
   dashboard: {
     type: 'okapi',
     path: 'settings/entries/:{id}',
@@ -39,7 +39,7 @@ SingleDashboardRoute.manifest = Object.freeze({
 });
 
 
-SingleDashboardRoute.propTypes = {
+ViewDashboardRoute.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -56,4 +56,4 @@ SingleDashboardRoute.propTypes = {
 };
 
 
-export default stripesConnect(SingleDashboardRoute);
+export default stripesConnect(ViewDashboardRoute);

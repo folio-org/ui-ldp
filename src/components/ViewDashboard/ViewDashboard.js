@@ -4,7 +4,7 @@ import { Pane } from '@folio/stripes/components';
 import DashboardChart from '../DashboardChart';
 
 
-function SingleDashboard({ data }) {
+function ViewDashboard({ data }) {
   return (
     <Pane defaultWidth="fill" paneTitle={data.dashboard.value.name}>
       <p>{data.dashboard.value.description}</p>
@@ -16,7 +16,7 @@ function SingleDashboard({ data }) {
 }
 
 
-SingleDashboard.propTypes = {
+ViewDashboard.propTypes = {
   data: PropTypes.shape({
     chartSpecs: PropTypes.arrayOf(
       PropTypes.shape({
@@ -34,4 +34,4 @@ SingleDashboard.propTypes = {
 };
 
 
-export default SingleDashboard;
+export default ViewDashboard;

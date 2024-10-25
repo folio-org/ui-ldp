@@ -13,7 +13,7 @@ import SavedQueriesRoute from './routes/SavedQueriesRoute';
 import TemplatedQueriesRoute from './routes/TemplatedQueriesRoute';
 import TemplatedQueryRoute from './routes/TemplatedQueryRoute';
 import DashboardsRoute from './routes/DashboardsRoute';
-import SingleDashboardRoute from './routes/SingleDashboardRoute';
+import ViewDashboardRoute from './routes/ViewDashboardRoute';
 import EditDashboardRoute from './routes/EditDashboardRoute';
 import LogsRoute from './routes/LogsRoute';
 import Playground from './routes/Playground';
@@ -127,7 +127,7 @@ const Ldp = (props) => {
             <Route
               path={`${match.path}/dashboards/:id`}
               exact
-              component={SingleDashboardRoute}
+              component={ViewDashboardRoute}
             />
             <Route
               path={`${match.path}/dashboards/:id/edit`}
