@@ -4,7 +4,7 @@ import { Pane } from '@folio/stripes/components';
 import DashboardChart from '../DashboardChart';
 
 
-function SingleDashboard({ id, data }) {
+function SingleDashboard({ data }) {
   return (
     <Pane defaultWidth="fill" paneTitle={data.dashboard.value.name}>
       <p>{data.dashboard.value.description}</p>
