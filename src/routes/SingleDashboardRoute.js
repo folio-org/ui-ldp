@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
+import { Loading } from '@folio/stripes/components';
 import SingleDashboard from '../components/SingleDashboard';
 
 
@@ -9,6 +10,8 @@ function SingleDashboardRoute({ match, resources }) {
     dashboard: resources.dashboard.records[0],
     chartSpecs: resources.charts.records,
   };
+
+  if (!data.dashboard) return <Loading size="xlarge" />;
 
   return <SingleDashboard id={match.params.id} data={data} />;
 }
@@ -43,6 +46,9 @@ SingleDashboardRoute.propTypes = {
     }).isRequired,
   }).isRequired,
   resources: PropTypes.shape({
+    dashboard: PropTypes.shape({
+      records: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+    }).isRequired,
     charts: PropTypes.shape({
       records: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     }).isRequired,
