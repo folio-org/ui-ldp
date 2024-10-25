@@ -14,6 +14,7 @@ import TemplatedQueriesRoute from './routes/TemplatedQueriesRoute';
 import TemplatedQueryRoute from './routes/TemplatedQueryRoute';
 import DashboardsRoute from './routes/DashboardsRoute';
 import SingleDashboardRoute from './routes/SingleDashboardRoute';
+import EditDashboardRoute from './routes/EditDashboardRoute';
 import LogsRoute from './routes/LogsRoute';
 import Playground from './routes/Playground';
 import Settings from './settings';
@@ -127,6 +128,11 @@ const Ldp = (props) => {
               path={`${match.path}/dashboards/:id`}
               exact
               component={SingleDashboardRoute}
+            />
+            <Route
+              path={`${match.path}/dashboards/:id/edit`}
+              exact
+              component={EditDashboardRoute}
             />
             <Route
               path={`${match.path}/playground`}

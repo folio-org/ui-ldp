@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
+import { PaneMenu, Button, Icon, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
 
 
 function Dashboards({ data }) {
-  const history = useHistory();
-
-  const dashboardList = data.dashboards.map(entry => [entry.id, entry.value.name]);
+  const actionMenu = ({ onToggle }) => (
+    <PaneMenu>
+      <Button
+        buttonStyle="dropdownItem"
+        onClick={() => {
+          onToggle();
+          alert('XXX not yet implemented'); // eslint-disable-line no-alert
+        }}
+      >
+        <Icon icon="plus-sign"><FormattedMessage id="ui-ldp.dashboards.new" /></Icon>
+      </Button>
+    </PaneMenu>
+  );
 
   return (
-    <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.dashboards.select" />}>
+    <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.dashboards.select" />} actionMenu={actionMenu}>
       <MultiColumnList
         contentData={data.dashboards.map(entry => ({ id: entry.id, name: entry.value.name, editLink: 'x', deleteLink: 'x' }))}
         visibleColumns={['name', 'editLink', 'deleteLink']}
@@ -26,10 +36,10 @@ function Dashboards({ data }) {
           deleteLink: 50,
         }}
         formatter={{
-          editLink: () => <IconButton icon="edit" />,
-          deleteLink: () => <IconButton icon="trash" />,
+          name: r => <Link to={`/ldp/dashboards/${r.id}`}>{r.name}</Link>,
+          editLink: r => <Link to={`/ldp/dashboards/${r.id}/edit`}><IconButton icon="edit" /></Link>,
+          deleteLink: () => <IconButton icon="trash" disabled />,
         }}
-        onRowClick={(_, r) => history.push(`/ldp/dashboards/${r.id}`)}
       />
     </Pane>
   );
