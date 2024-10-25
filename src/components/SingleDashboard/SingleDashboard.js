@@ -17,7 +17,6 @@ function SingleDashboard({ data }) {
 
 
 SingleDashboard.propTypes = {
-  id: PropTypes.string.isRequired,
   data: PropTypes.shape({
     chartSpecs: PropTypes.arrayOf(
       PropTypes.shape({
@@ -25,6 +24,12 @@ SingleDashboard.propTypes = {
         value: PropTypes.object.isRequired,
       }).isRequired,
     ).isRequired,
+    dashboard: PropTypes.shape({
+      value: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string,
+      }).isRequired,
+    }).isRequired,
   }).isRequired,
 };
 
