@@ -25,7 +25,7 @@ function DashboardForm({ data, onSubmit }) {
       callout.sendCallout({
         message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: values.name }} />
       });
-      history.push('.');
+      history.push(`../${data.dashboard.id}`);
     } catch (res) {
       const { status, statusText } = res;
       const detail = await res.text();
