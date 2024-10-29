@@ -99,12 +99,6 @@ DashboardForm.propTypes = {
         description: PropTypes.string,
       }).isRequired,
     }).isRequired,
-    chartSpecs: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        value: PropTypes.object.isRequired,
-      }).isRequired,
-    ).isRequired,
     allCharts: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,

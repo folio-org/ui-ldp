@@ -8,7 +8,6 @@ import DashboardForm from '../components/DashboardForm';
 function EditDashboardRoute({ match, resources, mutator }) {
   const data = {
     dashboard: resources.dashboard.records[0],
-    chartSpecs: resources.charts.records,
     allCharts: resources.allCharts.records,
   };
 
