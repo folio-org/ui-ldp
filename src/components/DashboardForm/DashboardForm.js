@@ -5,7 +5,7 @@ import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { useStripes } from '@folio/stripes/core';
-import { Pane, TextField, TextArea, Row, Col, NoValue, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
+import { Pane, TextField, TextArea, NoValue, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
 
 
 function DashboardForm({ data, onSubmit }) {
@@ -26,35 +26,34 @@ function DashboardForm({ data, onSubmit }) {
 
             <FieldArray name="charts">
               {({ fields }) => (
-                <div>
+                <>
                   {fields.map((name, index) => (
                     <div key={index}>
-                      <Row>
-                        <Col xs={11}>
-                          <Field
-                            placeholder={<NoValue />}
-                            name={name}
-                            label={<FormattedMessage id="ui-ldp.dashboard.chartNumber" values={{ number: index + 1 }} />}
-                            component={Select}
-                            dataOptions={dataOptions}
-                          />
-                        </Col>
-                        <Col xs={1}>
-                          <IconButton icon="trash" onClick={() => fields.remove(index)} />
-                        </Col>
-                      </Row>
+                      <Field
+                        placeholder={<NoValue />}
+                        name={name}
+                        label={(
+                          <>
+                            <FormattedMessage id="ui-ldp.dashboard.chartNumber" values={{ number: index + 1 }} />
+                            <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                          </>
+                        )}
+                        component={Select}
+                        dataOptions={dataOptions}
+                      />
                     </div>
                   ))}
                   <Button type="button" onClick={() => fields.push('')}>
                     <FormattedMessage id="ui-ldp.dashboard.addChart" />
                   </Button>
-                </div>
+                </>
               )}
             </FieldArray>
-
-            <Button type="submit" buttonStyle="primary">
-              <FormattedMessage id="ui-ldp.button.submit" />
-            </Button>
+            <div>
+              <Button type="submit" buttonStyle="primary">
+                <FormattedMessage id="ui-ldp.button.submit" />
+              </Button>
+            </div>
           </form>
         )}
       </Form>
