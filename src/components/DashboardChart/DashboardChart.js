@@ -50,10 +50,9 @@ function DashboardChart({ id, spec }) {
       border: '3px solid lightgray',
       overflow: 'auto',
       resize: 'both',
-      'min-height': '200px',
-      'min-width': '200px',
-    }
-    }
+      'minHeight': '200px',
+      'minWidth': '200px',
+    }}
     >
       <h3 style={{ 'marginLeft': '1em' }}>{spec.name} ({id})</h3>
       <Chart
