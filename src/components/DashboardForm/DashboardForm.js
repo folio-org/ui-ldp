@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
@@ -10,6 +11,7 @@ import { Pane, TextField, TextArea, NoValue, Select, IconButton, Button, Accordi
 
 function DashboardForm({ data, onSubmit }) {
   const callout = useContext(CalloutContext);
+  const history = useHistory();
   const stripes = useStripes();
   const showDevInfo = stripes.config?.showDevInfo;
   const header = <FormattedMessage id="ui-ldp.dashboard.editHeading" values={{ name: data.dashboard.value.name }} />;
@@ -23,6 +25,7 @@ function DashboardForm({ data, onSubmit }) {
       callout.sendCallout({
         message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: values.name }} />
       });
+      history.push('.');
     } catch (res) {
       const { status, statusText } = res;
       const detail = await res.text();
