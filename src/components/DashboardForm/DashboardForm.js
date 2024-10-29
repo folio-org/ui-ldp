@@ -6,7 +6,7 @@ import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import { useStripes, CalloutContext } from '@folio/stripes/core';
-import { Pane, TextField, TextArea, NoValue, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
+import { Pane, TextField, TextArea, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
 
 
 function DashboardForm({ data, onSubmit }) {
@@ -54,7 +54,7 @@ function DashboardForm({ data, onSubmit }) {
                   {fields.map((name, index) => (
                     <div key={index}>
                       <Field
-                        placeholder={<NoValue />}
+                        placeholder="-"
                         name={name}
                         label={(
                           <>
