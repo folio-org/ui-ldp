@@ -94,6 +94,7 @@ function DashboardForm({ data, onSubmit }) {
 DashboardForm.propTypes = {
   data: PropTypes.shape({
     dashboard: PropTypes.shape({
+      id: PropTypes.string.isRequired,
       value: PropTypes.shape({
         name: PropTypes.string.isRequired,
         description: PropTypes.string,
