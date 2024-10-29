@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
-import { useStripes } from '@folio/stripes/core';
+import { useStripes, CalloutContext } from '@folio/stripes/core';
 import { Pane, TextField, TextArea, NoValue, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
 
 
 function DashboardForm({ data, onSubmit }) {
+  const callout = useContext(CalloutContext);
   const stripes = useStripes();
   const showDevInfo = stripes.config?.showDevInfo;
   const header = <FormattedMessage id="ui-ldp.dashboard.editHeading" values={{ name: data.dashboard.value.name }} />;
@@ -16,9 +17,29 @@ function DashboardForm({ data, onSubmit }) {
   const initialValues = { ...data.dashboard.value };
   const dataOptions = data.allCharts.map(x => ({ value: x.id, label: x.value.name }));
 
+  const onSubmitWithReaction = async (values, y, z) => {
+    try {
+      await onSubmit(values, y, z);
+      callout.sendCallout({
+        message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: values.name }} />
+      });
+    } catch (res) {
+      const { status, statusText } = res;
+      const detail = await res.text();
+      callout.sendCallout({
+        type: 'error',
+        message: <FormattedMessage
+          id="ui-ldp.save-dashboard.fail"
+          values={{ name: values.name, code: status, statusText, detail }}
+        />
+      });
+    }
+  };
+
+
   return (
     <Pane defaultWidth="fill" paneTitle={header}>
-      <Form initialValues={initialValues} onSubmit={onSubmit} mutators={{ ...arrayMutators }}>
+      <Form initialValues={initialValues} onSubmit={onSubmitWithReaction} mutators={{ ...arrayMutators }}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <Field name="name" label={<FormattedMessage id="ui-ldp.dashboard.name" />} required component={TextField} />

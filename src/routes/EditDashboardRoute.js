@@ -16,8 +16,7 @@ function EditDashboardRoute({ match, resources, mutator }) {
 
   const onSubmit = async (v) => {
     const rec = { ...resources.dashboard.records[0], value: v };
-    await mutator.dashboard.PUT(rec);
-    // XXX should report success or failure in toasts
+    return mutator.dashboard.PUT(rec);
   };
 
   return <DashboardForm id={match.params.id} data={data} onSubmit={onSubmit} />;
@@ -28,6 +27,9 @@ EditDashboardRoute.manifest = Object.freeze({
   dashboard: {
     type: 'okapi',
     path: 'settings/entries/:{id}',
+    PUT: {
+      throwErrors: false,
+    },
   },
   charts: {
     type: 'okapi',

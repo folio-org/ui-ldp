@@ -116,6 +116,9 @@
   "dashboard.editHeading": "Edit dashboard: {name}",
   "dashboard.chartNumber": "Chart #{number}",
   "dashboard.addChart": "Add chart",
+  "save-dashboard.ok": "Saved dashboard {name}",
+  "save-dashboard.fail": "Could not save dashboard {name}: error {code} ({statusText}): {detail}",
+
   "permission.settings.record-limits": "Settings (Reporting): Can modify default record limits",
   "permission.settings.table-availability": "Settings (Reporting): Can select which tables are available to search",
   "permission.settings.dbinfo": "Settings (Reporting): Can modify Reporting database connection details",
