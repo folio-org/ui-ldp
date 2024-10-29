@@ -4,10 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
-import { Pane, TextField, TextArea, Select, Button } from '@folio/stripes/components';
+import { useStripes } from '@folio/stripes/core';
+import { Pane, TextField, TextArea, Row, Col, NoValue, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
 
 
 function DashboardForm({ data, onSubmit }) {
+  const stripes = useStripes();
+  const showDevInfo = stripes.config?.showDevInfo;
   const header = <FormattedMessage id="ui-ldp.dashboard.editHeading" values={{ name: data.dashboard.value.name }} />;
 
   const initialValues = { ...data.dashboard.value };
@@ -26,21 +29,40 @@ function DashboardForm({ data, onSubmit }) {
                 <div>
                   {fields.map((name, index) => (
                     <div key={index}>
-                      <Field name={name} label="ID" component={Select} dataOptions={dataOptions} />
-                      <button type="button" onClick={() => fields.remove(index)}>Remove</button>
+                      <Row>
+                        <Col xs={11}>
+                          <Field
+                            placeholder={<NoValue />}
+                            name={name}
+                            label={<FormattedMessage id="ui-ldp.dashboard.chartNumber" values={{ number: index + 1 }} />}
+                            component={Select}
+                            dataOptions={dataOptions}
+                          />
+                        </Col>
+                        <Col xs={1}>
+                          <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                        </Col>
+                      </Row>
                     </div>
                   ))}
-                  <button type="button" onClick={() => fields.push('')}>Add</button>
+                  <Button type="button" onClick={() => fields.push('')}>
+                    <FormattedMessage id="ui-ldp.dashboard.addChart" />
+                  </Button>
                 </div>
               )}
             </FieldArray>
 
-            <Button type="submit">
+            <Button type="submit" buttonStyle="primary">
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
           </form>
         )}
       </Form>
+      {showDevInfo &&
+        <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </Accordion>
+      }
     </Pane>
   );
 }
