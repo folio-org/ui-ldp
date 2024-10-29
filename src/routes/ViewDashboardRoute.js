@@ -29,7 +29,7 @@ ViewDashboardRoute.manifest = Object.freeze({
     params: (_q, _p, _r, _l, props) => {
       const dashboards = props.resources?.dashboard?.records;
       if (!dashboards || dashboards.length === 0) return null;
-      const ids = dashboards[0].value.charts;
+      const ids = dashboards[0].value.charts.filter(x => x !== '');
       return {
         limit: 100,
         query: `id=(${ids.slice(0, 100).map(id => `"${id}"`).join(' or ')})`
