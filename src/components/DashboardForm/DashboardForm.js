@@ -14,19 +14,23 @@ function DashboardForm({ data, onSubmit }) {
   const history = useHistory();
   const stripes = useStripes();
   const showDevInfo = stripes.config?.showDevInfo;
-  const header = <FormattedMessage id="ui-ldp.dashboard.editHeading" values={{ name: data.dashboard.value.name }} />;
+  const header = (
+    data.dashboard ?
+      <FormattedMessage id="ui-ldp.dashboard.editHeading" values={{ name: data.dashboard.value.name }} /> :
+      'XXX new dashboard'
+  );
 
-  const initialValues = { ...data.dashboard.value };
+  const initialValues = data.dashboard ? { ...data.dashboard.value } : { charts: [] };
+  console.log('initialValues =', initialValues);
   const dataOptions = data.allCharts.map(x => ({ value: x.id, label: x.value.name }));
 
   const onSubmitWithReaction = async (values, y, z) => {
+    console.log('onSubmitWithReaction: values =', values);
+    let rec;
     try {
-      await onSubmit(values, y, z);
-      callout.sendCallout({
-        message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: values.name }} />
-      });
-      history.push(`../${data.dashboard.id}`);
+      rec = await onSubmit(values, y, z);
     } catch (res) {
+      console.log('onSubmit failed, res =', res);
       const { status, statusText } = res;
       const detail = await res.text();
       callout.sendCallout({
@@ -36,7 +40,15 @@ function DashboardForm({ data, onSubmit }) {
           values={{ name: values.name, code: status, statusText, detail }}
         />
       });
+      return;
     }
+
+    console.log('onSubmit succeeded, rec =', rec);
+    callout.sendCallout({
+      message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: rec.value.name }} />
+    });
+    console.log('rec =', rec);
+    history.push(`../${rec.id}`);
   };
 
 

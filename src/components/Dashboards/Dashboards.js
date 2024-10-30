@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { PaneMenu, Button, Icon, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
 
 
 function Dashboards({ data }) {
-  const actionMenu = ({ onToggle }) => (
+  const history = useHistory();
+
+  const actionMenu = () => (
     <PaneMenu>
       <Button
         buttonStyle="dropdownItem"
         onClick={() => {
-          onToggle();
-          alert('XXX not yet implemented'); // eslint-disable-line no-alert
+          history.push('dashboards/create');
         }}
       >
         <Icon icon="plus-sign"><FormattedMessage id="ui-ldp.dashboards.new" /></Icon>
