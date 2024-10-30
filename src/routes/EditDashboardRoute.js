@@ -38,6 +38,7 @@ EditDashboardRoute.manifest = Object.freeze({
       const dashboards = props.resources?.dashboard?.records;
       if (!dashboards || dashboards.length === 0) return null;
       const ids = dashboards[0].value.charts;
+      if (ids.length === 0) return null;
       return {
         limit: 100,
         query: `id=(${ids.slice(0, 100).map(id => `"${id}"`).join(' or ')})`
