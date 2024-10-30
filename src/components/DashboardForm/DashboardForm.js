@@ -43,7 +43,7 @@ function DashboardForm({ data, onSubmit }) {
     callout.sendCallout({
       message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: rec.value.name }} />
     });
-    history.push(`../${rec.id}`);
+    history.push(`/ldp/dashboards/${rec.id}`);
   };
 
 
