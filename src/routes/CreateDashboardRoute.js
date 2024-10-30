@@ -12,14 +12,12 @@ function CreateDashboardRoute({ match, resources, mutator }) {
 
   const onSubmit = async (v) => {
     const id = uuidv4();
-    console.log('CreateDashboardRoute submit, v =', v);
     const rec = {
       id,
       scope: 'ui-ldp.admin',
       key: `dashboard-${id}`,
       value: v,
     };
-    console.log('CreateDashboardRoute submit, rec =', rec);
     return mutator.dashboard.POST(rec);
   };
 

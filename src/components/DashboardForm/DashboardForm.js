@@ -21,16 +21,13 @@ function DashboardForm({ data, onSubmit }) {
   );
 
   const initialValues = data.dashboard ? { ...data.dashboard.value } : { charts: [] };
-  console.log('initialValues =', initialValues);
   const dataOptions = data.allCharts.map(x => ({ value: x.id, label: x.value.name }));
 
   const onSubmitWithReaction = async (values, y, z) => {
-    console.log('onSubmitWithReaction: values =', values);
     let rec;
     try {
       rec = await onSubmit(values, y, z);
     } catch (res) {
-      console.log('onSubmit failed, res =', res);
       const { status, statusText } = res;
       const detail = await res.text();
       callout.sendCallout({
@@ -43,11 +40,9 @@ function DashboardForm({ data, onSubmit }) {
       return;
     }
 
-    console.log('onSubmit succeeded, rec =', rec);
     callout.sendCallout({
       message: <FormattedMessage id="ui-ldp.save-dashboard.ok" values={{ name: rec.value.name }} />
     });
-    console.log('rec =', rec);
     history.push(`../${rec.id}`);
   };
 
