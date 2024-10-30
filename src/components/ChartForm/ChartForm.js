@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import arrayMutators from 'final-form-arrays';
 import { useStripes, CalloutContext } from '@folio/stripes/core';
-import { Pane, TextField, TextArea, Select, Button, Accordion } from '@folio/stripes/components';
+import { Pane, TextField, TextArea, Select, Label, IconButton, Button, Accordion } from '@folio/stripes/components';
 
 
 function ChartForm({ data, onSubmit }) {
@@ -59,7 +60,37 @@ function ChartForm({ data, onSubmit }) {
             <Field name="name" label={<FormattedMessage id="ui-ldp.field.name" />} required component={TextField} />
             <Field name="description" label={<FormattedMessage id="ui-ldp.field.description" />} component={TextArea} />
             <Field name="query.url" label={<FormattedMessage id="ui-ldp.field.queryUrl" />} component={TextField} />
-            <Field name="query.params" label={<FormattedMessage id="ui-ldp.field.queryParams" />} component={TextField} />{/* XXX array of key/value */}
+
+            <Label><FormattedMessage id="ui-ldp.field.queryParams" /></Label>
+            <FieldArray name="query.params">
+              {({ fields }) => (
+                <>
+                  {fields.map((name, index) => (
+                    <div key={index}>
+                      <Field
+                        name={`${name}.key`}
+                        label={(
+                          <>
+                            <FormattedMessage id="ui-ldp.field.key" />
+                            <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                          </>
+                        )}
+                        component={TextField}
+                      />
+                      <Field
+                        name={`${name}.value`}
+                        label={(<FormattedMessage id="ui-ldp.field.value" />)}
+                        component={TextField}
+                      />
+                    </div>
+                  ))}
+                  <Button type="button" onClick={() => fields.push('')}>
+                    <FormattedMessage id="ui-ldp.chart.addParam" />
+                  </Button>
+                </>
+              )}
+            </FieldArray>
+
             <Field name="query.limit" label={<FormattedMessage id="ui-ldp.field.queryLimit" />} component={TextField} />
             <Field name="chart.type" label={<FormattedMessage id="ui-ldp.field.chartType" />} component={Select} dataOptions={chartTypes} />
             <Field name="chart.labelsField" label={<FormattedMessage id="ui-ldp.field.labelsField" />} component={TextField} />
