@@ -6,10 +6,10 @@ import { Pane, PaneMenu, Icon, Button } from '@folio/stripes/components';
 import DashboardChart from '../DashboardChart';
 
 
-function ViewDashboard({ data }) {
+function ViewChart({ data }) {
   const actionMenu = () => (
     <PaneMenu>
-      <Link to={`${data.dashboard.id}/edit`}>
+      <Link to={`${data.chart.id}/edit`}>
         <Button buttonStyle="dropdownItem">
           <Icon icon="edit"><FormattedMessage id="ui-ldp.editLink" /></Icon>
         </Button>
@@ -18,25 +18,17 @@ function ViewDashboard({ data }) {
   );
 
   return (
-    <Pane defaultWidth="fill" paneTitle={data.dashboard.value.name} actionMenu={actionMenu}>
-      <p>{data.dashboard.value.description}</p>
-      {data.chartSpecs.map(chartSpec => (
-        <DashboardChart key={chartSpec.id} id={chartSpec.id} spec={chartSpec.value} />
-      ))}
+    <Pane defaultWidth="fill" paneTitle={data.chart.value.name} actionMenu={actionMenu}>
+      <p>{data.chart.value.description}</p>
+      <DashboardChart key={data.chart.id} id={data.chart.id} spec={data.chart.value} />
     </Pane>
   );
 }
 
 
-ViewDashboard.propTypes = {
+ViewChart.propTypes = {
   data: PropTypes.shape({
-    chartSpecs: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        value: PropTypes.object.isRequired,
-      }).isRequired,
-    ).isRequired,
-    dashboard: PropTypes.shape({
+    chart: PropTypes.shape({
       id: PropTypes.string.isRequired,
       value: PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -47,4 +39,4 @@ ViewDashboard.propTypes = {
 };
 
 
-export default ViewDashboard;
+export default ViewChart;

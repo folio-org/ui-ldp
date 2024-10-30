@@ -4,24 +4,22 @@ import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { FieldArray } from 'react-final-form-arrays';
 import { useStripes, CalloutContext } from '@folio/stripes/core';
-import { Pane, TextField, TextArea, Select, IconButton, Button, Accordion } from '@folio/stripes/components';
+import { Pane, TextField, TextArea, Select, Button, Accordion } from '@folio/stripes/components';
 
 
-function DashboardForm({ data, onSubmit }) {
+function ChartForm({ data, onSubmit }) {
   const callout = useContext(CalloutContext);
   const history = useHistory();
   const stripes = useStripes();
   const showDevInfo = stripes.config?.showDevInfo;
   const header = (
-    data.dashboard ?
-      <FormattedMessage id="ui-ldp.dashboard.editHeading" values={{ name: data.dashboard.value.name }} /> :
-      <FormattedMessage id="ui-ldp.dashboard.addHeading" />
+    data.chart ?
+      <FormattedMessage id="ui-ldp.chart.editHeading" values={{ name: data.chart.value.name }} /> :
+      <FormattedMessage id="ui-ldp.chart.addHeading" />
   );
 
-  const initialValues = data.dashboard ? { ...data.dashboard.value } : { charts: [] };
-  const dataOptions = data.allCharts.map(x => ({ value: x.id, label: x.value.name }));
+  const initialValues = data.chart ? { ...data.chart.value } : {};
 
   const onSubmitWithReaction = async (values, y, z) => {
     let rec;
@@ -33,7 +31,7 @@ function DashboardForm({ data, onSubmit }) {
       callout.sendCallout({
         type: 'error',
         message: <FormattedMessage
-          id="ui-ldp.dashboard.save.fail"
+          id="ui-ldp.chart.save.fail"
           values={{ name: values.name, code: status, statusText, detail }}
         />
       });
@@ -41,11 +39,17 @@ function DashboardForm({ data, onSubmit }) {
     }
 
     callout.sendCallout({
-      message: <FormattedMessage id="ui-ldp.dashboard.save.ok" values={{ name: rec.value.name }} />
+      message: <FormattedMessage id="ui-ldp.chart.save.ok" values={{ name: rec.value.name }} />
     });
-    history.push(`/ldp/dashboards/${rec.id}`);
+    history.push(`/ldp/charts/${rec.id}`);
   };
 
+  const chartTypes = [
+    { value: 'line', label: 'Line' },
+    { value: 'bar', label: 'Bar' },
+    { value: 'pie', label: 'Pie' },
+    { value: 'doughnut', label: 'Doughnut' },
+  ];
 
   return (
     <Pane defaultWidth="fill" paneTitle={header}>
@@ -54,32 +58,12 @@ function DashboardForm({ data, onSubmit }) {
           <form onSubmit={handleSubmit}>
             <Field name="name" label={<FormattedMessage id="ui-ldp.field.name" />} required component={TextField} />
             <Field name="description" label={<FormattedMessage id="ui-ldp.field.description" />} component={TextArea} />
-
-            <FieldArray name="charts">
-              {({ fields }) => (
-                <>
-                  {fields.map((name, index) => (
-                    <div key={index}>
-                      <Field
-                        placeholder="-"
-                        name={name}
-                        label={(
-                          <>
-                            <FormattedMessage id="ui-ldp.field.chartNumber" values={{ number: index + 1 }} />
-                            <IconButton icon="trash" onClick={() => fields.remove(index)} />
-                          </>
-                        )}
-                        component={Select}
-                        dataOptions={dataOptions}
-                      />
-                    </div>
-                  ))}
-                  <Button type="button" onClick={() => fields.push('')}>
-                    <FormattedMessage id="ui-ldp.dashboard.addChart" />
-                  </Button>
-                </>
-              )}
-            </FieldArray>
+            <Field name="query.url" label={<FormattedMessage id="ui-ldp.field.queryUrl" />} component={TextField} />
+            <Field name="query.params" label={<FormattedMessage id="ui-ldp.field.queryParams" />} component={TextField} />{/* XXX array of key/value */}
+            <Field name="query.limit" label={<FormattedMessage id="ui-ldp.field.queryLimit" />} component={TextField} />
+            <Field name="chart.type" label={<FormattedMessage id="ui-ldp.field.chartType" />} component={Select} dataOptions={chartTypes} />
+            <Field name="chart.labelsField" label={<FormattedMessage id="ui-ldp.field.labelsField" />} component={TextField} />
+            <Field name="datasets array" label={<FormattedMessage id="ui-ldp.field.datasets" />} component={TextField} />{/* XXX array of [label, dataField] */}
             <div>
               <Button type="submit" buttonStyle="primary">
                 <FormattedMessage id="ui-ldp.button.submit" />
@@ -98,24 +82,18 @@ function DashboardForm({ data, onSubmit }) {
 }
 
 
-DashboardForm.propTypes = {
+ChartForm.propTypes = {
   data: PropTypes.shape({
-    dashboard: PropTypes.shape({
+    chart: PropTypes.shape({
       id: PropTypes.string.isRequired,
       value: PropTypes.shape({
         name: PropTypes.string.isRequired,
         description: PropTypes.string,
       }).isRequired,
     }).isRequired,
-    allCharts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        value: PropTypes.object.isRequired,
-      }).isRequired,
-    ).isRequired,
   }).isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
 
-export default DashboardForm;
+export default ChartForm;

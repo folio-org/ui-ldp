@@ -20,8 +20,8 @@ function DashboardChart({ id, spec }) {
   const [error, setError] = useState();
 
   useEffect(() => {
-    loadReport(intl, stripes, spec.query.url, spec.query.params, setResponse, setError, spec.query.limit);
-  }, [intl, stripes, spec.query.url, spec.query.params, spec.query.limit]);
+    loadReport(intl, stripes, spec.query?.url, spec.query?.params, setResponse, setError, spec.query?.limit);
+  }, [intl, stripes, spec.query?.url, spec.query?.params, spec.query?.limit]);
 
   if (error) {
     return <BigError message={error} />;

@@ -16,6 +16,10 @@ import DashboardsRoute from './routes/DashboardsRoute';
 import ViewDashboardRoute from './routes/ViewDashboardRoute';
 import EditDashboardRoute from './routes/EditDashboardRoute';
 import CreateDashboardRoute from './routes/CreateDashboardRoute';
+import ChartsRoute from './routes/ChartsRoute';
+import ViewChartRoute from './routes/ViewChartRoute';
+import EditChartRoute from './routes/EditChartRoute';
+import CreateChartRoute from './routes/CreateChartRoute';
 import LogsRoute from './routes/LogsRoute';
 import Playground from './routes/Playground';
 import Settings from './settings';
@@ -139,6 +143,26 @@ const Ldp = (props) => {
               path={`${match.path}/dashboards/:id/edit`}
               exact
               component={EditDashboardRoute}
+            />
+            <Route
+              path={`${match.path}/charts`}
+              exact
+              component={ChartsRoute}
+            />
+            <Route
+              path={`${match.path}/charts/create`}
+              exact
+              component={CreateChartRoute}
+            />
+            <Route
+              path={`${match.path}/charts/:id`}
+              exact
+              component={ViewChartRoute}
+            />
+            <Route
+              path={`${match.path}/charts/:id/edit`}
+              exact
+              component={EditChartRoute}
             />
             <Route
               path={`${match.path}/playground`}

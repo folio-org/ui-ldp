@@ -5,6 +5,7 @@
     "key": "chart-6db28306-bc1e-48f8-aca0-26aa489d958e",
     "value": {
       "name": "Daily checkout counts through the year",
+      "description": "Viewed as a line graph",
       "query": {
         "url": "https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql",
         "params": {
@@ -38,6 +39,7 @@
     "key": "chart-914e1299-2ddb-47f2-88a5-4e492f833c07",
     "value": {
       "name": "Daily checkout counts as a bar graph",
+      "description": "Different view on same data as 'through the year'",
       "query": {
         "url": "https://raw.githubusercontent.com/MikeTaylor/metadb-chart-queries/main/./checkins_by_date.sql",
         "params": {

@@ -5,26 +5,21 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Icon, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
 
 
-function Dashboards({ data }) {
+function Charts({ data }) {
   const actionMenu = () => (
     <>
       <Button buttonStyle="dropdownItem">
-        <Link to="dashboards/create">
-          <Icon icon="plus-sign"><FormattedMessage id="ui-ldp.dashboards.new" /></Icon>
-        </Link>
-      </Button>
-      <Button buttonStyle="dropdownItem">
-        <Link to="charts">
-          <Icon icon="report"><FormattedMessage id="ui-ldp.manageCharts" /></Icon>
+        <Link to="charts/create">
+          <Icon icon="plus-sign"><FormattedMessage id="ui-ldp.charts.new" /></Icon>
         </Link>
       </Button>
     </>
   );
 
   return (
-    <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.dashboards.select" />} actionMenu={actionMenu}>
+    <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.charts.select" />} actionMenu={actionMenu}>
       <MultiColumnList
-        contentData={data.dashboards.map(entry => ({ id: entry.id, name: entry.value.name, editLink: 'x', deleteLink: 'x' }))}
+        contentData={data.charts.map(entry => ({ id: entry.id, name: entry.value.name, editLink: 'x', deleteLink: 'x' }))}
         visibleColumns={['name', 'editLink', 'deleteLink']}
         columnMapping={{
           name: <FormattedMessage id="ui-ldp.field.name" />,
@@ -37,8 +32,8 @@ function Dashboards({ data }) {
           deleteLink: 50,
         }}
         formatter={{
-          name: r => <Link to={`/ldp/dashboards/${r.id}`}>{r.name}</Link>,
-          editLink: r => <Link to={`/ldp/dashboards/${r.id}/edit`}><IconButton icon="edit" /></Link>,
+          name: r => <Link to={`/ldp/charts/${r.id}`}>{r.name}</Link>,
+          editLink: r => <Link to={`/ldp/charts/${r.id}/edit`}><IconButton icon="edit" /></Link>,
           deleteLink: () => <IconButton icon="trash" disabled />,
         }}
       />
@@ -47,9 +42,9 @@ function Dashboards({ data }) {
 }
 
 
-Dashboards.propTypes = {
+Charts.propTypes = {
   data: PropTypes.shape({
-    dashboards: PropTypes.arrayOf(
+    charts: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         value: PropTypes.object.isRequired,
@@ -59,6 +54,6 @@ Dashboards.propTypes = {
 };
 
 
-export default Dashboards;
+export default Charts;
 
 
