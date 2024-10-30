@@ -133,6 +133,8 @@
   "charts.new": "New chart",
   "chart.editHeading": "Edit chart: {name}",
   "chart.addHeading": "Create new chart",
+  "chart.addParam": "Add parameter",
+  "chart.addDataset": "Add dataset",
   "chart.save.ok": "Saved chart {name}",
   "chart.save.fail": "Could not save chart {name}: error {code} ({statusText}): {detail}",
 

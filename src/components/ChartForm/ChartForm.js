@@ -6,7 +6,7 @@ import { Form, Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import arrayMutators from 'final-form-arrays';
 import { useStripes, CalloutContext } from '@folio/stripes/core';
-import { Pane, TextField, TextArea, Select, Label, IconButton, Button, Accordion } from '@folio/stripes/components';
+import { Pane, TextField, TextArea, Row, Col, Select, Label, IconButton, Button, Accordion } from '@folio/stripes/components';
 
 
 function ChartForm({ data, onSubmit }) {
@@ -66,23 +66,25 @@ function ChartForm({ data, onSubmit }) {
               {({ fields }) => (
                 <>
                   {fields.map((name, index) => (
-                    <div key={index}>
-                      <Field
-                        name={`${name}.key`}
-                        label={(
-                          <>
-                            <FormattedMessage id="ui-ldp.field.key" />
-                            <IconButton icon="trash" onClick={() => fields.remove(index)} />
-                          </>
-                        )}
-                        component={TextField}
-                      />
-                      <Field
-                        name={`${name}.value`}
-                        label={(<FormattedMessage id="ui-ldp.field.value" />)}
-                        component={TextField}
-                      />
-                    </div>
+                    <Row key={index}>
+                      <Col xs={3}>
+                        <Field
+                          name={`${name}.key`}
+                          label={<FormattedMessage id="ui-ldp.field.key" />}
+                          component={TextField}
+                        />
+                      </Col>
+                      <Col xs={8}>
+                        <Field
+                          name={`${name}.value`}
+                          label={(<FormattedMessage id="ui-ldp.field.value" />)}
+                          component={TextField}
+                        />
+                      </Col>
+                      <Col xs={1}>
+                        <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                      </Col>
+                    </Row>
                   ))}
                   <Button type="button" onClick={() => fields.push('')}>
                     <FormattedMessage id="ui-ldp.chart.addParam" />
