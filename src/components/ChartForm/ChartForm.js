@@ -20,7 +20,7 @@ function ChartForm({ data, onSubmit }) {
       <FormattedMessage id="ui-ldp.chart.addHeading" />
   );
 
-  const initialValues = data.chart ? { ...data.chart.value } : {};
+  const initialValues = data.chart ? structuredClone(data.chart.value) : {};
 
   const onSubmitWithReaction = async (values, y, z) => {
     let rec;
@@ -96,7 +96,39 @@ function ChartForm({ data, onSubmit }) {
             <Field name="query.limit" label={<FormattedMessage id="ui-ldp.field.queryLimit" />} component={TextField} />
             <Field name="chart.type" label={<FormattedMessage id="ui-ldp.field.chartType" />} component={Select} dataOptions={chartTypes} />
             <Field name="chart.labelsField" label={<FormattedMessage id="ui-ldp.field.labelsField" />} component={TextField} />
-            <Field name="datasets array" label={<FormattedMessage id="ui-ldp.field.datasets" />} component={TextField} />{/* XXX array of [label, dataField] */}
+
+            <Label><FormattedMessage id="ui-ldp.field.datasets" /></Label>
+            <FieldArray name="datasets">
+              {({ fields }) => (
+                <>
+                  {fields.map((name, index) => (
+                    <Row key={index}>
+                      <Col xs={3}>
+                        <Field
+                          name={`${name}.dataField`}
+                          label={(<FormattedMessage id="ui-ldp.field.dataField" />)}
+                          component={TextField}
+                        />
+                      </Col>
+                      <Col xs={8}>
+                        <Field
+                          name={`${name}.label`}
+                          label={<FormattedMessage id="ui-ldp.field.label" />}
+                          component={TextField}
+                        />
+                      </Col>
+                      <Col xs={1}>
+                        <IconButton icon="trash" onClick={() => fields.remove(index)} />
+                      </Col>
+                    </Row>
+                  ))}
+                  <Button type="button" onClick={() => fields.push('')}>
+                    <FormattedMessage id="ui-ldp.chart.addDataset" />
+                  </Button>
+                </>
+              )}
+            </FieldArray>
+
             <div>
               <Button type="submit" buttonStyle="primary">
                 <FormattedMessage id="ui-ldp.button.submit" />
