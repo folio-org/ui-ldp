@@ -8,10 +8,10 @@ import ChartForm from '../components/ChartForm';
 function CreateChartRoute({ match, mutator }) {
   const onSubmit = async (value) => {
     const v = structuredClone(value);
-    if (v.query.params) {
+    if (v.query?.params) {
       v.query.params = Object.fromEntries(v.query.params.map(x => [x.key, x.value]));
     }
-    if (v.query.limit) {
+    if (v.query?.limit) {
       v.query.limit = Number(v.query.limit);
     }
     const id = uuidv4();

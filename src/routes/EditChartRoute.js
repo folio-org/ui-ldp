@@ -20,10 +20,10 @@ function EditChartRoute({ match, resources, mutator }) {
   const onSubmit = async (value) => {
     const v = structuredClone(value);
     const rec = { ...resources.editChart.records[0], value: v };
-    if (v.query.params) {
+    if (v.query?.params) {
       v.query.params = Object.fromEntries(v.query.params.map(x => [x.key, x.value]));
     }
-    if (v.query.limit) {
+    if (v.query?.limit) {
       v.query.limit = Number(v.query.limit);
     }
     return mutator.editChart.PUT(rec);
