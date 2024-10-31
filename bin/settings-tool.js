@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 import Folio from '@indexdata/foliojs';
 
 const op = process.argv[2];
@@ -18,7 +20,7 @@ if (op === 'find') {
   }
   const body = await session.folioFetch(url);
   console.log(JSON.stringify(body, null, 2));
-} else if (op == 'delete') {
+} else if (op === 'delete') {
   if (arg === undefined) {
     console.error(process.argv[1], '"delete" operation needs <id>');
     process.exit(1);
