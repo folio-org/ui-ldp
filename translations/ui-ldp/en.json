@@ -129,6 +129,8 @@
   "dashboard.addChart": "Add chart",
   "dashboard.save.ok": "Saved dashboard {name}",
   "dashboard.save.fail": "Could not save dashboard {name}: error {code} ({statusText}): {detail}",
+  "dashboard.delete.ok": "Deleted dashboard {name}",
+  "dashboard.delete.fail": "Could not delete dashboard {name}: error {code} ({statusText}): {detail}",
   "manageCharts": "Manage charts",
   "charts.select": "Select chart",
   "charts.new": "New chart",

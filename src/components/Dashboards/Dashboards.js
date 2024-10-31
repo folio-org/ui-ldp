@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { CalloutContext } from '@folio/stripes/core';
 import { Button, Icon, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
 
 
-function Dashboards({ data }) {
+function Dashboards({ data, onDelete }) {
+  const callout = useContext(CalloutContext);
+
   const actionMenu = () => (
     <>
       <Button buttonStyle="dropdownItem">
@@ -20,6 +23,27 @@ function Dashboards({ data }) {
       </Button>
     </>
   );
+
+  const onDeleteWithReaction = async (dashboard) => {
+    try {
+      await onDelete(dashboard.id);
+    } catch (res) {
+      const { status, statusText } = res;
+      const detail = await res.text();
+      callout.sendCallout({
+        type: 'error',
+        message: <FormattedMessage
+          id="ui-ldp.dashboard.delete.fail"
+          values={{ name: dashboard.name, code: status, statusText, detail }}
+        />
+      });
+      return;
+    }
+
+    callout.sendCallout({
+      message: <FormattedMessage id="ui-ldp.dashboard.delete.ok" values={{ name: dashboard.name }} />
+    });
+  };
 
   return (
     <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.dashboards.select" />} actionMenu={actionMenu}>
@@ -39,7 +63,7 @@ function Dashboards({ data }) {
         formatter={{
           name: r => <Link to={`/ldp/dashboards/${r.id}`}>{r.name}</Link>,
           editLink: r => <Link to={`/ldp/dashboards/${r.id}/edit`}><IconButton icon="edit" /></Link>,
-          deleteLink: () => <IconButton icon="trash" disabled />,
+          deleteLink: r => <IconButton icon="trash" onClick={() => onDeleteWithReaction(r)} />,
         }}
       />
     </Pane>
@@ -56,6 +80,7 @@ Dashboards.propTypes = {
       }).isRequired,
     ).isRequired,
   }).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 
