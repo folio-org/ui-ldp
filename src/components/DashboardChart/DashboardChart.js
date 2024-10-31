@@ -54,7 +54,7 @@ function DashboardChart({ id, spec }) {
       'minWidth': '200px',
     }}
     >
-      <h3 style={{ 'marginLeft': '1em' }}>{spec.name} ({id})</h3>
+      <h3 style={{ 'marginLeft': '1em' }}>{spec.name}</h3>
       <Chart
         redraw
         type={spec.chart.type}
