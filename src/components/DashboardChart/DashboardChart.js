@@ -67,7 +67,6 @@ function DashboardChart({ spec }) {
 
 
 DashboardChart.propTypes = {
-  id: PropTypes.string.isRequired,
   spec: PropTypes.shape({
     name: PropTypes.string.isRequired,
     query: PropTypes.shape({
