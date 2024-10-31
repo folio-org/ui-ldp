@@ -4,12 +4,16 @@ import { stripesConnect } from '@folio/stripes/core';
 import Charts from '../components/Charts';
 
 
-function ChartsRoute({ resources }) {
+function ChartsRoute({ resources, mutator }) {
   const data = {
     charts: resources.charts.records,
   };
 
-  return <Charts data={data} />;
+  const onDelete = async (id) => {
+    return mutator.charts.DELETE({ id });
+  };
+
+  return <Charts data={data} onDelete={onDelete} />;
 }
 
 
@@ -18,9 +22,14 @@ ChartsRoute.manifest = Object.freeze({
     type: 'okapi',
     records: 'items',
     path: 'settings/entries',
-    params: {
-      query: '(scope==ui-ldp.admin and key==chart-*)'
+    GET: {
+      params: {
+        query: '(scope==ui-ldp.admin and key==chart-*)'
+      },
     },
+    DELETE: {
+      throwErrors: false,
+    }
   },
 });
 
@@ -29,6 +38,11 @@ ChartsRoute.propTypes = {
   resources: PropTypes.shape({
     charts: PropTypes.shape({
       records: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+    }).isRequired,
+  }),
+  mutator: PropTypes.shape({
+    charts: PropTypes.shape({
+      DELETE: PropTypes.func.isRequired,
     }).isRequired,
   }),
 };

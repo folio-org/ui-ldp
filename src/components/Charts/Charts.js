@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { CalloutContext } from '@folio/stripes/core';
 import { Button, Icon, Pane, MultiColumnList, IconButton } from '@folio/stripes/components';
 
 
-function Charts({ data }) {
+function Charts({ data, onDelete }) {
+  const callout = useContext(CalloutContext);
+
   const actionMenu = () => (
     <>
       <Button buttonStyle="dropdownItem">
@@ -15,6 +18,27 @@ function Charts({ data }) {
       </Button>
     </>
   );
+
+  const onDeleteWithReaction = async (chart) => {
+    try {
+      await onDelete(chart.id);
+    } catch (res) {
+      const { status, statusText } = res;
+      const detail = await res.text();
+      callout.sendCallout({
+        type: 'error',
+        message: <FormattedMessage
+          id="ui-ldp.chart.delete.fail"
+          values={{ name: chart.name, code: status, statusText, detail }}
+        />
+      });
+      return;
+    }
+
+    callout.sendCallout({
+      message: <FormattedMessage id="ui-ldp.chart.delete.ok" values={{ name: chart.name }} />
+    });
+  };
 
   return (
     <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.charts.select" />} actionMenu={actionMenu}>
@@ -34,7 +58,7 @@ function Charts({ data }) {
         formatter={{
           name: r => <Link to={`/ldp/charts/${r.id}`}>{r.name}</Link>,
           editLink: r => <Link to={`/ldp/charts/${r.id}/edit`}><IconButton icon="edit" /></Link>,
-          deleteLink: () => <IconButton icon="trash" disabled />,
+          deleteLink: r => <IconButton icon="trash" onClick={() => onDeleteWithReaction(r)} />,
         }}
       />
     </Pane>
@@ -51,6 +75,7 @@ Charts.propTypes = {
       }).isRequired,
     ).isRequired,
   }).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 

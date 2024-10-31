@@ -138,6 +138,8 @@
   "chart.addDataset": "Add dataset",
   "chart.save.ok": "Saved chart {name}",
   "chart.save.fail": "Could not save chart {name}: error {code} ({statusText}): {detail}",
+  "chart.delete.ok": "Deleted chart {name}",
+  "chart.delete.fail": "Could not delete chart {name}: error {code} ({statusText}): {detail}",
 
   "permission.settings.record-limits": "Settings (Reporting): Can modify default record limits",
   "permission.settings.table-availability": "Settings (Reporting): Can select which tables are available to search",
