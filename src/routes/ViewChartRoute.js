@@ -7,7 +7,7 @@ import ViewChart from '../components/ViewChart';
 
 function ViewChartRoute({ match, resources }) {
   const data = {
-    chart: resources.chart.records[0],
+    chart: resources.viewChart.records[0],
   };
 
   if (!data.chart) return <Loading size="xlarge" />;
@@ -17,7 +17,7 @@ function ViewChartRoute({ match, resources }) {
 
 
 ViewChartRoute.manifest = Object.freeze({
-  chart: {
+  viewChart: {
     type: 'okapi',
     path: 'settings/entries/:{id}',
   },
@@ -31,7 +31,7 @@ ViewChartRoute.propTypes = {
     }).isRequired,
   }).isRequired,
   resources: PropTypes.shape({
-    chart: PropTypes.shape({
+    viewChart: PropTypes.shape({
       records: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     }).isRequired,
   }),
