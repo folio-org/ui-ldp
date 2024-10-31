@@ -13,7 +13,7 @@ import loadReport from '../../util/loadReport';
 ChartJS.register(CategoryScale);
 
 
-function DashboardChart({ id, spec }) {
+function DashboardChart({ spec }) {
   const intl = useIntl();
   const stripes = useStripes();
   const [response, setResponse] = useState();
