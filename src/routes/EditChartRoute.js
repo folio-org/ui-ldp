@@ -7,14 +7,26 @@ import ChartForm from '../components/ChartForm';
 
 function EditChartRoute({ match, resources, mutator }) {
   const data = {
-    chart: resources.chart.records[0],
+    chart: resources.editChart.records[0],
   };
 
   if (!data.chart) return <Loading size="xlarge" />;
 
-  const onSubmit = async (v) => {
-    const rec = { ...resources.chart.records[0], value: v };
-    return mutator.chart.PUT(rec);
+  const query = data.chart.value.query;
+  if (query.params) {
+    query.params = Object.entries(query.params).map(([k, v]) => ({ key: k, value: v }));
+  }
+
+  const onSubmit = async (value) => {
+    const v = structuredClone(value);
+    const rec = { ...resources.editChart.records[0], value: v };
+    if (v.query.params) {
+      v.query.params = Object.fromEntries(v.query.params.map(x => [x.key, x.value]));
+    }
+    if (v.query.limit) {
+      v.query.limit = Number(v.query.limit);
+    }
+    return mutator.editChart.PUT(rec);
   };
 
   return <ChartForm id={match.params.id} data={data} onSubmit={onSubmit} />;
@@ -22,7 +34,7 @@ function EditChartRoute({ match, resources, mutator }) {
 
 
 EditChartRoute.manifest = Object.freeze({
-  chart: {
+  editChart: {
     type: 'okapi',
     path: 'settings/entries/:{id}',
     PUT: {
@@ -39,12 +51,12 @@ EditChartRoute.propTypes = {
     }).isRequired,
   }).isRequired,
   resources: PropTypes.shape({
-    chart: PropTypes.shape({
+    editChart: PropTypes.shape({
       records: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
     }).isRequired,
   }),
   mutator: PropTypes.shape({
-    chart: PropTypes.shape({
+    editChart: PropTypes.shape({
       PUT: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
