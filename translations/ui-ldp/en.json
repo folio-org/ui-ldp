@@ -19,6 +19,7 @@
   "nav.saved-queries": "Load query",
   "nav.templated-queries": "Run report",
   "nav.dashboards": "Dashboards",
+  "nav.charts": "Charts",
   "nav.logs": "Logs",
   "nav.playground": "Playground",
   "heading.current-settings": "Current settings",

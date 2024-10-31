@@ -85,6 +85,9 @@ const Ldp = (props) => {
                 <NavListItem data-cy="nav-dashboards" to={`${match.path}/dashboards`}>
                   <FormattedMessage id="ui-ldp.nav.dashboards" />
                 </NavListItem>
+                <NavListItem data-cy="nav-charts" to={`${match.path}/charts`}>
+                  <FormattedMessage id="ui-ldp.nav.charts" />
+                </NavListItem>
                 {showDevInfo &&
                   <>
                     <NavListItem data-cy="nav-logs" to={`${match.path}/logs`}>
