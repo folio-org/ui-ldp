@@ -20,7 +20,7 @@ function ChartForm({ data, onSubmit }) {
       <FormattedMessage id="ui-ldp.chart.addHeading" />
   );
 
-  const initialValues = data.chart ? structuredClone(data.chart.value) : {};
+  const initialValues = data.chart ? structuredClone(data.chart.value) : { chart: { type: 'line' } };
 
   const onSubmitWithReaction = async (values, y, z) => {
     let rec;
