@@ -48,7 +48,7 @@
     "permission.settings.table-availability": "Ustawienia (Raportowanie): Może wybierać, które tabele są dostępne do przeszukiwania",
     "settings.dbinfo": "Database configuration",
     "settings.dbinfo.url": "Database URL",
-    "settings.dbinfo.user": "Username",
+    "settings.dbinfo.user": "Nazwa użytkownika",
     "settings.dbinfo.pass": "Password (write-only)",
     "settings.dbinfo.update.ok": "Updated database configuration",
     "settings.sqconfig": "Saved queries configuration",
