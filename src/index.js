@@ -82,6 +82,7 @@ const Ldp = (props) => {
                     </NavListItem>
                   ))
                 }
+                <br />
                 <NavListItem data-cy="nav-dashboards" to={`${match.path}/dashboards`}>
                   <FormattedMessage id="ui-ldp.nav.dashboards" />
                 </NavListItem>
