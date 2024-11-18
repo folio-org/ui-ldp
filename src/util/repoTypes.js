@@ -11,7 +11,17 @@ class QueryRepo {
 class QueryRepoGitHub extends QueryRepo {
   static name() { return 'GitHub'; }
   webUrl() { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
-  apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/contents/${this.dir}?ref=${this.branch}`; }
+//apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/contents/${this.dir}?ref=${this.branch}`; }
+  apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/git/trees/${this.branch}?recursive=1`; }
+  mapApiResponse(res) {
+    // XXX filter out entries from outside the specified root
+    return res.tree.map(entry => ({
+      // XXX do we have all the elements we need?
+      ...entry,
+      name: entry.path.replace(/.*\//, ''),
+      // XXX why do we get information from top-level files?
+    }));
+  }
   rawFilePath(name) { return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${this.branch}/${this.dir}/${name}`; }
   urlBase(filename) { return `${this.webUrl()}/${filename}`; }
 }
@@ -20,6 +30,7 @@ class QueryRepoGitLab extends QueryRepo {
   static name() { return 'GitLab'; }
   webUrl() { return `https://gitlab.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
   apiDirectoryPath() { return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/tree?ref=${this.branch}&path=${this.dir}`; }
+  mapApiResponse(res) { return res; }
 
   rawFilePath(name) {
     const encodedPath = encodeURIComponent(`${this.dir}/${name}`);
