@@ -13,9 +13,13 @@ class QueryRepoGitHub extends QueryRepo {
   webUrl() { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
   apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/git/trees/${this.branch}?recursive=1`; }
   mapApiResponse(res) {
-    // XXX filter out entries from outside the specified root
-    // XXX do we have all the elements we need?
-    return res.tree.map(entry => ({ ...entry, name: entry.path }));
+    // Unlike the response to the old fetch-a-single-directory WSAPI
+    // call, the tree call returns the list of entries within a `tree`
+    // subrecord. it also has no `name` entry, so we populate from
+    // that `parh`; and since there is no parameter to specify where
+    // in the repo to start the root of the tree, we need to filter
+    // the complete tree to include only the relevant entries.
+    return res.tree.map(e => ({ ...e, name: e.path })).filter(e => this.dir === '.' || e.name.startsWith(this.dir));
   }
 
   rawFilePath(name) { return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${this.branch}/${name}`; }
