@@ -32,12 +32,10 @@ async function fetchTemplatedQueryFilenames(gitRepos) {
 
   const promises2 = results.map(result => result.json());
   const rawJsons = await Promise.all(promises2);
-  console.log("RAW:", rawJsons[1]); // XXX temporary!
   const jsons = rawJsons.map((json, i) => {
     const reportRepo = createReportRepo(resultsWithConfig[i].config);
     return reportRepo.mapApiResponse(json);
   });
-  console.log("COOKED:", jsons[1]); // XXX temporary!
 
   const filenameListsWithConfig = resultsWithConfig.map((rc, i) => ({
     filenames: jsons[i].map(x => x.name).filter(x => x.endsWith('.sql') || x.endsWith('.json')),
