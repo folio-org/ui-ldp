@@ -24,6 +24,12 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
     });
   }
 
+  // I don't understand it's necessary to pass this in explicitly, but
+  // if we do not then MultiColumnList unhelpfully caches its
+  // calculated notion of what columns to display, so that switching
+  // between report-result tabs shows the wrong columns.
+  const visibleColumns = Object.keys(data[0]);
+
   const maybeExportCsv = (qr) => {
     if (qr.isComplete) {
       exportCsv(qr.resp, {});
@@ -51,7 +57,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
           <FormattedMessage id="ui-ldp.button.csv" />
         </Button>
       </div>
-      <MultiColumnList contentData={data} formatter={formatter} virtualize autosize />
+      <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
     </>
   );
 };
