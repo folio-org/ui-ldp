@@ -24,8 +24,8 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
     });
   }
 
-  // I don't understand it's necessary to pass this in explicitly, but
-  // if we do not then MultiColumnList unhelpfully caches its
+  // I don't understand why it's necessary to pass this in explicitly,
+  // but if we do not then MultiColumnList unhelpfully caches its
   // calculated notion of what columns to display, so that switching
   // between report-result tabs shows the wrong columns.
   const visibleColumns = Object.keys(data[0]);
