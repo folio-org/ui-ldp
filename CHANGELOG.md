@@ -4,6 +4,7 @@
 
 * Support `<AutoSuggest>` parameters in templated queries. Fixes UILDP-110.
 * Recursively traverse nominated GitHub directories for reports. Fixes UILDP-104.
+* Report results are now persisted in dynamic tabs. Fixes UILDP-139.
 
 ## [2.3.0](https://github.com/folio-org/ui-ldp/tree/v2.3.0) (2024-10-17)
 
