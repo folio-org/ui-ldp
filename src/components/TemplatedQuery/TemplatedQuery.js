@@ -12,7 +12,7 @@ import css from './TemplatedQuery.css';
 
 function TemplatedQuery({ query }) {
   const [toggle, setToggle] = useState(false); // To force a re-render when the data changes
-  const data = query.state.data
+  const data = query.state.data;
   const setData = (v) => { query.state.data = v; setToggle(!toggle); };
   const [error, setError] = useState();
   const intl = useIntl();
@@ -58,6 +58,9 @@ TemplatedQuery.propTypes = {
     json: PropTypes.shape({
       displayName: PropTypes.string,
     }),
+    state: PropTypes.shape({
+      data: PropTypes.object,
+    }).isRequired,
   }).isRequired,
 };
 
