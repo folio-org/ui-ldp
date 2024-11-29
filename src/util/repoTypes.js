@@ -4,7 +4,7 @@ class QueryRepo {
     this.user = user;
     this.repo = repo;
     this.branch = branch;
-    this.dir = dir;
+    this.dir = (dir === undefined || dir === '/') ? '.' : dir;
   }
 }
 
