@@ -31,7 +31,7 @@
     "button.add-join-table": "Add join table",
     "found-records": "Found {count} records",
     "found-more-than": "Found more than {count} records",
-    "label.start-date": "Data początkowa",
+    "label.start-date": "Data rozpoczęcia",
     "label.end-date": "Data zakończenia",
     "settings.record-limits": "Record limits",
     "settings.record-limits.default-show": "Default number to show",
