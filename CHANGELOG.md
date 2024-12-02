@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [2.4.0](https://github.com/folio-org/ui-ldp/tree/v2.4.0) (IN PROGRESS)
+## [2.4.0](https://github.com/folio-org/ui-ldp/tree/v2.4.0) (2024-12-02)
 
 * Support `<AutoSuggest>` parameters in templated queries. Fixes UILDP-110.
 * Recursively traverse nominated GitHub directories for reports. Fixes UILDP-104.
