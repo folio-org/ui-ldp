@@ -61,7 +61,7 @@
     "settings.sqconfig.branch": "Branch",
     "settings.sqconfig.token": "OAuth token for access to repository (write-only)",
     "button.save-query": "Save query",
-    "button.save": "Save",
+    "button.save": "Zapisz",
     "button.cancel": "Anuluj",
     "saved-queries.displayName": "Display name",
     "saved-queries.autoRun": "Auto-run?",
