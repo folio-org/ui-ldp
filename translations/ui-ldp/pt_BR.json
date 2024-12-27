@@ -1,5 +1,5 @@
 {
-    "meta.title": "Reportando",
+    "meta.title": "Relatórios",
     "something-went-wrong": "Algo deu errado.",
     "refresh": "Atualizar",
     "error.http": "Erro de HTTP: status {status} ({text}) -- {detail}",
