@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [2.5.0] (IN PROGRESS)
+
+* Change import of `exportToCsv` from `stripes-util` to `stripes-components`. Refs UILDP-150.
+
 ## [2.4.0](https://github.com/folio-org/ui-ldp/tree/v2.4.0) (2024-12-02)
 
 * Support `<AutoSuggest>` parameters in templated queries. Fixes UILDP-110.

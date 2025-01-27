@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { exportCsv } from '@folio/stripes/util';
-import { Button, MultiColumnList } from '@folio/stripes/components';
+import { Button, MultiColumnList, exportToCsv } from '@folio/stripes/components';
 import css from './QueryBuilder.css';
 
 
@@ -32,9 +31,9 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
 
   const maybeExportCsv = (qr) => {
     if (qr.isComplete) {
-      exportCsv(qr.resp, {});
+      exportToCsv(qr.resp, {});
     } else {
-      searchWithoutLimit(r => exportCsv(r.resp, {}));
+      searchWithoutLimit(r => exportToCsv(r.resp, {}));
     }
   };
 
