@@ -12,6 +12,7 @@ import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import SavedQueriesRoute from './routes/SavedQueriesRoute';
 import TemplatedQueriesRoute from './routes/TemplatedQueriesRoute';
 import TemplatedQueryRoute from './routes/TemplatedQueryRoute';
+import InfoRoute from './routes/InfoRoute';
 import LogsRoute from './routes/LogsRoute';
 import Playground from './routes/Playground';
 import Settings from './settings';
@@ -54,8 +55,13 @@ const Ldp = (props) => {
                 <NavListItem data-cy="nav-savedQueries" to={`${match.path}/queries`}>
                   <FormattedMessage id="ui-ldp.nav.saved-queries" />
                 </NavListItem>
-                <br />
-                <NavListItem data-cy="nav-savedQueries" to={`${match.path}/templated`}>
+                <NavListItem data-cy="nav-info" to={`${match.path}/info`}>
+                  <FormattedMessage id="ui-ldp.nav.info" />
+                </NavListItem>
+              </NavListSection>
+              <br />
+              <NavListSection activeLink={window.location.pathname}>
+                <NavListItem data-cy="nav-templatedQueries" to={`${match.path}/templated`}>
                   <FormattedMessage id="ui-ldp.nav.templated-queries" />
                 </NavListItem>
                 {
@@ -112,6 +118,11 @@ const Ldp = (props) => {
               path={`${match.path}/logs`}
               exact
               component={LogsRoute}
+            />
+            <Route
+              path={`${match.path}/info`}
+              exact
+              component={InfoRoute}
             />
             <Route
               path={`${match.path}/playground`}
