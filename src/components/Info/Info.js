@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Pane } from '@folio/stripes/components';
+import Tabs from '../../Tabs';
 
 
 function Info({ data }) {
-  const paneTitle = <FormattedMessage id="ui-ldp.dbinfo.version" values={{ version: data.version?.version }} />;
   return (
-    <Pane defaultWidth="fill" paneTitle={paneTitle}>
-    </Pane>
+    <Tabs version={data.version?.version}>
+      {'XXX' + 1}
+    </Tabs>
   );
 }
 
