@@ -3,10 +3,10 @@ import { useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import loadData from '../util/loadData';
 import BigError from '../components/BigError';
-import Info from '../components/Info';
+import Updates from '../components/Updates';
 
 
-function InfoRoute() {
+function UpdatesRoute() {
   const intl = useIntl();
   const stripes = useStripes();
   const [version, setVersion] = useState();
@@ -24,7 +24,7 @@ function InfoRoute() {
     version,
   };
 
-  return <Info data={data} />;
+  return <Updates data={data} />;
 }
 
-export default InfoRoute;
+export default UpdatesRoute;

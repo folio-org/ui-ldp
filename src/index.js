@@ -12,8 +12,8 @@ import QueryBuilderRoute from './routes/QueryBuilderRoute';
 import SavedQueriesRoute from './routes/SavedQueriesRoute';
 import TemplatedQueriesRoute from './routes/TemplatedQueriesRoute';
 import TemplatedQueryRoute from './routes/TemplatedQueryRoute';
-import InfoRoute from './routes/InfoRoute';
 import LogsRoute from './routes/LogsRoute';
+import UpdatesRoute from './routes/UpdatesRoute';
 import Playground from './routes/Playground';
 import Settings from './settings';
 
@@ -55,7 +55,7 @@ const Ldp = (props) => {
                 <NavListItem data-cy="nav-savedQueries" to={`${match.path}/queries`}>
                   <FormattedMessage id="ui-ldp.nav.saved-queries" />
                 </NavListItem>
-                <NavListItem data-cy="nav-info" to={`${match.path}/info`}>
+                <NavListItem data-cy="nav-info" to={`${match.path}/info/updates`}>
                   <FormattedMessage id="ui-ldp.nav.info" />
                 </NavListItem>
               </NavListSection>
@@ -119,14 +119,9 @@ const Ldp = (props) => {
               exact
               component={LogsRoute}
             />
-            <Route
-              path={`${match.path}/info`}
-              exact
-              component={InfoRoute}
-            />
-            <Route path={`${match.path}/info/logs`} exact component={InfoRoute} />
-            <Route path={`${match.path}/info/updates`} exact component={InfoRoute} />
-            <Route path={`${match.path}/info/processes`} exact component={InfoRoute} />
+            <Route path={`${match.path}/info/logs`} exact component={LogsRoute} />
+            <Route path={`${match.path}/info/updates`} exact component={UpdatesRoute} />
+            <Route path={`${match.path}/info/processes`} exact component={UpdatesRoute} />
             <Route
               path={`${match.path}/playground`}
               exact
