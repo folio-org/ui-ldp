@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { MultiColumnList } from '@folio/stripes/components';
 import Tabs from '../../Tabs';
+import FormattedDateTime from '../../util/FormattedDateTime';
 
 
 // PRIVATE to colorize
@@ -29,9 +30,9 @@ function Logs({ data }) {
     const bv = b[sortedColumn];
 
     if (av < bv) {
-      return (sortDirection == 'ascending' ? -1 : 1);
+      return (sortDirection === 'ascending' ? -1 : 1);
     } else if (av > bv) {
-      return (sortDirection == 'ascending' ? 1 : -1);
+      return (sortDirection === 'ascending' ? 1 : -1);
     } else {
       return 0;
     }
@@ -48,18 +49,17 @@ function Logs({ data }) {
           message: <FormattedMessage id="ui-ldp.dbinfo.logs.message" />,
         }}
         columnWidths={{
-          log_time: 200,
+          log_time: 240,
           error_severity: 100,
           message: 600,
         }}
         formatter={{
-          log_time: r => r.log_time, // XXX localize
-          error_severity: r => colorize(r.error_severity)
+          log_time: r => <FormattedDateTime datetime={r.log_time} />,
+          error_severity: r => colorize(r.error_severity),
         }}
         sortedColumn={sortedColumn}
         sortDirection={sortDirection}
         onHeaderClick={(e, { name }) => {
-          console.log('clicked on', name);
           if (name === sortedColumn) {
             setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending');
           } else {
