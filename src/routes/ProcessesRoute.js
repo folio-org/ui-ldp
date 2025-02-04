@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
+import loadData from '../util/loadData';
 import BigError from '../components/BigError';
 import Updates from '../components/Updates';
-import loadData from '../util/loadData';
 
 
 function UpdatesRoute() {
