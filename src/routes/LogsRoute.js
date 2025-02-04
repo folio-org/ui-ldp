@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
-import BigError from '../components/BigError';
-import Updates from '../components/Updates';
 import loadData from '../util/loadData';
+import BigError from '../components/BigError';
+import Logs from '../components/Info/Logs';
 
 
-function UpdatesRoute() {
+function LogsRoute() {
   const intl = useIntl();
   const stripes = useStripes();
-  const [version, setVersion] = useState();
+  const [logs, setLogs] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
-    loadData(intl, stripes, 'version', '/ldp/db/version', setVersion, setError);
+    loadData(intl, stripes, 'logs', '/ldp/db/log', setLogs, setError);
   }, [intl, stripes]);
 
   if (error) {
@@ -21,10 +21,10 @@ function UpdatesRoute() {
   }
 
   const data = {
-    version,
+    logs,
   };
 
-  return <Updates data={data} />;
+  return <Logs data={data} />;
 }
 
-export default UpdatesRoute;
+export default LogsRoute;

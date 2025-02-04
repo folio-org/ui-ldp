@@ -3,17 +3,17 @@ import { useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import loadData from '../util/loadData';
 import BigError from '../components/BigError';
-import Updates from '../components/Updates';
+import Updates from '../components/Info/Updates';
 
 
 function UpdatesRoute() {
   const intl = useIntl();
   const stripes = useStripes();
-  const [version, setVersion] = useState();
+  const [updates, setUpdates] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
-    loadData(intl, stripes, 'version', '/ldp/db/version', setVersion, setError);
+    loadData(intl, stripes, 'updates', '/ldp/db/updates', setUpdates, setError);
   }, [intl, stripes]);
 
   if (error) {
@@ -21,7 +21,7 @@ function UpdatesRoute() {
   }
 
   const data = {
-    version,
+    updates,
   };
 
   return <Updates data={data} />;
