@@ -1,12 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import { MultiColumnList } from '@folio/stripes/components';
+import sortByParams from '../../util/sortByParams';
+import FormattedDateTime from '../../util/FormattedDateTime';
 import Tabs from '../../Tabs';
 
 
 function Processes({ data }) {
+  const [sortedColumn, setSortedColumn] = useState('realTime');
+  const [sortDirection, setSortDirection] = useState('descending');
+  const sortedList = sortByParams(data.processes, sortedColumn, sortDirection);
+
   return (
     <Tabs>
-      <pre>{JSON.stringify(data.processes, null, 2)}</pre>
+      <MultiColumnList
+        contentData={sortedList}
+        visibleColumns={['databaseName', 'userName', 'state', 'realTime', 'query']}
+        columnMapping={{
+          databaseName: <FormattedMessage id="ui-ldp.dbinfo.processes.databaseName" />,
+          userName: <FormattedMessage id="ui-ldp.dbinfo.processes.userName" />,
+          state: <FormattedMessage id="ui-ldp.dbinfo.processes.state" />,
+          realTime: <FormattedMessage id="ui-ldp.dbinfo.processes.realTime" />,
+          query: <FormattedMessage id="ui-ldp.dbinfo.processes.query" />,
+        }}
+        columnWidths={{
+          databaseName: 180,
+          userName: 100,
+          state: 100,
+          realTime: 110,
+          query: 300,
+        }}
+        sortedColumn={sortedColumn}
+        sortDirection={sortDirection}
+        onHeaderClick={(e, { name }) => {
+          if (name === sortedColumn) {
+            setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending');
+          } else {
+            setSortedColumn(name);
+            setSortDirection('ascending');
+          }
+        }}
+      />
     </Tabs>
   );
 }
