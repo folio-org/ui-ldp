@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { MultiColumnList } from '@folio/stripes/components';
-import Tabs from '../../Tabs';
+import sortByParams from '../../util/sortByParams';
 import FormattedDateTime from '../../util/FormattedDateTime';
+import Tabs from '../../Tabs';
 
 
 // PRIVATE to colorize
@@ -24,24 +25,12 @@ function colorize(severity) {
 function Logs({ data }) {
   const [sortedColumn, setSortedColumn] = useState('log_time');
   const [sortDirection, setSortDirection] = useState('descending');
-
-  const sortedLogs = (data.logs || []).sort((a, b) => {
-    const av = a[sortedColumn];
-    const bv = b[sortedColumn];
-
-    if (av < bv) {
-      return (sortDirection === 'ascending' ? -1 : 1);
-    } else if (av > bv) {
-      return (sortDirection === 'ascending' ? 1 : -1);
-    } else {
-      return 0;
-    }
-  });
+  const sortedList = sortByParams(data.logs, sortedColumn, sortDirection);
 
   return (
     <Tabs>
       <MultiColumnList
-        contentData={sortedLogs}
+        contentData={sortedList}
         visibleColumns={['log_time', 'error_severity', 'message']}
         columnMapping={{
           log_time: <FormattedMessage id="ui-ldp.dbinfo.logs.log_time" />,
