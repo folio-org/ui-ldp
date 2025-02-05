@@ -57,7 +57,7 @@ const Ldp = (props) => {
                 <NavListItem data-cy="nav-savedQueries" to={`${match.path}/queries`}>
                   <FormattedMessage id="ui-ldp.nav.saved-queries" />
                 </NavListItem>
-                <NavListItem data-cy="nav-info" to={`${match.path}/info/logs`}>
+                <NavListItem data-cy="nav-info" to={`${match.path}/info/updates`}>
                   <FormattedMessage id="ui-ldp.nav.info" />
                 </NavListItem>
               </NavListSection>
@@ -121,9 +121,9 @@ const Ldp = (props) => {
               exact
               component={LegacyLogsRoute}
             />
-            <Route path={`${match.path}/info/logs`} exact component={LogsRoute} />
             <Route path={`${match.path}/info/updates`} exact component={UpdatesRoute} />
             <Route path={`${match.path}/info/processes`} exact component={ProcessesRoute} />
+            <Route path={`${match.path}/info/logs`} exact component={LogsRoute} />
             <Route
               path={`${match.path}/playground`}
               exact

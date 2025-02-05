@@ -10,14 +10,14 @@ import loadData from './util/loadData';
 
 // XXX Use visible permissions defined by the UI in place of these low-level permissions
 const segments = [{
-  name: 'logs',
-  perm: 'ldp.log.get',
-}, {
   name: 'updates',
   perm: 'ldp.updates.read',
 }, {
   name: 'processes',
   perm: 'ldp.processes.read',
+}, {
+  name: 'logs',
+  perm: 'ldp.log.get',
 }];
 
 

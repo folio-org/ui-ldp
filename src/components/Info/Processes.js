@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { MultiColumnList } from '@folio/stripes/components';
 import sortByParams from '../../util/sortByParams';
-import FormattedDateTime from '../../util/FormattedDateTime';
 import Tabs from '../../Tabs';
 
 
@@ -41,6 +40,7 @@ function Processes({ data }) {
             setSortDirection('ascending');
           }
         }}
+        isEmptyMessage={<FormattedMessage id="ui-ldp.dbinfo.processes.empty" />}
       />
     </Tabs>
   );

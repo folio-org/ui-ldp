@@ -122,6 +122,7 @@
   "dbinfo.processes.state": "Status",
   "dbinfo.processes.realTime": "Real time",
   "dbinfo.processes.query": "Query",
+  "dbinfo.processes.empty": "There are currently no long-running processes",
   "permission.settings.record-limits": "Settings (Reporting): Can modify default record limits",
   "permission.settings.table-availability": "Settings (Reporting): Can select which tables are available to search",
   "permission.settings.dbinfo": "Settings (Reporting): Can modify Reporting database connection details",
