@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { MultiColumnList } from '@folio/stripes/components';
+import { MultiColumnList, Loading } from '@folio/stripes/components';
 import sortByParams from '../../util/sortByParams';
 import FormattedDateTime from '../../util/FormattedDateTime';
 import Tabs from '../../Tabs';
@@ -56,6 +56,7 @@ function Logs({ data }) {
             setSortDirection('ascending');
           }
         }}
+        isEmptyMessage={<Loading size="large" />}
       />
     </Tabs>
   );
