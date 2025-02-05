@@ -121,9 +121,9 @@ const Ldp = (props) => {
               exact
               component={LegacyLogsRoute}
             />
+            <Route path={`${match.path}/info/logs`} exact component={LogsRoute} />
             <Route path={`${match.path}/info/updates`} exact component={UpdatesRoute} />
             <Route path={`${match.path}/info/processes`} exact component={ProcessesRoute} />
-            <Route path={`${match.path}/info/logs`} exact component={LogsRoute} />
             <Route
               path={`${match.path}/playground`}
               exact

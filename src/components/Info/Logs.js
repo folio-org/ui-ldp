@@ -56,7 +56,7 @@ function Logs({ data }) {
             setSortDirection('ascending');
           }
         }}
-        isEmptyMessage={<><Loading size="large" /></>}
+        isEmptyMessage={<Loading size="large" />}
       />
     </Tabs>
   );
