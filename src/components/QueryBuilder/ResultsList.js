@@ -27,7 +27,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
   // but if we do not then MultiColumnList unhelpfully caches its
   // calculated notion of what columns to display, so that switching
   // between report-result tabs shows the wrong columns.
-  const visibleColumns = Object.keys(data[0]);
+  const visibleColumns = data[0] ? Object.keys(data[0]) : [];
 
   const maybeExportCsv = (qr) => {
     if (qr.isComplete) {
