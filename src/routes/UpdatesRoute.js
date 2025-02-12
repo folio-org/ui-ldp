@@ -17,7 +17,15 @@ function UpdatesRoute() {
   }, [intl, stripes]);
 
   if (error) {
-    return <BigError message={error} />;
+    let message = error;
+    // By the time we get here, `error` is a message, not a structure,
+    // so we can't look at a `status` field and see whether it's
+    // 501. So we have to be naughty and peek in the string.
+    if (error.includes(' 501 ')) {
+      message = intl.formatMessage({ id: 'ui-ldp.error.not-metadb' });
+   }
+
+    return <BigError message={message} />;
   }
 
   const data = {
