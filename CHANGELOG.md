@@ -6,6 +6,7 @@
 * Display information about the underlying MetaDB database. Useful for operations. Fixes UILDP-148.
 * Migrate to shared CI workflows. Fixes UILDP-159.
 * Avoid "TypeError: can't convert undefined to object" when report finds no rows. Fixes UILDP-163.
+* Politely explain why Metadb-only features are unavailable when using LDP Classic. Fixes UILDP-162.
 
 ## [2.4.0](https://github.com/folio-org/ui-ldp/tree/v2.4.0) (2024-12-02)
 
