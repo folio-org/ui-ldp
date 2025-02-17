@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-01-17)
+
+* **BREAKING**: upgrade to Stripes v10. Fixes UILDP-160.
+
 ## [2.5.0](https://github.com/folio-org/ui-ldp/tree/v2.5.0) (2025-01-17)
 
 * Change import of `exportToCsv` from `stripes-util` to `stripes-components`. Refs UILDP-150.

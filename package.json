@@ -36,8 +36,8 @@
     "@cypress/code-coverage": "^3.9.6",
     "@folio/eslint-config-stripes": "^7.0.0",
     "@folio/jest-config-stripes": "^2.0.0",
-    "@folio/stripes": "^9.0.0",
-    "@folio/stripes-cli": "^3.0.0",
+    "@folio/stripes": "^10.0.0",
+    "@folio/stripes-cli": "^4.0.0",
     "babel-plugin-require-context-hook": "^1.0.0",
     "chai": "^4.2.0",
     "cypress": "^6.4.0",
@@ -76,7 +76,7 @@
     "uuid": "^8.3.1"
   },
   "peerDependencies": {
-    "@folio/stripes": "^9.0.0",
+    "@folio/stripes": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^6.4.4",
