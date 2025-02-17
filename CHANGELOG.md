@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [2.5.0] (IN PROGRESS)
+## [2.5.0](https://github.com/folio-org/ui-ldp/tree/v2.5.0) (2025-01-17)
 
 * Change import of `exportToCsv` from `stripes-util` to `stripes-components`. Refs UILDP-150.
 * Display information about the underlying MetaDB database. Useful for operations. Fixes UILDP-148.
