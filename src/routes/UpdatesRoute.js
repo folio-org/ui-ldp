@@ -23,7 +23,7 @@ function UpdatesRoute() {
     // 501. So we have to be naughty and peek in the string.
     if (error.includes(' 501 ')) {
       message = intl.formatMessage({ id: 'ui-ldp.error.not-metadb' });
-   }
+    }
 
     return <BigError message={message} />;
   }
