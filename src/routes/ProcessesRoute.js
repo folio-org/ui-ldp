@@ -3,17 +3,17 @@ import { useIntl } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import loadData from '../util/loadData';
 import BigError from '../components/BigError';
-import Logs from '../components/Info/Logs';
+import Processes from '../components/Info/Processes';
 
 
-function LogsRoute() {
+function ProcessesRoute() {
   const intl = useIntl();
   const stripes = useStripes();
-  const [logs, setLogs] = useState();
+  const [processes, setProcesses] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
-    loadData(intl, stripes, 'logs', '/ldp/db/log', setLogs, setError);
+    loadData(intl, stripes, 'processes', '/ldp/db/processes', setProcesses, setError);
   }, [intl, stripes]);
 
   if (error) {
@@ -21,10 +21,10 @@ function LogsRoute() {
   }
 
   const data = {
-    logs,
+    processes,
   };
 
-  return <Logs data={data} />;
+  return <Processes data={data} />;
 }
 
-export default LogsRoute;
+export default ProcessesRoute;

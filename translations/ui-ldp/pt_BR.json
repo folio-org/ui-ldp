@@ -1,5 +1,5 @@
 {
-    "meta.title": "Reportando",
+    "meta.title": "Relatórios",
     "something-went-wrong": "Algo deu errado.",
     "refresh": "Atualizar",
     "error.http": "Erro de HTTP: status {status} ({text}) -- {detail}",
@@ -45,7 +45,7 @@
     "placeholder.column": "(Coluna)",
     "nav": "Navegação",
     "permission.settings.record-limits": "Configurações (Relatórios): Pode modificar os limites de registro padrão",
-    "permission.settings.table-availability": "Configurações (Relatórios): Pode selecionar quais tabelas estão disponíveis para pesquisa",
+    "permission.settings.table-availability": "Configurações (Relatórios): Pode selecionar quais tabelas estão disponíveis para busca",
     "settings.dbinfo": "Configuração do banco de dados",
     "settings.dbinfo.url": "URL do banco de dados",
     "settings.dbinfo.user": "Nome de usuário",

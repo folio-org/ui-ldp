@@ -14,7 +14,7 @@ function TemplatedQueries({ queries }) {
   function navigateToQuery(q) {
     const qname = templatedQueryName(q);
     const existing = ldp.tqTabs.filter(tab => tab.name === qname);
-    if (existing.length === 0) ldp.tqTabs.push({ ...q, name: qname });
+    if (existing.length === 0) ldp.tqTabs.push({ ...q, name: qname, state: {} });
     history.push(`/ldp/tq/${qname}`);
   }
 

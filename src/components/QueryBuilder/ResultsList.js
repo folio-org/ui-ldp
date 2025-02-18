@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { exportCsv } from '@folio/stripes/util';
-import { Button, MultiColumnList } from '@folio/stripes/components';
+import { Button, MultiColumnList, exportToCsv } from '@folio/stripes/components';
 import css from './QueryBuilder.css';
 
 
@@ -24,11 +23,17 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
     });
   }
 
+  // I don't understand why it's necessary to pass this in explicitly,
+  // but if we do not then MultiColumnList unhelpfully caches its
+  // calculated notion of what columns to display, so that switching
+  // between report-result tabs shows the wrong columns.
+  const visibleColumns = data[0] ? Object.keys(data[0]) : [];
+
   const maybeExportCsv = (qr) => {
     if (qr.isComplete) {
-      exportCsv(qr.resp, {});
+      exportToCsv(qr.resp, {});
     } else {
-      searchWithoutLimit(r => exportCsv(r.resp, {}));
+      searchWithoutLimit(r => exportToCsv(r.resp, {}));
     }
   };
 
@@ -51,7 +56,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
           <FormattedMessage id="ui-ldp.button.csv" />
         </Button>
       </div>
-      <MultiColumnList contentData={data} formatter={formatter} virtualize autosize />
+      <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
     </>
   );
 };

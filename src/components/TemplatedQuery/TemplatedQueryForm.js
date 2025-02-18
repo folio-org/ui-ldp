@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
-import { TextField, Datepicker, Select, /* AutoSuggest, */ Button, Accordion } from '@folio/stripes/components';
+import { TextField, Datepicker, Select, AutoSuggest, Button, Accordion } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
 import { createReportRepo } from '../../util/repoTypes';
 import ResultsList from '../QueryBuilder/ResultsList';
@@ -16,11 +16,8 @@ function type2component(param) {
     return [TextField, 'DEFAULT'];
   } else if (param['controlled.options'] && !param['controlled.allowOtherValues']) {
     return [Select, 'Select'];
-    /*
-  // For now, we don't use AutoSuggest, as it doesn't work inside a react-final-form: see UILDP-147
   } else if (param['controlled.options'] && param['controlled.allowOtherValues']) {
     return [AutoSuggest, 'AutoSuggest'];
-    */
   } else {
     return [TextField, 'TextField'];
   }

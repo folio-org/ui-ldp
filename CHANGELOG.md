@@ -1,5 +1,24 @@
 # Change history for ui-ldp
 
+## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-01-17)
+
+* **BREAKING**: upgrade to Stripes v10. Fixes UILDP-160.
+
+## [2.5.0](https://github.com/folio-org/ui-ldp/tree/v2.5.0) (2025-01-17)
+
+* Change import of `exportToCsv` from `stripes-util` to `stripes-components`. Refs UILDP-150.
+* Display information about the underlying MetaDB database. Useful for operations. Fixes UILDP-148.
+* Migrate to shared CI workflows. Fixes UILDP-159.
+* Avoid "TypeError: can't convert undefined to object" when report finds no rows. Fixes UILDP-163.
+* Politely explain why Metadb-only features are unavailable when using LDP Classic. Fixes UILDP-162.
+
+## [2.4.0](https://github.com/folio-org/ui-ldp/tree/v2.4.0) (2024-12-02)
+
+* Support `<AutoSuggest>` parameters in templated queries. Fixes UILDP-110.
+* Recursively traverse nominated GitHub directories for reports. Fixes UILDP-104.
+* Report results are now persisted in dynamic tabs. Fixes UILDP-139.
+* Report-repository configuration now allows directory to be left blank (or specified as `/`) to indicate the top level of the repository. Fixes UILDP-156.
+
 ## [2.3.0](https://github.com/folio-org/ui-ldp/tree/v2.3.0) (2024-10-17)
 
 * When choosing a table in the Query Builder, the set of options is now filtered according to whether name includes what the user has types, not by whether the name starts with that string. Fixes UILDP-137.
