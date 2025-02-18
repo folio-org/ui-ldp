@@ -1,0 +1,12 @@
+.noJsonError {
+    font-size: 125%;
+    color: #600;
+    background-color: #ffe0e0;
+    padding: 1em 3em;
+    margin: 2em 6em;
+    border: 1px solid #600;
+}
+
+.centerContainer { text-align: center; }
+.center { display: inline-block; }
+.right { float: right; }

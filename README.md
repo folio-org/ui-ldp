@@ -1,6 +1,6 @@
 # ui-ldp
 
-Copyright (C) 2020-2022 The Open Library Foundation
+Copyright (C) 2020-2025 The Open Library Foundation
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for more information.
 
@@ -14,6 +14,7 @@ This software is distributed under the terms of the Apache License, Version 2.0.
     * [Use of mod-configuration](#use-of-mod-configuration)
 * [Permissions](#permissions)
 * [Database issues](#database-issues)
+* [Migrating saved queries from GitHub to mod-settings](#migrating-saved-queries-from-github-to-mod-settings)
 * [Additional information](#additional-information)
     * [Other documentation](#other-documentation)
     * [Code of Conduct](#code-of-conduct)
@@ -81,6 +82,11 @@ The `settings.ldp.enabled` permission ("Settings (LDP): Can view settings") shou
 In the LDP database, the `srs_marctab` table uses a special index which is not yet supported by the LDP app, and as a result it could put a lot of load on the LDP database. To prevent this, go to **Settings** > **LDP** > **Table availability**m and under **Schema `public`**, check `srs_marctab`. This will disable that table in the LDP app. (In the future we plan for the LDP app to support the `srs_marctab` table fully.)
 
 For any local tables that are visible in the LDP App, indexes should be created on all columns. Again this will avoid putting too much load on the database. In the future we plan for the LDP App to disable filtering automatically on columns that do not have indexes (see [UILDP-52](https://issues.folio.org/browse/UILDP-52).)
+
+
+## Migrating saved queries from GitHub to mod-settings
+
+From v1.6.0 until 1.9.0, this module supported saved queries which were stored in GitHub repositories. As of v1.10.0, queries are now stored in FOLIO itself, using mod-settings. When migrating from an older version of ui-courses to v1.10.0 or higher, it is necessary to migrate the existing saved queries from GitHub to mod-settings. [The `folio-port-ldp-queries` script](bin) is provided to do this.
 
 
 ## Additional information

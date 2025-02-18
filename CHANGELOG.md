@@ -1,9 +1,87 @@
 # Change history for ui-ldp
 
-## 1.11.0 (IN PROGRESS)
+## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-01-17)
 
-* Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
-* List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
+* **BREAKING**: upgrade to Stripes v10. Fixes UILDP-160.
+
+## [2.5.0](https://github.com/folio-org/ui-ldp/tree/v2.5.0) (2025-01-17)
+
+* Change import of `exportToCsv` from `stripes-util` to `stripes-components`. Refs UILDP-150.
+* Display information about the underlying MetaDB database. Useful for operations. Fixes UILDP-148.
+* Migrate to shared CI workflows. Fixes UILDP-159.
+* Avoid "TypeError: can't convert undefined to object" when report finds no rows. Fixes UILDP-163.
+* Politely explain why Metadb-only features are unavailable when using LDP Classic. Fixes UILDP-162.
+
+## [2.4.0](https://github.com/folio-org/ui-ldp/tree/v2.4.0) (2024-12-02)
+
+* Support `<AutoSuggest>` parameters in templated queries. Fixes UILDP-110.
+* Recursively traverse nominated GitHub directories for reports. Fixes UILDP-104.
+* Report results are now persisted in dynamic tabs. Fixes UILDP-139.
+* Report-repository configuration now allows directory to be left blank (or specified as `/`) to indicate the top level of the repository. Fixes UILDP-156.
+
+## [2.3.0](https://github.com/folio-org/ui-ldp/tree/v2.3.0) (2024-10-17)
+
+* When choosing a table in the Query Builder, the set of options is now filtered according to whether name includes what the user has types, not by whether the name starts with that string. Fixes UILDP-137.
+
+## [2.2.0](https://github.com/folio-org/ui-ldp/tree/v2.2.0) (2024-09-20)
+
+* Correctly read configuration (disabled tables and default result sizes) from mod-settings. Fixes UILDP-144.
+* **Temporarily** use a simple textbox instead of `<AutoSuggest>` in generated query forms. Addresses UILDP-147.
+* Closing the results list from a "Run report" query no longer clears entered parameters. Fixes UILDP-138.
+* Support GitLab as well as GitHub as a source for templated reports. Fixes UILDP-132.
+* When there are no tables in the selected schema (e.g. because a back-end problems reports no tables at all), the UI is now robust against this condition. Fixes UILDP-151.
+* Queries that have been saved for the first time no longer show "Invalid date" in the Date Last Updated field in the Load Query list. Fixes UILDP-152.
+
+## [2.1.0](https://github.com/folio-org/ui-ldp/tree/v2.1.0) (2024-03-19)
+
+* Remove unnecessary `cross-fetch` dependency which may be interfering with new authentication regimen. Fixes UILDP-145.
+
+## [2.0.1](https://github.com/folio-org/ui-ldp/tree/v2.0.1) (2023-11-16)
+
+* In settings page **Report Repositories**, separate individual repositories. Fixes UILDP-120.
+* Permissions names changed from "LDP" to "Reporting" to match the rest of the UI. Fixes UILDP-119.
+* Available reports are now sorted correctly. Fixes UILDP-122.
+* Reports lacking JSON metadata are no longer listed as available. Fixes UILDP-123.
+* Permission names tweaked to avoid obsolete reference to "LDP", and make internal permissions used by mod-settings invisible. Fixes UILDP-127.
+* Old `scripts` directory merged into `bin`. Fixes UILDP-128.
+* Report metadata files can specify default values for report parameters. Fixes UILDP-124.
+* Report metadata files can specify that report parameters are disabled. Fixes UILDP-125.
+* Results from query-builder appear in place of, rather than below, the query for. Fixes UILDP-118, though we will revisit this UX in a future release.
+* When adding the initial report repository', `+` no longer creates two empty templates. Fixes UILDP-126.
+* Submitting a query from the builder, then closing the results, no longer resets to the last loaded query. Fixes UILDP-130.
+* List of available schemas in query-builder is now sorted. Fixes UILDP-131.
+* Duplicate result-summary lines are no longer displayed when running a report. Fixes UILDP-134.
+
+## [2.0.0](https://github.com/folio-org/ui-ldp/tree/v2.0.0) (2023-09-30)
+
+* _Infrastructure changes_
+  * **BREAKING**: upgrade Stripes to v9 and React to v18. Fixes UILDP-102.
+  * **BREAKING**: bump `react-intl` to `v6.4.4`. Refs UILDP-109.
+  * Update Node.js to v18 in GitHub Actions. Fixes UILDP-106.
+  * Leverage cookie-based authentication in all API requests. Fixes UILDP-77.
+* Support for MetaDB
+  * Port ui-ldp to work with MetaDB as well as LDP Classic. Fixes UILDP-92.
+* _New feature: reports_
+  * Settings page for maintaining set of GitHub repos containing reports. Fixes UILDP-97.
+  * New "Run report" tab that lists available Templated Queries. Fixes UILDP-98.
+  * Create dynamic tabs for selected reports. Fixes UILDP-99.
+  * Handle form generation and filling for reports. Fixes UILDP-105.
+  * Show results of running a report. Fixes UILDP-100.
+  * Number of records retrieved for reports is limited according to configured parameters. Fixes UILDP-112.
+  * Download results of running a query as CSV. Fixes UILDP-113.
+  * Add documentation of [how to author reports and their metadata](doc/reports.md). Fixes UILDP-114.
+* _Bug fixes_
+  * List all saved queries (not just the first ten), sorted alphabetically. Fixes UILDP-96.
+  * `module.ldp.enabled` and `settings.ldp.enabled` permissionss are no longer visible, in accordance with standard practice in FOLIO. Fixes UILDP-95.
+  * All appropriate LDP permissions are now correctly included as subpermissions of `ui-ldp.all`. Fixes UILDP-108.
+* _Housekeeping_
+  * Rip out old redundant copy of stripes-smart-components/ConfigManager. Fixes UILDP-101.
+  * Update terminology in UI. Fixes UILDP-111.
+  * Change name of app to "Reporting"
+
+## [1.10.1](https://github.com/folio-org/ui-ldp/tree/v1.10.1) (2023-07-28)
+
+* Add `folio-port-ldp-queries` script, used to port old GitHub-based saved queries over to mod-settings. Fixes UILDP-103.
 
 ## [1.10.0](https://github.com/folio-org/ui-ldp/tree/v1.10.0) (2023-02-24)
 

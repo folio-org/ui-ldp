@@ -1,0 +1,13 @@
+.QuerySingleTable {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+}
+
+.ResultsSummary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  padding-top: 14px;
+}

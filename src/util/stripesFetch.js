@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-
 async function stripesFetch(stripes, path, options) {
   const { okapi } = stripes;
   let okapiUrl;

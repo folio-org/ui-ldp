@@ -1,15 +1,13 @@
 {
   "name": "@folio/ldp",
-  "version": "1.10.0",
+  "version": "3.0.0",
   "description": "Dashboard for the Library Data Platform",
   "main": "src/index.js",
   "repository": "",
   "license": "Apache-2.0",
-  "engines": {
-    "node": ">=8.9.0"
-  },
   "scripts": {
     "start": "stripes serve stripes.config.js",
+    "start2": "stripes serve --port 3010 --okapi https://indexdata-test-okapi.folio.indexdata.com --tenant indexdata stripes.config.js",
     "build": "stripes build --output ./output",
     "test-snapshot": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
     "test-snapshot-load": "echo Use test-snapshot instead",
@@ -21,7 +19,9 @@
     "kill": "yarn lsof | awk '{print $2}' | egrep '^[0-9]+$' | xargs kill",
     "lint": "eslint --format unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
+    "qqlint": "eslint -f unix  --rule '{\"@calm/react-intl/missing-formatted-message\":\"off\"}' .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-ldp ./translations/ui-ldp/compiled",
     "lintwatch": "esw . -w --color"
   },
   "devDependencies": {
@@ -35,13 +35,10 @@
     "@babel/preset-env": "^7.14.4",
     "@calm/eslint-plugin-react-intl": "^1.4.1",
     "@cypress/code-coverage": "^3.9.6",
-    "@folio/eslint-config-stripes": "^6.1.0",
-    "@folio/stripes": "^8.0.0",
-    "@folio/stripes-cli": "^2.7.0",
-    "@testing-library/jest-dom": "^5.11.1",
-    "@testing-library/react": "^11.0.2",
-    "@testing-library/user-event": "^12.1.10",
-    "babel-jest": "^26.3.0",
+    "@folio/eslint-config-stripes": "^7.0.0",
+    "@folio/jest-config-stripes": "^2.0.0",
+    "@folio/stripes": "^10.0.0",
+    "@folio/stripes-cli": "^4.0.0",
     "babel-plugin-require-context-hook": "^1.0.0",
     "chai": "^4.2.0",
     "cypress": "^6.4.0",
@@ -51,15 +48,13 @@
     "eslint-plugin-jest": "^24.1.3",
     "eslint-watch": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.6.3",
-    "jest-junit": "^12.0.0",
     "lodash": "^4.17.20",
     "mocha": "^6.1.3",
     "moment": "^2.29.0",
     "path": "^0.12.7",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-intl": "^5.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.4.4",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
     "sinon": "^7.3.2",
@@ -67,25 +62,26 @@
     "yakbak-proxy": "^1.7.0"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
-    "cross-fetch": "^3.0.6",
-    "final-form": "^4.20.1",
+    "chart.js": "^4.4.4",
+    "final-form": "^4.20.7",
     "final-form-arrays": "^3.0.2",
     "localforage": "^1.9.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
     "prop-types": "^15.6.0",
     "query-string": "^5.1.0",
-    "react-final-form": "^6.5.1",
-    "react-final-form-arrays": "^3.1.2",
+    "react-chartjs-2": "^5.2.0",
+    "react-final-form": "^6.5.9",
+    "react-final-form-arrays": "^3.1.3",
     "react-final-form-listeners": "^1.0.2",
     "redux-form": "^8.3.0",
     "uuid": "^8.3.1"
   },
   "peerDependencies": {
-    "@folio/stripes": "^6.0.0 || ^7.0.0 || ^8.0.0",
-    "react": "^16.0.0 || ^17.0.2",
-    "react-intl": "^5.8.0",
+    "@folio/stripes": "^10.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.4.4",
     "react-router-dom": "^5.2.0"
   },
   "stripes": {
@@ -96,20 +92,20 @@
     "displayName": "ui-ldp.meta.title",
     "route": "/ldp",
     "okapiInterfaces": {
-      "ldp-query": "1.1",
+      "ldp-query": "1.2",
       "settings": "1.0"
     },
     "icons": [
       {
         "name": "app",
         "alt": "Dashboard for the Library Data Platform",
-        "title": "LDP"
+        "title": "Reporting"
       }
     ],
     "permissionSets": [
       {
         "permissionName": "module.ldp.enabled",
-        "displayName": "UI: LDP module is enabled",
+        "displayName": "UI: Reporting module is enabled",
         "subPermissions": [
           "ldp.read",
           "ldp.config.read",
@@ -117,20 +113,19 @@
           "mod-settings.global.read.ui-ldp.admin",
           "mod-settings.global.read.ui-ldp.queries"
         ],
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "settings.ldp.enabled",
-        "displayName": "Settings (LDP): Can view settings",
+        "displayName": "Settings (Reporting): Can view settings",
         "subPermissions": [
-          "settings.enabled",
-          "mod-settings.global.read.ui-ldp.admin"
+          "settings.enabled"
         ],
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "ui-ldp.settings.record-limits",
-        "displayName": "Settings (LDP): Can modify default record limits",
+        "displayName": "Settings (Reporting): Can modify default record limits",
         "subPermissions": [
           "settings.ldp.enabled",
           "mod-settings.entries.item.post",
@@ -142,7 +137,7 @@
       },
       {
         "permissionName": "ui-ldp.settings.table-availability",
-        "displayName": "Settings (LDP): Can select which tables are available to search",
+        "displayName": "Settings (Reporting): Can select which tables are available to search",
         "subPermissions": [
           "settings.ldp.enabled",
           "mod-settings.entries.item.post",
@@ -154,7 +149,17 @@
       },
       {
         "permissionName": "ui-ldp.settings.dbinfo",
-        "displayName": "Settings (LDP): Can modify LDP database connection details",
+        "displayName": "Settings (Reporting): Can modify Reporting database connection details",
+        "subPermissions": [
+          "settings.ldp.enabled",
+          "ldp.config.read",
+          "ldp.config.edit"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.settings.tqrepos",
+        "displayName": "Settings (Reporting): Can modify templated-query repos configuration",
         "subPermissions": [
           "settings.ldp.enabled",
           "ldp.config.read",
@@ -164,34 +169,47 @@
       },
       {
         "permissionName": "ui-ldp.all",
-        "displayName": "LDP: All permissions",
+        "displayName": "Reporting: All permissions",
         "subPermissions": [
           "module.ldp.enabled",
           "ui-ldp.settings.record-limits",
           "ui-ldp.settings.table-availability",
-          "ui-ldp.settings.dbinfo"
+          "ui-ldp.settings.dbinfo",
+          "ui-ldp.settings.tqrepos",
+          "mod-settings.global.write.ui-ldp.queries",
+          "mod-settings.global.write.ui-ldp.dashboards"
         ],
         "visible": true
       },
       {
         "permissionName": "mod-settings.global.read.ui-ldp.admin",
-        "displayName": "Settings: read LDP administrative settings",
-        "visible": true
+        "displayName": "Settings (Reporting): read Reporting administrative settings",
+        "visible": false
       },
       {
         "permissionName": "mod-settings.global.write.ui-ldp.admin",
-        "displayName": "Settings: write LDP administrative settings",
-        "visible": true
+        "displayName": "Settings (Reporting): write Reporting administrative settings",
+        "visible": false
       },
       {
         "permissionName": "mod-settings.global.read.ui-ldp.queries",
-        "displayName": "Settings: browse and load LDP saved queries",
-        "visible": true
+        "displayName": "Settings (Reporting): browse and load Reporting saved queries",
+        "visible": false
       },
       {
         "permissionName": "mod-settings.global.write.ui-ldp.queries",
-        "displayName": "Settings: create and update LDP saved queries",
-        "visible": true
+        "displayName": "Settings (Reporting): create and update Reporting saved queries",
+        "visible": false
+      },
+      {
+        "permissionName": "mod-settings.global.read.ui-ldp.dashboards",
+        "displayName": "Read dashboards and charts",
+        "visible": false
+      },
+      {
+        "permissionName": "mod-settings.global.write.ui-ldp.dashboards",
+        "displayName": "Create, update and delete dashboards and charts",
+        "visible": false
       }
     ]
   }
