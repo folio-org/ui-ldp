@@ -53,7 +53,7 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
     "sinon": "^7.3.2",
@@ -79,7 +79,7 @@
     "@folio/stripes": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-router-dom": "^5.2.0"
   },
   "stripes": {

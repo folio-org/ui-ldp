@@ -3,6 +3,7 @@
 ## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-01-17)
 
 * **BREAKING**: upgrade to Stripes v10. Fixes UILDP-160.
+* **BREAKING**: upgrade to react-intl v7.1.5. Fixes UILDP-161.
 
 ## [2.5.0](https://github.com/folio-org/ui-ldp/tree/v2.5.0) (2025-01-17)
 
