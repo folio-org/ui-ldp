@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [3.0.1](https://github.com/folio-org/ui-ldp/tree/v3.0.1) (IN PROGRESS)
+## [3.0.1](https://github.com/folio-org/ui-ldp/tree/v3.0.1) (2025-03-13)
 
 * When running reports, large record sets (up to 10000 records) are correctly exported. Fixes UILDP-164.
 
