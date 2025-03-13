@@ -1,6 +1,10 @@
 # Change history for ui-ldp
 
-## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-01-17)
+## [3.0.1](https://github.com/folio-org/ui-ldp/tree/v3.0.1) (IN PROGRESS)
+
+* When running reports, large record sets (up to 10000 records) are correctly exported. Fixes UILDP-164.
+
+## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-03-11)
 
 * **BREAKING**: upgrade to Stripes v10. Fixes UILDP-160.
 * **BREAKING**: upgrade to react-intl v7.1.5. Fixes UILDP-161.
