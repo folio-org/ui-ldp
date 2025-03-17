@@ -11,6 +11,7 @@ import QuerySingleTable from './QuerySingleTable';
 import ResultsList from './ResultsList';
 import loadResults from '../../util/loadResults';
 import SaveQueryModal from './SaveQueryModal';
+import css2 from './QueryBuilder.css';
 
 
 let _savedValues; // Private to stateMayHaveChanged
@@ -94,7 +95,9 @@ function QueryBuilder({ ldp, initialState, stateHasChanged, metadataHasChanged, 
             const title = initialState.META?.displayName;
             return (
               <Pane defaultWidth="fill" paneTitle={title} dismissible onClose={() => setQueryResponse()}>
-                <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
+                <div className={css2.container}>
+                  <ResultsList results={queryResponse} searchWithoutLimit={searchWithoutLimit} />
+                </div>
               </Pane>
             );
           }
