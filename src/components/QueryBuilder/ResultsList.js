@@ -38,7 +38,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
   };
 
   return (
-    <div className={css.container}>
+    <>
       <div className={css.ResultsSummary}>
         <span data-cy="results.message">
           {results.isComplete ?
@@ -62,7 +62,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
           <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
