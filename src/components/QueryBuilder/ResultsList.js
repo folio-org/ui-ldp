@@ -38,33 +38,31 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
   };
 
   return (
-    <>
-      <div className={css.container}>
-        <div className={css.ResultsSummary}>
-          <span data-cy="results.message">
-            {results.isComplete ?
-              <FormattedMessage id="ui-ldp.found-records" values={{ count: results.count }} /> :
-              <FormattedMessage id="ui-ldp.found-more-than" values={{ count: results.count }} />
-            }
-          </span>
-          <Button
-            aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
-            disabled={!data.length}
-            onClick={() => maybeExportCsv(results)}
-            xstyle={{ marginTop: '-1em' }}
-            data-cy="results.downloadCSV"
-          >
-            <FormattedMessage id="ui-ldp.button.csv" />
-          </Button>
-        </div>
-        <div className={css.mclFlexDescendent}>
-          {/* the next div is non-flex, gives autosizer something to expand against */}
-          <div className={css.mclParent}>
-            <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
-          </div>
+    <div className={css.container}>
+      <div className={css.ResultsSummary}>
+        <span data-cy="results.message">
+          {results.isComplete ?
+            <FormattedMessage id="ui-ldp.found-records" values={{ count: results.count }} /> :
+            <FormattedMessage id="ui-ldp.found-more-than" values={{ count: results.count }} />
+          }
+        </span>
+        <Button
+          aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
+          disabled={!data.length}
+          onClick={() => maybeExportCsv(results)}
+          xstyle={{ marginTop: '-1em' }}
+          data-cy="results.downloadCSV"
+        >
+          <FormattedMessage id="ui-ldp.button.csv" />
+        </Button>
+      </div>
+      <div className={css.mclFlexDescendent}>
+        {/* the next div is non-flex, gives autosizer something to expand against */}
+        <div className={css.mclParent}>
+          <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
