@@ -56,7 +56,12 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
           <FormattedMessage id="ui-ldp.button.csv" />
         </Button>
       </div>
-      <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
+      <div className={css.mclFlexDescendent}>
+        {/* the next div is non-flex, gives autosizer something to expand against */}
+        <div className={css.mclParent}>
+          <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
+        </div>
+      </div>
     </>
   );
 };
