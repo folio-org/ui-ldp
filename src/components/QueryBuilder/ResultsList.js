@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, MultiColumnList, exportToCsv } from '@folio/stripes/components';
 import css from './QueryBuilder.css';
-import css2 from './MCLPartial.css';
 
 
 // NULL is NULL all over the world, and does not need localizing
@@ -40,7 +39,7 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
 
   return (
     <>
-      <div className={`${css.ResultsSummary} ${css2.container}`}>
+      <div className={`${css.ResultsSummary} ${css.container}`}>
         <span data-cy="results.message">
           {results.isComplete ?
             <FormattedMessage id="ui-ldp.found-records" values={{ count: results.count }} /> :
@@ -56,9 +55,9 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
         >
           <FormattedMessage id="ui-ldp.button.csv" />
         </Button>
-        <div className={css2.mclFlexDescendent}>
+        <div className={css.mclFlexDescendent}>
           {/* the next div is non-flex, gives autosizer something to expand against */}
-          <div className={css2.mclParent}>
+          <div className={css.mclParent}>
             <MultiColumnList contentData={data} formatter={formatter} visibleColumns={visibleColumns} virtualize autosize />
           </div>
         </div>
