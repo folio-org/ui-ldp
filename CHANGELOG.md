@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (IN PROGRESS)
+## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
 
 * When displaying a results table, it is now sized to fit the area available after the head matter has been rendered. _Many_ thanks to @JohnC-80, without whom I would never, ever have figured out how to do this. Fixes UILDP-136.
 
