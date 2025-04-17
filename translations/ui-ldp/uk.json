@@ -19,7 +19,7 @@
     "label.order-by-column": "Order by column",
     "label.limit-results": "Limit number of results",
     "direction.asc": "Ascending",
-    "direction.desc": "Descending",
+    "direction.desc": "За спаданням",
     "nulls.start": "Nulls at start",
     "nulls.end": "Nulls at end",
     "placeholder.value": "(Value)",
