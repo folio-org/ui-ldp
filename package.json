@@ -1,13 +1,14 @@
 {
   "name": "@folio/ldp",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Dashboard for the Library Data Platform",
   "main": "src/index.js",
   "repository": "",
   "license": "Apache-2.0",
   "scripts": {
     "start": "stripes serve stripes.config.js",
-    "start2": "stripes serve --port 3010 --okapi https://indexdata-test-okapi.folio.indexdata.com --tenant indexdata stripes.config.js",
+    "start-idtest": "stripes serve --port 3010 --okapi https://indexdata-test-okapi.folio.indexdata.com --tenant indexdata stripes.config.js",
+    "start-snapshot": "stripes serve --port 3011 --okapi https://folio-snapshot-okapi.dev.folio.org --tenant diku",
     "build": "stripes build --output ./output",
     "test-snapshot": "stripes serve --coverage --port 3001 --okapi https://folio-snapshot-okapi.dev.folio.org & pid=$! && cypress run; status=$?; kill $pid; echo Exiting with status $status; exit $status",
     "test-snapshot-load": "echo Use test-snapshot instead",
@@ -54,7 +55,7 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
     "sinon": "^7.3.2",
@@ -81,7 +82,7 @@
     "@folio/stripes": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-router-dom": "^5.2.0"
   },
   "stripes": {

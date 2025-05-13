@@ -9,6 +9,7 @@ import loadReport from '../../util/loadReport';
 import BigError from '../BigError';
 import TemplatedQueryForm from './TemplatedQueryForm';
 import css from './TemplatedQuery.css';
+import css2 from '../QueryBuilder/QueryBuilder.css';
 
 function TemplatedQuery({ query }) {
   const [toggle, setToggle] = useState(false); // To force a re-render when the data changes
@@ -29,17 +30,19 @@ function TemplatedQuery({ query }) {
 
   return (
     <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
-      {error ? (
-        <BigError message={error} />
-      ) : (
-        !query.json ? (
-          <div className={css.noJsonError}>
-            <FormattedMessage id="ui-ldp.templated-queries.no-json" />
-          </div>
+      <div className={css2.container}>
+        {error ? (
+          <BigError message={error} />
         ) : (
-          <TemplatedQueryForm query={query} onSubmit={onSubmit} data={data} />
-        )
-      )}
+          !query.json ? (
+            <div className={css.noJsonError}>
+              <FormattedMessage id="ui-ldp.templated-queries.no-json" />
+            </div>
+          ) : (
+            <TemplatedQueryForm query={query} onSubmit={onSubmit} data={data} />
+          )
+        )}
+      </div>
     </Pane>
   );
 }

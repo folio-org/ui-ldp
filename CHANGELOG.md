@@ -1,8 +1,21 @@
 # Change history for ui-ldp
 
-## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-01-17)
+## [3.1.0](https://github.com/folio-org/ui-ldp/tree/v3.1.0) (IN PROGRESS)
+
+* Recursively traverse nominated GitLab directories for reports. Fixes UILDP-157.
+
+## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
+
+* When displaying a results table, it is now sized to fit the area available after the head matter has been rendered. _Many_ thanks to @JohnC-80, without whom I would never, ever have figured out how to do this. Fixes UILDP-136.
+
+## [3.0.1](https://github.com/folio-org/ui-ldp/tree/v3.0.1) (2025-03-13)
+
+* When running reports, large record sets (up to 10000 records) are correctly exported. Fixes UILDP-164.
+
+## [3.0.0](https://github.com/folio-org/ui-ldp/tree/v3.0.0) (2025-03-11)
 
 * **BREAKING**: upgrade to Stripes v10. Fixes UILDP-160.
+* **BREAKING**: upgrade to react-intl v7.1.5. Fixes UILDP-161.
 
 ## [2.5.0](https://github.com/folio-org/ui-ldp/tree/v2.5.0) (2025-01-17)
 

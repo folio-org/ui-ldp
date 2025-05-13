@@ -26,7 +26,7 @@ const loadReport = async (intl, stripes, url, params, setQueryResponse, setError
 
   loadData(intl, stripes, 'report', '/ldp/db/reports', setData, setError, {
     method: 'POST',
-    body: JSON.stringify({ url, params, limit }),
+    body: JSON.stringify({ url, params, limit: parseInt(limit, 10) + 1 }),
   });
 };
 
