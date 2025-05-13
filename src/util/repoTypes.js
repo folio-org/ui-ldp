@@ -29,11 +29,11 @@ class QueryRepoGitHub extends QueryRepo {
 class QueryRepoGitLab extends QueryRepo {
   static name() { return 'GitLab'; }
   webUrl() { return `https://gitlab.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
-  apiDirectoryPath() { return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/tree?ref=${this.branch}&path=${this.dir}`; }
-  mapApiResponse(res) { return res; }
+  apiDirectoryPath() { return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/tree?ref=${this.branch}&path=${this.dir}&recursive=true`; }
+  mapApiResponse(res) { return res.filter(e => e.type === 'blob').map(e => ({ ...e, name: e.path })); }
 
   rawFilePath(name) {
-    const encodedPath = encodeURIComponent(`${this.dir}/${name}`);
+    const encodedPath = encodeURIComponent(`${name}`);
     return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/files/${encodedPath}/raw?ref=${this.branch}`;
   }
 
