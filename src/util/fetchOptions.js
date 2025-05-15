@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import Handlebars from 'handlebars';
-import vocabularies from './vocabDescriptors';
+import vocabDescriptors from './vocabDescriptors';
 
 
 async function fetchOptions(okapiKy, val) {
@@ -9,7 +9,7 @@ async function fetchOptions(okapiKy, val) {
   if (typeof val !== 'string') {
     params = val;
   } else {
-    params = vocabularies[val];
+    params = vocabDescriptors[val];
     if (!params) {
       // eslint-disable-next-line no-console
       console.warn('no such controlled vocabulary: ', val);
