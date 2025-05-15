@@ -118,18 +118,19 @@ Each element of the `parameters` array is an object with the following keys:
   * `date` -- a date, which is chosen using a date-picker.
 * `default` -- if provided, a string or number that is placed into the generated form as a default value for the parameter.
 * `controlled.options` -- if the type is `text` and this is provided, then it must be an array of strings from which the user will be invited to select one.
-* `controlled.allowOtherValues` -- if provided and true in a parameter with `controlled.options`, then the user is able to enter other values that those provided in the dropdown.
-* `disabled` -- if provided and true, then the parameter is disabled, and will be omitted from the generated form.
-* `controlled.fetchOptions` -- if the type is `text` and this is provuded, then it is a specification for how the UI should fetch option values to be presented to the user. It can take two forms:
-  * It may be an object with the following keys:
-    * `wsapiPath` -- the path of the WSAPI call that must be made to an Okapi-mediated service to obtain the elements of the controlled vocabulary
-    * `query` -- if provided, a value to be used as the `query` parameter of the WSAPI call.
-    * `sortSpec` -- if provided, a CQL sort-specification to be used in the WSAPI call. If this is provided but no query is specified, then `cql.allRecords=1` (find all records) is used as the query.
+* `controlled.allowOtherValues` -- if provided and true, occurring in a parameter with `controlled.options`, then the user is able to enter other values that those provided in the dropdown.
+* `controlled.fetchOptions` -- if the type is `text` and this is provided, then it is a specification for how the UI should fetch option values to be presented to the user, by reference to the running FOLIO system. The value of this parameter can take two forms:
+  * It may be a full specification: an object with the following keys:
+    * `wsapiPath` -- the path of the WSAPI call that must be made to an Okapi-mediated service to obtain the elements of the controlled vocabulary.
+    * `query` -- if provided, a value to be used as the `query` parameter of the WSAPI call. This is useful, for example, is searching in mod-settings and limiting to a specific scope.
+    * `sortSpec` -- if provided, a CQL sort-specification to be used in the WSAPI call. If this is provided but no `query` is specified, then `cql.allRecords=1` (find all records) is used as the query.
     * `limit` -- if provided, a record-count limit to be passed as the `limit` parameter of the WSAPI call. When this is not specified, different services have different default behaviour, but defaulting to ten records is common.
-    * `resultPath` -- the path to the part of the WSAPI's HTTP response that contains the records. May be faceted, e.g. `data.records` if the list of records is called `records` and it held within a `data` object.
+    * `resultPath` -- the path to the part of the WSAPI's HTTP response that contains the records. Can be faceted, e.g. if the response has a `data` obeject which contains a list of records is called `recs`, then `data.recs` may be used.
     * `queryField` -- the name of the field within the result records whose value should be used in SQL searches -- typically `id`.
     * `displaySpec` -- a specification for how to build string shown to user for each option. This takes the form of [a Handlebars template](https://handlebarsjs.com/guide/) -- often just `{{name}}` when the records have a `name` field.
   * If the `controlled.fetchOptions` value is a simple string, then it is taken to be a reference to one of a small number of pre-packaged controlled vocabularies (`locations`, `userGroups`, etc.) which are [defined in the source code](https://github.com/folio-org/ui-ldp/blob/master/src/util/vocabDescriptors.js). These pre-packaged vocabularies are also useful examples of how the full specification facility can be used. The pre-packaged vocabularies will likely cover most requirements.
+* `disabled` -- if provided and true, then the parameter is disabled, and will be omitted from the generated form.
+
 
 ## Setting up the Reporting app to find your report
 
