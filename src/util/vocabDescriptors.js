@@ -1,7 +1,7 @@
 // Controlled vocabularies for use in forms generated for user to supply Report parameters
 // See https://folio-org.atlassian.net/browse/UILDP-141
 //
-const vocabularies = {
+const vocabDescriptors = {
   holdingsTypes: {
     wsapiPath: 'holdings-types',
     query: undefined,
@@ -32,4 +32,4 @@ const vocabularies = {
   },
 };
 
-export default vocabularies;
+export default vocabDescriptors;
