@@ -16,7 +16,6 @@ const vocabDescriptors = {
   },
 
   loanTypes: {
-    // https://folio-snapshot-okapi.dev.folio.org/loan-types?query=cql.allRecords=1 sortby name&limit=2000
     wsapiPath: 'loan-types',
     query: undefined,
     sortSpec: 'name',
@@ -27,7 +26,6 @@ const vocabDescriptors = {
   },
 
   materialTypes: {
-    // https://folio-snapshot-okapi.dev.folio.org/material-types?query=cql.allRecords=1%20sortby%20name&limit=2000
     wsapiPath: 'material-types',
     query: undefined,
     sortSpec: 'name',
@@ -38,7 +36,6 @@ const vocabDescriptors = {
   },
 
   statisticalCodes: {
-    // https://folio-snapshot-okapi.dev.folio.org/statistical-codes?query=cql.allRecords=1 sortby code&limit=2000
     wsapiPath: 'statistical-codes',
     query: undefined,
     sortSpec: 'code',
@@ -49,7 +46,6 @@ const vocabDescriptors = {
   },
 
   statisticalCodeTypes: {
-    // https://folio-snapshot-okapi.dev.folio.org/statistical-code-types?query=cql.allRecords=1 &limit=500
     wsapiPath: 'statistical-code-types',
     query: undefined,
     sortSpec: undefined,
@@ -60,7 +56,6 @@ const vocabDescriptors = {
   },
 
   locations: {
-    // https://folio-snapshot-okapi.dev.folio.org/locations?limit=3000&query=cql.allRecords%3D1+sortby+name
     wsapiPath: 'locations',
     query: undefined,
     sortSpec: 'name',
@@ -71,7 +66,6 @@ const vocabDescriptors = {
   },
 
   acquisitionUnits: {
-    // https://folio-snapshot-okapi.dev.folio.org/acquisitions-units/units?limit=2147483647&query=cql.allRecords%3D1 sortby name
     wsapiPath: 'acquisitions-units/units',
     query: undefined,
     sortSpec: 'name',
@@ -82,7 +76,6 @@ const vocabDescriptors = {
   },
 
   patronGroups: {
-    // https://folio-snapshot-okapi.dev.folio.org/groups?query=cql.allRecords=1 sortby group&limit=2000
     wsapiPath: 'groups',
     query: undefined,
     sortSpec: 'group',
