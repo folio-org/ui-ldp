@@ -17,7 +17,6 @@ async function fetchOptions(okapiKy, val) {
     }
   }
 
-  console.log('considering fetchOptions', params);
   const searchParams = {};
   if (params.query && params.sortSpec) {
     searchParams.query = params.query + ' sortby ' + params.sortSpec;
@@ -29,10 +28,8 @@ async function fetchOptions(okapiKy, val) {
   if (params.limit) {
     searchParams.limit = params.limit;
   }
-  console.log('searchParams =', searchParams);
 
   const resp = await okapiKy(params.wsapiPath, { throwHttpErrors: false, searchParams });
-  console.log('resp =', resp);
   if (!resp.ok) {
     // eslint-disable-next-line no-console
     console.warn('cannot fetch controlled vocabulary: ', params, `-- status ${resp.status}:`, await resp.text());
@@ -40,7 +37,6 @@ async function fetchOptions(okapiKy, val) {
   }
 
   const json = await resp.json();
-  console.log('json =', json);
   const data = get(json, params.resultPath);
   if (!data) {
     // eslint-disable-next-line no-console
@@ -48,10 +44,13 @@ async function fetchOptions(okapiKy, val) {
     return [];
   }
 
-  return data.map(record => ({
-    value: record[params.queryField],
-    label: Handlebars.compile(params.displaySpec)(record),
-  }));
+  return [
+    { value: '', label: '' },
+    ...data.map(record => ({
+      value: record[params.queryField],
+      label: Handlebars.compile(params.displaySpec)(record),
+    }))
+  ];
 }
 
 
