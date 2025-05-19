@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
+import { Paneset, Pane, TextField, MultiColumnList } from '@folio/stripes/components';
 import { useLdp } from '../../LdpContext';
 import templatedQueryName from '../../util/templatedQueryName';
 
@@ -12,6 +12,7 @@ function TemplatedQueries({ queries }) {
   const ldp = useLdp();
   const [sortedColumn, setSortedColumn] = useState('displayName');
   const [sortDirection, setSortDirection] = useState('ascending');
+  const [filterString, setFilterString] = useState('');
 
   function navigateToQuery(q) {
     const qname = templatedQueryName(q);
@@ -54,11 +55,21 @@ function TemplatedQueries({ queries }) {
     }
   });
 
+  const filteredQueries = queries.filter(q => {
+    return (q.json?.displayName.toLowerCase().includes(filterString.toLowerCase()) ||
+            q.filename.toLowerCase().includes(filterString.toLowerCase()));
+  });
+
   return (
     <Paneset>
       <Pane defaultWidth="fill" paneTitle={<FormattedMessage id="ui-ldp.templated-queries.select" />}>
+
+        <TextField
+          label={<FormattedMessage id="ui-ldp.templated-queries.filter" />}
+          onChange={ev => setFilterString(ev.target.value)}
+        />
         <MultiColumnList
-          contentData={queries}
+          contentData={filteredQueries}
           visibleColumns={['displayName', 'filename', 'repo']}
           columnMapping={{
             displayName: <FormattedMessage id="ui-ldp.templated-queries.column.displayName" />,

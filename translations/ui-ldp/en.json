@@ -102,6 +102,7 @@
   "settings.tqrepos.branch": "Branch of the specified repository",
   "settings.tqrepos.directory": "Directory within repository",
   "templated-queries.select": "Select report",
+  "templated-queries.filter": "Filter listed reports",
   "templated-queries.column.displayName": "Display name",
   "templated-queries.column.filename": "Filename",
   "templated-queries.column.repo": "Git repository",

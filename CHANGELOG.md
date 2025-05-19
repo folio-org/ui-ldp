@@ -7,6 +7,7 @@
 * Links from report forms to the underlying SQL queries and metadata work once more. Fixes UILDP-172.
 * While loading the list of reports, display a spinner instead of a premature empty-list message. Fixes UILDP-173.
 * Provide the ability to sort and filter the available reports. Fixes UILDP-142.
+* Allow user to filter the reports listed on the Run Report page. Fixes UILDP-174.
 
 ## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
 
