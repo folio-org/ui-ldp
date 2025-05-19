@@ -71,7 +71,7 @@ function mergeSQLandJSON(data) {
 }
 
 
-async function fetchTemplatedQueries(gitRepos, setQueries) {
+async function fetchTemplatedQueries(gitRepos, setLoaded, setQueries) {
   const filenamesWithConfig = await fetchTemplatedQueryFilenames(gitRepos);
 
   const promises = filenamesWithConfig.map(fc => {
@@ -106,6 +106,7 @@ async function fetchTemplatedQueries(gitRepos, setQueries) {
   const merged = mergeSQLandJSON(data);
   const withMetadata = merged.filter(x => x.json);
   withMetadata.sort((a, b) => a.json?.displayName.localeCompare(b.json?.displayName));
+  setLoaded(true);
   setQueries(withMetadata);
 }
 
