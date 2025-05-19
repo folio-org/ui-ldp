@@ -23,7 +23,7 @@ class QueryRepoGitHub extends QueryRepo {
   }
 
   rawFilePath(name) { return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${this.branch}/${name}`; }
-  urlBase(filename) { return `${this.webUrl()}/${filename}`; }
+  urlBase(filename) { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${filename}`; }
 }
 
 class QueryRepoGitLab extends QueryRepo {
@@ -37,7 +37,7 @@ class QueryRepoGitLab extends QueryRepo {
     return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/files/${encodedPath}/raw?ref=${this.branch}`;
   }
 
-  urlBase(filename) { return `${this.webUrl()}/${filename}`; }
+  urlBase(filename) { return `https://gitlab.com/${this.user}/${this.repo}/tree/${this.branch}/${filename}`; }
 }
 
 const repoTypes = {

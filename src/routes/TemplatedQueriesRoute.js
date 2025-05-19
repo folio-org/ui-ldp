@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStripes } from '@folio/stripes/core';
+import { Loading } from '@folio/stripes/components';
 import BigError from '../components/BigError';
 import TemplatedQueries from '../components/TemplatedQueries';
 import stripesFetch from '../util/stripesFetch';
@@ -9,6 +10,7 @@ import fetchTemplatedQueries from '../util/fetchTemplatedQueries';
 function TemplatedQueriesRoute() {
   const stripes = useStripes();
   const [error, setError] = useState();
+  const [loaded, setLoaded] = useState();
   const [gitRepos, setGitRepos] = useState();
   const [queries, setQueries] = useState([]);
 
@@ -29,7 +31,7 @@ function TemplatedQueriesRoute() {
 
   useEffect(() => {
     if (gitRepos) {
-      fetchTemplatedQueries(gitRepos, setQueries)
+      fetchTemplatedQueries(gitRepos, setLoaded, setQueries)
         .catch(e => {
           setError(e.toString());
         });
@@ -37,6 +39,7 @@ function TemplatedQueriesRoute() {
   }, [gitRepos]);
 
   if (error) return <BigError message={error} />;
+  if (!loaded) return <Loading size="large" />;
 
   return (
     <TemplatedQueries

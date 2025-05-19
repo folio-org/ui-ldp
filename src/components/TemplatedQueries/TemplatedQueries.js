@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -10,6 +10,8 @@ import templatedQueryName from '../../util/templatedQueryName';
 function TemplatedQueries({ queries }) {
   const history = useHistory();
   const ldp = useLdp();
+  const [sortedColumn, setSortedColumn] = useState('displayName');
+  const [sortDirection, setSortDirection] = useState('ascending');
 
   function navigateToQuery(q) {
     const qname = templatedQueryName(q);
@@ -17,6 +19,40 @@ function TemplatedQueries({ queries }) {
     if (existing.length === 0) ldp.tqTabs.push({ ...q, name: qname, state: {} });
     history.push(`/ldp/tq/${qname}`);
   }
+
+  function sortByColumn(name) {
+    if (sortedColumn === name) {
+      setSortDirection(sortDirection === 'ascending' ? 'descending' : 'ascending');
+    } else {
+      setSortedColumn(name);
+      setSortDirection('ascending');
+    }
+  }
+
+  function sortKey(r, sc) {
+    if (sc === 'displayName') {
+      return r.json?.displayName;
+    } else if (sc === 'filename') {
+      return r.filename;
+    } else if (sc === 'repo') {
+      return (r.config.type || 'github') + ':' + r.config.user + '/' + r.config.repo;
+    } else {
+      return r[sc];
+    }
+  }
+
+  queries.sort((a, b) => {
+    const av = sortKey(a, sortedColumn);
+    const bv = sortKey(b, sortedColumn);
+    if (av === bv) {
+      return 0;
+    } else if ((av < bv && sortDirection === 'ascending') ||
+               (av > bv && sortDirection === 'descending')) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
 
   return (
     <Paneset>
@@ -36,6 +72,9 @@ function TemplatedQueries({ queries }) {
             repo: r => <span><code>{r.config.type || 'github'}</code> {r.config.user}/{r.config.repo}</span>,
           }}
           onRowClick={(_, q) => navigateToQuery(q)}
+          sortedColumn={sortedColumn}
+          sortDirection={sortDirection}
+          onHeaderClick={(_, m) => sortByColumn(m.name)}
         />
       </Pane>
     </Paneset>

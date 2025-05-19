@@ -3,6 +3,10 @@
 ## [3.1.0](https://github.com/folio-org/ui-ldp/tree/v3.1.0) (IN PROGRESS)
 
 * Recursively traverse nominated GitLab directories for reports. Fixes UILDP-157.
+* Allow for dynamic choices in a templated SQL query based on FOLIO data. Fixes UILDP-141.
+* Links from report forms to the underlying SQL queries and metadata work once more. Fixes UILDP-172.
+* While loading the list of reports, display a spinner instead of a premature empty-list message. Fixes UILDP-173.
+* Provide the ability to sort and filter the available reports. Fixes UILDP-142.
 
 ## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
 
