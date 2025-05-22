@@ -5,7 +5,7 @@ const XLSX_MIMETYPE = 'application/vnd.openxmlformats-officedocument.spreadsheet
 
 export default function exportToExcel(objectArray, opts) {
   return exportToSpreadsheet(objectArray, opts, 'xlsx', 'Excel', (_fields, header) => {
-    // XXX `_fields` is not yet used
+    // XXX `_fields` is not yet supported
     const worksheet = XLSX.utils.json_to_sheet(objectArray, { skipHeader: !header });
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'FOLIO Reporting export');
