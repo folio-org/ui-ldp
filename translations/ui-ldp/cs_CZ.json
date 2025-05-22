@@ -131,5 +131,6 @@
     "error.load-updates": "Nepodařilo se načíst poslední aktualizace: {error}",
     "error.load-processes": "Nepodařilo se načíst dlouhodobé procesy: {error}",
     "error.load-logs": "Nepodařilo se načíst logy Metadb: {error}",
-    "error.not-metadb": "Tato funkce je k dispozici pouze z databáze Metadb, ale tato aplikace je připojena k LDP Classic"
+    "error.not-metadb": "Tato funkce je k dispozici pouze z databáze Metadb, ale tato aplikace je připojena k LDP Classic",
+    "templated-queries.filter": "Filter listed reports"
 }
