@@ -131,5 +131,6 @@
     "error.load-updates": "Kon recente updates niet invoeren: {error}",
     "error.load-processes": "Kan langlopende processen niet invoeren: {error}",
     "error.load-logs": "Invoer van Metadb-logboeken niet mogelijk: {error}",
-    "error.not-metadb": "Deze faciliteit is alleen beschikbaar vanuit een Metadb-database, maar deze app is verbonden met LDP Classic."
+    "error.not-metadb": "Deze faciliteit is alleen beschikbaar vanuit een Metadb-database, maar deze app is verbonden met LDP Classic.",
+    "templated-queries.filter": "Filter listed reports"
 }

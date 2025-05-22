@@ -131,5 +131,6 @@
     "error.load-updates": "تعذر تحميل التحديثات الأخيرة: {error}",
     "error.load-processes": "تعذر تحميل العمليات طويلة الأمد: {error}",
     "error.load-logs": "تعذر تحميل سجلات Metadb: {error}",
-    "error.not-metadb": "هذه الميزة متاحة فقط من قاعدة بيانات Metadb، ولكن هذا التطبيق متصل بـ LDP Classic"
+    "error.not-metadb": "هذه الميزة متاحة فقط من قاعدة بيانات Metadb، ولكن هذا التطبيق متصل بـ LDP Classic",
+    "templated-queries.filter": "Filter listed reports"
 }

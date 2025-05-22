@@ -131,5 +131,6 @@
     "error.load-updates": "Nie można załadować ostatnich aktualizacji: {error}",
     "error.load-processes": "Nie można załadować długotrwałych procesów: {error}",
     "error.load-logs": "Nie można załadować dzienników Metadb: {error}",
-    "error.not-metadb": "Ta funkcja jest dostępna tylko w bazie danych Metadb, ale ta aplikacja jest połączona z LDP Classic"
+    "error.not-metadb": "Ta funkcja jest dostępna tylko w bazie danych Metadb, ale ta aplikacja jest połączona z LDP Classic",
+    "templated-queries.filter": "Filtruj wyświetlone raporty"
 }

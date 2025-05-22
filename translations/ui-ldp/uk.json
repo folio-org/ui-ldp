@@ -12,10 +12,10 @@
     "nav.logs": "Логи",
     "nav.playground": "Playground",
     "heading.current-settings": "Current settings",
-    "label.schema": "Schema",
-    "label.table": "Table",
+    "label.schema": "Схема",
+    "label.table": "Таблиця",
     "label.filter-by-column": "Filter by column",
-    "label.show-columns": "Show columns",
+    "label.show-columns": "Показати колонки",
     "label.order-by-column": "Order by column",
     "label.limit-results": "Limit number of results",
     "direction.asc": "Ascending",
@@ -31,7 +31,7 @@
     "button.add-join-table": "Add join table",
     "found-records": "Found {count} records",
     "found-more-than": "Found more than {count} records",
-    "label.start-date": "Start date",
+    "label.start-date": "Дата початку",
     "label.end-date": "End date",
     "settings.record-limits": "Record limits",
     "settings.record-limits.default-show": "Default number to show",
@@ -131,5 +131,6 @@
     "error.load-updates": "Не вдалося завантажити останні оновлення: {error}",
     "error.load-processes": "Could not load long-running processes: {error}",
     "error.load-logs": "Could not load Metadb logs: {error}",
-    "error.not-metadb": "This facility is only available from a Metadb database, but this app is connected to LDP Classic"
+    "error.not-metadb": "This facility is only available from a Metadb database, but this app is connected to LDP Classic",
+    "templated-queries.filter": "Filter listed reports"
 }

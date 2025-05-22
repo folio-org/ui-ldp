@@ -131,5 +131,6 @@
     "error.load-updates": "无法加载最近的更新：{error}",
     "error.load-processes": "无法加载长期运行的进程：{error}",
     "error.load-logs": "无法加载 Metadb 日志： {error}",
-    "error.not-metadb": "该功能只能通过 Metadb 数据库使用，但本应用程序与 LDP Classic 相连。"
+    "error.not-metadb": "该功能只能通过 Metadb 数据库使用，但本应用程序与 LDP Classic 相连。",
+    "templated-queries.filter": "Filter listed reports"
 }
