@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { Button, MultiColumnList, exportToCsv } from '@folio/stripes/components';
+import { Button, MultiColumnList } from '@folio/stripes/components';
+import { exportToCsv, exportToExcel } from '../../stripes-components';
 import css from './QueryBuilder.css';
 
 
@@ -37,6 +38,14 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
     }
   };
 
+  const maybeExportExcel = (qr) => {
+    if (qr.isComplete) {
+      exportToExcel(qr.resp, {});
+    } else {
+      searchWithoutLimit(r => exportToExcel(r.resp, {}));
+    }
+  };
+
   return (
     <>
       <div className={css.ResultsSummary}>
@@ -46,15 +55,26 @@ const ResultsList = ({ results, searchWithoutLimit }) => {
             <FormattedMessage id="ui-ldp.found-more-than" values={{ count: results.count }} />
           }
         </span>
-        <Button
-          aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
-          disabled={!data.length}
-          onClick={() => maybeExportCsv(results)}
-          xstyle={{ marginTop: '-1em' }}
-          data-cy="results.downloadCSV"
-        >
-          <FormattedMessage id="ui-ldp.button.csv" />
-        </Button>
+        <span>
+          <Button
+            aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-csv' })}
+            disabled={!data.length}
+            onClick={() => maybeExportCsv(results)}
+            xstyle={{ marginTop: '-1em' }}
+            data-cy="results.downloadCSV"
+          >
+            <FormattedMessage id="ui-ldp.button.csv" />
+          </Button>
+          <Button
+            aria-label={intl.formatMessage({ id: 'ui-ldp.button.download-excel' })}
+            disabled={!data.length}
+            onClick={() => maybeExportExcel(results)}
+            xstyle={{ marginTop: '-1em' }}
+            data-cy="results.downloadExcel"
+          >
+            <FormattedMessage id="ui-ldp.button.excel" />
+          </Button>
+        </span>
       </div>
       <div className={css.mclFlexDescendent}>
         {/* the next div is non-flex, gives autosizer something to expand against */}
