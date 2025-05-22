@@ -8,6 +8,7 @@
 * While loading the list of reports, display a spinner instead of a premature empty-list message. Fixes UILDP-173.
 * Provide the ability to sort and filter the available reports. Fixes UILDP-142.
 * User can filter the reports listed on the Run Report page. Fixes UILDP-174.
+* Add support for exporting query results to Excel file. Fixes UILDP-20.
 
 ## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
 
