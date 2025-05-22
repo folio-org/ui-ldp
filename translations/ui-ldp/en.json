@@ -52,6 +52,8 @@
   "button.clear": "Clear",
   "button.csv": "CSV",
   "button.download-csv": "Download as CSV",
+  "button.excel": "Excel",
+  "button.download-excel": "Download as Excel",
   "button.add-join-table": "Add join table",
   "button.save": "Save",
   "button.cancel": "Cancel",
