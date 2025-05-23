@@ -9,6 +9,7 @@
 * Provide the ability to sort and filter the available reports. Fixes UILDP-142.
 * User can filter the reports listed on the Run Report page. Fixes UILDP-174.
 * Add support for exporting query results to Excel file. Fixes UILDP-20.
+* Switch from `xslt` dependency to maintained version `@e965/xslt` to fix security issues. Fixes UILDP-175.
 
 ## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
 
