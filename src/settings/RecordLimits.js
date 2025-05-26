@@ -94,7 +94,7 @@ function RecordLimits(props) {
                 name="maxExport"
                 label={label}
                 component={Select}
-                dataOptions={generateOptions(3, 3)}
+                dataOptions={generateOptions(3, 5)}
                 placeholder="---"
               />
             )}
