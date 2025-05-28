@@ -15,7 +15,11 @@ const _latestCommitOnBranch = {};
 class QueryRepoGitHub extends QueryRepo {
   static name() { return 'GitHub'; }
   webUrl() { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
-  apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/git/trees/${this.branch}?recursive=1`; }
+  apiDirectoryPath() {
+    // We send a dummy always-different parameter `t` in an attempt to defeat caching
+    return `https://api.github.com/repos/${this.user}/${this.repo}/git/trees/${this.branch}?recursive=1&t=${Date.now()}`;
+  }
+
   _key() { return `${this.user}:${this.repo}:${this.branch}`; } // PRIVATE, not part of API
   mapApiResponse(res) {
     // Side-effect: we remember the SHA1 for this tree, so we can use it later in rawFilePath
