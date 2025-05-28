@@ -8,11 +8,19 @@ class QueryRepo {
   }
 }
 
+// PRIVATE to class QueryRepoGitHub
+// Maps user:repo:branch to commit SHA
+const _latestCommitOnBranch = {};
+
 class QueryRepoGitHub extends QueryRepo {
   static name() { return 'GitHub'; }
   webUrl() { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
   apiDirectoryPath() { return `https://api.github.com/repos/${this.user}/${this.repo}/git/trees/${this.branch}?recursive=1`; }
+  _key() { return `${this.user}:${this.repo}:${this.branch}`; } // PRIVATE, not part of API
   mapApiResponse(res) {
+    // Side-effect: we remember the SHA1 for this tree, so we can use it later in rawFilePath
+    _latestCommitOnBranch[this._key()] = res.sha;
+
     // Unlike the response to the old fetch-a-single-directory WSAPI
     // call, the tree call returns the list of entries within a `tree`
     // subrecord. it also has no `name` entry, so we populate from
@@ -22,7 +30,11 @@ class QueryRepoGitHub extends QueryRepo {
     return res.tree.map(e => ({ ...e, name: e.path })).filter(e => this.dir === '.' || e.name.startsWith(this.dir));
   }
 
-  rawFilePath(name) { return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${this.branch}/${name}`; }
+  rawFilePath(name) {
+    const sha = _latestCommitOnBranch[this._key()];
+    return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${sha}/${name}`;
+  }
+
   urlBase(filename) { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${filename}`; }
 }
 
