@@ -26,6 +26,12 @@ const json = {
       branch: 'main',
       dir: 'folio/reports'
     },
+    {
+      user: 'cul-it',
+      repo: 'cul-folio-analytics',
+      branch: 'main',
+      dir: 'reporting_app',
+    }
   ],
 };
 
