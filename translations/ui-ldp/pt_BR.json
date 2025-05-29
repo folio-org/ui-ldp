@@ -132,5 +132,7 @@
     "error.load-processes": "Não foi possível carregar processos de longa duração: {error}",
     "error.load-logs": "Não foi possível carregar os logs do Metadb: {error}",
     "error.not-metadb": "Este recurso está disponível apenas em um banco de dados Metadb, mas este aplicativo está conectado ao LDP Classic",
-    "templated-queries.filter": "Filtrar relatórios listados"
+    "templated-queries.filter": "Filtrar relatórios listados",
+    "button.excel": "Excel",
+    "button.download-excel": "Baixar como Excel"
 }
