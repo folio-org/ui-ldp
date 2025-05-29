@@ -58,7 +58,13 @@ function mergeSQLandJSON(data) {
   data.forEach(entry => {
     if (entry.filename.endsWith('.json')) {
       const qn = baseName(entry.filename);
-      jsonRegister[qn] = JSON.parse(entry.text);
+      try {
+        jsonRegister[qn] = JSON.parse(entry.text);
+      } catch (e) {
+        const reportRepo = createReportRepo(entry.config);
+        const url = reportRepo.urlBase(entry.filename);
+        throw new Error(`Could not parse JSON for ${url}: ${e.toString()}`);
+      }
     }
   });
 

@@ -12,6 +12,7 @@
 * Switch from `xslt` dependency to maintained version `@e965/xslt` to fix security issues. Fixes UILDP-175.
 * Increase maximum number of records that can be exported from 100,000 to 10,000,000. Fixes UILDP-133.
 * Defeat GitHub caching to always get up-to-date reports. Fixes UILDP-135.
+* Error message on malformed report-metadata JSON now includes the path to the faulty file. Fixes UILDP-176.
 
 ## [3.0.2](https://github.com/folio-org/ui-ldp/tree/v3.0.2) (2025-03-19)
 
