@@ -132,5 +132,7 @@
     "error.load-processes": "Kan langlopende processen niet invoeren: {error}",
     "error.load-logs": "Invoer van Metadb-logboeken niet mogelijk: {error}",
     "error.not-metadb": "Deze faciliteit is alleen beschikbaar vanuit een Metadb-database, maar deze app is verbonden met LDP Classic.",
-    "templated-queries.filter": "Filter listed reports"
+    "templated-queries.filter": "Rapporten in lijsten filteren",
+    "button.excel": "Excel",
+    "button.download-excel": "Downloaden als Excel"
 }
