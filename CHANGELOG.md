@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [3.1.2](https://github.com/folio-org/ui-ldp/tree/v3.1.2) (2025-06-04)
+
+* Resolve version-number confusion caused by an incorrect git tag.
+
 ## [3.1.0](https://github.com/folio-org/ui-ldp/tree/v3.1.0) (2025-06-04)
 
 * Recursively traverse nominated GitLab directories for reports. Fixes UILDP-157.
