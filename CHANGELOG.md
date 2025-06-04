@@ -1,6 +1,6 @@
 # Change history for ui-ldp
 
-## [3.1.0](https://github.com/folio-org/ui-ldp/tree/v3.1.0) (IN PROGRESS)
+## [3.1.0](https://github.com/folio-org/ui-ldp/tree/v3.1.0) (2025-06-04)
 
 * Recursively traverse nominated GitLab directories for reports. Fixes UILDP-157.
 * Allow for dynamic choices in a templated SQL query based on FOLIO data. Fixes UILDP-141.
