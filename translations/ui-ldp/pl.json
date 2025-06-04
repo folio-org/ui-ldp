@@ -115,7 +115,7 @@
     "dbinfo.nav.logs": "Dzienniki",
     "dbinfo.nav.updates": "Ostatnie aktualizacje tabel",
     "dbinfo.nav.processes": "Procesy długotrwałe",
-    "dbinfo.logs.log_time": "Znacznik czasu",
+    "dbinfo.logs.log_time": "Timestamp",
     "dbinfo.logs.error_severity": "Powaga",
     "dbinfo.logs.message": "Wiadomość",
     "dbinfo.updates.tableSchema": "Schemat",
@@ -132,5 +132,7 @@
     "error.load-processes": "Nie można załadować długotrwałych procesów: {error}",
     "error.load-logs": "Nie można załadować dzienników Metadb: {error}",
     "error.not-metadb": "Ta funkcja jest dostępna tylko w bazie danych Metadb, ale ta aplikacja jest połączona z LDP Classic",
-    "templated-queries.filter": "Filtruj wyświetlone raporty"
+    "templated-queries.filter": "Filtruj wyświetlone raporty",
+    "button.excel": "Excel",
+    "button.download-excel": "Pobierz jako Excel"
 }
