@@ -121,7 +121,7 @@
     "dbinfo.updates.tableSchema": "模式",
     "dbinfo.updates.tableName": "表",
     "dbinfo.updates.lastUpdate": "最后更新时间",
-    "dbinfo.updates.elapsedRealTime": "Elapsed",
+    "dbinfo.updates.elapsedRealTime": "耗时",
     "dbinfo.processes.databaseName": "数据库",
     "dbinfo.processes.userName": "用户",
     "dbinfo.processes.state": "状态",
@@ -132,7 +132,7 @@
     "error.load-processes": "无法加载长期运行的进程：{error}",
     "error.load-logs": "无法加载 Metadb 日志： {error}",
     "error.not-metadb": "该功能只能通过 Metadb 数据库使用，但本应用程序与 LDP Classic 相连。",
-    "templated-queries.filter": "Filter listed reports",
+    "templated-queries.filter": "过滤列出的报告",
     "button.excel": "Excel",
-    "button.download-excel": "Download as Excel"
+    "button.download-excel": "下载为 Excel"
 }
