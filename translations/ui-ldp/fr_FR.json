@@ -123,7 +123,7 @@
     "dbinfo.updates.lastUpdate": "Last updated",
     "dbinfo.updates.elapsedRealTime": "Elapsed",
     "dbinfo.processes.databaseName": "Database",
-    "dbinfo.processes.userName": "User",
+    "dbinfo.processes.userName": "Utilisateur",
     "dbinfo.processes.state": "Status",
     "dbinfo.processes.realTime": "Real time",
     "dbinfo.processes.query": "Query",

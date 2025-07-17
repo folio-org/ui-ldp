@@ -11,7 +11,7 @@
     "nav.query-builder": "Створити запит",
     "nav.logs": "Логи",
     "nav.playground": "Playground",
-    "heading.current-settings": "Current settings",
+    "heading.current-settings": "Поточні налаштування",
     "label.schema": "Схема",
     "label.table": "Таблиця",
     "label.filter-by-column": "Фільтрувати за колонкою",
