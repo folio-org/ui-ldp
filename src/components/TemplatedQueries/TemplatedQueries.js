@@ -56,7 +56,7 @@ function TemplatedQueries({ queries }) {
   });
 
   const filteredQueries = queries.filter(q => {
-    return (q.json?.displayName.toLowerCase().includes(filterString.toLowerCase()) ||
+    return (q.json?.displayName?.toLowerCase().includes(filterString.toLowerCase()) ||
             q.filename.toLowerCase().includes(filterString.toLowerCase()));
   });
 
