@@ -1,9 +1,13 @@
 # Change history for ui-ldp
 
+## [3.2.0](https://github.com/folio-org/ui-ldp/tree/v3.2.0) (IN PROGRESS)
+
+* Stored reports with no display-name no longer cause a crash. Fixes UILDP-179.
+* Add new permission, `ui-ldp.user` (“Reporting app user”) which contains all the permissions needed for a user to have read-only (not administrative) access to the Query Builder and and stored Reports. **NOTE.** These permissions were, incorrectly, included in `module.ldp.enabled` ("UI: Reporting module is enabled"), which is intended to be _only_ for the use of Stripes, to determine whether to display the app at all. In the present release, the subpermissions are retained in `module.ldp.enabled` so that things don't stop working ovrnight. But users _must_ add the new `ui-ldp.user` permission because the subpermission of the old one **will be removed** in the next major release. Fixes UILDP-178.
+
 ## [3.1.2](https://github.com/folio-org/ui-ldp/tree/v3.1.2) (2025-06-04)
 
 * Resolve version-number confusion caused by an incorrect git tag.
-* Stored reports with no display-name no longer cause a crash. Fixes UILDP-179.
 
 ## [3.1.0](https://github.com/folio-org/ui-ldp/tree/v3.1.0) (2025-06-04)
 
