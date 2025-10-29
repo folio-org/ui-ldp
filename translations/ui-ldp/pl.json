@@ -27,7 +27,7 @@
     "button.add-filter": "Dodaj filtr",
     "button.add-ordering-criterion": "Dodaj kryterium sortowania",
     "button.submit": "Submit",
-    "button.download-csv": "Download as CSV",
+    "button.download-csv": "Pobierz jako CSV",
     "button.add-join-table": "Add join table",
     "found-records": "Found {count} records",
     "found-more-than": "Found more than {count} records",
