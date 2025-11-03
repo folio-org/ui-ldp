@@ -99,6 +99,7 @@
   "settings.sqconfig.update.ok": "Updated saved queries configuration",
   "settings.tqrepos": "Report repositories",
   "settings.tqrepos.type": "Type",
+  "settings.tqrepos.baseUrl": "Base URL of repository",
   "settings.tqrepos.user": "Git site user",
   "settings.tqrepos.repo": "Repository name within user's area",
   "settings.tqrepos.branch": "Branch of the specified repository",

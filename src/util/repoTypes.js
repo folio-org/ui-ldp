@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 class QueryRepo {
-  constructor(user, repo, branch, dir) {
+  constructor(baseUrl, user, repo, branch, dir) {
+    this.baseUrl = baseUrl;
     this.user = user;
     this.repo = repo;
     this.branch = branch;
@@ -40,20 +41,22 @@ class QueryRepoGitHub extends QueryRepo {
   }
 
   urlBase(filename) { return `https://github.com/${this.user}/${this.repo}/tree/${this.branch}/${filename}`; }
+  showBaseUrl() { return false; }
 }
 
 class QueryRepoGitLab extends QueryRepo {
   static name() { return 'GitLab'; }
-  webUrl() { return `https://gitlab.com/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
-  apiDirectoryPath() { return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/tree?ref=${this.branch}&path=${this.dir}&recursive=true`; }
+  webUrl() { return `${this.baseUrl || 'https://gitlab.com'}/${this.user}/${this.repo}/tree/${this.branch}/${this.dir}`; }
+  apiDirectoryPath() { return `${this.baseUrl || 'https://gitlab.com'}/api/v4/projects/${this.user}%2F${this.repo}/repository/tree?ref=${this.branch}&path=${this.dir}&recursive=true`; }
   mapApiResponse(res) { return res.filter(e => e.type === 'blob').map(e => ({ ...e, name: e.path })); }
 
   rawFilePath(name) {
     const encodedPath = encodeURIComponent(`${name}`);
-    return `https://gitlab.com/api/v4/projects/${this.user}%2F${this.repo}/repository/files/${encodedPath}/raw?ref=${this.branch}`;
+    return `${this.baseUrl || 'https://gitlab.com'}/api/v4/projects/${this.user}%2F${this.repo}/repository/files/${encodedPath}/raw?ref=${this.branch}`;
   }
 
-  urlBase(filename) { return `https://gitlab.com/${this.user}/${this.repo}/tree/${this.branch}/${filename}`; }
+  urlBase(filename) { return `${this.baseUrl || 'https://gitlab.com'}/${this.user}/${this.repo}/tree/${this.branch}/${filename}`; }
+  showBaseUrl() { return true; }
 }
 
 const repoTypes = {
@@ -64,7 +67,7 @@ const repoTypes = {
 
 function createReportRepo(config) {
   const ReportRepoType = repoTypes[config.type || 'github'];
-  const reportRepo = new ReportRepoType(config.user, config.repo, config.branch, config.dir);
+  const reportRepo = new ReportRepoType(config.baseUrl, config.user, config.repo, config.branch, config.dir);
   return reportRepo;
 }
 

@@ -28,6 +28,7 @@ function TemplatedQueryRepos(props) {
   };
 
   const typeLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.type" />;
+  const baseUrlLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.baseUrl" />;
   const userLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.user" />;
   const repoLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.repo" />;
   const branchLabel = <FormattedMessage id="ui-ldp.settings.tqrepos.branch" />;
@@ -57,6 +58,9 @@ function TemplatedQueryRepos(props) {
                     <Row>
                       <Col xs={11}>
                         <Field name={`${subname}.type`} label={typeLabel} component={Select} dataOptions={typeOptions} />
+                        {reportRepo.showBaseUrl() &&
+                          <Field name={`${subname}.baseUrl`} label={baseUrlLabel} component={TextField} />
+                        }
                         <Field name={`${subname}.user`} label={userLabel} component={TextField} />
                         <Field name={`${subname}.repo`} label={repoLabel} component={TextField} />
                         <Field name={`${subname}.branch`} label={branchLabel} component={TextField} />
