@@ -21,6 +21,14 @@ const json = {
       dir: 'folio/reports'
     },
     {
+      type: 'gitlab',
+      baseUrl: 'https://gitlab.msu.edu',
+      user: 'f0112643',
+      repo: 'metadb-reports',
+      branch: 'main',
+      dir: 'folio'
+    },
+    {
       user: 'metadb-project',
       repo: 'metadb-examples',
       branch: 'main',
