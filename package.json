@@ -171,15 +171,39 @@
         "visible": true
       },
       {
+        "permissionName": "ui-ldp.query-builder",
+        "displayName": "Reporting: Use query builder",
+        "subPermissions": [
+          "module.ldp.enabled",
+          "ldp.config.read",
+          "ldp.columns.get",
+          "ldp.tables.get",
+          "ldp.query.post",
+          "mod-settings.entries.collection.get",
+          "mod-settings.global.read.ui-ldp.admin",
+          "mod-settings.global.read.ui-ldp.queries",
+          "mod-settings.global.write.ui-ldp.queries"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-ldp.run-report",
+        "displayName": "Reporting: Run pre-built reports",
+        "subPermissions": [
+          "module.ldp.enabled",
+          "ldp.config.read",
+          "ldp.reports.post",
+          "mod-settings.entries.collection.get",
+          "mod-settings.global.read.ui-ldp.admin"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-ldp.user",
         "displayName": "Reporting: All user permissions (not admin)",
         "subPermissions": [
-          "module.ldp.enabled",
-          "ldp.read",
-          "ldp.config.read",
-          "mod-settings.entries.collection.get",
-          "mod-settings.global.read.ui-ldp.admin",
-          "mod-settings.global.read.ui-ldp.queries"
+          "ui-ldp.query-builder",
+          "ui-ldp.run-report"
         ],
         "visible": true
       },
@@ -192,6 +216,7 @@
           "ui-ldp.settings.table-availability",
           "ui-ldp.settings.dbinfo",
           "ui-ldp.settings.tqrepos",
+          "ldp.log.get",
           "mod-settings.global.write.ui-ldp.queries",
           "mod-settings.global.write.ui-ldp.dashboards"
         ],
