@@ -109,7 +109,7 @@
       {
         "permissionName": "module.ldp.enabled",
         "displayName": "UI: Reporting module is enabled",
-        "subPermissions": [
+        "XXX-UNUSED-subPermissions": [
           "ldp.read",
           "ldp.config.read",
           "mod-settings.entries.collection.get",
