@@ -134,5 +134,6 @@
     "error.not-metadb": "This facility is only available from a Metadb database, but this app is connected to LDP Classic",
     "templated-queries.filter": "Filter listed reports",
     "button.excel": "Excel",
-    "button.download-excel": "Download as Excel"
+    "button.download-excel": "Download as Excel",
+    "settings.tqrepos.baseUrl": "Base URL of repository"
 }

@@ -134,5 +134,6 @@
     "error.not-metadb": "Ця функція доступна лише з бази даних Metadb, а цей додаток підключений до LDP Classic",
     "templated-queries.filter": "Фільтрувати перелічені звіти",
     "button.excel": "Excel",
-    "button.download-excel": "Завантажити у форматі Excel"
+    "button.download-excel": "Завантажити у форматі Excel",
+    "settings.tqrepos.baseUrl": "Base URL of repository"
 }
