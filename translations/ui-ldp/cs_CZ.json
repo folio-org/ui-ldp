@@ -85,9 +85,9 @@
     "button.copy-query": "Kopírovat dotaz",
     "desc.copy-query": "Tím se aktuální dotaz zkopíruje do nového, který lze upravovat, spouštět a ukládat.",
     "save-query.update.notFound": "Načtený dotaz byl smazán. Vytvořte kopii a uložte ji.",
-    "saved-queries.updater": "Naposledy aktualizoval",
+    "saved-queries.updater": "Naposledy aktualizoval/a",
     "saved-queries.updated": "Datum poslední aktualizace",
-    "saved-queries.delete.updatedBy": "Naposledy aktualizoval <code>{updater}</code>, {updated}",
+    "saved-queries.delete.updatedBy": "Naposledy aktualizoval/a <code>{updater}</code>, {updated}",
     "settings.tqrepos": "Úložiště výstupů",
     "settings.tqrepos.user": "Uživatel webu Git",
     "settings.tqrepos.repo": "Název úložiště v uživatelské oblasti",
@@ -134,5 +134,6 @@
     "error.not-metadb": "Tato funkce je k dispozici pouze z databáze Metadb, ale tato aplikace je připojena k LDP Classic",
     "templated-queries.filter": "Filtrovat uvedené hlášení",
     "button.excel": "Excel",
-    "button.download-excel": "Stáhnout jako Excel"
+    "button.download-excel": "Stáhnout jako Excel",
+    "settings.tqrepos.baseUrl": "Základní adresa URL úložiště"
 }
