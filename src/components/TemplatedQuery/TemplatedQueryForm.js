@@ -70,7 +70,7 @@ async function parameterizedField(okapiKy, param) {
 }
 
 
-function TemplatedQueryForm({ query, onSubmit, data }) {
+function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) {
   const { json } = query;
   const reportRepo = createReportRepo(query.config);
   const urlBase = reportRepo.urlBase(query.filename);
@@ -119,9 +119,12 @@ function TemplatedQueryForm({ query, onSubmit, data }) {
       <Form initialValues={initialValues} onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           data ? <ResultsList results={data} /> :
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={values => {
+            setSubmitted(true);
+            handleSubmit(values);
+          }}>
             {fields || <Loading />}
-            <Button type="submit">
+            <Button type="submit" disabled={submitted}>
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
             <br style={{ marginTop: '2em' }} />
