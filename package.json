@@ -172,6 +172,7 @@
           "ldp.columns.get",
           "ldp.tables.get",
           "ldp.query.post",
+          "mod-settings.entries.item.post",
           "mod-settings.entries.item.put",
           "mod-settings.entries.collection.get",
           "mod-settings.global.read.ui-ldp.admin",
