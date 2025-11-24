@@ -8,6 +8,7 @@ import baseName from '../../util/baseName';
 import { createReportRepo } from '../../util/repoTypes';
 import ResultsList from '../QueryBuilder/ResultsList';
 import fetchOptions from '../../util/fetchOptions';
+import QueryTimer from './QueryTimer';
 
 
 function type2component(param) {
@@ -127,7 +128,18 @@ function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) 
           >
             {fields || <Loading />}
             <Button type="submit" disabled={submitted}>
-              <FormattedMessage id="ui-ldp.button.submit" />
+              {!submitted ? (
+                <FormattedMessage id="ui-ldp.button.submit" />
+              ) : (
+                <>
+                  <FormattedMessage id="ui-ldp.button.submitted" />
+                  {' '}
+                  &mdash;
+                  {' '}
+                  <QueryTimer />
+                </>
+              )
+              }
             </Button>
             {submitted && <Loading size="large" />}
             <br style={{ marginTop: '2em' }} />
