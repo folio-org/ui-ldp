@@ -127,6 +127,7 @@ function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) 
             <Button type="submit" disabled={submitted}>
               <FormattedMessage id="ui-ldp.button.submit" />
             </Button>
+            {submitted && <Loading size="large" />}
             <br style={{ marginTop: '2em' }} />
             <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
               <pre>{JSON.stringify(query, null, 2)}</pre>
