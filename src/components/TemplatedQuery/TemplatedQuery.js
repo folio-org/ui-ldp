@@ -20,7 +20,7 @@ function TemplatedQuery({ query }) {
   const stripes = useStripes();
   const ldp = useLdp();
   const title = query.json?.displayName || query.name;
-  const [submitted, setSubmitted] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = async (values) => {
     const reportRepo = createReportRepo(query.config);

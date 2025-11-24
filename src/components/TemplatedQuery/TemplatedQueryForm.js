@@ -119,10 +119,12 @@ function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) 
       <Form initialValues={initialValues} onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           data ? <ResultsList results={data} /> :
-          <form onSubmit={values => {
-            setSubmitted(true);
-            handleSubmit(values);
-          }}>
+          <form
+            onSubmit={values => {
+              setSubmitted(true);
+              handleSubmit(values);
+            }}
+          >
             {fields || <Loading />}
             <Button type="submit" disabled={submitted}>
               <FormattedMessage id="ui-ldp.button.submit" />
@@ -160,6 +162,8 @@ TemplatedQueryForm.propTypes = {
   }).isRequired,
   data: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
+  submitted: PropTypes.bool.isRequired,
+  setSubmitted: PropTypes.func.isRequired,
 };
 
 export default TemplatedQueryForm;
