@@ -49,6 +49,7 @@
   "button.add-filter": "Add filter",
   "button.add-ordering-criterion": "Add ordering criterion",
   "button.submit": "Submit",
+  "button.submitted": "Submitted",
   "button.clear": "Clear",
   "button.csv": "CSV",
   "button.download-csv": "Download as CSV",
