@@ -3,7 +3,8 @@ import 'regenerator-runtime/runtime';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useHistory, Switch, Route } from 'react-router-dom';
+import { useHistory, Switch, Route, Redirect } from 'react-router-dom';
+import { IfPermission } from '@folio/stripes/core';
 import { Loading, Paneset, Pane, NavList, NavListSection, NavListItem, IconButton } from '@folio/stripes/components';
 import loadConfig from './util/loadConfig';
 import { LdpContext } from './LdpContext';
@@ -43,6 +44,9 @@ const Ldp = (props) => {
 
   const showDevInfo = stripes.config?.showDevInfo;
 
+  // Don't redirect to a page we don't have permission to view
+  const dest = stripes.hasPerm('ui-ldp.query-builder') ? 'builder' : 'templated';
+
   return (
     <LdpContext.Provider value={LdpConfig}>
       {actAs === 'settings' ?
@@ -51,54 +55,61 @@ const Ldp = (props) => {
           <Pane defaultWidth="25%" paneTitle={<FormattedMessage id="ui-ldp.nav" />}>
             <NavList>
               <NavListSection activeLink={window.location.pathname}>
-                <NavListItem data-cy="nav-queryBuilder" to={`${match.path}`}>
-                  <FormattedMessage id="ui-ldp.nav.query-builder" />
-                </NavListItem>
-                <NavListItem data-cy="nav-savedQueries" to={`${match.path}/queries`}>
-                  <FormattedMessage id="ui-ldp.nav.saved-queries" />
-                </NavListItem>
-                <NavListItem data-cy="nav-info" to={`${match.path}/info/updates`}>
-                  <FormattedMessage id="ui-ldp.nav.info" />
-                </NavListItem>
+                <IfPermission perm="ui-ldp.query-builder">
+                  <NavListItem data-cy="nav-queryBuilder" to={`${match.path}/builder`}>
+                    <FormattedMessage id="ui-ldp.nav.query-builder" />
+                  </NavListItem>
+                  <NavListItem data-cy="nav-savedQueries" to={`${match.path}/queries`}>
+                    <FormattedMessage id="ui-ldp.nav.saved-queries" />
+                  </NavListItem>
+                </IfPermission>
+                <IfPermission perm="ldp.updates.read">
+                  <NavListItem data-cy="nav-info" to={`${match.path}/info/updates`}>
+                    <FormattedMessage id="ui-ldp.nav.info" />
+                  </NavListItem>
+                </IfPermission>
               </NavListSection>
-              <br />
-              <NavListSection activeLink={window.location.pathname}>
-                <NavListItem data-cy="nav-templatedQueries" to={`${match.path}/templated`}>
-                  <FormattedMessage id="ui-ldp.nav.templated-queries" />
-                </NavListItem>
-                {
-                  LdpConfig.tqTabs?.map((tab, i) => (
-                    <NavListItem key={tab.name} data-cy={`nav-tq-${tab.name}`} to={`${match.path}/tq/${tab.name}`}>
-                      <IconButton
-                        icon="times"
-                        style={{ border: '1px solid #e0e0e0', marginRight: 10 }}
-                        onClick={() => {
-                          LdpConfig.tqTabs.splice(i, 1);
-                          // For some reason, history.push('/ldp/templated') does nothing when invoked here
-                          setNavTo('/ldp/templated');
-                        }}
-                      />
-                      {tab.json?.displayName || tab.name}
-                    </NavListItem>
-                  ))
-                }
-                {showDevInfo &&
-                  <>
-                    <NavListItem data-cy="nav-logs" to={`${match.path}/logs`}>
-                      <FormattedMessage id="ui-ldp.nav.logs" />
-                    </NavListItem>
-                    <NavListItem data-cy="nav-playground" to={`${match.path}/playground`}>
-                      <FormattedMessage id="ui-ldp.nav.playground" />
-                    </NavListItem>
-                  </>
-                }
-              </NavListSection>
+              <IfPermission perm="ui-ldp.run-report">
+                <br />
+                <NavListSection activeLink={window.location.pathname}>
+                  <NavListItem data-cy="nav-templatedQueries" to={`${match.path}/templated`}>
+                    <FormattedMessage id="ui-ldp.nav.templated-queries" />
+                  </NavListItem>
+                  {
+                    LdpConfig.tqTabs?.map((tab, i) => (
+                      <NavListItem key={tab.name} data-cy={`nav-tq-${tab.name}`} to={`${match.path}/tq/${tab.name}`}>
+                        <IconButton
+                          icon="times"
+                          style={{ border: '1px solid #e0e0e0', marginRight: 10 }}
+                          onClick={() => {
+                            LdpConfig.tqTabs.splice(i, 1);
+                            // For some reason, history.push('/ldp/templated') does nothing when invoked here
+                            setNavTo('/ldp/templated');
+                          }}
+                        />
+                        {tab.json?.displayName || tab.name}
+                      </NavListItem>
+                    ))
+                  }
+                </NavListSection>
+              </IfPermission>
+              {showDevInfo &&
+                <NavListSection activeLink={window.location.pathname}>
+                  <NavListItem data-cy="nav-logs" to={`${match.path}/logs`}>
+                    <FormattedMessage id="ui-ldp.nav.logs" />
+                  </NavListItem>
+                  <NavListItem data-cy="nav-playground" to={`${match.path}/playground`}>
+                    <FormattedMessage id="ui-ldp.nav.playground" />
+                  </NavListItem>
+                </NavListSection>
+              }
             </NavList>
           </Pane>
 
           <Switch>
+            <Redirect exact from={match.path} to={`${match.path}/${dest}`} />
             <Route
-              path={match.path}
+              path={`${match.path}/builder`}
               exact
               component={QueryBuilderRoute}
             />
@@ -148,7 +159,8 @@ Ldp.propTypes = {
     config: PropTypes.shape({
       showDevInfo: PropTypes.bool,
     }),
-    connect: PropTypes.func
+    connect: PropTypes.func,
+    hasPerm: PropTypes.func.isRequired,
   })
 };
 
