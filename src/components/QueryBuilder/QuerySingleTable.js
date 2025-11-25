@@ -54,7 +54,7 @@ function filterAvailableTables(tables, selectedSchema, ldp) {
   }
 
   const disabledMap = {};
-  ldp.disabledTables.forEach(name => {
+  (ldp.disabledTables || []).forEach(name => {
     const [s, t] = name.split('-');
     if (s === selectedSchema) disabledMap[t] = true;
   });
