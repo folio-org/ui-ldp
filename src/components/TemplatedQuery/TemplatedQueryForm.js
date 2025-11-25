@@ -8,6 +8,7 @@ import baseName from '../../util/baseName';
 import { createReportRepo } from '../../util/repoTypes';
 import ResultsList from '../QueryBuilder/ResultsList';
 import fetchOptions from '../../util/fetchOptions';
+import QueryTimer from './QueryTimer';
 
 
 function type2component(param) {
@@ -70,7 +71,7 @@ async function parameterizedField(okapiKy, param) {
 }
 
 
-function TemplatedQueryForm({ query, onSubmit, data }) {
+function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) {
   const { json } = query;
   const reportRepo = createReportRepo(query.config);
   const urlBase = reportRepo.urlBase(query.filename);
@@ -119,11 +120,28 @@ function TemplatedQueryForm({ query, onSubmit, data }) {
       <Form initialValues={initialValues} onSubmit={onSubmit}>
         {({ handleSubmit }) => (
           data ? <ResultsList results={data} /> :
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={values => {
+              setSubmitted(true);
+              handleSubmit(values);
+            }}
+          >
             {fields || <Loading />}
-            <Button type="submit">
-              <FormattedMessage id="ui-ldp.button.submit" />
+            <Button type="submit" disabled={submitted}>
+              {!submitted ? (
+                <FormattedMessage id="ui-ldp.button.submit" />
+              ) : (
+                <>
+                  <FormattedMessage id="ui-ldp.button.submitted" />
+                  {' '}
+                  &mdash;
+                  {' '}
+                  <QueryTimer />
+                </>
+              )
+              }
             </Button>
+            {submitted && <Loading size="large" />}
             <br style={{ marginTop: '2em' }} />
             <Accordion closedByDefault label={<FormattedMessage id="ui-ldp.devinfo" />}>
               <pre>{JSON.stringify(query, null, 2)}</pre>
@@ -156,6 +174,8 @@ TemplatedQueryForm.propTypes = {
   }).isRequired,
   data: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
+  submitted: PropTypes.bool.isRequired,
+  setSubmitted: PropTypes.func.isRequired,
 };
 
 export default TemplatedQueryForm;

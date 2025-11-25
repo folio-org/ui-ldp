@@ -20,6 +20,7 @@ function TemplatedQuery({ query }) {
   const stripes = useStripes();
   const ldp = useLdp();
   const title = query.json?.displayName || query.name;
+  const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = async (values) => {
     const reportRepo = createReportRepo(query.config);
@@ -29,7 +30,7 @@ function TemplatedQuery({ query }) {
   };
 
   return (
-    <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => setData()}>
+    <Pane defaultWidth="fill" paneTitle={title} dismissible={!!data} onClose={() => { setData(); setSubmitted(false); }}>
       <div className={css2.container}>
         {error ? (
           <BigError message={error} />
@@ -39,7 +40,7 @@ function TemplatedQuery({ query }) {
               <FormattedMessage id="ui-ldp.templated-queries.no-json" />
             </div>
           ) : (
-            <TemplatedQueryForm query={query} onSubmit={onSubmit} data={data} />
+            <TemplatedQueryForm query={query} onSubmit={onSubmit} submitted={submitted} setSubmitted={setSubmitted} data={data} />
           )
         )}
       </div>
