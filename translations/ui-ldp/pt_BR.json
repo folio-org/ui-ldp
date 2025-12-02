@@ -135,5 +135,6 @@
     "templated-queries.filter": "Filtrar relatórios listados",
     "button.excel": "Excel",
     "button.download-excel": "Baixar como Excel",
-    "settings.tqrepos.baseUrl": "URL base do repositório"
+    "settings.tqrepos.baseUrl": "URL base do repositório",
+    "button.submitted": "Enviado"
 }

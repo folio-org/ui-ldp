@@ -135,5 +135,6 @@
     "templated-queries.filter": "Фільтрувати перелічені звіти",
     "button.excel": "Excel",
     "button.download-excel": "Завантажити у форматі Excel",
-    "settings.tqrepos.baseUrl": "Base URL of repository"
+    "settings.tqrepos.baseUrl": "Base URL of repository",
+    "button.submitted": "Submitted"
 }
