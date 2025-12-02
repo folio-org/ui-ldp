@@ -135,5 +135,6 @@
     "templated-queries.filter": "Rapporten in lijsten filteren",
     "button.excel": "Excel",
     "button.download-excel": "Downloaden als Excel",
-    "settings.tqrepos.baseUrl": "Base URL of repository"
+    "settings.tqrepos.baseUrl": "Basis URL van archief",
+    "button.submitted": "Indienen"
 }

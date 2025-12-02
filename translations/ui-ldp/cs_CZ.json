@@ -135,5 +135,6 @@
     "templated-queries.filter": "Filtrovat uvedené hlášení",
     "button.excel": "Excel",
     "button.download-excel": "Stáhnout jako Excel",
-    "settings.tqrepos.baseUrl": "Základní adresa URL úložiště"
+    "settings.tqrepos.baseUrl": "Základní adresa URL úložiště",
+    "button.submitted": "Odesláno"
 }

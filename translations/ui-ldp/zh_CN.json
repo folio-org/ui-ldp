@@ -135,5 +135,6 @@
     "templated-queries.filter": "过滤列出的报告",
     "button.excel": "Excel",
     "button.download-excel": "下载为 Excel",
-    "settings.tqrepos.baseUrl": "Base URL of repository"
+    "settings.tqrepos.baseUrl": "Base URL of repository",
+    "button.submitted": "Submitted"
 }
