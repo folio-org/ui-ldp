@@ -40,7 +40,7 @@
     "settings.table-availability": "Dostępnośc tabel",
     "settings.table-availability.schema": "Schema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Check the tables to disable for querying",
-    "direction": "Sort direction",
+    "direction": "Kierunek sortowania",
     "nulls": "Sort nulls",
     "placeholder.column": "(Column)",
     "nav": "Nawigacja",
