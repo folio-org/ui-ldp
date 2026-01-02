@@ -6,7 +6,7 @@
 * Add new permission, `ui-ldp.user` (“Reporting app user”) which contains all the permissions needed for a user to have read-only (not administrative) access to the Query Builder and and stored Reports. **NOTE.** These permissions were, incorrectly, included in `module.ldp.enabled` ("UI: Reporting module is enabled"), which is intended to be _only_ for the use of Stripes, to determine whether to display the app at all. In the present release, the subpermissions are retained in `module.ldp.enabled` so that things don't stop working overnight. But users _must_ add the new `ui-ldp.user` permission because the subpermission of the old one **will be removed** in the next major release. Fixes UILDP-178.
 * Support self-hosted GitLab repositories (i.e. those other than https://gitlab.com/). Fixes UILDP-171.
 * Provide new permissions governing user access to either Query Builder or Run Report without the other. **NOTE.** Until the next major release, when subpermissions are removed from `module.ldp.enabled`, these permissions will be ineffective, as all users for whom the module is enabled will have the necessary subpermissions. Fixes UILDP-184.
-* UI elements to indicate long-running reports: disable Submit button when pressed; show spinner; show elapsed-time count. Fixes UILDP-141.
+* UI elements to indicate long-running reports: disable Submit button when pressed; show spinner; show elapsed-time count. Fixes UILDP-181.
 
 ## [3.1.2](https://github.com/folio-org/ui-ldp/tree/v3.1.2) (2025-06-04)
 
