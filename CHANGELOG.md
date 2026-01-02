@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [3.3.0](https://github.com/folio-org/ui-ldp/tree/v3.3.0) (IN PROGRESS)
+
+* Correctly export large numbers of run-report results as CSV, like Query Builder results. Fixes UILDP-188.
+
 ## [3.2.0](https://github.com/folio-org/ui-ldp/tree/v3.2.0) (2026-01-02)
 
 * Stored reports with no display-name no longer cause a crash. Fixes UILDP-179.

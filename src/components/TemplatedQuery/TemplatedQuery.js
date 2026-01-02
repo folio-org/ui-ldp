@@ -40,7 +40,7 @@ function TemplatedQuery({ query }) {
               <FormattedMessage id="ui-ldp.templated-queries.no-json" />
             </div>
           ) : (
-            <TemplatedQueryForm query={query} onSubmit={onSubmit} submitted={submitted} setSubmitted={setSubmitted} data={data} />
+            <TemplatedQueryForm query={query} onSubmit={onSubmit} submitted={submitted} setSubmitted={setSubmitted} data={data} setError={setError} />
           )
         )}
       </div>
