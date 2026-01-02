@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Form, Field } from 'react-final-form';
-import { useOkapiKy } from '@folio/stripes/core';
+import { useStripes, useOkapiKy } from '@folio/stripes/core';
 import { TextField, Datepicker, Select, AutoSuggest, Loading, Button, Accordion } from '@folio/stripes/components';
 import baseName from '../../util/baseName';
+import { useLdp } from '../../LdpContext';
 import { createReportRepo } from '../../util/repoTypes';
 import ResultsList from '../QueryBuilder/ResultsList';
+import loadReport from '../../util/loadReport';
 import fetchOptions from '../../util/fetchOptions';
 import QueryTimer from './QueryTimer';
 
@@ -71,12 +73,22 @@ async function parameterizedField(okapiKy, param) {
 }
 
 
-function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) {
+function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data, setError }) {
+  const intl = useIntl();
+  const stripes = useStripes();
+  const ldp = useLdp();
   const { json } = query;
   const reportRepo = createReportRepo(query.config);
   const urlBase = reportRepo.urlBase(query.filename);
   const okapiKy = useOkapiKy();
   const [fields, setFields] = useState(null);
+  const makeSearchWithoutLimit = (values) => {
+    const searchWithoutLimit = (setData) => {
+      const url = reportRepo.rawFilePath(query.filename);
+      loadReport(intl, stripes, url, values, setData, setError, ldp.maxExport);
+    };
+    return searchWithoutLimit;
+  }
 
   // We have to omit okapiKy from the hook dependency below, otherwise
   // this hook gets called on each render, causing an infinite loop.
@@ -118,8 +130,8 @@ function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data }) 
         </>
       )}
       <Form initialValues={initialValues} onSubmit={onSubmit}>
-        {({ handleSubmit }) => (
-          data ? <ResultsList results={data} /> :
+        {({ values, handleSubmit }) => (
+          data ? <ResultsList results={data} searchWithoutLimit={makeSearchWithoutLimit(values)} /> :
           <form
             onSubmit={values => {
               setSubmitted(true);
