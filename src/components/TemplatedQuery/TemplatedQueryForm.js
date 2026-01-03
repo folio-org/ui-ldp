@@ -88,7 +88,7 @@ function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data, se
       loadReport(intl, stripes, url, values, setData, setError, ldp.maxExport);
     };
     return searchWithoutLimit;
-  }
+  };
 
   // We have to omit okapiKy from the hook dependency below, otherwise
   // this hook gets called on each render, causing an infinite loop.
@@ -133,9 +133,9 @@ function TemplatedQueryForm({ query, onSubmit, submitted, setSubmitted, data, se
         {({ values, handleSubmit }) => (
           data ? <ResultsList results={data} searchWithoutLimit={makeSearchWithoutLimit(values)} /> :
           <form
-            onSubmit={values => {
+            onSubmit={values2 => {
               setSubmitted(true);
-              handleSubmit(values);
+              handleSubmit(values2);
             }}
           >
             {fields || <Loading />}
@@ -188,6 +188,7 @@ TemplatedQueryForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   submitted: PropTypes.bool.isRequired,
   setSubmitted: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
 };
 
 export default TemplatedQueryForm;
