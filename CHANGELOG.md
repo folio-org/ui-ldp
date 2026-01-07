@@ -3,6 +3,7 @@
 ## [3.3.0](https://github.com/folio-org/ui-ldp/tree/v3.3.0) (IN PROGRESS)
 
 * Correctly export large numbers of run-report results as CSV, like Query Builder results. Fixes UILDP-188.
+* Rename some UI-only permissions to satisfy Eureka's arbitrary whims. Fixes UILDP-190.
 
 ## [3.2.0](https://github.com/folio-org/ui-ldp/tree/v3.2.0) (2026-01-02)
 
