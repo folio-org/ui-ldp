@@ -29,10 +29,11 @@ class QueryRepoGitHub extends QueryRepo {
     // Unlike the response to the old fetch-a-single-directory WSAPI
     // call, the tree call returns the list of entries within a `tree`
     // subrecord. it also has no `name` entry, so we populate from
-    // that `parh`; and since there is no parameter to specify where
+    // that `path`; and since there is no parameter to specify where
     // in the repo to start the root of the tree, we need to filter
-    // the complete tree to include only the relevant entries.
-    return res.tree.map(e => ({ ...e, name: e.path })).filter(e => this.dir === '.' || e.name.startsWith(this.dir));
+    // the complete tree to include only the relevant IDentries.
+    const dir = this.dir.endsWith('/') ? this.dir : this.dir + '/';
+    return res.tree.map(e => ({ ...e, name: e.path })).filter(e => this.dir === '.' || e.name.startsWith(dir));
   }
 
   rawFilePath(name) {
