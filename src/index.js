@@ -51,7 +51,6 @@ const Ldp = (props) => {
   ];
   const infoDests = perms2infoPage.filter(x => stripes.hasPerm(x[1]));
   const defaultInfoPage = infoDests.length ? infoDests[0][0] : 'noperm';
-  // console.log(`defaultInfoPage '${defaultInfoPage}' from list`, infoDests);
 
   const perms2page = [
     // We need multiple spellings of the same permission due to Eureka: see UILDP-190
@@ -60,7 +59,6 @@ const Ldp = (props) => {
   ].concat(perms2infoPage);
   const dests = perms2page.filter(x => stripes.hasPerm(x[1]) || (x[2] && stripes.hasPerm(x[2])));
   const defaultPage = dests.length ? dests[0][0] : 'noperm';
-  // console.log(`defaultPage '${defaultPage}' from list`, dests);
 
   return (
     <LdpContext.Provider value={LdpConfig}>
@@ -165,7 +163,7 @@ const Ldp = (props) => {
             <Route
               path={`${match.path}/noperm`}
               exact
-              component={() => <Pane><FormattedMessage id="ui-ldp.noperm" /></Pane>}
+              component={() => <Pane defaultWidth="fill"><FormattedMessage id="ui-ldp.noperm" /></Pane>}
             />
           </Switch>
         </Paneset>
