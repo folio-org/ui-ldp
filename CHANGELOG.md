@@ -6,6 +6,7 @@
 * Rename some UI-only permissions to satisfy Eureka's arbitrary whims. Fixes UILDP-190.
 * Reports are correctly now harvested only from a specified directory (and its subdirectories), not also from directories of whose name the specified directory is a prefix. Fixes UILDP-191.
 * Add permission guards for all parts of the UI. Fixes UILDP-189.
+* Database Configuration settings page uses `<ConfigManager>` like Record Limits and Table Availability, so it can now create a new settings object as well as modify an existing one. Fixes UILDP-192.
 
 ## [3.2.0](https://github.com/folio-org/ui-ldp/tree/v3.2.0) (2026-01-02)
 
