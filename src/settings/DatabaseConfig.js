@@ -17,8 +17,10 @@ function DatabaseConfig(props) {
   if (!ConnectedConfigManager) return null;
 
   const getInitialValues = (settings) => {
-    const value = settings.length === 0 ? '{}' : settings[0].value;
-    const config = JSON.parse(value);
+    let config = settings.length === 0 ? {} : settings[0].value;
+    if (typeof config === 'string') {
+      config = JSON.parse(config);
+    }
     return { ...config, pass: config.pass ? '********' : '' };
   };
 
