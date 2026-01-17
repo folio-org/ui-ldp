@@ -136,5 +136,6 @@
     "button.excel": "Excel",
     "button.download-excel": "下载为 Excel",
     "settings.tqrepos.baseUrl": "存储库的基本 URL",
-    "button.submitted": "已提交"
+    "button.submitted": "已提交",
+    "noperm": "You do not have permission to access any part of this app"
 }

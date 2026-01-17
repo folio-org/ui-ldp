@@ -136,5 +136,6 @@
     "button.excel": "Excel",
     "button.download-excel": "Excel olarak indir",
     "settings.tqrepos.baseUrl": "Deponun temel Bağlantısı",
-    "button.submitted": "Gönder"
+    "button.submitted": "Gönder",
+    "noperm": "You do not have permission to access any part of this app"
 }
