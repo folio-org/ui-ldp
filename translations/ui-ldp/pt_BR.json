@@ -136,5 +136,6 @@
     "button.excel": "Excel",
     "button.download-excel": "Baixar como Excel",
     "settings.tqrepos.baseUrl": "URL base do repositório",
-    "button.submitted": "Enviado"
+    "button.submitted": "Enviado",
+    "noperm": "Você não tem permissão para acessar nenhuma parte deste aplicativo"
 }
