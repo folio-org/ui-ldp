@@ -107,7 +107,7 @@
     "error.load-report": "Não foi possível executar o relatório: {error}",
     "more-records": "... Mais registros ...",
     "templated-queries.select": "Selecionar relatório",
-    "SENTINEL": "",
+    "SENTINEL": "Vazio",
     "settings.tqrepos.type": "Tipo",
     "error.load-version": "Não foi possível carregar a versão do Metadb: {error}",
     "nav.info": "Informações do banco de dados",
