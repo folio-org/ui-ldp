@@ -74,7 +74,7 @@
     "button.csv": "CSV-файл",
     "button.clear": "Очистити",
     "saved-queries.delete.deleteQuery": "Видалити запит?",
-    "saved-queries.delete.createdBy": "Створено <code>{creator}</code>, {created}",
+    "saved-queries.delete.createdBy": "Створено (ким) <code>{creator}</code>, {created}",
     "saved-queries.delete.confirm": "Підтвердити",
     "saved-queries.delete.deleted": "Видалено запит <b>{name}</b> .",
     "placeholder.hidden": "[Приховано]",
