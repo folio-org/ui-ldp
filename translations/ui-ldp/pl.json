@@ -75,7 +75,7 @@
     "button.clear": "Clear",
     "saved-queries.delete.deleteQuery": "Delete query?",
     "saved-queries.delete.createdBy": "Created by <code>{creator}</code>, {created}",
-    "saved-queries.delete.confirm": "Confirm",
+    "saved-queries.delete.confirm": "Potwierdź",
     "saved-queries.delete.deleted": "Deleted query <b>{name}</b>.",
     "placeholder.hidden": "[Hidden]",
     "error.load-queries": "Could not load saved queries: {error}",
