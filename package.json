@@ -68,6 +68,7 @@
     "final-form": "^4.20.7",
     "final-form-arrays": "^3.0.2",
     "handlebars": "^4.7.7",
+    "intl-messageformat": "^11.1.2",
     "json2csv": "^4.5.4",
     "localforage": "^1.9.0",
     "lodash.clonedeep": "^4.5.0",
@@ -166,7 +167,9 @@
       },
       {
         "permissionName": "ui-ldp.query-builder.view",
-        "replaces": ["ui-ldp.query-builder"],
+        "replaces": [
+          "ui-ldp.query-builder"
+        ],
         "displayName": "Reporting: Use query builder",
         "subPermissions": [
           "module.ldp.enabled",
@@ -185,7 +188,9 @@
       },
       {
         "permissionName": "ui-ldp.run-report.view",
-        "replaces": ["ui-ldp.run-report"],
+        "replaces": [
+          "ui-ldp.run-report"
+        ],
         "displayName": "Reporting: Run pre-built reports",
         "subPermissions": [
           "module.ldp.enabled",
@@ -198,7 +203,9 @@
       },
       {
         "permissionName": "ui-ldp.user.view",
-        "replaces": ["ui-ldp.user"],
+        "replaces": [
+          "ui-ldp.user"
+        ],
         "displayName": "Reporting: All user permissions (not admin)",
         "subPermissions": [
           "ui-ldp.query-builder.view",
@@ -208,7 +215,9 @@
       },
       {
         "permissionName": "ui-ldp.all.view",
-        "replaces": ["ui-ldp.all"],
+        "replaces": [
+          "ui-ldp.all"
+        ],
         "displayName": "Reporting: All permissions",
         "subPermissions": [
           "ui-ldp.user.view",
