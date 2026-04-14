@@ -135,7 +135,7 @@
     "templated-queries.filter": "Фільтрувати перелічені звіти",
     "button.excel": "Excel",
     "button.download-excel": "Завантажити у форматі Excel",
-    "settings.tqrepos.baseUrl": "Base URL of repository",
-    "button.submitted": "Submitted",
-    "noperm": "You do not have permission to access any part of this app"
+    "settings.tqrepos.baseUrl": "Базова URL-адреса репозиторію",
+    "button.submitted": "Надіслано",
+    "noperm": "Ви не маєте дозволу на доступ до будь-якої частини цього додатка"
 }

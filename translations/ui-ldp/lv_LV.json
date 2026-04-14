@@ -1,5 +1,5 @@
 {
-    "meta.title": "Reporting",
+    "meta.title": "Ziņojumi",
     "something-went-wrong": "Something went wrong.",
     "refresh": "Refresh",
     "error.http": "HTTP error {status} ({text}) -- {detail}",
