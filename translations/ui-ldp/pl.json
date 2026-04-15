@@ -37,7 +37,7 @@
     "settings.record-limits.default-show": "Domyślna liczba do wyświetlania",
     "settings.record-limits.max-show": "Maksymalna liczba do wyświetlenia",
     "settings.record-limits.max-export": "Maksymalna liczba do wyeksportowania",
-    "settings.table-availability": "Dostępnośc tabel",
+    "settings.table-availability": "Dostępność tabel",
     "settings.table-availability.schema": "Schema <code>{name}</code>",
     "settings.table-availability.check-to-disable": "Check the tables to disable for querying",
     "direction": "Kierunek sortowania",
