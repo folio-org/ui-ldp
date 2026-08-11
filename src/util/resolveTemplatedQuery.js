@@ -1,5 +1,6 @@
 import { createReportRepo } from './repoTypes';
 import stripesFetch from './stripesFetch';
+import httpErrorMessage from './httpErrorMessage';
 
 // The directory of a repository is normalized in the same way as in
 // the QueryRepo constructor, so that the tests we make here agree with
@@ -43,13 +44,15 @@ function findRepoConfig(gitRepos, qname) {
 }
 
 
-async function fetchGitRepos(stripes) {
+async function fetchGitRepos(intl, stripes) {
   const res = await stripesFetch(stripes, '/settings/entries?query=(scope==ui-ldp.admin%20and%20key==tqrepos)');
-  const body = await res.text();
   if (!res.ok) {
-    throw new Error(`Could not fetch templated-query git repositories: ${body}`);
+    throw new Error(intl.formatMessage(
+      { id: 'ui-ldp.error.load-tqrepos' },
+      { error: await httpErrorMessage(intl, res) },
+    ));
   }
-  const json = JSON.parse(body);
+  const json = JSON.parse(await res.text());
   return (json.resultInfo.totalRecords === 0) ? [] : json.items[0].value;
 }
 
@@ -59,7 +62,7 @@ async function fetchGitRepos(stripes) {
 // reached by following a link into a freshly loaded web-app.
 //
 async function resolveTemplatedQuery(intl, stripes, qname) {
-  const gitRepos = await fetchGitRepos(stripes);
+  const gitRepos = await fetchGitRepos(intl, stripes);
   const { config, path } = findRepoConfig(gitRepos, qname);
   if (!config) {
     throw new Error(intl.formatMessage({ id: 'ui-ldp.error.no-such-repo' }, { qname }));
@@ -76,8 +79,10 @@ async function resolveTemplatedQuery(intl, stripes, qname) {
     throw new Error(intl.formatMessage({ id: 'ui-ldp.error.no-such-query' }, { qname }));
   }
   if (!sqlRes.ok) {
-    const text = await sqlRes.text();
-    throw new Error(`could not load templated query ${reportRepo.rawFilePath(filename)}: ${sqlRes.status} ${sqlRes.statusText} (${text})`);
+    throw new Error(intl.formatMessage(
+      { id: 'ui-ldp.error.load-templated-query' },
+      { url: reportRepo.rawFilePath(filename), error: await httpErrorMessage(intl, sqlRes) },
+    ));
   }
   const text = await sqlRes.text();
 
@@ -89,7 +94,10 @@ async function resolveTemplatedQuery(intl, stripes, qname) {
     try {
       json = JSON.parse(jsonText);
     } catch (e) {
-      throw new Error(`Could not parse JSON for ${reportRepo.urlBase(`${path}.json`)}: ${e.toString()}`);
+      throw new Error(intl.formatMessage(
+        { id: 'ui-ldp.error.parse-templated-query-json' },
+        { url: reportRepo.urlBase(`${path}.json`), error: e.toString() },
+      ));
     }
   }
 
