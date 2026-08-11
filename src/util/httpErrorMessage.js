@@ -1,6 +1,7 @@
-// The equivalent, for the raw fetches that we make against GitHub and
-// GitLab, of the error that loadData composes for WSAPI calls. Those
-// fetches do not go through Okapi, so they cannot use loadData itself.
+// Renders a failed response as a human-readable message, digging the
+// detail out of the JSON body when there is one. Used both by loadData
+// for WSAPI calls and by the raw fetches that we make against GitHub
+// and GitLab, which do not go through Okapi and so cannot use loadData.
 //
 async function httpErrorMessage(intl, res) {
   const text = await res.text();
