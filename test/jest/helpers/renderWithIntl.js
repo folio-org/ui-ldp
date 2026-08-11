@@ -3,11 +3,8 @@ import { render } from '@folio/jest-config-stripes/testing-library/react';
 
 import { Harness } from '../../helpers';
 
-const renderWithIntl = (children, translations = [], stripes) => render(
-  <Harness
-    translations={translations}
-    stripes={stripes}
-  >
+const renderWithIntl = (children, stripesCustomProps) => render(
+  <Harness stripesCustomProps={stripesCustomProps}>
     {children}
   </Harness>
 );
