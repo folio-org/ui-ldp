@@ -1,5 +1,6 @@
 import baseName from './baseName';
 import { createReportRepo } from './repoTypes';
+import httpErrorMessage from './httpErrorMessage';
 
 
 // In the unlikely event that performance becomes a problem here, we
@@ -8,7 +9,7 @@ import { createReportRepo } from './repoTypes';
 // than loading all the directories first. For now, simpler is better,
 // so we just fetch all the directories, then all the files.
 //
-async function fetchTemplatedQueryFilenames(gitRepos) {
+async function fetchTemplatedQueryFilenames(intl, gitRepos) {
   const promises = gitRepos.map(config => {
     const reportRepo = createReportRepo(config);
     const path = reportRepo.apiDirectoryPath();
@@ -26,8 +27,10 @@ async function fetchTemplatedQueryFilenames(gitRepos) {
     const reportRepo = createReportRepo(failed[0].config);
     const path = reportRepo.apiDirectoryPath();
     const result = failed[0].result;
-    const text = await result.text();
-    throw new Error(`could not load templated queries from ${path}: ${result.status} ${result.statusText} (${text})`);
+    throw new Error(intl.formatMessage(
+      { id: 'ui-ldp.error.load-templated-queries' },
+      { url: path, error: await httpErrorMessage(intl, result) },
+    ));
   }
 
   const promises2 = results.map(result => result.json());
@@ -53,7 +56,7 @@ async function fetchTemplatedQueryFilenames(gitRepos) {
 }
 
 
-function mergeSQLandJSON(data) {
+function mergeSQLandJSON(intl, data) {
   const jsonRegister = {};
   data.forEach(entry => {
     if (entry.filename.endsWith('.json')) {
@@ -62,8 +65,10 @@ function mergeSQLandJSON(data) {
         jsonRegister[qn] = JSON.parse(entry.text);
       } catch (e) {
         const reportRepo = createReportRepo(entry.config);
-        const url = reportRepo.urlBase(entry.filename);
-        throw new Error(`Could not parse JSON for ${url}: ${e.toString()}`);
+        throw new Error(intl.formatMessage(
+          { id: 'ui-ldp.error.parse-templated-query-json' },
+          { url: reportRepo.urlBase(entry.filename), error: e.toString() },
+        ));
       }
     }
   });
@@ -77,8 +82,8 @@ function mergeSQLandJSON(data) {
 }
 
 
-async function fetchTemplatedQueries(gitRepos, setLoaded, setQueries) {
-  const filenamesWithConfig = await fetchTemplatedQueryFilenames(gitRepos);
+async function fetchTemplatedQueries(intl, gitRepos, setLoaded, setQueries) {
+  const filenamesWithConfig = await fetchTemplatedQueryFilenames(intl, gitRepos);
 
   const promises = filenamesWithConfig.map(fc => {
     const reportRepo = createReportRepo(fc.config);
@@ -97,8 +102,10 @@ async function fetchTemplatedQueries(gitRepos, setLoaded, setQueries) {
     const reportRepo = createReportRepo(failed[0].config);
     const path = reportRepo.rawFilePath(failed[0].filename);
     const result = failed[0].result;
-    const text = await result.text();
-    throw new Error(`could not load templated query ${path}: ${result.status} ${result.statustext} (${text})`);
+    throw new Error(intl.formatMessage(
+      { id: 'ui-ldp.error.load-templated-query' },
+      { url: path, error: await httpErrorMessage(intl, result) },
+    ));
   }
 
   const promises2 = results.map(result => result.text());
@@ -109,7 +116,7 @@ async function fetchTemplatedQueries(gitRepos, setLoaded, setQueries) {
     text: texts[i],
   }));
 
-  const merged = mergeSQLandJSON(data);
+  const merged = mergeSQLandJSON(intl, data);
   const withMetadata = merged.filter(x => x.json);
   withMetadata.sort((a, b) => a.json?.displayName?.localeCompare(b.json?.displayName));
   setLoaded(true);

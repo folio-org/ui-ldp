@@ -24,6 +24,7 @@ const LdpConfig = {};
 const Ldp = (props) => {
   const { actAs, stripes, match } = props;
   const [navTo, setNavTo] = useState(); // Used to force navigation from outside the router
+  const [, setTqTabsChanged] = useState(0); // Used to re-render when a tab is added from elsewhere
   const history = useHistory();
   const intl = useIntl();
   const [configLoaded, setConfigLoaded] = useState(false);
@@ -31,6 +32,17 @@ const Ldp = (props) => {
   useEffect(() => {
     loadConfig(intl, stripes, LdpConfig, setConfigLoaded, setError);
   }, [intl, stripes, stripes.okapi]);
+
+  // The tabs live in the configuration object rather than in React
+  // state, so adding one does not by itself re-render the navigation
+  // list. TemplatedQueryRoute adds a tab when it resolves a report
+  // that was reached by URL rather than by clicking, which happens
+  // after this component has rendered, so we provide the means to add
+  // a tab and say that it happened.
+  LdpConfig.addTqTab = (tab) => {
+    if (!LdpConfig.tqTabs.some(t => t.name === tab.name)) LdpConfig.tqTabs.push(tab);
+    setTqTabsChanged(n => n + 1);
+  };
 
   if (error) return <BigError message={error} />;
   if (!configLoaded) return <Loading size="xlarge" />;
@@ -144,7 +156,10 @@ const Ldp = (props) => {
             />
             <Route
               path={`${match.path}/tq`}
-              component={TemplatedQueryRoute}
+              // Keying on the path means that moving between reports
+              // makes a new component rather than re-rendering the old
+              // one, so that no state outlives the report it belongs to
+              render={({ location }) => <TemplatedQueryRoute key={location.pathname} />}
             />
             <Route
               path={`${match.path}/logs`}

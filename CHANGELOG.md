@@ -1,5 +1,9 @@
 # Change history for ui-ldp
 
+## [3.4.0](https://github.com/folio-org/ui-ldp/tree/v3.4.0) (IN PROGRESS)
+
+* Bookmarkable and reloadable report tabs. Fixes UILDP-182.
+
 ## [3.3.0](https://github.com/folio-org/ui-ldp/tree/v3.3.0) (2026-04-14)
 
 * Correctly export large numbers of run-report results as CSV, like Query Builder results. Fixes UILDP-188.
