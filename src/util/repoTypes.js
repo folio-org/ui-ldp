@@ -37,7 +37,12 @@ class QueryRepoGitHub extends QueryRepo {
   }
 
   rawFilePath(name) {
-    const sha = _latestCommitOnBranch[this._key()];
+    // We know the SHA1 only if we have harvested this repository's
+    // tree in this session. When we have not -- for example when a
+    // single query is resolved from its URL -- the head of the branch
+    // is fine, since there is not yet a cache thaqt we need to
+    // defeat.
+    const sha = _latestCommitOnBranch[this._key()] || this.branch;
     return `https://raw.githubusercontent.com/${this.user}/${this.repo}/${sha}/${name}`;
   }
 
