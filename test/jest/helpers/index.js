@@ -1,2 +1,3 @@
-export { default as renderWithIntl } from './renderWithIntl'; // eslint-disable-line import/prefer-default-export
+export { default as renderWithIntl } from './renderWithIntl';
+export { default as intl } from './intl';
 // export { getHookExecutionResult } from './getHookExecutionResult';

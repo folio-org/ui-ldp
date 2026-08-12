@@ -12,7 +12,7 @@ describe('BigError', () => {
 
   it('renders the translated headline', () => {
     renderWithIntl(<BigError message="Connection refused" />);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Something went wrong.');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('SOMETHING-WENT-WRONG');
   });
 
   it('renders the message it was given', () => {
@@ -24,20 +24,20 @@ describe('BigError', () => {
     // message is an optional prop, and several callers pass an
     // undefined error rather than checking first.
     renderWithIntl(<BigError />);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Something went wrong.');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('SOMETHING-WENT-WRONG');
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('');
   });
 
   it('renders a refresh button', () => {
     renderWithIntl(<BigError message="Connection refused" />);
-    expect(screen.getByRole('button', { name: 'Refresh' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'REFRESH' })).toBeInTheDocument();
   });
 
   it('reloads the page only once the refresh button is clicked', async () => {
     renderWithIntl(<BigError message="Connection refused" />);
     expect(window.location.reload).not.toHaveBeenCalled();
 
-    await userEvent.click(screen.getByRole('button', { name: 'Refresh' }));
+    await userEvent.click(screen.getByRole('button', { name: 'REFRESH' }));
     expect(window.location.reload).toHaveBeenCalledTimes(1);
   });
 });

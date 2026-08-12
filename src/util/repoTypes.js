@@ -5,7 +5,10 @@ class QueryRepo {
     this.user = user;
     this.repo = repo;
     this.branch = branch;
-    this.dir = (dir === undefined || dir === '/') ? '.' : dir;
+    // An unset, empty or root directory all mean the root of the
+    // repository, normalized to '.' as in normalizeDir() in
+    // resolveTemplatedQuery.js, which must agree with this.
+    this.dir = (!dir || dir === '/') ? '.' : dir;
   }
 }
 
