@@ -8,23 +8,25 @@ const stripes = {};
 
 // Each call gets its own setColumns/setError, so the negative assertions
 // below ("did not call setError") are always made against a spy that
-// nothing else has touched. Resetting loadData here rather than in a
-// beforeEach earns the same guarantee for `calls[0]` below: it is this
-// call's, not the first one an earlier test happened to make.
+// nothing else has touched, and each call resets loadData so that the
+// argument assertion below sees only its own call.
 //
-// loadColumns does not hand its own setColumns to loadData: it passes an
-// inner setData that reshapes the raw column records first. That inner
-// function is what the server response would arrive at, so return it too,
-// and the tests can drive it directly.
+// When raw records are supplied, loadData is made to hand them to the
+// callback it was given, as the real one does when a response arrives.
+// That callback is not the caller's setColumns: loadColumns passes an
+// inner setData that reshapes the raw records first, so driving it is
+// what exercises the reshaping.
 //
-const load = async (schema, tableName) => {
+const load = async (schema, tableName, raw) => {
   const setColumns = jest.fn();
   const setError = jest.fn();
   loadData.mockReset();
+  if (raw) loadData.mockImplementation((i, s, tag, path, setData) => setData(raw));
   await loadColumns(intl, stripes, schema, tableName, setColumns, setError);
-  const setData = loadData.mock.calls[0][4];
-  return { setColumns, setError, setData };
+  return { setColumns, setError };
 };
+
+const columnRecords = names => names.map(columnName => ({ columnName }));
 
 describe('loadColumns', () => {
   it('asks loadData for the columns of the given table', async () => {
@@ -41,12 +43,11 @@ describe('loadColumns', () => {
   });
 
   it('offers the column names both as a list and as select options', async () => {
-    const { setColumns, setError, setData } = await load('folio_inventory', 'holdings');
-
-    setData([
-      { columnName: 'id' },
-      { columnName: 'permanent_location_id' },
-    ]);
+    const { setColumns, setError } = await load(
+      'folio_inventory',
+      'holdings',
+      columnRecords(['id', 'permanent_location_id']),
+    );
 
     expect(setColumns).toHaveBeenCalledWith({
       list: ['id', 'permanent_location_id'],
@@ -59,8 +60,6 @@ describe('loadColumns', () => {
   });
 
   it('keeps the order the server gave, rather than sorting', async () => {
-    const { setColumns, setError, setData } = await load('folio_inventory', 'holdings');
-
     // Neither sorted nor reverse-sorted, so a sort in either direction
     // shows up here.
     const columnList = [
@@ -71,7 +70,11 @@ describe('loadColumns', () => {
       'discovery_suppress',
       'acquisition_method',
     ];
-    setData(columnList.map(x => ({ columnName: x })));
+    const { setColumns, setError } = await load(
+      'folio_inventory',
+      'holdings',
+      columnRecords(columnList),
+    );
 
     expect(setColumns.mock.calls[0][0].list).toEqual(columnList);
     expect(setError).not.toHaveBeenCalled();
