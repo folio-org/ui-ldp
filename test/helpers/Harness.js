@@ -29,6 +29,22 @@ const stripesDefaultProps = {
 };
 // const reactQueryClient = new QueryClient(createReactQueryClient());
 
+// react-intl renders a message id verbatim when it has no translation
+// for it, so a component asking for an id that is not in
+// test/helpers/translations.js would render `ui-ldp.whatever` and still
+// satisfy an assertion written against that text. Fail instead.
+//
+// Only our own ids are policed. The stripes-components messages come
+// from the installed package rather than from us: a missing one means
+// that package's translations have moved on, which is not this
+// repository's test failing.
+//
+function onIntlError(e) {
+  if (e.code === 'MISSING_TRANSLATION' && e.descriptor?.id?.startsWith('ui-ldp.')) {
+    throw e;
+  }
+}
+
 function Harness({
   // translations: translationsConfig,
   shouldMockOffsetSize = true,
@@ -55,6 +71,7 @@ function Harness({
         key="en"
         timeZone="UTC"
         messages={allTranslations}
+        onError={onIntlError}
       >
         {children}
       </IntlProvider>
