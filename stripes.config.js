@@ -1,9 +1,17 @@
 module.exports = {
-  okapi: { url: 'https://folio-snapshot-okapi.dev.folio.org', tenant: 'diku' },
+  okapi: {
+    'url': 'https://folio-etesting-snapshot-kong.ci.folio.org',
+    'uiUrl': 'https://localhost:3000',
+    'authnUrl': 'https://folio-etesting-snapshot-keycloak.ci.folio.org',
+    timeout: 30000,
+    // tenant: 'diku'
+  },
   config: {
-    showHomeLink: true,
-    // modLdpUrl: 'http://localhost:8080/http://localhost:8001',
-    // showDevInfo: true,
+    tenantOptions: {
+      diku: { name: 'diku', clientId: 'diku-application' }
+    },
+    useSecureTokens: true,
+    // showHomeLink: true,
   },
   modules: {
     '@folio/ldp': {},
