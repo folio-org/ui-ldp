@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "stripes serve stripes.config.js",
-    "start-idtest": "stripes serve --port 3011 --okapi https://indexdata-test-okapi.folio.indexdata.com --tenant indexdata stripes.config.js",
+    "start-idtest": "stripes serve --start-proxy --port 3011 --okapi https://indexdata-test-okapi.folio.indexdata.com --tenant indexdata stripes.config.js",
     "start-snapshot": "stripes serve --start-proxy --port 3011 --okapi https://folio-snapshot-okapi.dev.folio.org --tenant diku",
     "start-snapshot-eureka": "stripes serve --start-proxy --port 3000 --okapi https://folio-etesting-snapshot-kong.ci.folio.org --tenant diku stripes-eureka.config.js",
     "start-snapshot-2": "stripes serve --start-proxy --port 3011 --okapi https://folio-snapshot-2-okapi.dev.folio.org --tenant diku",
