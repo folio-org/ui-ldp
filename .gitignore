@@ -10,3 +10,4 @@ output
 junit.xml
 .nyc_output
 coverage
+.claude
