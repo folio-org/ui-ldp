@@ -7,5 +7,6 @@ module.exports = {
   },
   modules: {
     '@folio/ldp': {},
+    '@folio/plugin-find-user': {},
   },
 };

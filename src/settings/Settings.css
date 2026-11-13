@@ -3,3 +3,8 @@
   border-top: 1px solid #888;
   margin-bottom: 2em;
 }
+
+.assignUsers {
+  display: flex;
+  justify-content: flex-end;
+}
