@@ -83,6 +83,9 @@
     "redux-form": "^8.3.0",
     "uuid": "^8.3.1"
   },
+  "optionalDependencies": {
+    "@folio/plugin-find-user": "^8.0.0"
+  },
   "peerDependencies": {
     "@folio/stripes": "^10.0.0",
     "react": "^18.2.0",
@@ -100,6 +103,9 @@
     "okapiInterfaces": {
       "ldp-query": "1.2",
       "settings": "1.0"
+    },
+    "optionalOkapiInterfaces": {
+      "users": "15.1 16.0"
     },
     "icons": [
       {
@@ -127,6 +133,7 @@
         "displayName": "Settings (Reporting): Can modify default record limits",
         "subPermissions": [
           "settings.ldp.enabled",
+          "mod-settings.entries.collection.get",
           "mod-settings.entries.item.post",
           "mod-settings.entries.item.put",
           "mod-settings.global.read.ui-ldp.admin",
@@ -139,6 +146,7 @@
         "displayName": "Settings (Reporting): Can select which tables are available to search",
         "subPermissions": [
           "settings.ldp.enabled",
+          "mod-settings.entries.collection.get",
           "mod-settings.entries.item.post",
           "mod-settings.entries.item.put",
           "mod-settings.global.read.ui-ldp.admin",
@@ -151,8 +159,11 @@
         "displayName": "Settings (Reporting): Can modify Reporting database connection details",
         "subPermissions": [
           "settings.ldp.enabled",
-          "ldp.config.read",
-          "ldp.config.edit"
+          "mod-settings.entries.collection.get",
+          "mod-settings.entries.item.post",
+          "mod-settings.entries.item.put",
+          "mod-settings.global.read.ui-ldp.admin",
+          "mod-settings.global.write.ui-ldp.admin"
         ],
         "visible": true
       },
@@ -161,8 +172,12 @@
         "displayName": "Settings (Reporting): Can modify templated-query repos configuration",
         "subPermissions": [
           "settings.ldp.enabled",
-          "ldp.config.read",
-          "ldp.config.edit"
+          "mod-settings.entries.collection.get",
+          "mod-settings.entries.item.post",
+          "mod-settings.entries.item.put",
+          "mod-settings.global.read.ui-ldp.admin",
+          "mod-settings.global.write.ui-ldp.admin",
+          "users.collection.get"
         ],
         "visible": true
       },

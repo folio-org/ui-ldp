@@ -6,6 +6,7 @@ import { FieldArray } from 'react-final-form-arrays';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { Loading, Row, Col, TextField, IconButton, Select } from '@folio/stripes/components';
 import { repoTypes, createReportRepo } from '../util/repoTypes';
+import RepoUsers from './RepoUsers';
 import css from './Settings.css';
 
 
@@ -65,6 +66,7 @@ function TemplatedQueryRepos(props) {
                         <Field name={`${subname}.repo`} label={repoLabel} component={TextField} />
                         <Field name={`${subname}.branch`} label={branchLabel} component={TextField} />
                         <Field name={`${subname}.dir`} label={dirLabel} component={TextField} />
+                        <RepoUsers name={`${subname}.authorizedUsers`} />
                       </Col>
                       <Col xs={1}>
                         <IconButton icon="trash" onClick={() => fields.remove(index)} />

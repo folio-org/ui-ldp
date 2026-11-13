@@ -3,6 +3,8 @@
 ## [3.4.0](https://github.com/folio-org/ui-ldp/tree/v3.4.0) (IN PROGRESS)
 
 * Bookmarkable and reloadable report tabs. Fixes UILDP-182.
+* Report repositories settings can maintain a list of users authorized to run reports from each repository, stored as `authorizedUsers` (all users, if the list is empty). Settings UI only: not yet enforced. Fixes UILDP-200.
+* Settings permission sets now grant the mod-settings permissions their pages actually use: `ui-ldp.settings.dbinfo` and `ui-ldp.settings.tqrepos` no longer grant the obsolete `ldp.config.read`/`ldp.config.edit`, and all four settings permissions now include `mod-settings.entries.collection.get`. Fixes UILDP-201.
 
 ## [3.3.0](https://github.com/folio-org/ui-ldp/tree/v3.3.0) (2026-04-14)
 
