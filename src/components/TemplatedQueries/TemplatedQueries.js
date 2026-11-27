@@ -1,13 +1,43 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
-import { Paneset, Pane, TextField, MultiColumnList } from '@folio/stripes/components';
+import { useStripes } from '@folio/stripes/core';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Paneset, Pane, TextField, MultiColumnList, DefaultMCLRowFormatter } from '@folio/stripes/components';
 import { useLdp } from '../../LdpContext';
 import templatedQueryName from '../../util/templatedQueryName';
+import canRunReport from '../../util/canRunReport';
+import css from './TemplatedQueries.css';
 
 
-function TemplatedQueries({ queries }) {
+// Reports that the user is not authorized to run are rendered in grey,
+// and without the click and keyboard handlers that would open them.
+function makeRowFormatter(intl) {
+  return (row) => {
+    const { rowIndex, rowClass, rowData, rowProps, cells } = row;
+    if (rowData.canRun !== false) {
+      return DefaultMCLRowFormatter(row);
+    }
+
+    const { _onClick, _onKeyDown, _labelStrings, ...props } = rowProps;
+    return (
+      <div
+        key={`row-${rowIndex}`}
+        className={`${rowClass} ${css.unauthorized}`}
+        aria-disabled="true"
+        title={intl.formatMessage({ id: 'ui-ldp.templated-queries.unauthorized' })}
+        {...props}
+      >
+        {cells}
+      </div>
+    );
+  };
+}
+
+
+function TemplatedQueries({ queries, repos }) {
+  const intl = useIntl();
+  const stripes = useStripes();
   const history = useHistory();
   const ldp = useLdp();
   const [sortedColumn, setSortedColumn] = useState('displayName');
@@ -15,6 +45,9 @@ function TemplatedQueries({ queries }) {
   const [filterString, setFilterString] = useState('');
 
   function navigateToQuery(q) {
+    // A click on a disabled row, which has no click handler of its own,
+    // reaches the MCL row container, which calls onRowClick with no row
+    if (!q || q.canRun === false) return;
     const qname = templatedQueryName(q);
     ldp.addTqTab({ ...q, name: qname, state: {} });
     history.push(`/ldp/tq/${qname}`);
@@ -41,7 +74,13 @@ function TemplatedQueries({ queries }) {
     }
   }
 
-  queries.sort((a, b) => {
+  const userId = stripes.user?.user?.id;
+  const annotatedQueries = queries.map(q => ({
+    ...q,
+    canRun: canRunReport(q, repos, userId),
+  }));
+
+  annotatedQueries.sort((a, b) => {
     const av = sortKey(a, sortedColumn);
     const bv = sortKey(b, sortedColumn);
     if (av === bv) {
@@ -54,7 +93,7 @@ function TemplatedQueries({ queries }) {
     }
   });
 
-  const filteredQueries = queries.filter(q => {
+  const filteredQueries = annotatedQueries.filter(q => {
     return (q.json?.displayName?.toLowerCase().includes(filterString.toLowerCase()) ||
             q.filename.toLowerCase().includes(filterString.toLowerCase()));
   });
@@ -82,6 +121,7 @@ function TemplatedQueries({ queries }) {
             repo: r => <span><code>{r.config.type || 'github'}</code> {r.config.user}/{r.config.repo}</span>,
           }}
           onRowClick={(_, q) => navigateToQuery(q)}
+          rowFormatter={makeRowFormatter(intl)}
           sortedColumn={sortedColumn}
           sortDirection={sortDirection}
           onHeaderClick={(_, m) => sortByColumn(m.name)}
@@ -104,6 +144,11 @@ TemplatedQueries.propTypes = {
       json: PropTypes.shape({
         displayName: PropTypes.string,
       }),
+    }).isRequired,
+  ),
+  repos: PropTypes.arrayOf(
+    PropTypes.shape({
+      authorizedUsers: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,
   ),
 };
