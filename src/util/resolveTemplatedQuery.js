@@ -1,15 +1,7 @@
 import { createReportRepo } from './repoTypes';
 import stripesFetch from './stripesFetch';
 import httpErrorMessage from './httpErrorMessage';
-
-// The directory of a repository is normalized in the same way as in
-// the QueryRepo constructor, so that the tests we make here agree with
-// the filtering that is done when a whole repository is harvested.
-//
-function normalizeDir(dir) {
-  if (dir === undefined || dir === '' || dir === '/') return '.';
-  return dir.replace(/\/+$/, '');
-}
+import normalizeDir from './normalizeDir';
 
 
 // A query name is `user/repo/branch/path`, where the path is relative

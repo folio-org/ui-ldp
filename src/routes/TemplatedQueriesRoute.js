@@ -49,6 +49,7 @@ function TemplatedQueriesRoute() {
   return (
     <TemplatedQueries
       queries={queries}
+      repos={gitRepos}
     />
   );
 }

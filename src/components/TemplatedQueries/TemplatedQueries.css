@@ -1,0 +1,12 @@
+/*
+ * Rows for reports that the user is not authorized to run.
+ *
+ * MultiColumnList styles every row with `.mclRow { color: ... }` and, since
+ * the list has an onRowClick handler, `.mclRow.mclClickableRow:hover
+ * { cursor: pointer }`. We use !important to override both, rather than
+ * trying to out-specify them.
+ */
+.unauthorized {
+  color: var(--color-text-p2, #999) !important;
+  cursor: not-allowed !important;
+}
